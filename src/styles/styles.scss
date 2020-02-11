@@ -1,0 +1,15 @@
+body {
+  // font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
+}
+
+#app-content {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#router-content {
+  flex: 1 0 auto;
+}
+    
