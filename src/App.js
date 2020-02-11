@@ -7,7 +7,7 @@ import {
 
 import Home from './screens/Home'
 import Recipes from './screens/Recipes'
-import RecipeDetail from './screens/RecipeDetail'
+import Recipe from './screens/Recipe'
 import Groceries from './screens/Groceries'
 import SignIn from './screens/SignIn'
 import SignUp from './screens/SignUp'
@@ -28,11 +28,11 @@ function App() {
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route exact path="/recipes" component={Recipes} />
-						<Route path="/recipes/:recipeName" component={RecipeDetail} />
+						<Route path="/recipes/:id" component={Recipe} />
 						<Route path="/groceries" component={Groceries} />
 						<Route path="/sign-in" component={SignIn} />
 						<Route path="/sign-up" component={SignUp} />
-						<Route path="/account/:name" component={Account} />
+						<Route path="/account/:slug" component={Account} />
 						<Route component={NoMatch} />
 					</Switch>
 				</div>

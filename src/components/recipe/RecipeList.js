@@ -2,11 +2,11 @@ import React from 'react'
 
 import RecipeCard from './RecipeCard'
 
-function RecipeList() {
+function RecipeList({ recipes }) {
     return (
         <div className="container">
             <div className="row">
-                <RecipeCard />
+                {recipes.map(recipe => <RecipeCard recipe={recipe} key={recipe.id} />)}
             </div>
         </div>
     )

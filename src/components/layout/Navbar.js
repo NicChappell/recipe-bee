@@ -1,24 +1,58 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
-function Navbar() {
-    return (
-        <nav>
-            <div className="container">
-                <div className="row">
-                    <div className="col s12">
-                        <div className="nav-wrapper">
-                            <a href="#" className="brand-logo">Logo</a>
-                            <ul id="nav-mobile" className="right hide-on-med-and-down">
-                                <li><a href="sass.html">Sass</a></li>
-                                <li><a href="badges.html">Components</a></li>
-                                <li><a href="collapsible.html">JavaScript</a></li>
-                            </ul>
-                        </div>
+import SignedInLinks from '../../components/auth/SignedInLinks'
+import SignedOutLinks from '../../components/auth/SignedOutLinks'
+
+import logo from '../../images/logos/logo.png'
+
+class Navbar extends Component {
+    state = {
+        auth: false
+    }
+
+    handleSignIn = () => {
+        console.log('sign in')
+
+        this.setState({
+            auth: true
+        })
+    }
+
+    handleSignOut = () => {
+        console.log('sign out')
+
+        this.setState({
+            auth: false
+        })
+    }
+
+    render() {
+        const { auth } = this.state
+
+        const authLinks = auth ? <SignedInLinks handleSignOut={this.handleSignOut} /> : <SignedOutLinks handleSignIn={this.handleSignIn} />
+
+        return (
+            <nav className="grey lighten-2">
+                <div className="container">
+                    <div className="nav-wrapper">
+                        <ul className="left hide-on-med-and-down">
+                            <li><NavLink className="black-text" to="/">Explore</NavLink></li>
+                            <li><NavLink className="black-text" to="/recipes">Recipes</NavLink></li>
+                        </ul>
+                        <Link to="/" className="brand-logo center">
+                            <div className="logo">
+                                <img src={logo} alt="Recipe Bee" />
+                            </div>
+                        </Link>
+                        <ul className="right hide-on-med-and-down">
+                            {authLinks}
+                        </ul>
                     </div>
                 </div>
-            </div>
-        </nav>
-    )
+            </nav>
+        )
+    }
 }
 
 export default Navbar
