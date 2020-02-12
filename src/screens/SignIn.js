@@ -4,9 +4,10 @@ import SignInForm from '../components/auth/SignInForm'
 
 function SignIn() {
     return (
-        <div>
-            Sign In
-            <SignInForm />
+        <div className="container">
+            <div className="row">
+                <SignInForm />
+            </div>
         </div>
     )
 }
