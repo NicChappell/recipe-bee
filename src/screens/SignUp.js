@@ -4,9 +4,10 @@ import SignUpForm from '../components/auth/SignUpForm'
 
 function SignUp() {
     return (
-        <div>
-            Sign Up
-            <SignUpForm />
+        <div className="container">
+            <div className="row">
+                <SignUpForm />
+            </div>
         </div>
     )
 }

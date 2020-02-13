@@ -21,7 +21,10 @@ body {
 }
 
 #router-content {
+  display: flex;
+  align-items: center;
   flex: 1 0 auto;
+  justify-content: center;
 }
 
 nav {
@@ -50,6 +53,41 @@ footer {
 }
 
 .recipe-photo {
-	height: auto;
-	width: 100%;
+  height: auto;
+  width: 100%;
+}
+
+textarea.materialize-textarea {
+  height: 4rem;
+  // &::placeholder {
+  //   line-height: 4rem;
+  // }
+  // &::-moz-placeholder {
+  //   /* Firefox */
+  //   line-height: 4rem;
+  // }
+  // &::-webkit-input-placeholder {
+  //   /* Webkit */
+  //   line-height: 4rem;
+  // }
+  // &::-ms-input-placeholder {
+  //   /* IE */
+  //   line-height: 4rem;
+  // }
+}
+
+.ingredient-button,
+.ingredient-item-number {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 3rem;
+  justify-content: center;
+  margin: 1rem 0;
+  button {
+    margin: .25rem 0;
+  }
+  span {
+    font-weight: bold;
+  }
 }

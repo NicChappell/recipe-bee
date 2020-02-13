@@ -10,7 +10,10 @@ body {
 }
 
 #router-content {
+  display: flex;
+  align-items: center;
   flex: 1 0 auto;
+  justify-content: center;
 }
 
 nav {
@@ -45,6 +48,28 @@ footer {
 .recipe-photo {
   height: auto;
   width: 100%;
+}
+
+textarea.materialize-textarea {
+  height: 4rem;
+}
+
+.ingredient-button,
+.ingredient-item-number {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 3rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+.ingredient-button button,
+.ingredient-item-number button {
+  margin: 0.25rem 0;
+}
+.ingredient-button span,
+.ingredient-item-number span {
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=styles.css.map */
