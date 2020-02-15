@@ -65,34 +65,55 @@ textarea.materialize-textarea {
   max-width: 25rem;
   width: 100%;
 }
-#create-recipe .ingredient-form .input-field {
+#create-recipe .direction .input-field,
+#create-recipe .ingredient .input-field {
   margin: 0;
 }
-#create-recipe .ingredient-form .ingredient-button {
+#create-recipe .direction .buttons,
+#create-recipe .ingredient .buttons {
   align-items: center;
   display: flex;
-  height: 3rem;
   justify-content: center;
 }
 @media screen and (max-width: 991px) {
-  #create-recipe .ingredient-form .ingredient-button {
+  #create-recipe .direction .buttons,
+#create-recipe .ingredient .buttons {
     flex-direction: column;
-    height: 6rem;
   }
-  #create-recipe .ingredient-form .ingredient-button button {
+  #create-recipe .direction .buttons button,
+#create-recipe .ingredient .buttons button {
     margin: 0.25rem 0;
   }
 }
 @media screen and (min-width: 992px) {
-  #create-recipe .ingredient-form .ingredient-button {
+  #create-recipe .direction .buttons,
+#create-recipe .ingredient .buttons {
     flex-direction: row;
   }
-  #create-recipe .ingredient-form .ingredient-button button {
+  #create-recipe .direction .buttons button,
+#create-recipe .ingredient .buttons button {
     margin: 0 0.25rem;
   }
 }
-#create-recipe .ingredient-form .ingredient-button span {
+#create-recipe .direction .buttons span,
+#create-recipe .ingredient .buttons span {
   font-weight: bold;
+}
+#create-recipe .direction .buttons {
+  height: 4rem;
+}
+@media screen and (max-width: 991px) {
+  #create-recipe .direction .buttons {
+    height: 4rem;
+  }
+}
+#create-recipe .ingredient .buttons {
+  height: 3rem;
+}
+@media screen and (max-width: 991px) {
+  #create-recipe .ingredient .buttons {
+    height: 6rem;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-// import CreateDirection from './CreateDirection'
+import CreateDirection from './CreateDirection'
 import CreateIngredient from './CreateIngredient'
-// import Direction from './Direction'
+import Direction from './Direction'
 import Ingredient from './Ingredient'
 
 import {
@@ -11,14 +11,35 @@ import {
 } from '../../helpers/customHooks'
 
 const CreateRecipe = () => {
-    // const [directions, setDirections] = useState([])
+    const [directions, setDirections] = useState([])
     const [ingredients, setIngredients] = useState([])
 
     const title = useInputValue()
     const description = useTextAreaValue()
 
+    const addDirection = direction => {
+        setDirections([...directions, direction])
+    }
+
     const addIngredient = ingredient => {
         setIngredients([...ingredients, ingredient])
+    }
+
+    const deleteDirection = direction => {
+        const updatedDirections = directions.filter(obj => obj.id !== direction.id)
+        setDirections(updatedDirections)
+    }
+
+    const deleteIngredient = ingredient => {
+        const updatedIngredients = ingredients.filter(obj => obj.id !== ingredient.id)
+        setIngredients(updatedIngredients)
+    }
+
+    const updateDirection = direction => {
+        const index = directions.findIndex(obj => obj.id === direction.id)
+        const updatedDirections = directions
+        updatedDirections[index] = direction
+        setDirections(updatedDirections)
     }
 
     const updateIngredient = ingredient => {
@@ -28,20 +49,11 @@ const CreateRecipe = () => {
         setIngredients(updatedIngredients)
     }
 
-    const deleteIngredient = ingredient => {
-        const updatedIngredients = ingredients.filter(obj => obj.id !== ingredient.id)
-        setIngredients(updatedIngredients)
-    }
-
     // options for quantity select list
     const quantities = ['', '¼', '⅓', '½', '⅔', '¾']
-    for (let i = 1; i <= 16; i++) {
-        quantities.push(i)
-    }
+    for (let i = 1; i <= 16; i++) { quantities.push(i) }
     // options for unit select list
     const units = ['', 'Milliliter', 'Teaspoon', 'Tablespoon', 'Ounce', 'Cup', 'Pint', 'Liter', 'Quart', 'Gallon']
-    // index position of next ingredient
-    const createIngredientIndex = ingredients.length + 1
 
     return (
         <div className="container" id="create-recipe">
@@ -88,7 +100,7 @@ const CreateRecipe = () => {
                         })}
                         <CreateIngredient
                             addIngredient={addIngredient}
-                            index={createIngredientIndex}
+                            index={ingredients.length + 1}
                             quantities={quantities}
                             units={units}
                         />
@@ -97,6 +109,21 @@ const CreateRecipe = () => {
                                 <h5>Directions</h5>
                             </div>
                         </div>
+                        {directions.map((direction, index) => {
+                            return (
+                                <Direction
+                                    deleteDirection={deleteDirection}
+                                    index={index}
+                                    direction={direction}
+                                    key={direction.id}
+                                    updateDirection={updateDirection}
+                                />
+                            )
+                        })}
+                        <CreateDirection
+                            addDirection={addDirection}
+                            index={directions.length + 1}
+                        />
                     </div>
                 </div>
             </div>

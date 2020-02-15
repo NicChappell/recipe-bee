@@ -10,7 +10,7 @@ function Footer() {
             <div className="container">
                 <div className="row">
                     <div className="col s12 m6">
-                        <h5 className="black-text">Recipe Bee</h5>
+                        <h5 className="black-text">RecipeBee</h5>
                         <p className="black-text">Making meal planning easy and fun</p>
                     </div>
                     <div className="col s6 m3">
@@ -32,7 +32,7 @@ function Footer() {
             </div>
             <div className="footer-copyright">
                 <div className="container black-text">
-                    © {date.getFullYear()} Recipe Bee, LLC
+                    © {date.getFullYear()} RecipeBee, LLC
                 </div>
             </div>
         </footer>

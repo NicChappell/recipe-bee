@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import DeleteEditUpdateButtons from './DeleteEditUpdateButtons'
+
 import {
     useInputValue,
     useSelectValue
@@ -21,19 +23,19 @@ const Ingredient = (props) => {
     const unit = useSelectValue(ingredient.unit)
     const name = useInputValue(ingredient.name)
 
-    const handleDeleteIngredientClick = e => {
+    const handleDeleteClick = e => {
         e.preventDefault()
 
         deleteIngredient(ingredient)
     }
 
-    const handleEditIngredientClick = e => {
+    const handleEditClick = e => {
         e.preventDefault()
 
         setDisabled(!disabled)
     }
 
-    const handleUpdateIngredientClick = e => {
+    const handleUpdateClick = e => {
         e.preventDefault()
 
         setDisabled(!disabled)
@@ -47,30 +49,8 @@ const Ingredient = (props) => {
         updateIngredient(updatedIngredient)
     }
 
-    const Buttons = ({ disabled }) => {
-        if (disabled) {
-            return (
-                <div className="col s2 ingredient-button">
-                    <button className="btn-small btn-flat white" onClick={handleEditIngredientClick}>
-                        <i className="black-text material-icons">edit</i>
-                    </button>
-                    <button className="btn-small btn-flat white" onClick={handleDeleteIngredientClick}>
-                        <i className="black-text material-icons">delete</i>
-                    </button>
-                </div>
-            )
-        }
-        return (
-            <div className="col s2 ingredient-button">
-                <button className="btn-small green lighten-2" onClick={handleUpdateIngredientClick}>
-                    <i className="black-text material-icons">check</i>
-                </button>
-            </div>
-        )
-    }
-
     return (
-        <div className="row ingredient-form">
+        <div className="row ingredient">
             <div className="col s10">
                 <div className="row">
                     <div className="input-field col s1 l1">
@@ -79,21 +59,31 @@ const Ingredient = (props) => {
                         </p>
                     </div>
                     <div className="input-field col s3 l2">
-                        <select disabled={disabled} id="quantity" {...quantity}>
+                        <select disabled={disabled} name="quantity" {...quantity}>
                             {quantities.map(quantity => <option key={quantity} value={quantity}>{quantity}</option>)}
                         </select>
                     </div>
                     <div className="input-field col s8 l3">
-                        <select disabled={disabled} id="unit" {...unit}>
+                        <select disabled={disabled} name="unit" {...unit}>
                             {units.map(unit => <option key={unit} value={unit}>{unit}</option>)}
                         </select>
                     </div>
                     <div className="input-field col s12 l6">
-                        <input disabled={disabled} id="ingredient-name" placeholder="Ingredient Name" {...name} />
+                        <input
+                            disabled={disabled}
+                            name="ingredient-name"
+                            placeholder="Ingredient Name"
+                            {...name}
+                        />
                     </div>
                 </div>
             </div>
-            <Buttons disabled={disabled} />
+            <DeleteEditUpdateButtons
+                disabled={disabled}
+                handleEditClick={handleEditClick}
+                handleDeleteClick={handleDeleteClick}
+                handleUpdateClick={handleUpdateClick}
+            />
         </div>
     )
 }

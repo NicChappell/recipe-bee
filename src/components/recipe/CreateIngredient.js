@@ -45,8 +45,8 @@ class CreateIngredient extends Component {
         const { addIngredient } = this.props
 
         if (name && quantity) {
-            const ingredient = { id, name, quantity, unit }
-            addIngredient(ingredient)
+            const newIngredient = { id, name, quantity, unit }
+            addIngredient(newIngredient)
     
             this.setState({
                 addIngredientErrors,
@@ -95,9 +95,9 @@ class CreateIngredient extends Component {
             quantities,
             units
         } = this.props
-        console.log(index)
+
         return (
-            <div className="row ingredient-form">
+            <div className="row ingredient">
                 <div className="col s10">
                     <div className="row">
                         <div className="input-field col s1 l1">
@@ -138,7 +138,7 @@ class CreateIngredient extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="col s2 ingredient-button">
+                <div className="col s2 buttons">
                     <button className="btn orange lighten-2" onClick={this.handleClick}>
                         <i className="black-text material-icons">add</i>
                     </button>

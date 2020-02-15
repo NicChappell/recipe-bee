@@ -88,18 +88,17 @@ textarea.materialize-textarea {
       width: 100%;
     }
   }
-  .ingredient-form {
+  .direction,
+  .ingredient {
     .input-field {
       margin: 0;
     }
-    .ingredient-button {
+    .buttons {
       align-items: center;
       display: flex;
-      height: 3rem;
       justify-content: center;
       @media screen and (max-width: $max-medium) {
         flex-direction: column;
-        height: 6rem;
         button {
           margin: 0.25rem 0;
         }
@@ -112,6 +111,22 @@ textarea.materialize-textarea {
       }
       span {
         font-weight: bold;
+      }
+    }
+  }
+  .direction {
+    .buttons {
+      height: 4rem;
+      @media screen and (max-width: $max-medium) {
+        height: 4rem;
+      }
+    }
+  }
+  .ingredient {
+    .buttons {
+      height: 3rem;
+      @media screen and (max-width: $max-medium) {
+        height: 6rem;
       }
     }
   }
