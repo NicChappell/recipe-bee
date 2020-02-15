@@ -23,21 +23,15 @@ const Ingredient = (props) => {
     const unit = useSelectValue(ingredient.unit)
     const name = useInputValue(ingredient.name)
 
-    const handleDeleteClick = e => {
-        e.preventDefault()
-
+    const handleDeleteClick = () => {
         deleteIngredient(ingredient)
     }
 
-    const handleEditClick = e => {
-        e.preventDefault()
-
+    const handleEditClick = () => {
         setDisabled(!disabled)
     }
 
-    const handleUpdateClick = e => {
-        e.preventDefault()
-
+    const handleUpdateClick = () => {
         setDisabled(!disabled)
 
         const updatedIngredient = {

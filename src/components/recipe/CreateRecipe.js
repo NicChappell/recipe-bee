@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { v4 as uuid } from 'uuid'
 
 import CreateDirection from './CreateDirection'
 import CreateIngredient from './CreateIngredient'
@@ -10,43 +11,62 @@ import {
     useTextAreaValue,
 } from '../../helpers/customHooks'
 
-const CreateRecipe = () => {
+const CreateRecipe = (props) => {
+    // state variables
+    const description = useTextAreaValue()
     const [directions, setDirections] = useState([])
     const [ingredients, setIngredients] = useState([])
-
     const title = useInputValue()
-    const description = useTextAreaValue()
 
+    // props variables
+    const { addRecipe } = props
+
+    // add new instruction to directions array
     const addDirection = direction => {
         setDirections([...directions, direction])
     }
-
+    // add new ingredient to ingredients array
     const addIngredient = ingredient => {
         setIngredients([...ingredients, ingredient])
     }
-
+    // delete instruction from directions array
     const deleteDirection = direction => {
         const updatedDirections = directions.filter(obj => obj.id !== direction.id)
         setDirections(updatedDirections)
     }
-
+    // delete ingredient from ingredients array
     const deleteIngredient = ingredient => {
         const updatedIngredients = ingredients.filter(obj => obj.id !== ingredient.id)
         setIngredients(updatedIngredients)
     }
-
+    // update instruction in directions array
     const updateDirection = direction => {
         const index = directions.findIndex(obj => obj.id === direction.id)
         const updatedDirections = directions
         updatedDirections[index] = direction
         setDirections(updatedDirections)
     }
-
+    // update ingredient in ingredients array
     const updateIngredient = ingredient => {
         const index = ingredients.findIndex(obj => obj.id === ingredient.id)
         const updatedIngredients = ingredients
         updatedIngredients[index] = ingredient
         setIngredients(updatedIngredients)
+    }
+
+    // submit recipe
+    const submitRecipe = () => {
+        const id = uuid()
+
+        const recipe = {
+            id,
+            description: description.value,
+            directions,
+            ingredients,
+            title: title.value
+        }
+
+        addRecipe(recipe)
     }
 
     // options for quantity select list
@@ -61,8 +81,8 @@ const CreateRecipe = () => {
                 <div className="col s12">
                     <div className="card-panel white">
                         <div className="row">
-                            <div className="col s12">
-                                <h3 className="center-align">Create New Recipe</h3>
+                            <div className="col s12 center-align">
+                                <h3>Create New Recipe</h3>
                             </div>
                         </div>
                         <div className="row">
@@ -124,6 +144,13 @@ const CreateRecipe = () => {
                             addDirection={addDirection}
                             index={directions.length + 1}
                         />
+                        <div className="row">
+                            <div className="col s12 center-align">
+                                <button className="black-text btn-large orange lighten-2" onClick={submitRecipe}>
+                                    Save Recipe
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

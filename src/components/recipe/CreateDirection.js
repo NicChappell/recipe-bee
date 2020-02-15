@@ -18,9 +18,7 @@ class CreateDirection extends Component {
         })
     }
 
-    handleClick = e => {
-        e.preventDefault()
-
+    handleClick = () => {
         const id = uuid()
 
         const {

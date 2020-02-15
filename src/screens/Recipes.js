@@ -11,6 +11,12 @@ import json from '../data/recipes.json'
 const Recipes = () => {
     const [recipes, setRecipes] = useState([])
 
+    const addRecipe = recipe => {
+        // console.log(recipes)
+        // console.log(recipe)
+        setRecipes([...recipes, recipe])
+    }
+
     // const getRecipes = async () => {
     //     // const response = await fetch(/* api endpoint goes here */)
     //     // const json = await response.json()
@@ -29,7 +35,7 @@ const Recipes = () => {
     if (recipes.length > 0) {
         return (
             <div>
-                <CreateRecipe />
+                <CreateRecipe addRecipe={addRecipe} />
                 <RecipeList recipes={recipes} />
             </div>
         )

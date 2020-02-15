@@ -16,21 +16,15 @@ const Direction = (props) => {
 
     const instruction = useTextAreaValue(direction.instruction)
 
-    const handleDeleteClick = e => {
-        e.preventDefault()
-
+    const handleDeleteClick = () => {
         deleteDirection(direction)
     }
 
-    const handleEditClick = e => {
-        e.preventDefault()
-
+    const handleEditClick = () => {
         setDisabled(!disabled)
     }
 
-    const handleUpdateClick = e => {
-        e.preventDefault()
-
+    const handleUpdateClick = () => {
         setDisabled(!disabled)
 
         const updatedDirection = {
