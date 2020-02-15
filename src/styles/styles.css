@@ -54,21 +54,44 @@ textarea.materialize-textarea {
   height: 4rem;
 }
 
-.ingredient-button,
-.ingredient-item-number {
+#create-recipe .image-upload {
   align-items: center;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+}
+#create-recipe .image-upload img {
+  height: auto;
+  max-height: 25rem;
+  max-width: 25rem;
+  width: 100%;
+}
+#create-recipe .ingredient-form .input-field {
+  margin: 0;
+}
+#create-recipe .ingredient-form .ingredient-button {
+  align-items: center;
+  display: flex;
   height: 3rem;
   justify-content: center;
-  margin: 1rem 0;
 }
-.ingredient-button button,
-.ingredient-item-number button {
-  margin: 0.25rem 0;
+@media screen and (max-width: 991px) {
+  #create-recipe .ingredient-form .ingredient-button {
+    flex-direction: column;
+    height: 6rem;
+  }
+  #create-recipe .ingredient-form .ingredient-button button {
+    margin: 0.25rem 0;
+  }
 }
-.ingredient-button span,
-.ingredient-item-number span {
+@media screen and (min-width: 992px) {
+  #create-recipe .ingredient-form .ingredient-button {
+    flex-direction: row;
+  }
+  #create-recipe .ingredient-form .ingredient-button button {
+    margin: 0 0.25rem;
+  }
+}
+#create-recipe .ingredient-form .ingredient-button span {
   font-weight: bold;
 }
 

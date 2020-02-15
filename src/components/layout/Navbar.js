@@ -36,7 +36,7 @@ class Navbar extends Component {
             <nav className="grey lighten-2">
                 <div className="container">
                     <div className="nav-wrapper">
-                        <ul className="left hide-on-med-and-down">
+                        <ul className="left">
                             <li><NavLink className="black-text" to="/">Explore</NavLink></li>
                             <li><NavLink className="black-text" to="/recipes">Recipes</NavLink></li>
                         </ul>
@@ -45,9 +45,7 @@ class Navbar extends Component {
                                 <img src={logo} alt="Recipe Bee" />
                             </div>
                         </Link>
-                        <ul className="right hide-on-med-and-down">
-                            {authLinks}
-                        </ul>
+                        {authLinks}
                     </div>
                 </div>
             </nav>

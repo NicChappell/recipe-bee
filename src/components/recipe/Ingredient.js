@@ -1,99 +1,99 @@
 import React, { useState } from 'react'
 
-import { useInputValue } from '../../helpers/customHooks'
+import {
+    useInputValue,
+    useSelectValue
+} from '../../helpers/customHooks'
 
 const Ingredient = (props) => {
-    console.log(props)
+    const [disabled, setDisabled] = useState(true)
+
     const {
-        handleDeleteIngredientClick,
-        handleSaveIngredientClick,
-        ingredient
+        deleteIngredient,
+        index,
+        ingredient,
+        quantities,
+        units,
+        updateIngredient
     } = props
 
-    const [disabled, setDisabled] = useState(true)
-    const [quantity, setQuantity] = useState('')
-    const [unit, setUnit] = useState('')
+    const quantity = useSelectValue(ingredient.quantity)
+    const unit = useSelectValue(ingredient.unit)
+    const name = useInputValue(ingredient.name)
 
-    const handleQuantityChange = (e) => {
-        setQuantity(e.target.value)
-    }
-    console.log(`Quantity: ${quantity}`)
-
-    const handleUnitChange = (e) => {
-        setUnit(e.target.value)
-    }
-    console.log(`Unit: ${unit}`)
-
-    const name = useInputValue('Ingredient Name', '')
-    console.log(`Name: ${name.value}`)
-
-    const misc = useInputValue('Misc', '')
-    console.log(`Misc: ${misc.value}`)
-
-    const sixteen = []
-    for (let i = 1; i <= 16; i++) {
-        sixteen.push(i)
-    }
-
-    const units = ['', 'Milliliter', 'Teaspoon', 'Tablespoon', 'Ounce', 'Cup', 'Pint', 'Liter', 'Quart', 'Gallon']
-
-    const handleEditIngredientClick = (e) => {
+    const handleDeleteIngredientClick = e => {
         e.preventDefault()
+
+        deleteIngredient(ingredient)
+    }
+
+    const handleEditIngredientClick = e => {
+        e.preventDefault()
+
         setDisabled(!disabled)
     }
 
-    const deleteButton = (handleClick) => {
-        return (
-            <button className="btn-small btn-flat white" onClick={handleClick}>
-                <i className="black-text material-icons">delete</i>
-            </button>
-        )
+    const handleUpdateIngredientClick = e => {
+        e.preventDefault()
+
+        setDisabled(!disabled)
+
+        const updatedIngredient = {
+            ...ingredient,
+            name: name.value,
+            quantity: quantity.value,
+            unit: unit.value
+        }
+        updateIngredient(updatedIngredient)
     }
 
-    const saveButton = (handleClick) => {
+    const Buttons = ({ disabled }) => {
+        if (disabled) {
+            return (
+                <div className="col s2 ingredient-button">
+                    <button className="btn-small btn-flat white" onClick={handleEditIngredientClick}>
+                        <i className="black-text material-icons">edit</i>
+                    </button>
+                    <button className="btn-small btn-flat white" onClick={handleDeleteIngredientClick}>
+                        <i className="black-text material-icons">delete</i>
+                    </button>
+                </div>
+            )
+        }
         return (
-            <button className="btn-small green lighten-2" onClick={handleClick}>
-                <i className="black-text material-icons">check</i>
-            </button>
+            <div className="col s2 ingredient-button">
+                <button className="btn-small green lighten-2" onClick={handleUpdateIngredientClick}>
+                    <i className="black-text material-icons">check</i>
+                </button>
+            </div>
         )
     }
 
     return (
-        <div className="row">
-            <form className="col s12">
+        <div className="row ingredient-form">
+            <div className="col s10">
                 <div className="row">
-                    <div className="col s1 ingredient-item-number">
-                        <span>
-                            {/* item number goes here */}
-                        </span>
+                    <div className="input-field col s1 l1">
+                        <p className="center-align">
+                            <b>{`${index + 1})`}</b>
+                        </p>
                     </div>
-                    <div className="input-field col s1">
-                        <select className="browser-default" disabled={disabled} id="quantity" onChange={handleQuantityChange}>
-                            <option value=""></option>
-                            <option value="one-quarter">¼</option>
-                            <option value="one-third">⅓</option>
-                            <option value="one-half">½</option>
-                            <option value="two-thirds">⅔</option>
-                            <option value="three-quarters">¾</option>
-                            {sixteen.map(n => <option key={n} value={n}>{n}</option>)}
+                    <div className="input-field col s3 l2">
+                        <select disabled={disabled} id="quantity" {...quantity}>
+                            {quantities.map(quantity => <option key={quantity} value={quantity}>{quantity}</option>)}
                         </select>
                     </div>
-                    <div className="input-field col s2">
-                        <select className="browser-default" disabled={disabled} id="unit" onChange={handleUnitChange}>
+                    <div className="input-field col s8 l3">
+                        <select disabled={disabled} id="unit" {...unit}>
                             {units.map(unit => <option key={unit} value={unit}>{unit}</option>)}
                         </select>
                     </div>
-                    <div className="input-field col s6">
-                        <input disabled={disabled} {...name} id="ingredient-name" />
-                    </div>
-                    <div className="col s2 ingredient-button">
-                        <button className="btn-small orange lighten-2" disabled={!disabled} onClick={handleEditIngredientClick}>
-                            <i className="black-text material-icons">edit</i>
-                        </button>
-                        {disabled ? deleteButton(handleDeleteIngredientClick) : saveButton(handleSaveIngredientClick)}
+                    <div className="input-field col s12 l6">
+                        <input disabled={disabled} id="ingredient-name" placeholder="Ingredient Name" {...name} />
                     </div>
                 </div>
-            </form>
+            </div>
+            <Buttons disabled={disabled} />
         </div>
     )
 }

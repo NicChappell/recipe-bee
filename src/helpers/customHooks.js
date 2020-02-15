@@ -1,12 +1,31 @@
 import { useState } from 'react'
 
-export const useInputValue = (ph, v) => {
-    const [value, setValue] = useState(v)
+export const useInputValue = (val = '') => {
+    const [value, setValue] = useState(val)
 
     return {
         onChange: (e) => setValue(e.target.value),
-        placeholder: ph,
         type: 'text',
+        value: value
+    }
+}
+
+export const useSelectValue = (val = '') => {
+    const [value, setValue] = useState(val)
+
+    return {
+        className: 'browser-default',
+        onChange: (e) => setValue(e.target.value),
+        value: value
+    }
+}
+
+export const useTextAreaValue = (val = '') => {
+    const [value, setValue] = useState(val)
+
+    return {
+        className: 'materialize-textarea',
+        onChange: (e) => setValue(e.target.value),
         value: value
     }
 }
