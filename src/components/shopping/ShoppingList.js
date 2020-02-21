@@ -1,15 +1,15 @@
 import React from 'react'
 
-import GroceryCard from './GroceryCard'
+import ShoppingItem from './ShoppingItem'
 
-function GroceryList() {
+function ShoppingList() {
     return (
         <div className="container">
             <div className="row">
-                <GroceryCard />
+                <ShoppingItem />
             </div>
         </div>
     )
 }
 
-export default GroceryList
+export default ShoppingList

@@ -1,79 +1,83 @@
 import React, { Component } from 'react'
 import { v4 as uuid } from 'uuid'
 
-const InvalidDirection = () => <span className="deep-orange-text text-lighten-2">Direction Is Required</span>
-
-class CreateDirection extends Component {
+class CreateRecipeInstruction extends Component {
     state = {
-        addDirectionError: false,
-        instruction: ''
+        valid: true,
+        value: ''
     }
 
     handleChange = e => {
+        // get user input
         const { value } = e.target
 
+        // update state
         this.setState({
-            addDirectionError: false,
-            instruction: value
+            valid: true,
+            value
         })
     }
 
     handleClick = () => {
+        // generate unique id
         const id = uuid()
 
-        const {
-            addDirectionError,
-            instruction
-        } = this.state
+        // destructure state
+        const { value } = this.state
 
-        const { addDirection } = this.props
+        // destructure props
+        const { addInstruction } = this.props
 
-        if (instruction) {
-            const newDirection = { id, instruction }
-            addDirection(newDirection)
+        // add instruction if value exists
+        if (value) {
+            // create new instruction object
+            const newInstruction = { id, value }
 
+            // add new instruction to recipe
+            addInstruction(newInstruction)
+
+            // reset state
             this.setState({
-                addDirectionError,
-                instruction: '',
+                valid: true,
+                value: ''
             })
         } else {
+            // prompt user to provide valid input
             this.setState({
                 ...this.state,
-                addDirectionError: true
+                valid: false
             })
         }
 
     }
 
     render() {
+        // destructure state
         const {
-            addDirectionError,
-            instruction
+            valid,
+            value
         } = this.state
 
-        const {
-            addDirection,
-            index
-        } = this.props
+        // destructure props
+        const { index } = this.props
 
         return (
-            <div className="row direction">
+            <div className="row instruction">
                 <div className="col s10">
                     <div className="input-field col s1">
                         <p className="center-align">
                             <b>{`${index})`}</b>
                         </p>
                     </div>
-                    <div className="input-field col s11">
+                    <div className={`input-field col s11 ${valid ? null : 'invalid-input'}`}>
                         <textarea
                             className='materialize-textarea'
                             name="instruction"
                             onChange={this.handleChange}
-                            placeholder="Instruction"
-                            value={instruction}
+                            placeholder={valid ? 'Instruction' : 'Instruction is required' }
+                            value={value}
                         >
                         </textarea>
-                        {addDirectionError ? <InvalidDirection /> : null}
                     </div>
                 </div>
                 <div className="col s2 buttons">
@@ -86,4 +90,4 @@ class CreateDirection extends Component {
     }
 }
 
-export default CreateDirection
+export default CreateRecipeInstruction

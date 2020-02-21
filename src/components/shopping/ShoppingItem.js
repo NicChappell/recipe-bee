@@ -1,6 +1,6 @@
 import React from 'react'
 
-function GroceryCard() {
+function ShoppingItem() {
     return (
         <div className="col s6">
             <div className="card-panel teal">
@@ -12,4 +12,4 @@ function GroceryCard() {
     )
 }
 
-export default GroceryCard
+export default ShoppingItem
