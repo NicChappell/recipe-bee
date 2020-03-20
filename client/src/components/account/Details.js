@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 // import custom hooks
 import {
@@ -11,32 +11,37 @@ const AuthDetails = ({ user }) => {
     console.log(user)
     // destructure user
     const {
-        // address1,
-        // address2,
-        // city,
+        address1,
+        address2,
+        city,
         email,
         firstName,
         lastName,
-        // postalCode
-        // state,
-        // username
+        postalCode,
+        state,
+        username
     } = user
 
     // custom hook variables
-    const address1Input = useTextValue('')
-    const address2Input = useTextValue('')
+    const address1Input = useTextValue(address1)
+    const address2Input = useTextValue(address2)
     const changePasswordInput = usePasswordValue('')
     const changePassword2Input = usePasswordValue('')
-    const cityInput = useTextValue('')
+    const cityInput = useTextValue(city)
     const emailInput = useEmailValue(email)
     const firstNameInput = useTextValue(firstName)
     const lastNameInput = useTextValue(lastName)
     const passwordInput = usePasswordValue('')
-    const postalCodeInput = useTextValue('')
-    const stateInput = useTextValue('')
-    const usernameInput = useTextValue('')
+    const postalCodeInput = useTextValue(postalCode)
+    const stateInput = useTextValue(state)
+    const usernameInput = useTextValue(username)
 
-    const handleClick = () => {
+    const handleDeleteClick = () => {
+        console.log('handle delete click')
+    }
+
+    const handleEditClick = () => {
+        console.log('handle edit click')
     }
 
     return (
@@ -98,7 +103,7 @@ const AuthDetails = ({ user }) => {
                             {...address2Input}
                             disabled={true}
                             name="address2"
-                            placeholder="Street Address (Continued)"
+                            placeholder=""
                         />
                     </div>
                     <div className="input-field col s12 m5">
@@ -169,12 +174,12 @@ const AuthDetails = ({ user }) => {
                         <h5>Delete Account</h5>
                     </div>
                     <div className="col s12 m6">
-                        <button className="black-text btn red lighten-2">Delete Account</button>
+                        <button className="black-text btn red lighten-2" onClick={handleDeleteClick}>Delete Account</button>
                     </div>
                 </div>
                 <div className="row center-align">
                     <div className="col s12">
-                        <button className="black-text btn grey lighten-2">Edit</button>
+                        <button className="black-text btn grey lighten-2" onClick={handleEditClick}>Edit</button>
                     </div>
                 </div>
             </div>

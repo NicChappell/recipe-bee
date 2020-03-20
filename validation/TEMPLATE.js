@@ -3,7 +3,7 @@ const Validator = require('validator')
 const isEmpty = require('is-empty')
 
 // validate user input
-const validateUserInput = data => {
+const validateSomething = data => {
     // instantiate an errors object
     let errors = {}
 
@@ -14,8 +14,8 @@ const validateUserInput = data => {
     } = data
 
     // convert empty fields into empty strings for Validator methods
-    validateThing1 = !isEmpty(thing1) ? thing1 : ''
-    validateThing2 = !isEmpty(thing2) ? thing2 : ''
+    const validateThing1 = !isEmpty(thing1) ? thing1 : ''
+    const validateThing2 = !isEmpty(thing2) ? thing2 : ''
 
     // validate email input
     if (Validator.isEmpty(validateThing1)) {
@@ -35,4 +35,4 @@ const validateUserInput = data => {
 }
 
 // export function
-module.exports = validateUserInput
+module.exports = validateSomething

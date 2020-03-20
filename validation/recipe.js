@@ -17,11 +17,11 @@ const validateRecipe = data => {
     } = data
 
     // convert empty fields into empty strings for Validator methods
-    validateTitle = !isEmpty(title) ? title : ''
-    validateDescription = !isEmpty(description) ? description : ''
-    // validateIngredients = !isEmpty(ingredients) ? ingredients : ''
-    // validateInstructions = !isEmpty(instructions) ? instructions : ''
-    // validateTags = !isEmpty(tags) ? tags : ''
+    const validateTitle = !isEmpty(title) ? title : ''
+    const validateDescription = !isEmpty(description) ? description : ''
+    // const validateIngredients = !isEmpty(ingredients) ? ingredients : ''
+    // const validateInstructions = !isEmpty(instructions) ? instructions : ''
+    // const validateTags = !isEmpty(tags) ? tags : ''
 
     // validate title input
     if (Validator.isEmpty(validateTitle)) {

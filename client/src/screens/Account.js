@@ -1,5 +1,5 @@
 // import dependencies
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -9,12 +9,13 @@ import Comms from '../components/account/Comms'
 import Details from '../components/account/Details'
 
 const Account = props => {
-    console.log(props)
     // destructure props
     const {
         auth,
-        errors
+        errors,
+        utilities
     } = props
+    console.log(errors)
 
     // destructure auth
     const {
@@ -22,10 +23,13 @@ const Account = props => {
         user
     } = auth
 
+    // destructure utilities
+    const { routerHeight } = utilities
+
     // allow access if user is authenticated
     if (isAuthenticated) {
         return (
-            <div className="container">
+            <div className="container router" style={{ height: routerHeight }}>
                 <Details user={user} />
                 <Comms />
             </div>
@@ -37,12 +41,14 @@ const Account = props => {
 
 Account.propTypes = {
     auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
+    utilities: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    errors: state.errors
+    errors: state.errors,
+    utilities: state.utilities
 })
 
 export default connect(

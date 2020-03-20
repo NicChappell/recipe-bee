@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { secretOrKey } = require('../../../config/keys')
 
-// import user input validation
+// import validation
 const validateSignUpInput = require('../../../validation/signUp')
 const validateSignInInput = require('../../../validation/signIn')
 
@@ -101,11 +101,18 @@ router.post('/sign-in', (req, res) => {
                     // create jwt payload
                     const payload = {
                         id: user.id,
+                        address1: user.address1,
+                        address2: user.address2,
+                        city: user.city,
                         email: user.email,
                         firstName: user.firstName,
                         fullName: user.fullName,
                         lastName: user.lastName,
-                        slug: user.slug
+                        password: user.password,
+                        postalCode: user.postalCode,
+                        slug: user.slug,
+                        state: user.state,
+                        username: user.username
                     }
 
                     // 1 year in seconds
@@ -153,38 +160,59 @@ router.post('/sign-up', (req, res) => {
 
     // destructure request body
     const {
+        address1,
+        address2,
+        city,
         email,
         firstName,
         lastName,
-        password
+        password,
+        postalCode,
+        state,
+        username
     } = req.body
 
+    // check for existing email
     User.findOne({ email }).then(user => {
-        // check for existing user
         if (user) {
             return res
                 .status(400)
                 .json({ email: 'Email already exists' })
         }
 
-        // instantiate new User object 
-        const newUser = new User({
-            email,
-            firstName,
-            fullName: `${firstName} ${lastName}`,
-            lastName,
-            password,
-            slug: `${firstName.toLowerCase()}-${lastName.toLowerCase()}`
-        })
+        // check for existing username
+        User.findOne({ username }).then(user => {
+            if (user) {
+                return res
+                    .status(400)
+                    .json({ username: 'Username already exists' })
+            }
 
-        // hash password before saving to database
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-                if (err) throw err
-                newUser.password = hash
-                newUser.save()
-                    .then(user => res.status(200).json(user))
-                    .catch(err => console.log(err))
+            // instantiate new User object 
+            const newUser = new User({
+                address1,
+                address2,
+                city,
+                email,
+                firstName,
+                fullName: `${firstName} ${lastName}`,
+                lastName,
+                password,
+                postalCode,
+                slug: `${firstName.toLowerCase()}-${lastName.toLowerCase()}`,
+                state,
+                username
+            })
+
+            // hash password before saving to database
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(newUser.password, salt, (err, hash) => {
+                    if (err) throw err
+                    newUser.password = hash
+                    newUser.save()
+                        .then(user => res.status(200).json(user))
+                        .catch(err => console.log(err))
+                })
             })
         })
     })

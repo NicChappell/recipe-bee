@@ -1,81 +1,252 @@
 // import dependencies
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { isEmpty } from 'lodash'
+
+// import actions
+import {
+    getRecipes,
+    updateRecipe
+} from '../actions/recipeActions'
+import { getTags } from '../actions/tagActions'
 
 // import components
+import Autocomplete from '../components/utility/Autocomplete'
 import RecipesList from '../components/recipe/RecipesList'
-import Preloader from '../components/utility/Preloader'
 
-// import images
-import icon from '../images/icons/icon@4x.png'
+const GetRecipes = props => {
+    // state hook variables
+    const [arrayHalves, setArrayHalves] = useState([[], []])
+    const [filters, setFilters] = useState([])
+    const [options, setOptions] = useState([])
+    const [sortMethod, setSortMethod] = useState('trendingRecipes')
 
-const GetRecipes = (props) => {
-    console.log(props)
     // destructure props
-    const { recipes } = props
+    const {
+        auth,
+        errors,
+        getRecipes,
+        getTags,
+        recipes,
+        tags,
+        updateRecipe,
+        utilities
+    } = props
 
-    const [recipesList, setRecipesList] = useState(null)
-    const [halvedList, setHalvedList] = useState(null)
+    // destructure auth object
+    const {
+        isAuthenticated,
+        user
+    } = auth
 
-    // const getRecipes = async () => {
-    //     // const response = await fetch(/* api endpoint goes here */)
-    //     // const json = await response.json()
-    //     // setRecipes(json)
-    // }
+    // destructure recipes object
+    const {
+        mostLovedRecipes,
+        newRecipes,
+        topRecipes,
+        trendingRecipes
+    } = recipes
 
-    useEffect(() => {
-        if (recipesList) {
-            const half = Math.ceil(recipesList.length / 2)
-            const halvedList = []
+    // destructure utilities object
+    const { routerHeight } = utilities
 
-            for (let i = 0; i < 2; i++) {
-                const startSlice = i * half
-                const endSlice = startSlice + half
-                const slicedList = recipes.slice(startSlice, endSlice)
-                halvedList.push(slicedList)
+    // add filter
+    const addFilter = filter => {
+        setFilters([...filters, filter])
+
+        const updatedOptions = options.filter(option => option !== filter)
+        setOptions(updatedOptions)
+    }
+
+    // remove filter
+    const removeFilter = filter => {
+        const updatedFilters = filters.filter(tag => tag !== filter)
+        setFilters(updatedFilters)
+
+        setOptions([...options, filter])
+    }
+
+    const halveArray = (arr, updateState) => {
+        // create local variables
+        const firstHalf = []
+        const secondHalf = []
+
+        arr.forEach((item, index) => {
+            if (index % 2 === 0) {
+                firstHalf.push(item)
+            } else {
+                secondHalf.push(item)
             }
+        })
 
-            setHalvedList(halvedList)
+        // update state
+        updateState([firstHalf, secondHalf])
+    }
+
+    const handleScroll = e => {
+        // destructure event.target
+        const {
+            clientHeight,
+            scrollHeight,
+            scrollTop,
+        } = e.target
+
+        // calculate scroll bottom
+        const bottom = scrollHeight - scrollTop === clientHeight
+        // calculate lazy load
+        const lazyLoad = scrollHeight - scrollTop === clientHeight + 300
+
+        // load more content
+        if (bottom || lazyLoad) {
+            // dispatch getRecipes action
+            //   limit: 10
+            //   skip: recipes[sortMethod].length
+            //   sortMethod: sortMethod
+            getRecipes(10, recipes[sortMethod].length, sortMethod)
         }
-    }, [recipes, recipesList])
+    }
 
+    // halve recipes array when filters, recipes or sortMethod changes
     useEffect(() => {
-        setTimeout(() => {
-            setRecipesList(recipes)
-        }, 1000)
-    }, [recipes])
+        // get nested recipes array from recipes object
+        const nestedRecipesArray = recipes[sortMethod]
 
-    if (recipesList && recipesList.length > 0) {
-        return <RecipesList recipes={halvedList} />
-    } else if (recipesList && recipesList.length === 0) {
+        // filter nestedRecipesArray using filters array
+        let filteredRecipesArray = []
+        if (filters.length) {
+            filteredRecipesArray = nestedRecipesArray.filter(recipe => {
+                // destructure recipe
+                const { tags } = recipe
+    
+                // check if any tag matches any filters
+                return tags.some(tag => filters.includes(tag.toLowerCase()))
+            })
+        } else {
+            filteredRecipesArray = nestedRecipesArray
+        }
+        console.log(filteredRecipesArray.length)
+
+        halveArray(filteredRecipesArray, setArrayHalves)
+    }, [filters, sortMethod, recipes])
+
+    // set options when tags changes
+    useEffect(() => {
+        const options = tags.map(tagObj => tagObj.tag)
+        setOptions(options)
+    }, [tags])
+
+    // get recipes after component mount
+    useEffect(() => {
+        if (isEmpty(mostLovedRecipes)) {
+            // dispatch getRecipes action
+            //   limit: 10
+            //   skip: 0
+            //   sortMethod: 'mostLovedRecipes'
+            getRecipes(10, 0, 'mostLovedRecipes')
+        }
+
+        if (isEmpty(newRecipes)) {
+            // dispatch getRecipes action
+            //   limit: 10
+            //   skip: 0
+            //   sortMethod: 'newRecipes'
+            getRecipes(10, 0, 'newRecipes')
+        }
+
+        if (isEmpty(topRecipes)) {
+            // dispatch getRecipes action
+            //   limit: 10
+            //   skip: 0
+            //   sortMethod: 'topRecipes'
+            getRecipes(10, 0, 'topRecipes')
+        }
+
+        if (isEmpty(trendingRecipes)) {
+            // dispatch getRecipes action
+            //   limit: 10
+            //   skip: 0
+            //   sortMethod: 'trendingRecipes'
+            getRecipes(10, 0, 'trendingRecipes')
+        }
+    }, [])
+
+    // get tags after component mount
+    useEffect(() => {
+        if (isEmpty(tags)) {
+            getTags()
+        }
+    }, [])
+
+    if (!isEmpty(errors)) {
+        console.log(errors)
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col no-recipes s12">
-                        <h3>No Recipes Found</h3>
-                        <p>You haven't added any recipes yet</p>
-                        <img src={icon} alt="" />
-                        <Link className="black-text btn lighten-2 orange" to="/recipes/create">
-                            Create Recipe
-                        </Link>
+                <div className="row mt-5">
+                    <div className="center-align col s12">
+                        <p>There's been an error. Check the console.</p>
                     </div>
                 </div>
             </div>
         )
     }
-    return <Preloader />
+
+    return (
+        <div className="container router" onScroll={handleScroll} style={{ height: routerHeight }}>
+            <div className="row">
+                <div className="col s12 l6 sort-recipes">
+                    <button className={`btn-flat ${sortMethod === 'trendingRecipes' ? 'active' : null}`} onClick={() => setSortMethod('trendingRecipes')}><i className="material-icons left">trending_up</i>trending</button>
+                    <button className={`btn-flat ${sortMethod === 'topRecipes' ? 'active' : null}`} onClick={() => setSortMethod('topRecipes')}><i className="material-icons left">thumb_up</i>top</button>
+                    <button className={`btn-flat ${sortMethod === 'mostLovedRecipes' ? 'active' : null}`} onClick={() => setSortMethod('mostLovedRecipes')}><i className="material-icons left">favorite</i>loved</button>
+                    <button className={`btn-flat ${sortMethod === 'newRecipes' ? 'active' : null}`} onClick={() => setSortMethod('newRecipes')}><i className="material-icons left">new_releases</i>new</button>
+                </div>
+                <div className="col s12 l3 tags-search">
+                    <Autocomplete
+                        options={options}
+                        liftState={addFilter}
+                    />
+                </div>
+                <div className="col s12 l3 tags">
+                    {filters.map(filter => {
+                        return (
+                            <div className="chip orange lighten-2" key={filter}>
+                                {filter.toUpperCase()}
+                                <i className="close material-icons" onClick={() => removeFilter(filter)}>close</i>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+            <RecipesList
+                isAuthenticated={isAuthenticated}
+                recipes={arrayHalves}
+                updateRecipe={updateRecipe}
+                user={user}
+            />
+        </div>
+    )
 }
 
 GetRecipes.propTypes = {
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired,
+    getRecipes: PropTypes.func.isRequired,
+    getTags: PropTypes.func.isRequired,
+    recipes: PropTypes.object.isRequired,
+    tags: PropTypes.array.isRequired,
+    updateRecipe: PropTypes.func.isRequired,
+    utilities: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    errors: state.errors,
+    recipes: state.recipes,
+    tags: state.tags,
+    utilities: state.utilities
 })
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    { getRecipes, getTags, updateRecipe }
 )(GetRecipes)

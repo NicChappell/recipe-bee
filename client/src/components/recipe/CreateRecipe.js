@@ -244,6 +244,7 @@ class CreateRecipe extends Component {
             validIngredients,
             validTitle
         } = this.state
+        console.log(description, image, title)
 
         return (
             <div className="card-panel white">
@@ -261,6 +262,69 @@ class CreateRecipe extends Component {
                         imgSrc={this.imageSource}
                         rmvImg={this.removeImage}
                     />
+                </div>
+                <div className="row">
+                    <div className="col s12">
+                        <h5>Tags</h5>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12">
+                        autocomplete form goes here
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12">
+                        <div className="chip">
+                            Breakfat
+                            <i className="close material-icons">close</i>
+                        </div>
+                        <div className="chip">
+                            Lunch
+                            <i className="close material-icons">close</i>
+                        </div>
+                        <div className="chip">
+                            Dinner
+                            <i className="close material-icons">close</i>
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s6">
+                        <h5>Prep Time</h5>
+                    </div>
+                    <div className="input-field col s6">
+                        <input
+                            name="prepTime"
+                            placeholder="Prep time"
+                            type='number'
+                        />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s6">
+                        <h5>Cook Time</h5>
+                    </div>
+                    <div className="input-field col s6">
+                        <input
+                            name="cookTime"
+                            placeholder="Cook time"
+                            type='number'
+                        />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12">
+                        <span className="left mr-1"><i className="material-icons left">share</i> Share settings</span>
+                        <div className="switch">
+                            <label>
+                                Off
+                                <input disabled type="checkbox" />
+                                <span className="lever"></span>
+                                On
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div className="row">
                     <div className="col s12">
@@ -290,22 +354,25 @@ class CreateRecipe extends Component {
                 </div>
                 <div className="row">
                     <div className="col s12">
+                        <h5>Preparation</h5>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12">
                         <h5>Instructions</h5>
                     </div>
                 </div>
                 <div className={`row ${instructions.length > 0 ? 'instructions' : ''}`}>
                     <div className="col s12">
-                        {instructions.map((instruction, index) => {
-                            return (
-                                <InstructionsList
-                                    deleteInstruction={this.deleteInstruction}
-                                    index={index}
-                                    instruction={instruction}
-                                    key={instruction.id}
-                                    updateInstruction={this.updateInstruction}
-                                />
-                            )
-                        })}
+                        {instructions.map((instruction, index) => (
+                            <InstructionsList
+                                deleteInstruction={this.deleteInstruction}
+                                index={index}
+                                instruction={instruction}
+                                key={instruction.id}
+                                updateInstruction={this.updateInstruction}
+                            />
+                        ))}
                     </div>
                 </div>
                 <div className={validInstructions ? '' : 'invalid-recipe-instructions'}>

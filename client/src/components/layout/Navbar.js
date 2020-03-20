@@ -36,8 +36,8 @@ const Navbar = (props) => {
                         <li><i className="black-text material-icons" onClick={openSideNav}>menu</i></li>
                     </ul>
                     <ul className="left hide-on-small-and-down">
-                        <li><NavLink className="black-text" to="/">Home</NavLink></li>
-                        <li><NavLink className="black-text" to="/recipes">Recipes</NavLink></li>
+                        <li><NavLink className="black-text" exact to="/">Home</NavLink></li>
+                        <li><NavLink className="black-text" exact to="/recipes">Recipes</NavLink></li>
                     </ul>
                     <Link to="/" className="brand-logo center">
                         <div className="logo">

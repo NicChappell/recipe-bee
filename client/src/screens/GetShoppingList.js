@@ -7,17 +7,27 @@ import PropTypes from 'prop-types'
 import ShoppingList from '../components/shopping/ShoppingList'
 
 const GetShoppingList = (props) => {
+    // destructure props
+    const { utilities } = props
+
+    // destructure utilities
+    const { routerHeight } = utilities
+
     return (
-        <ShoppingList />
+        <div className="container router" style={{ height: routerHeight }}>
+            <ShoppingList />
+        </div>
     )
 }
 
 GetShoppingList.propTypes = {
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    utilities: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    utilities: state.utilities
 })
 
 export default connect(

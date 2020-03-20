@@ -14,8 +14,8 @@ const validateSignInInput = data => {
     } = data
 
     // convert empty fields into empty strings for Validator methods
-    validateEmail = !isEmpty(email) ? email : ''
-    validatePassword = !isEmpty(password) ? password : ''
+    const validateEmail = !isEmpty(email) ? email : ''
+    const validatePassword = !isEmpty(password) ? password : ''
 
     // validate email input
     if (Validator.isEmpty(validateEmail)) {

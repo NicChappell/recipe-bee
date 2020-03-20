@@ -21,7 +21,6 @@ const authReducer = (state = initialState, action) => {
     switch (type) {
         case SET_CURRENT_USER:
             return {
-                ...state,
                 isAuthenticated: !isEmpty(payload),
                 user: payload
             }

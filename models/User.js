@@ -12,6 +12,18 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    address1: {
+        type: String,
+        default: ''
+    },
+    address2: {
+        type: String,
+        default: ''
+    },
+    city: {
+        type: String,
+        default: ''
+    },
     email: {
         type: String,
         required: true
@@ -32,10 +44,25 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    postalCode: {
+        type: String,
+        required: true
+    },
     slug: {
         type: String,
         required: true
-    }
+    },
+    state: {
+        type: String,
+        default: ''
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    upVotes: Array,
+    downVotes: Array,
+    hearts: Array
 })
 
 // export schema

@@ -23,34 +23,47 @@
             "name": "butter"
         }
     ],
-    "instructions": [
+    "preparation": [
         {
             "sequence": 0,
-            "instruction": "Preheat skillet over medium heat."
+            "action": "Preheat skillet over medium heat."
         },
         {
             "sequence": 1,
-            "instruction": "Generously butter one side of a slice of bread."
+            "action": "Preheat oven to 425 degrees"
         },
         {
             "sequence": 2,
+            "action": "Wash and dry all produce."
+        }
+    ],
+    "instructions": [
+        {
+            "sequence": 0,
+            "instruction": "Generously butter one side of a slice of bread."
+        },
+        {
+            "sequence": 1,
             "instruction": "Place bread butter-side-down onto skillet bottom and add 1 slice of cheese."
         },
         {
-            "sequence": 3,
+            "sequence": 2,
             "instruction": "Butter a second slice of bread on one side and place butter-side-up on top of sandwich."
         },
         {
-            "sequence": 4,
+            "sequence": 3,
             "instruction": "Grill until lightly browned and flip over."
         },
         {
-            "sequence": 5,
+            "sequence": 4,
             "instruction": "Continue grilling until cheese is melted."
         }
     ],
-    "tags": ["breakfast", "lunch", "dinner"],
+    "prepTime": 10,
+    "cookTime": 30,
     "shared": false,
     "upVotes": [],
-    "downVotes": []
+    "downVotes": [],
+    "hearts": [],
+    "tags": ["breakfast", "lunch", "dinner"]
 }

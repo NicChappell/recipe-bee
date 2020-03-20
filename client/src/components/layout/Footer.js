@@ -2,11 +2,11 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 
-function Footer() {
+const Footer = () => {
     const date = new Date()
 
     return (
-        <footer className="page-footer grey lighten-2 mt-4">
+        <footer className="page-footer grey lighten-2">
             <div className="container">
                 <div className="row">
                     <div className="col s12 m6">

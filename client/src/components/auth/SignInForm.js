@@ -9,7 +9,7 @@ import {
 
 const SignInForm = props => {
     // useState hook variables
-    const [authErrors, setAuthErrors] = useState({})
+    const [signInErrors, setSignInErrors] = useState({})
 
     // custom hook variables
     const email = useEmailValue('')
@@ -36,25 +36,25 @@ const SignInForm = props => {
         // destructure event
         const { name } = e.target
 
-        // reset corresponding key in authErrors
-        setAuthErrors({ ...authErrors, [name]: '' })
+        // reset corresponding key in signInErrors
+        setSignInErrors({ ...signInErrors, [name]: '' })
     }
 
-    // update authErrors after errors change
+    // update signInErrors after errors change
     useEffect(() => {
-        setAuthErrors(errors)
+        setSignInErrors(errors)
     }, [errors])
 
-    // reset authErrors after component mount
+    // reset signInErrors after component mount
     useEffect(() => {
-        setAuthErrors({})
+        setSignInErrors({})
     }, [])
 
     return (
         <div className="col s12">
             <div className="card-panel">
                 <div className="row">
-                    <div className={`input-field col s12 ${authErrors.email ? "invalid-input" : null}`}>
+                    <div className={`input-field col s12 ${signInErrors.email ? 'invalid-input' : null}`}>
                         <i className="material-icons prefix">email</i>
                         <input
                             {...email}
@@ -62,11 +62,11 @@ const SignInForm = props => {
                             onFocus={handleFocus}
                             placeholder="Email Address"
                         />
-                        {authErrors.email ? <span className="invalid-span">{authErrors.email}</span> : null}
+                        {signInErrors.email ? <span className="invalid-span">{signInErrors.email}</span> : null}
                     </div>
                 </div>
                 <div className="row">
-                    <div className={`input-field col s12 ${authErrors.password ? "invalid-input" : null}`}>
+                    <div className={`input-field col s12 ${signInErrors.password ? 'invalid-input' : null}`}>
                         <i className="material-icons prefix">lock</i>
                         <input
                             {...password}
@@ -74,7 +74,7 @@ const SignInForm = props => {
                             onFocus={handleFocus}
                             placeholder="Password"
                         />
-                        {authErrors.password ? <span className="invalid-span">{authErrors.password}</span> : null}
+                        {signInErrors.password ? <span className="invalid-span">{signInErrors.password}</span> : null}
                     </div>
                 </div>
                 <div className="row center-align">

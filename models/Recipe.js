@@ -29,13 +29,39 @@ const RecipeSchema = new Schema({
         default: undefined
     },
     ingredients: Array,
+    preparation: Array,
     instructions: Array,
+    prepTime: {
+        type: Number,
+        default: 0
+    },
+    cookTime: {
+        type: Number,
+        default: 0
+    },
     shared: {
         type: Boolean,
         default: false
     },
     upVotes: Array,
     downVotes: Array,
+    netVotes: {
+        type: Number,
+        default: 0
+    },
+    percentDownVotes: {
+        type: Number,
+        default: 0.0
+    },
+    percentUpVotes: {
+        type: Number,
+        default: 0.0
+    },
+    hearts: Array,
+    totalHearts: {
+        type: Number,
+        default: 0
+    },
     tags: Array
 })
 

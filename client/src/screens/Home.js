@@ -10,14 +10,24 @@ import create from '../images/marketing/create-rgb.svg'
 import save from '../images/marketing/save-rgb.svg'
 import share from '../images/marketing/share-rgb.svg'
 
-const Home = ({ auth }) => {
+const Home = (props) => {
+    // destructure props
+    const {
+        auth,
+        recipes,
+        utilities
+    } = props
+
     // destructure auth
     const { isAuthenticated } = auth
+
+    // destructure utilities
+    const { routerHeight } = utilities
 
     // authenticated content
     if (isAuthenticated) {
         return (
-            <div className="container">
+            <div className="container router" style={{ height: routerHeight }}>
                 <div className="row">
                     <div className="col s12">
                         Authenticated Home
@@ -28,9 +38,9 @@ const Home = ({ auth }) => {
     }
     // unauthenticated content
     return (
-        <div className="container">
+        <div className="container router" style={{ height: routerHeight }}>
             <div className="row">
-                <div className="center-align col s12 mt-3">
+                <div className="center-align col s12">
                     <h3>Make meal planning easy and fun</h3>
                     <p className="flow-text">RecipeBee keeps track of the meals you love and creates customized meal plans</p>
                 </div>
@@ -191,11 +201,15 @@ const Home = ({ auth }) => {
 }
 
 Home.propTypes = {
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+	recipes: PropTypes.object.isRequired,
+    utilities: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    recipes: state.recipes,
+    utilities: state.utilities
 })
 
 export default connect(
