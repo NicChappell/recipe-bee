@@ -6,6 +6,7 @@ import { isEmpty } from 'lodash'
 
 // import actions
 import {
+    getRecipe,
     getRecipes,
     updateRecipe
 } from '../actions/recipeActions'
@@ -26,6 +27,7 @@ const GetRecipes = props => {
     const {
         auth,
         errors,
+        getRecipe,
         getRecipes,
         getTags,
         recipes,
@@ -118,14 +120,13 @@ const GetRecipes = props => {
             filteredRecipesArray = nestedRecipesArray.filter(recipe => {
                 // destructure recipe
                 const { tags } = recipe
-    
+
                 // check if any tag matches any filters
                 return tags.some(tag => filters.includes(tag.toLowerCase()))
             })
         } else {
             filteredRecipesArray = nestedRecipesArray
         }
-        console.log(filteredRecipesArray.length)
 
         halveArray(filteredRecipesArray, setArrayHalves)
     }, [filters, sortMethod, recipes])
@@ -135,6 +136,11 @@ const GetRecipes = props => {
         const options = tags.map(tagObj => tagObj.tag)
         setOptions(options)
     }, [tags])
+
+    // get recipe after component mount
+    useEffect(() => {
+        getRecipe('')
+    }, [])
 
     // get recipes after component mount
     useEffect(() => {
@@ -191,22 +197,24 @@ const GetRecipes = props => {
         )
     }
 
+    console.log(recipes[sortMethod])
+
     return (
-        <div className="container router" onScroll={handleScroll} style={{ height: routerHeight }}>
+        <div className="container get-recipes router" onScroll={handleScroll} style={{ height: routerHeight }}>
             <div className="row">
-                <div className="col s12 l6 sort-recipes">
+                <div className="col s12 l6 recipe-sort-methods">
                     <button className={`btn-flat ${sortMethod === 'trendingRecipes' ? 'active' : null}`} onClick={() => setSortMethod('trendingRecipes')}><i className="material-icons left">trending_up</i>trending</button>
                     <button className={`btn-flat ${sortMethod === 'topRecipes' ? 'active' : null}`} onClick={() => setSortMethod('topRecipes')}><i className="material-icons left">thumb_up</i>top</button>
                     <button className={`btn-flat ${sortMethod === 'mostLovedRecipes' ? 'active' : null}`} onClick={() => setSortMethod('mostLovedRecipes')}><i className="material-icons left">favorite</i>loved</button>
                     <button className={`btn-flat ${sortMethod === 'newRecipes' ? 'active' : null}`} onClick={() => setSortMethod('newRecipes')}><i className="material-icons left">new_releases</i>new</button>
                 </div>
-                <div className="col s12 l3 tags-search">
+                <div className="col s12 l3 recipe-tag-search">
                     <Autocomplete
                         options={options}
                         liftState={addFilter}
                     />
                 </div>
-                <div className="col s12 l3 tags">
+                <div className="col s12 l3 recipe-tags">
                     {filters.map(filter => {
                         return (
                             <div className="chip orange lighten-2" key={filter}>
@@ -215,6 +223,13 @@ const GetRecipes = props => {
                             </div>
                         )
                     })}
+                </div>
+            </div>
+            <div className="row">
+                <div className="col s12">
+                    <span className="sm-text">
+                        {`${recipes[sortMethod].length} recipes found`}
+                    </span>
                 </div>
             </div>
             <RecipesList
@@ -230,6 +245,7 @@ const GetRecipes = props => {
 GetRecipes.propTypes = {
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
+    getRecipe: PropTypes.func.isRequired,
     getRecipes: PropTypes.func.isRequired,
     getTags: PropTypes.func.isRequired,
     recipes: PropTypes.object.isRequired,
@@ -248,5 +264,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getRecipes, getTags, updateRecipe }
+    { getRecipe, getRecipes, getTags, updateRecipe }
 )(GetRecipes)

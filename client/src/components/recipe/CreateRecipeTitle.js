@@ -1,58 +1,45 @@
-import React, { Component } from 'react'
+// import dependencies
+import React, { useState } from 'react'
 
-class CreateRecipeTitle extends Component {
-    state = {
-        valid: true,
-        value: ''
-    }
+const CreateRecipeTitle = props => {
+    // state hook variables
+    const [valid, setValid] = useState(true)
+    const [value, setValue] = useState('')
 
-    handleChange = e => {
+    const handleChange = e => {
         // get user input
         const { value } = e.target
 
         // destructure props
-        const { recipeTitle } = this.props
+        const { recipeTitle } = props
 
-        // add title if value exists
         if (value) {
-            // add title to recipe
+            // add title to recipe if value exists
             recipeTitle(value)
 
             // update state
-            this.setState({
-                valid: true,
-                value
-            })
+            setValid(true)
+            setValue(value)
         } else {
             // prompt user to provide valid input
-            this.setState({
-                valid: false,
-                value
-            })
+            setValid(false)
+            setValue(value)
         }
     }
 
-    render() {
-        // destructure state
-        const {
-            valid,
-            value
-        } = this.state
-
-        return (
-            <div className="row">
-                <div className={`input-field col s12 ${valid ? null : 'invalid-recipe-title'}`}>
-                    <input
-                        name="title"
-                        onChange={this.handleChange}
-                        placeholder="Title"
-                        type='text'
-                        value={value}
-                    />
-                </div>
+    return (
+        <div className="row">
+            <div className={`input-field col s12 ${valid ? null : 'invalid-input'}`}>
+                <input
+                    name="title"
+                    onChange={handleChange}
+                    placeholder={valid ? "Title" : "Title is required"}
+                    type='text'
+                    value={value}
+                />
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default CreateRecipeTitle

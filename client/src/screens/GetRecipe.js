@@ -12,11 +12,14 @@ import {
 
 // import components
 import Breadcrumb from '../components/layout/Breadcrumb'
+import HeartAction from '../components/recipe/HeartAction'
 import Preloader from '../components/utility/Preloader'
+import VoteAction from '../components/recipe/VoteAction'
 
 const GetRecipe = props => {
     // destructure props
     const {
+        auth,
         errors,
         getRecipe,
         location,
@@ -26,11 +29,42 @@ const GetRecipe = props => {
         utilities
     } = props
 
-    // destructure recipes
-    const { recipe } = recipes
-    console.log(recipe)
+    // destructure auth object
+    const {
+        isAuthenticated,
+        user
+    } = auth
+    const userId = user.id
 
-    // destructure utilities
+    // destructure recipes object
+    const { recipe } = recipes
+
+    // destructure recipe object
+    const {
+        createdAt,
+        updatedAt,
+        // user,
+        title,
+        description,
+        photo,
+        ingredients,
+        preparation,
+        instructions,
+        prepTime,
+        cookTime,
+        shared,
+        upVotes,
+        downVotes,
+        netVotes,
+        percentDownVotes,
+        percentUpVotes,
+        hearts,
+        totalHearts,
+        tags
+    } = recipe
+    const recipeId = recipe._id
+
+    // destructure utilities object
     const { routerHeight } = utilities
 
     // get recipe after component mount
@@ -43,12 +77,6 @@ const GetRecipe = props => {
 
         // dispatch getRecipe action
         getRecipe(recipeId)
-
-        // clean up after this effect
-        const cleanup = () => {
-            getRecipe('')
-        }
-        return cleanup
     }, [])
 
     if (!isEmpty(errors)) {
@@ -63,33 +91,9 @@ const GetRecipe = props => {
         )
     }
 
-    if (!isEmpty(recipe)) {
-        // destructure recipe
-        const {
-            createdAt,
-            updatedAt,
-            user,
-            title,
-            description,
-            photo,
-            ingredients,
-            preparation,
-            instructions,
-            prepTime,
-            cookTime,
-            shared,
-            upVotes,
-            downVotes,
-            netVotes,
-            percentDownVotes,
-            percentUpVotes,
-            hearts,
-            totalHearts,
-            tags
-        } = recipe
-
+    if (recipeId) {
         return (
-            <div className="container router" style={{ height: routerHeight }}>
+            <div className="container get-recipe router" style={{ height: routerHeight }}>
                 <Breadcrumb location={location} />
                 <div className="row">
                     <div className="col s12">
@@ -118,19 +122,24 @@ const GetRecipe = props => {
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div className="col s5 center-align">
-                                            <button className="btn-flat"><i className="material-icons">favorite_border</i></button>
-                                            {/* <button className="btn-flat"><i className="material-icons">favorite</i></button> */}
-                                            <span className="heart-count">{totalHearts}</span>
-                                        </div>
-                                        <div className="col s7 center-align">
-                                            <button className="btn-flat" disabled>
-                                                <i className="material-icons">thumb_up</i>
-                                            </button>
-                                            <span className="vote-count">{netVotes}</span>
-                                            <button className="btn-flat" disabled>
-                                                <i className="material-icons">thumb_down</i>
-                                            </button>
+                                        <div className="col s12 recipe-actions">
+                                            <HeartAction
+                                                hearts={hearts}
+                                                isAuthenticated={isAuthenticated}
+                                                recipeId={recipeId}
+                                                totalHearts={totalHearts}
+                                                updateRecipe={updateRecipe}
+                                                userId={userId}
+                                            />
+                                            <VoteAction
+                                                downVotes={downVotes}
+                                                isAuthenticated={isAuthenticated}
+                                                recipeId={recipeId}
+                                                netVotes={netVotes}
+                                                updateRecipe={updateRecipe}
+                                                upVotes={upVotes}
+                                                userId={userId}
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -171,6 +180,7 @@ const GetRecipe = props => {
 }
 
 GetRecipe.propTypes = {
+    auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     getRecipe: PropTypes.func.isRequired,
     recipes: PropTypes.object.isRequired,
@@ -179,6 +189,7 @@ GetRecipe.propTypes = {
 }
 
 const mapStateToProps = state => ({
+    auth: state.auth,
     errors: state.errors,
     recipes: state.recipes,
     utilities: state.utilities

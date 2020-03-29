@@ -1,11 +1,13 @@
 // import dependencies
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { isEmpty } from 'lodash'
 
 // // import actions
 // import { createRecipe } from '../actions/recipeActions'
+import { getTags } from '../actions/tagActions'
 
 // import components
 import CreateRecipe from '../components/recipe/CreateRecipe'
@@ -15,7 +17,9 @@ const PostRecipe = props => {
     const {
         auth,
         addRecipe,
+        getTags,
         history,
+        tags,
         utilities
     } = props
 
@@ -25,7 +29,14 @@ const PostRecipe = props => {
     // destructure utilities
     const { routerHeight } = utilities
 
-    // allow access if user is not authenticated
+    // get tags after component mount
+    useEffect(() => {
+        if (isEmpty(tags)) {
+            getTags()
+        }
+    }, [])
+
+    // allow access if user is authenticated
     if (isAuthenticated) {
         return (
             <div className="container router" id="create-recipe" style={{ height: routerHeight }}>
@@ -39,6 +50,7 @@ const PostRecipe = props => {
                         <CreateRecipe
                             addRecipe={addRecipe}
                             history={history}
+                            tags={tags}
                         />
                     </div>
                 </div>
@@ -53,16 +65,19 @@ PostRecipe.propTypes = {
     auth: PropTypes.object.isRequired,
     // createRecipe: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
+    getTags: PropTypes.func.isRequired,
+    tags: PropTypes.array.isRequired,
     utilities: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
     auth: state.auth,
     errors: state.errors,
+    tags: state.tags,
     utilities: state.utilities
 })
 
 export default connect(
     mapStateToProps,
-    // { createRecipe }
+    { /* createRecipe, */ getTags }
 )(PostRecipe)

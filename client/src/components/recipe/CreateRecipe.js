@@ -1,35 +1,62 @@
-import React, { Component } from 'react'
+// import dependencies
+import React, { useEffect, useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
+// import components
 import CreateRecipeDescription from './CreateRecipeDescription'
-import CreateRecipeImage from './CreateRecipeImage'
 import CreateRecipeIngredient from './CreateRecipeIngredient'
 import CreateRecipeInstruction from './CreateRecipeInstruction'
+import CreateRecipePhoto from './CreateRecipePhoto'
+import CreateRecipePreparation from './CreateRecipePreparation'
+import CreateRecipeTags from './CreateRecipeTags'
+import CreateRecipeTime from './CreateRecipeTime'
 import CreateRecipeTitle from './CreateRecipeTitle'
 import InstructionsList from './InstructionsList'
 import IngredientsList from './IngredientsList'
+import PreparationsList from './PreparationsList'
+import Autocomplete from '../utility/Autocomplete'
+import ShareSetting from '../utility/ShareSetting'
 
-class CreateRecipe extends Component {
-    state = {
-        description: '',
-        image: null,
-        ingredients: [],
-        instructions: [],
-        title: '',
-        validDescription: true,
-        validInstructions: true,
-        validIngredients: true,
-        validTitle: true
-    }
+const CreateRecipe = props => {
+    // state hook variables
+    const [cookTimeHours, setCookTimeHours] = useState(0)
+    const [cookTimeMinutes, setCookTimeMinutes] = useState(0)
+    const [description, setDescription] = useState('')
+    const [ingredients, setIngredients] = useState([])
+    const [instructions, setInstructions] = useState([])
+    const [options, setOptions] = useState([])
+    const [photo, setPhoto] = useState(undefined)
+    const [prepTimeHours, setPrepTimeHours] = useState(0)
+    const [prepTimeMinutes, setPrepTimeMinutes] = useState(0)
+    const [preparations, setPreparations] = useState([])
+    const [share, setShare] = useState(true)
+    const [tagList, setTagList] = useState([])
+    const [title, setTitle] = useState('')
+    const [validCookTime, setValidCookTime] = useState(true)
+    const [validDescription, setValidDescription] = useState(true)
+    const [validInstructions, setValidInstructions] = useState(true)
+    const [validIngredients, setValidIngredients] = useState(true)
+    const [validPrepTime, setValidPrepTime] = useState(true)
+    // const [validPreparations, setValidPreparations] = useState(true)
+    // const [validShare, setValidShare] = useState(true)
+    // const [validTags, setValidTags] = useState(true)
+    const [validTitle, setValidTitle] = useState(true)
+
+    // destructure props
+    const {
+        addRecipe,
+        history,
+        tags
+    } = props
 
     // add recipe title
-    recipeTitle = title => this.setState({ title })
+    const recipeTitle = title => setTitle(title)
 
     // add recipe description
-    recipeDescription = description => this.setState({ description })
+    const recipeDescription = description => setDescription(description)
 
-    // add image to recipe
-    addImage = e => {
+    // add photo to recipe
+    const addPhoto = e => {
         // access the uploaded file from the files array
         const file = e.target.files[0]
 
@@ -49,10 +76,7 @@ class CreateRecipe extends Component {
             // The load event is fired when a file has been read successfully
             reader.onload = e => {
                 // update state
-                this.setState({
-                    ...this.state,
-                    image: e.target.result
-                })
+                setPhoto(e.target.result)
             }
 
             // the readAsDataURL method is used to read the contents of the specified file
@@ -62,45 +86,77 @@ class CreateRecipe extends Component {
             reader.readAsDataURL(file)
         }
     }
-    // remove image from recipe
-    removeImage = e => {
+    // remove photo from recipe
+    const removePhoto = e => {
         // update state
-        this.setState({
-            ...this.state,
-            image: null
-        })
+        setPhoto(undefined)
+    }
+
+    // add tag
+    const addTag = tag => {
+        setTagList([...tagList, tag])
+
+        const updatedOptions = options.filter(option => option !== tag)
+        setOptions(updatedOptions)
+    }
+    // remove tag
+    const removeTag = tag => {
+        const updatedTagList = tagList.filter(tagName => tagName !== tag)
+        setTagList(updatedTagList)
+
+        setOptions([...options, tag])
+    }
+
+    // share setting
+    const shareSetting = check => setShare(check)
+
+    // add recipe prep time hours
+    const recipePrepTimeHours = hours => console.log(`recipePrepTimeHours: ${hours}`) // setPrepTimeHours(hours)
+    // add recipe prep time minutes
+    const recipePrepTimeMinutes = minutes => console.log(`recipePrepTimeMinutes: ${minutes}`) // setPrepTimeMinutes(minutes)
+
+    // add recipe cook time hours
+    const recipeCookTimeHours = hours => console.log(`recipeCookTimeHours: ${hours}`) // setCookTimeHours(hours)
+    // add recipe cook time minutes
+    const recipeCookTimeMinutes = minutes => console.log(`recipeCookTimeMinutes: ${minutes}`) // setCookTimeMinutes(minutes)
+
+    // add new preparation to preparations array
+    const addPreparation = preparation => setPreparations([...preparations, preparation])
+    // delete preparation from preparations array
+    const deletePreparation = preparation => {
+        // filter target preparation from preparations array
+        const updatedPreparations = preparations.filter(obj => obj.id !== preparation.id)
+
+        // update state
+        setPreparations(updatedPreparations)
+    }
+    // update preparation in preparations array
+    const updatePreparation = preparation => {
+        // find index of target preparation in preparations array
+        const index = preparations.findIndex(obj => obj.id === preparation.id)
+
+        // make a mutable copy of preparations array
+        const updatedPreparations = preparations
+
+        // update target preparation in preparations array
+        updatedPreparations[index] = preparation
+
+        // update state
+        setPreparations(updatedPreparations)
     }
 
     // add new ingredient to ingredients array
-    addIngredient = ingredient => {
-        // destructure state
-        const { ingredients } = this.state
-
-        // update state
-        this.setState({
-            ...this.state,
-            ingredients: [...ingredients, ingredient]
-        })
-    }
+    const addIngredient = ingredient => setIngredients([...ingredients, ingredient])
     // delete ingredient from ingredients array
-    deleteIngredient = ingredient => {
-        // destructure state
-        const { ingredients } = this.state
-
+    const deleteIngredient = ingredient => {
         // filter target ingredient from ingredients array
         const updatedIngredients = ingredients.filter(obj => obj.id !== ingredient.id)
 
         // update state
-        this.setState({
-            ...this.state,
-            ingredients: updatedIngredients
-        })
+        setIngredients(updatedIngredients)
     }
     // update ingredient in ingredients array
-    updateIngredient = ingredient => {
-        // destructure state
-        const { ingredients } = this.state
-
+    const updateIngredient = ingredient => {
         // find index of target ingredient in ingredients array
         const index = ingredients.findIndex(obj => obj.id === ingredient.id)
 
@@ -111,42 +167,21 @@ class CreateRecipe extends Component {
         updatedIngredients[index] = ingredient
 
         // update state
-        this.setState({
-            ...this.state,
-            ingredients: updatedIngredients
-        })
+        setIngredients(updatedIngredients)
     }
 
     // add new instruction to instructions array
-    addInstruction = instruction => {
-        // destructure state
-        const { instructions } = this.state
-
-        // update state
-        this.setState({
-            ...this.state,
-            instructions: [...instructions, instruction]
-        })
-    }
+    const addInstruction = instruction => setInstructions([...instructions, instruction])
     // delete instruction from instructions array
-    deleteInstruction = instruction => {
-        // destructure state
-        const { instructions } = this.state
-
+    const deleteInstruction = instruction => {
         // filter target instruction from instructions array
         const updatedInstructions = instructions.filter(obj => obj.id !== instruction.id)
 
         // update state
-        this.setState({
-            ...this.state,
-            instructions: updatedInstructions
-        })
+        setInstructions(updatedInstructions)
     }
     // update instruction in instructions array
-    updateInstruction = instruction => {
-        // destructure state
-        const { instructions } = this.state
-
+    const updateInstruction = instruction => {
         // find index of target instruction in instructions array
         const index = instructions.findIndex(obj => obj.id === instruction.id)
 
@@ -157,240 +192,212 @@ class CreateRecipe extends Component {
         updatedInstructions[index] = instruction
 
         // update state
-        this.setState({
-            ...this.state,
-            instructions: updatedInstructions
-        })
+        setInstructions(updatedInstructions)
     }
 
     // submit recipe
-    submitRecipe = () => {
-        // destructure state
-        const {
-            description,
-            image,
-            ingredients,
-            instructions,
-            title,
-            validDescription,
-            validInstructions,
-            validIngredients,
-            validTitle
-        } = this.state
-
-        // destructure props
-        const {
-            addRecipe,
-            history
-        } = this.props
-
-        // generate unique id
-        const id = uuid()
-
+    const submitRecipe = () => {
         // create new recipe object
         const recipe = {
-            id,
+            cookTimeHours,
+            cookTimeMinutes,
             description,
             ingredients,
             instructions,
-            image,
-            title
+            options,
+            photo,
+            prepTimeHours,
+            prepTimeMinutes,
+            preparations,
+            share,
+            tagList,
+            title,
         }
+        console.log(recipe)
 
-        // validate required user inputs
-        if (!description.value) {
-            console.log('invalid description')
+        // // validate required user inputs
+        // if (!description.value) {
+        //     console.log('invalid description')
 
-            // update state
-            this.setState({ validDescription: false })
-        }
-        if (ingredients.length === 0) {
-            console.log('invalid ingredients')
+        //     // update state
+        //     setValidDescription(false)
+        // }
+        // if (ingredients.length === 0) {
+        //     console.log('invalid ingredients')
 
-            // update state
-            this.setState({ validIngredients: false })
-        }
-        if (instructions.length === 0) {
-            console.log('invalid instructions')
-        }
-        if (!title.value) {
-            console.log('invalid title')
+        //     // update state
+        //     setValidIngredients(false)
+        // }
+        // if (instructions.length === 0) {
+        //     console.log('invalid instructions')
+        // }
+        // if (!title.value) {
+        //     console.log('invalid title')
 
-            // update state
-            this.setState({ validTitle: false })
-        }
+        //     // update state
+        //     setValidTitle(false)
+        // }
 
-        if (
-            validDescription &&
-            validInstructions &&
-            // validImageSource &&
-            validIngredients &&
-            validTitle
-        ) {
-            addRecipe(recipe)
-            history.push(`/recipes/${recipe.id}`)
-        }
+        // if (
+        //     validDescription &&
+        //     validInstructions &&
+        //     // validPhotoSource &&
+        //     validIngredients &&
+        //     validTitle
+        // ) {
+        //     addRecipe(recipe)
+        //     history.push(`/recipes/${recipe.id}`)
+        // }
     }
 
-    render() {
-        const {
-            description,
-            image,
-            ingredients,
-            instructions,
-            title,
-            validDescription,
-            validInstructions,
-            validIngredients,
-            validTitle
-        } = this.state
-        console.log(description, image, title)
+    // set options when tags changes
+    useEffect(() => {
+        const options = tags.map(tagObj => tagObj.tag)
+        setOptions(options)
+    }, [tags])
 
-        return (
-            <div className="card-panel white">
-                <div className="row">
-                    <div className="col s12 m6 l8 xl9">
-                        <div className={validTitle ? '' : 'invalid-recipe-title'}>
-                            <CreateRecipeTitle recipeTitle={this.recipeTitle} />
-                        </div>
-                        <div className={validDescription ? '' : 'invalid-recipe-description'}>
-                            <CreateRecipeDescription recipeDescription={this.recipeDescription} />
-                        </div>
+    return (
+        <div className="card-panel white">
+            <div className="row">
+                <div className="col s12 m6">
+                    <div className={validTitle ? '' : 'invalid-recipe-title'}>
+                        <CreateRecipeTitle recipeTitle={recipeTitle} />
                     </div>
-                    <CreateRecipeImage
-                        addImg={this.addImage}
-                        imgSrc={this.imageSource}
-                        rmvImg={this.removeImage}
-                    />
-                </div>
-                <div className="row">
-                    <div className="col s12">
-                        <h5>Tags</h5>
+                    <div className={validDescription ? '' : 'invalid-recipe-description'}>
+                        <CreateRecipeDescription recipeDescription={recipeDescription} />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col s12">
-                        autocomplete form goes here
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col s12">
-                        <div className="chip">
-                            Breakfat
-                            <i className="close material-icons">close</i>
-                        </div>
-                        <div className="chip">
-                            Lunch
-                            <i className="close material-icons">close</i>
-                        </div>
-                        <div className="chip">
-                            Dinner
-                            <i className="close material-icons">close</i>
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col s6">
-                        <h5>Prep Time</h5>
-                    </div>
-                    <div className="input-field col s6">
-                        <input
-                            name="prepTime"
-                            placeholder="Prep time"
-                            type='number'
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col s6">
-                        <h5>Cook Time</h5>
-                    </div>
-                    <div className="input-field col s6">
-                        <input
-                            name="cookTime"
-                            placeholder="Cook time"
-                            type='number'
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col s12">
-                        <span className="left mr-1"><i className="material-icons left">share</i> Share settings</span>
-                        <div className="switch">
-                            <label>
-                                Off
-                                <input disabled type="checkbox" />
-                                <span className="lever"></span>
-                                On
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col s12">
-                        <h5>Ingredients</h5>
-                    </div>
-                </div>
-                <div className={`row ${ingredients.length > 0 ? 'ingredients' : ''}`}>
-                    <div className="col s12">
-                        {ingredients.map((ingredient, index) => {
-                            return (
-                                <IngredientsList
-                                    deleteIngredient={this.deleteIngredient}
-                                    index={index}
-                                    ingredient={ingredient}
-                                    key={ingredient.id}
-                                    updateIngredient={this.updateIngredient}
-                                />
-                            )
-                        })}
-                    </div>
-                </div>
-                <div className={validIngredients ? '' : 'invalid-recipe-ingredients'}>
-                    <CreateRecipeIngredient
-                        addIngredient={this.addIngredient}
-                        index={ingredients.length + 1}
-                    />
-                </div>
-                <div className="row">
-                    <div className="col s12">
-                        <h5>Preparation</h5>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col s12">
-                        <h5>Instructions</h5>
-                    </div>
-                </div>
-                <div className={`row ${instructions.length > 0 ? 'instructions' : ''}`}>
-                    <div className="col s12">
-                        {instructions.map((instruction, index) => (
-                            <InstructionsList
-                                deleteInstruction={this.deleteInstruction}
-                                index={index}
-                                instruction={instruction}
-                                key={instruction.id}
-                                updateInstruction={this.updateInstruction}
-                            />
-                        ))}
-                    </div>
-                </div>
-                <div className={validInstructions ? '' : 'invalid-recipe-instructions'}>
-                    <CreateRecipeInstruction
-                        addInstruction={this.addInstruction}
-                        index={instructions.length + 1}
-                    />
-                </div>
-                <div className="row">
-                    <div className={`col s12 center-align ${validInstructions ? null : 'mt-2'}`}>
-                        <button className="black-text btn orange lighten-2" onClick={this.submitRecipe}>
-                            Save Recipe
-                        </button>
-                    </div>
+                <CreateRecipePhoto
+                    addPhoto={addPhoto}
+                    photo={photo}
+                    removePhoto={removePhoto}
+                />
+            </div>
+            <div className="row">
+                <div className="col s12">
+                    <h5>Tags</h5>
                 </div>
             </div>
-        )
-    }
+            <div className="row">
+                <div className="col s12 l4 recipe-tag-search">
+                    <Autocomplete
+                        options={options}
+                        liftState={addTag}
+                    />
+                </div>
+                <div className="col s12 l4 recipe-tags">
+                    {tagList.map(tag => {
+                        return (
+                            <div className="chip orange lighten-2" key={tag}>
+                                {tag.toUpperCase()}
+                                <i className="close material-icons" onClick={() => removeTag(tag)}>close</i>
+                            </div>
+                        )
+                    })}
+                </div>
+                <div className="col s12 l4 recipe-share-setting">
+                    <ShareSetting liftState={shareSetting} />
+                </div>
+            </div>
+            <div className="row">
+                <div className="col s12 m6">
+                    <CreateRecipeTime
+                        liftHours={recipePrepTimeHours}
+                        liftMinutes={recipePrepTimeMinutes}
+                        type="Prep"
+                    />
+                </div>
+                <div className="col s12 m6">
+                    <CreateRecipeTime
+                        liftHours={recipeCookTimeHours}
+                        liftMinutes={recipeCookTimeMinutes}
+                        type="Cook"
+                    />
+                </div>
+            </div>
+            <div className="row">
+                <div className="col s12">
+                    <h5>Preparation</h5>
+                </div>
+            </div>
+            <div className={`row ${preparations.length > 0 ? 'preparations' : null}`}>
+                <div className="col s12">
+                    {preparations.map((preparation, index) => (
+                        <PreparationsList
+                            deletePreparation={deletePreparation}
+                            index={index}
+                            preparation={preparation}
+                            key={preparation.id}
+                            updatePreparation={updatePreparation}
+                        />
+                    ))}
+                </div>
+            </div>
+            <div className={validInstructions ? '' : 'invalid-recipe-instructions'}>
+                <CreateRecipePreparation
+                    addPreparation={addPreparation}
+                    index={instructions.length + 1}
+                />
+            </div>
+            <div className="row">
+                <div className="col s12">
+                    <h5>Ingredients</h5>
+                </div>
+            </div>
+            <div className={`row ${ingredients.length > 0 ? 'ingredients' : null}`}>
+                <div className="col s12">
+                    {ingredients.map((ingredient, index) => {
+                        return (
+                            <IngredientsList
+                                deleteIngredient={deleteIngredient}
+                                index={index}
+                                ingredient={ingredient}
+                                key={ingredient.id}
+                                updateIngredient={updateIngredient}
+                            />
+                        )
+                    })}
+                </div>
+            </div>
+            <div className={validIngredients ? '' : 'invalid-recipe-ingredients'}>
+                <CreateRecipeIngredient
+                    addIngredient={addIngredient}
+                    index={ingredients.length + 1}
+                />
+            </div>
+            <div className="row">
+                <div className="col s12">
+                    <h5>Instructions</h5>
+                </div>
+            </div>
+            <div className={`row ${instructions.length > 0 ? 'instructions' : null}`}>
+                <div className="col s12">
+                    {instructions.map((instruction, index) => (
+                        <InstructionsList
+                            deleteInstruction={deleteInstruction}
+                            index={index}
+                            instruction={instruction}
+                            key={instruction.id}
+                            updateInstruction={updateInstruction}
+                        />
+                    ))}
+                </div>
+            </div>
+            <div className={validInstructions ? '' : 'invalid-recipe-instructions'}>
+                <CreateRecipeInstruction
+                    addInstruction={addInstruction}
+                    index={instructions.length + 1}
+                />
+            </div>
+            <div className="row">
+                <div className={`col s12 center-align ${validInstructions ? null : 'mt-2'}`}>
+                    <button className="black-text btn orange lighten-2" onClick={submitRecipe}>
+                        Save Recipe
+                    </button>
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default CreateRecipe

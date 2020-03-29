@@ -31,20 +31,22 @@ const Navbar = (props) => {
     return (
         <nav className="grey lighten-2">
             <div className="container">
-                <div className="nav-wrapper">
-                    <ul className="left hide-on-med-and-up">
-                        <li><i className="black-text material-icons" onClick={openSideNav}>menu</i></li>
-                    </ul>
-                    <ul className="left hide-on-small-and-down">
-                        <li><NavLink className="black-text" exact to="/">Home</NavLink></li>
-                        <li><NavLink className="black-text" exact to="/recipes">Recipes</NavLink></li>
-                    </ul>
-                    <Link to="/" className="brand-logo center">
-                        <div className="logo">
-                            <img src={icon} alt="RecipeBee" />
-                        </div>
-                    </Link>
-                    {authLinks}
+                <div className="row">
+                    <div className="col s12">
+                        <ul className="left hide-on-med-and-up">
+                            <li><i className="black-text material-icons" onClick={openSideNav}>menu</i></li>
+                        </ul>
+                        <ul className="left hide-on-small-and-down">
+                            <li><NavLink className="black-text" exact to="/">Home</NavLink></li>
+                            <li><NavLink className="black-text" exact to="/recipes">Recipes</NavLink></li>
+                        </ul>
+                        <Link to="/" className="brand-logo center">
+                            <div className="logo">
+                                <img src={icon} alt="RecipeBee" />
+                            </div>
+                        </Link>
+                        {authLinks}
+                    </div>
                 </div>
             </div>
         </nav>

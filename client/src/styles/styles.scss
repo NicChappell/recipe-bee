@@ -6,10 +6,10 @@
 // ****************************** //
 $max-small: 600px;
 $min-medium: 601px;
-$max-medium: 991px;
-$min-large: 992px;
-$max-large: 1199px;
-$min-extra-large: 1200px;
+$max-medium: 992px;
+$min-large: 993px;
+$max-large: 1200px;
+$min-extra-large: 1201px;
 
 body {
   background-color: #eeeeee;
@@ -17,6 +17,15 @@ body {
 }
 
 footer {
+  font-family: "Roboto", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Roboto", sans-serif;
 }
 
@@ -49,6 +58,14 @@ nav {
   }
 }
 
+p {
+  font-family: "Open Sans", sans-serif;
+}
+
+span {
+  font-family: "Open Sans", sans-serif;
+}
+
 #app-content {
   display: flex;
   min-height: 100vh;
@@ -57,7 +74,8 @@ nav {
 
 #create-recipe {
   .ingredient,
-  .instruction {
+  .instruction,
+  .preparation {
     :disabled {
       color: #000000;
     }
@@ -99,7 +117,8 @@ nav {
       }
     }
   }
-  .instruction {
+  .instruction,
+  .preparation {
     .buttons {
       height: 4rem;
       @media screen and (max-width: $max-medium) {
@@ -108,40 +127,35 @@ nav {
     }
   }
   .ingredients,
-  .instructions {
+  .instructions,
+  .preparations {
     border: 1px dotted #bdbdbd;
     padding: 1.5rem 0 0;
   }
-  // .recipe-image {
-  //   img {
-  //     height: auto;
-  //     max-width: 100%;
-  //     width: auto;
-  //   }
-  // }
-  .recipe-placeholder {
-    padding: 1.5rem;
-    img {
-      height: auto;
-      max-width: 100%;
-      width: auto;
-    }
-  }
   .recipe-image,
   .recipe-placeholder {
-    @media screen and (max-width: $max-small) {
-      height: auto;
-      max-height: 20rem;
-      max-width: 20rem;
-      width: auto;
-      margin: 0 auto;
-    }
-    @media screen and (min-width: $min-medium) {
-      height: auto;
-      max-height: 15rem;
-      max-width: 15rem;
-      width: auto;
-      margin: 0 auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: auto;
+    margin: 0 auto;
+    max-height: 22.5rem;
+    max-width: 30rem;
+    padding: 1.5rem;
+    width: auto;
+    img {
+      @media screen and (max-width: $max-small) {
+        height: auto;
+        max-height: calc(22.5rem - 3rem);
+        max-width: calc(30rem - 3rem);
+        width: 100%;
+      }
+      @media screen and (min-width: $min-medium) {
+        height: auto;
+        max-height: calc(22.5rem - 3rem);
+        max-width: calc(30rem - 3rem);
+        width: 100%;
+      }
     }
   }
 }
@@ -181,54 +195,6 @@ $size: 100px;
   overflow-y: hidden;
 }
 
-.tags {
-  @media screen and (max-width: $max-medium) {
-    margin-top: 1rem;
-  }
-}
-
-.tags-search {
-  .autocomplete {
-    padding: 0 1rem;
-    .input-field {
-      margin: 0;
-      input[type="text"] {
-        font-size: 0.875rem;
-        height: 2rem;
-        line-height: 2rem;
-        margin: 0;
-      }
-      .prefix {
-        font-size: 1.3rem;
-        ~ input {
-          margin-left: 2.3rem;
-        }
-      }
-    }
-    .suggestions {
-      background-color: white;
-      font-size: 0.875rem;
-      margin: 0 0 0 2.3rem;
-      overflow: hidden;
-      padding: 0.875rem 0;
-      width: calc(100% - 3rem);
-      li {
-        color: rgba(0, 0, 0, 1);
-        padding: 0.125rem 1rem;
-        a {
-          color: rgba(0, 0, 0, 1);
-        }
-      }
-      li.active {
-        color: #ffb74d;
-      }
-    }
-    @media screen and (max-width: $max-medium) {
-      margin-top: 1rem;
-    }
-  }
-}
-
 .breadcrumbs {
   line-height: 1.15;
   .breadcrumb {
@@ -240,6 +206,12 @@ $size: 100px;
 }
 
 .card {
+  color: #000000;
+  a {
+    color: #000000;
+  }
+  // REVIEW THIS STYLE
+  // WHERE IS IT BEING USED?
   .create-buttons {
     display: flex;
     flex-direction: row;
@@ -253,31 +225,53 @@ $size: 100px;
   }
 }
 
-.card.recipeCard {
-  a {
-    color: #000000;
-  }
-  .card-action {
-    align-items: center;
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    justify-content: space-around;
+.recipe-actions {
+  display: flex;
+  flex-direction: row;
+  .heart-action,
+  .vote-action {
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    white-space: nowrap;
     button {
-      .material-icons {
-        font-size: 2rem;
+      &:focus {
+        background-color: transparent;
       }
     }
-    span {
-      font-size: 1.5rem;
+  }
+  .heart-action {
+    text-align: left;
+    width: 35%;
+  }
+  .vote-action {
+    text-align: right;
+    width: 65%;
+  }
+  @media screen and (min-width: $min-medium) and (max-width: $max-medium) {
+    flex-direction: column-reverse;
+    .heart-action,
+    .vote-action {
+      text-align: center;
+    }
+    .heart-action {
+      width: 100%;
+    }
+    .vote-action {
+      width: 100%;
     }
   }
 }
 
+.recipe-time {
+  margin-bottom: 0;
+  p {
+    overflow: hidden;
+  }
+}
+
 .invalid-input {
-  input,
+  input:not([type]),
   input[type="text"],
   input[type="password"],
   input[type="email"],
@@ -289,7 +283,20 @@ $size: 100px;
   input[type="tel"],
   input[type="number"],
   input[type="search"],
-  textarea.materialize-textarea {
+  textarea.materialize-textarea,
+  input:not([type]):focus:not([readonly]),
+  input[type="text"]:not(.browser-default):focus:not([readonly]),
+  input[type="password"]:not(.browser-default):focus:not([readonly]),
+  input[type="email"]:not(.browser-default):focus:not([readonly]),
+  input[type="url"]:not(.browser-default):focus:not([readonly]),
+  input[type="time"]:not(.browser-default):focus:not([readonly]),
+  input[type="date"]:not(.browser-default):focus:not([readonly]),
+  input[type="datetime"]:not(.browser-default):focus:not([readonly]),
+  input[type="datetime-local"]:not(.browser-default):focus:not([readonly]),
+  input[type="tel"]:not(.browser-default):focus:not([readonly]),
+  input[type="number"]:not(.browser-default):focus:not([readonly]),
+  input[type="search"]:not(.browser-default):focus:not([readonly]),
+  textarea.materialize-textarea:focus:not([readonly]) {
     border-bottom: 1px solid #ff8a65;
     box-shadow: 0 1px 0 0 #ff8a65;
     color: #ff8a65;
@@ -302,19 +309,10 @@ $size: 100px;
   }
 }
 
-.invalid-span {
+.invalid-message {
   color: #ff8a65;
-  display: block;
-  text-align: center;
 }
 
-.invalid-recipe-title,
-.invalid-recipe-description,
-.invalid-recipe-image,
-.invalid-recipe-ingredients,
-.invalid-recipe-instructions {
-  border: 1px solid #ff8a65;
-}
 .invalid-recipe-ingredients,
 .invalid-recipe-instructions {
   padding: 0.5rem;
@@ -328,14 +326,6 @@ $size: 100px;
     height: auto;
     margin: 2rem 0 3rem;
     max-width: 10rem;
-    width: auto;
-  }
-}
-
-.recipe-image {
-  img {
-    height: auto;
-    max-width: 100%;
     width: auto;
   }
 }
@@ -413,9 +403,56 @@ $size: 100px;
   width: 18rem;
 }
 
-.sort-recipes {
+.recipe-sort-methods {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   .active {
     background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.recipe-share-setting,
+.recipe-tag-search,
+.recipe-tags {
+  .autocomplete {
+    padding: 0 1rem;
+    .input-field {
+      margin: 0;
+      input[type="text"] {
+        font-size: 0.875rem;
+        height: 2rem;
+        line-height: 2rem;
+        margin: 0;
+      }
+      .prefix {
+        font-size: 1.3rem;
+        ~ input {
+          margin-left: 2.3rem;
+        }
+      }
+    }
+    .suggestions {
+      background-color: white;
+      font-size: 0.875rem;
+      margin: 0 0 0 2.3rem;
+      overflow: hidden;
+      padding: 0.875rem 0;
+      width: calc(100% - 3rem);
+      li {
+        color: rgba(0, 0, 0, 1);
+        padding: 0.125rem 1rem;
+        a {
+          color: rgba(0, 0, 0, 1);
+        }
+      }
+      li.active {
+        color: #ffb74d;
+      }
+    }
+  }
+  @media screen and (max-width: $max-medium) {
+    margin: 1rem;
   }
 }
 
@@ -439,6 +476,31 @@ $size: 100px;
 // ************** //
 // Layout Helpers //
 // ************** //
+
+// extra small text
+.xs-text {
+  font-size: 50%;
+}
+
+// small text
+.sm-text {
+  font-size: 75%;
+}
+
+// medium (normal) text
+.m-text {
+  font-size: 100%;
+}
+
+// large text
+.l-text {
+  font-size: 125%;
+}
+
+// extra large text
+.xl-text {
+  font-size: 150%;
+}
 
 // padding-bottom
 .pb-0 {

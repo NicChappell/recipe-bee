@@ -32,12 +32,34 @@ const RecipeSchema = new Schema({
     preparation: Array,
     instructions: Array,
     prepTime: {
-        type: Number,
-        default: 0
+        hours: {
+            type: Number,
+            default: 0
+        },
+        minutes: {
+            type: Number,
+            default: 0
+        }
     },
     cookTime: {
-        type: Number,
-        default: 0
+        hours: {
+            type: Number,
+            default: 0
+        },
+        minutes: {
+            type: Number,
+            default: 0
+        }
+    },
+    totalTime: {
+        hours: {
+            type: Number,
+            default: 0
+        },
+        minutes: {
+            type: Number,
+            default: 0
+        }
     },
     shared: {
         type: Boolean,

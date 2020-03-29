@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
-const CreateRecipeInstruction = props => {
+const CreateRecipePreparation = props => {
     // state hook variables
     const [valid, setValid] = useState(true)
     const [value, setValue] = useState('')
 
     // destructure props
     const {
-        addInstruction,
+        addPreparation,
         index
     } = props
 
@@ -25,13 +25,13 @@ const CreateRecipeInstruction = props => {
         // generate unique id
         const id = uuid()
 
-        // add instruction if value exists
+        // add preparation if value exists
         if (value) {
-            // create new instruction object
-            const newInstruction = { id, value }
+            // create new preparation object
+            const newPreparation = { id, value }
 
-            // add new instruction to recipe
-            addInstruction(newInstruction)
+            // add new preparation to recipe
+            addPreparation(newPreparation)
 
             // update state
             setValid(true)
@@ -44,7 +44,7 @@ const CreateRecipeInstruction = props => {
     }
 
     return (
-        <div className="row instruction">
+        <div className="row preparation">
             <div className="col s10">
                 <div className="input-field col s1">
                     <p className="center-align">
@@ -54,9 +54,9 @@ const CreateRecipeInstruction = props => {
                 <div className={`input-field col s11 ${valid ? null : 'invalid-input'}`}>
                     <textarea
                         className='materialize-textarea'
-                        name="instruction"
+                        name="preparation"
                         onChange={handleChange}
-                        placeholder={valid ? 'Instruction' : 'Instruction is required'}
+                        placeholder={valid ? 'Preparation' : 'Preparation is required'}
                         value={value}
                     >
                     </textarea>
@@ -71,4 +71,4 @@ const CreateRecipeInstruction = props => {
     )
 }
 
-export default CreateRecipeInstruction
+export default CreateRecipePreparation

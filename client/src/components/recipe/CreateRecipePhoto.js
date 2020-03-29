@@ -3,7 +3,7 @@ import React from 'react'
 import AddDeleteButtons from './AddDeleteButtons'
 import Image from './Image'
 
-const CreateRecipeImage = (props) => {
+const CreateRecipePhoto = (props) => {
     const {
         addImg,
         imgSrc,
@@ -22,7 +22,7 @@ const CreateRecipeImage = (props) => {
     }
 
     return (
-        <div className="col s12 m6 l4 xl3">
+        <div className="col s12 m6">
             <div className="row">
                 <div className="col s12">
                     <Image imgSrc={imgSrc} />
@@ -42,4 +42,4 @@ const CreateRecipeImage = (props) => {
     )
 }
 
-export default CreateRecipeImage
+export default CreateRecipePhoto

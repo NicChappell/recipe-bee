@@ -21,7 +21,17 @@ export const useEmailValue = (val = '') => {
     return {
         onChange: e => setValue(e.target.value),
         type: 'email',
-        value: value
+        value
+    }
+}
+
+export const useNumberValue = (val = '') => {
+    const [value, setValue] = useState(val)
+
+    return {
+        onChange: e => setValue(e.target.value),
+        type: 'number',
+        value
     }
 }
 
@@ -31,7 +41,7 @@ export const usePasswordValue = (val = '') => {
     return {
         onChange: e => setValue(e.target.value),
         type: 'password',
-        value: value
+        value
     }
 }
 
@@ -41,7 +51,7 @@ export const useSelectValue = (val = '') => {
     return {
         className: 'browser-default',
         onChange: e => setValue(e.target.value),
-        value: value
+        value
     }
 }
 
@@ -51,7 +61,7 @@ export const useTextValue = (val = '') => {
     return {
         onChange: e => setValue(e.target.value),
         type: 'text',
-        value: value
+        value
     }
 }
 
@@ -61,7 +71,48 @@ export const useTextAreaValue = (val = '') => {
     return {
         className: 'materialize-textarea',
         onChange: e => setValue(e.target.value),
-        value: value
+        value
+    }
+}
+
+export const useValidNumberValue = (val = 0) => {
+    const [blurred, setBlurred] = useState(false)
+    const [value, setValue] = useState(val)
+    const [valid, setValid] = useState(true)
+
+    const handleBlur = e => {
+        setBlurred(true)
+        value ? setValue(e.target.value) : setValue(0)
+    }
+
+    const handleChange = e => setValue(e.target.value)
+
+    const handleFocus = e => value ? setValue(e.target.value) : setValue('')
+
+    useEffect(() => {
+        if (value > 0 && blurred === true) {
+            // valid and blurred
+            setValid(true)
+        } else if (value > 0 && blurred === false) {
+            // valid and unblurred
+            setValid(true)
+        } else if (value < 1 && blurred === true) {
+            // invalid and blurred
+            setValid(false)
+        } else if (value < 1 && blurred === false) {
+            // invalid and unblurred
+            setValid(true)
+        }
+        // value > 0 && blurred ? setValid(false) : setValid(true)
+    }, [blurred, value])
+
+    return {
+        onBlur: handleBlur,
+        onChange: handleChange,
+        onFocus: handleFocus,
+        type: 'number',
+        valid,
+        value
     }
 }
 

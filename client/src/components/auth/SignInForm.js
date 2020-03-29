@@ -8,7 +8,7 @@ import {
 } from '../../helpers/customHooks'
 
 const SignInForm = props => {
-    // useState hook variables
+    // state hook variables
     const [signInErrors, setSignInErrors] = useState({})
 
     // custom hook variables

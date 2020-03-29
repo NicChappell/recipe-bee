@@ -57,10 +57,18 @@ const Autocomplete = props => {
 
         // update state
         if (keyCode === 13) { // return
+            // lift state
+            if (selectedSuggestion) {
+                liftState(selectedSuggestion)
+            } else {
+                return
+            }
+            
+            // update state
             setActiveSuggestion(0)
             setFilteredSuggestions([])
             setShowSuggestions(false)
-            setUserInput(selectedSuggestion ? selectedSuggestion : '')
+            setUserInput('')
         } else if (keyCode === 38) { // up arrow
             if (activeSuggestion === 0) {
                 return
@@ -100,6 +108,7 @@ const Autocomplete = props => {
 }
 
 Autocomplete.propTypes = {
+    liftState: PropTypes.func.isRequired,
     options: PropTypes.array.isRequired
 }
 
