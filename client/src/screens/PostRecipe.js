@@ -39,7 +39,7 @@ const PostRecipe = props => {
     // allow access if user is authenticated
     if (isAuthenticated) {
         return (
-            <div className="container router" id="create-recipe" style={{ height: routerHeight }}>
+            <div className="container router" id="post-recipe" style={{ height: routerHeight }}>
                 <div className="row">
                     <div className="center-align col s12">
                         <h3>Create New Recipe</h3>

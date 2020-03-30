@@ -1,7 +1,7 @@
 // import dependencies
 import React, { useState } from 'react'
 
-const CreateRecipeTitle = props => {
+const CreateRecipeTitle = ({ liftState }) => {
     // state hook variables
     const [valid, setValid] = useState(true)
     const [value, setValue] = useState('')
@@ -10,20 +10,18 @@ const CreateRecipeTitle = props => {
         // get user input
         const { value } = e.target
 
-        // destructure props
-        const { recipeTitle } = props
+        // update state
+        setValue(value)
 
         if (value) {
-            // add title to recipe if value exists
-            recipeTitle(value)
+            // add description to recipe if value exists
+            liftState(value)
 
-            // update state
+            // user provided a valid input
             setValid(true)
-            setValue(value)
         } else {
-            // prompt user to provide valid input
+            // prompt user to provide a valid input
             setValid(false)
-            setValue(value)
         }
     }
 

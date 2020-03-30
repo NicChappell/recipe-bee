@@ -435,37 +435,33 @@ span {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.recipe-share-setting .autocomplete,
-.recipe-tag-search .autocomplete,
-.recipe-tags .autocomplete {
+@media screen and (max-width: 992px) {
+  .recipe-share-setting,
+.recipe-tags > .search,
+.recipe-tags > .tags {
+    margin: 1rem;
+  }
+}
+
+.recipe-tags > .search .autocomplete {
   padding: 0 1rem;
 }
-.recipe-share-setting .autocomplete .input-field,
-.recipe-tag-search .autocomplete .input-field,
-.recipe-tags .autocomplete .input-field {
+.recipe-tags > .search .autocomplete .input-field {
   margin: 0;
 }
-.recipe-share-setting .autocomplete .input-field input[type=text],
-.recipe-tag-search .autocomplete .input-field input[type=text],
-.recipe-tags .autocomplete .input-field input[type=text] {
+.recipe-tags > .search .autocomplete .input-field input[type=text] {
   font-size: 0.875rem;
   height: 2rem;
   line-height: 2rem;
   margin: 0;
 }
-.recipe-share-setting .autocomplete .input-field .prefix,
-.recipe-tag-search .autocomplete .input-field .prefix,
-.recipe-tags .autocomplete .input-field .prefix {
+.recipe-tags > .search .autocomplete .input-field .prefix {
   font-size: 1.3rem;
 }
-.recipe-share-setting .autocomplete .input-field .prefix ~ input,
-.recipe-tag-search .autocomplete .input-field .prefix ~ input,
-.recipe-tags .autocomplete .input-field .prefix ~ input {
+.recipe-tags > .search .autocomplete .input-field .prefix ~ input {
   margin-left: 2.3rem;
 }
-.recipe-share-setting .autocomplete .suggestions,
-.recipe-tag-search .autocomplete .suggestions,
-.recipe-tags .autocomplete .suggestions {
+.recipe-tags > .search .autocomplete .suggestions {
   background-color: white;
   font-size: 0.875rem;
   margin: 0 0 0 2.3rem;
@@ -473,28 +469,15 @@ span {
   padding: 0.875rem 0;
   width: calc(100% - 3rem);
 }
-.recipe-share-setting .autocomplete .suggestions li,
-.recipe-tag-search .autocomplete .suggestions li,
-.recipe-tags .autocomplete .suggestions li {
+.recipe-tags > .search .autocomplete .suggestions li {
   color: black;
   padding: 0.125rem 1rem;
 }
-.recipe-share-setting .autocomplete .suggestions li a,
-.recipe-tag-search .autocomplete .suggestions li a,
-.recipe-tags .autocomplete .suggestions li a {
+.recipe-tags > .search .autocomplete .suggestions li a {
   color: black;
 }
-.recipe-share-setting .autocomplete .suggestions li.active,
-.recipe-tag-search .autocomplete .suggestions li.active,
-.recipe-tags .autocomplete .suggestions li.active {
+.recipe-tags > .search .autocomplete .suggestions li.active {
   color: #ffb74d;
-}
-@media screen and (max-width: 992px) {
-  .recipe-share-setting,
-.recipe-tag-search,
-.recipe-tags {
-    margin: 1rem;
-  }
 }
 
 .marketing.card-image {

@@ -15,17 +15,19 @@ const ShareSetting = ({ liftState }) => {
     }, [checkbox.checked])
 
     return (
-        <div className="share">
-            <span className="left mr-1">
-                <i className="material-icons left">share</i> Share
-            </span>
-            <div className="switch">
-                <label>
-                    Off
-                    <input {...checkbox} />
-                    <span className="lever"></span>
-                    On
-                </label>
+        <div className="row">
+            <div className="col s12">
+                <span className="left mr-1">
+                    <i className="material-icons left">share</i> Share
+                </span>
+                <div className="switch">
+                    <label>
+                        Off
+                        <input {...checkbox} />
+                        <span className="lever"></span>
+                        On
+                    </label>
+                </div>
             </div>
         </div>
     )

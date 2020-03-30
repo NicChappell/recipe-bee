@@ -1,6 +1,5 @@
 // import dependencies
-import React, { useEffect, useState } from 'react'
-import { v4 as uuid } from 'uuid'
+import React, { useState } from 'react'
 
 // import components
 import CreateRecipeDescription from './CreateRecipeDescription'
@@ -14,7 +13,6 @@ import CreateRecipeTitle from './CreateRecipeTitle'
 import InstructionsList from './InstructionsList'
 import IngredientsList from './IngredientsList'
 import PreparationsList from './PreparationsList'
-import Autocomplete from '../utility/Autocomplete'
 import ShareSetting from '../utility/ShareSetting'
 
 const CreateRecipe = props => {
@@ -24,13 +22,13 @@ const CreateRecipe = props => {
     const [description, setDescription] = useState('')
     const [ingredients, setIngredients] = useState([])
     const [instructions, setInstructions] = useState([])
-    const [options, setOptions] = useState([])
     const [photo, setPhoto] = useState(undefined)
     const [prepTimeHours, setPrepTimeHours] = useState(0)
     const [prepTimeMinutes, setPrepTimeMinutes] = useState(0)
     const [preparations, setPreparations] = useState([])
     const [share, setShare] = useState(true)
     const [tagList, setTagList] = useState([])
+    console.log(tagList)
     const [title, setTitle] = useState('')
     const [validCookTime, setValidCookTime] = useState(true)
     const [validDescription, setValidDescription] = useState(true)
@@ -48,12 +46,6 @@ const CreateRecipe = props => {
         history,
         tags
     } = props
-
-    // add recipe title
-    const recipeTitle = title => setTitle(title)
-
-    // add recipe description
-    const recipeDescription = description => setDescription(description)
 
     // add photo to recipe
     const addPhoto = e => {
@@ -92,33 +84,18 @@ const CreateRecipe = props => {
         setPhoto(undefined)
     }
 
-    // add tag
-    const addTag = tag => {
-        setTagList([...tagList, tag])
-
-        const updatedOptions = options.filter(option => option !== tag)
-        setOptions(updatedOptions)
-    }
-    // remove tag
-    const removeTag = tag => {
-        const updatedTagList = tagList.filter(tagName => tagName !== tag)
-        setTagList(updatedTagList)
-
-        setOptions([...options, tag])
-    }
-
     // share setting
     const shareSetting = check => setShare(check)
 
     // add recipe prep time hours
-    const recipePrepTimeHours = hours => console.log(`recipePrepTimeHours: ${hours}`) // setPrepTimeHours(hours)
+    const recipePrepTimeHours = hours => setPrepTimeHours(hours)
     // add recipe prep time minutes
-    const recipePrepTimeMinutes = minutes => console.log(`recipePrepTimeMinutes: ${minutes}`) // setPrepTimeMinutes(minutes)
+    const recipePrepTimeMinutes = minutes => setPrepTimeMinutes(minutes)
 
     // add recipe cook time hours
-    const recipeCookTimeHours = hours => console.log(`recipeCookTimeHours: ${hours}`) // setCookTimeHours(hours)
+    const recipeCookTimeHours = hours => setCookTimeHours(hours)
     // add recipe cook time minutes
-    const recipeCookTimeMinutes = minutes => console.log(`recipeCookTimeMinutes: ${minutes}`) // setCookTimeMinutes(minutes)
+    const recipeCookTimeMinutes = minutes => setCookTimeMinutes(minutes)
 
     // add new preparation to preparations array
     const addPreparation = preparation => setPreparations([...preparations, preparation])
@@ -204,7 +181,6 @@ const CreateRecipe = props => {
             description,
             ingredients,
             instructions,
-            options,
             photo,
             prepTimeHours,
             prepTimeMinutes,
@@ -250,21 +226,15 @@ const CreateRecipe = props => {
         // }
     }
 
-    // set options when tags changes
-    useEffect(() => {
-        const options = tags.map(tagObj => tagObj.tag)
-        setOptions(options)
-    }, [tags])
-
     return (
         <div className="card-panel white">
             <div className="row">
                 <div className="col s12 m6">
                     <div className={validTitle ? '' : 'invalid-recipe-title'}>
-                        <CreateRecipeTitle recipeTitle={recipeTitle} />
+                        <CreateRecipeTitle liftState={setTitle} />
                     </div>
                     <div className={validDescription ? '' : 'invalid-recipe-description'}>
-                        <CreateRecipeDescription recipeDescription={recipeDescription} />
+                        <CreateRecipeDescription liftState={setDescription} />
                     </div>
                 </div>
                 <CreateRecipePhoto
@@ -279,21 +249,11 @@ const CreateRecipe = props => {
                 </div>
             </div>
             <div className="row">
-                <div className="col s12 l4 recipe-tag-search">
-                    <Autocomplete
-                        options={options}
-                        liftState={addTag}
+                <div className="col s12 l8 recipe-tags">
+                    <CreateRecipeTags
+                        liftState={setTagList}
+                        tags={tags}
                     />
-                </div>
-                <div className="col s12 l4 recipe-tags">
-                    {tagList.map(tag => {
-                        return (
-                            <div className="chip orange lighten-2" key={tag}>
-                                {tag.toUpperCase()}
-                                <i className="close material-icons" onClick={() => removeTag(tag)}>close</i>
-                            </div>
-                        )
-                    })}
                 </div>
                 <div className="col s12 l4 recipe-share-setting">
                     <ShareSetting liftState={shareSetting} />
