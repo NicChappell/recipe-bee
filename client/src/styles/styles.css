@@ -61,84 +61,84 @@ span {
   flex-direction: column;
 }
 
-#create-recipe .ingredient :disabled,
-#create-recipe .instruction :disabled,
-#create-recipe .preparation :disabled {
+#post-recipe .ingredient :disabled,
+#post-recipe .instruction :disabled,
+#post-recipe .preparation :disabled {
   color: #000000;
 }
-#create-recipe .ingredient .input-field,
-#create-recipe .instruction .input-field,
-#create-recipe .preparation .input-field {
+#post-recipe .ingredient .input-field,
+#post-recipe .instruction .input-field,
+#post-recipe .preparation .input-field {
   margin: 0;
 }
-#create-recipe .ingredient .buttons,
-#create-recipe .instruction .buttons,
-#create-recipe .preparation .buttons {
+#post-recipe .ingredient .buttons,
+#post-recipe .instruction .buttons,
+#post-recipe .preparation .buttons {
   align-items: center;
   display: flex;
   justify-content: center;
 }
 @media screen and (max-width: 992px) {
-  #create-recipe .ingredient .buttons,
-#create-recipe .instruction .buttons,
-#create-recipe .preparation .buttons {
+  #post-recipe .ingredient .buttons,
+#post-recipe .instruction .buttons,
+#post-recipe .preparation .buttons {
     flex-direction: column;
   }
-  #create-recipe .ingredient .buttons button,
-#create-recipe .instruction .buttons button,
-#create-recipe .preparation .buttons button {
+  #post-recipe .ingredient .buttons button,
+#post-recipe .instruction .buttons button,
+#post-recipe .preparation .buttons button {
     margin: 0.25rem 0;
   }
 }
 @media screen and (min-width: 993px) {
-  #create-recipe .ingredient .buttons,
-#create-recipe .instruction .buttons,
-#create-recipe .preparation .buttons {
+  #post-recipe .ingredient .buttons,
+#post-recipe .instruction .buttons,
+#post-recipe .preparation .buttons {
     flex-direction: row;
   }
-  #create-recipe .ingredient .buttons button,
-#create-recipe .instruction .buttons button,
-#create-recipe .preparation .buttons button {
+  #post-recipe .ingredient .buttons button,
+#post-recipe .instruction .buttons button,
+#post-recipe .preparation .buttons button {
     margin: 0 0.25rem;
   }
 }
-#create-recipe .ingredient .buttons span,
-#create-recipe .instruction .buttons span,
-#create-recipe .preparation .buttons span {
+#post-recipe .ingredient .buttons span,
+#post-recipe .instruction .buttons span,
+#post-recipe .preparation .buttons span {
   font-weight: bold;
 }
-#create-recipe .image-input {
+#post-recipe .image-input {
   display: block;
   height: 0;
   visibility: hidden;
   width: 0;
 }
-#create-recipe .ingredient .buttons {
+#post-recipe .ingredient .buttons {
   height: 3rem;
 }
 @media screen and (max-width: 992px) {
-  #create-recipe .ingredient .buttons {
+  #post-recipe .ingredient .buttons {
     height: 6rem;
   }
 }
-#create-recipe .instruction .buttons,
-#create-recipe .preparation .buttons {
+#post-recipe .instruction .buttons,
+#post-recipe .preparation .buttons {
   height: 4rem;
 }
 @media screen and (max-width: 992px) {
-  #create-recipe .instruction .buttons,
-#create-recipe .preparation .buttons {
+  #post-recipe .instruction .buttons,
+#post-recipe .preparation .buttons {
     height: 4rem;
   }
 }
-#create-recipe .ingredients,
-#create-recipe .instructions,
-#create-recipe .preparations {
+#post-recipe .ingredients,
+#post-recipe .instructions,
+#post-recipe .preparations {
   border: 1px dotted #bdbdbd;
   padding: 1.5rem 0 0;
 }
-#create-recipe .recipe-image,
-#create-recipe .recipe-placeholder {
+#post-recipe .recipe-image,
+#post-recipe .recipe-placeholder {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -150,8 +150,8 @@ span {
   width: auto;
 }
 @media screen and (max-width: 600px) {
-  #create-recipe .recipe-image img,
-#create-recipe .recipe-placeholder img {
+  #post-recipe .recipe-image img,
+#post-recipe .recipe-placeholder img {
     height: auto;
     max-height: calc(22.5rem - 3rem);
     max-width: calc(30rem - 3rem);
@@ -159,8 +159,8 @@ span {
   }
 }
 @media screen and (min-width: 601px) {
-  #create-recipe .recipe-image img,
-#create-recipe .recipe-placeholder img {
+  #post-recipe .recipe-image img,
+#post-recipe .recipe-placeholder img {
     height: auto;
     max-height: calc(22.5rem - 3rem);
     max-width: calc(30rem - 3rem);

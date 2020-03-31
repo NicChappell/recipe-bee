@@ -22,21 +22,17 @@ const CreateRecipePhoto = (props) => {
     }
 
     return (
-        <div className="col s12 m6">
-            <div className="row">
-                <div className="col s12">
-                    <Image imgSrc={imgSrc} />
-                </div>
+        <div className="row">
+            <div className="col s12">
+                <Image imgSrc={imgSrc} />
             </div>
-            <div className="row">
-                <div className="col s12 center-align">
-                    <input className="image-input" onChange={handleChange} type="file" />
-                    <AddDeleteButtons
-                        imgSrc={imgSrc}
-                        handleAddClick={handleAddClick}
-                        handleDeleteClick={handleDeleteClick}
-                    />
-                </div>
+            <div className="col s12 center-align">
+                <input className="image-input" onChange={handleChange} type="file" />
+                <AddDeleteButtons
+                    imgSrc={imgSrc}
+                    handleAddClick={handleAddClick}
+                    handleDeleteClick={handleDeleteClick}
+                />
             </div>
         </div>
     )

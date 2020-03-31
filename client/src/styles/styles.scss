@@ -72,7 +72,31 @@ span {
   flex-direction: column;
 }
 
-#create-recipe {
+#post-recipe {
+  // recipe title
+  .title {
+    .invalid-input {
+    }
+  }
+  // recipe description
+  .description {
+    .invalid-input {
+    }
+  }
+  // recipe tags
+  .tag-search {
+    .invalid-input {
+    }
+    .search {
+    }
+    .tags {
+    }
+  }
+  // recipe share setting
+  .share {
+    .invalid-input {
+    }
+  }
   .ingredient,
   .instruction,
   .preparation {

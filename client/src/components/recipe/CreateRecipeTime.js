@@ -2,10 +2,7 @@
 import React, { useEffect, useState } from 'react'
 
 // import custom hooks
-import {
-    useDidMount,
-    useValidNumberValue
-} from '../../helpers/customHooks'
+import { useValidNumberValue } from '../../helpers/customHooks'
 
 const CreateRecipeTime = props => {
     // state hook variables
@@ -13,7 +10,6 @@ const CreateRecipeTime = props => {
     const [validMinutes, setValidMinutes] = useState(true)
 
     // custom hook variables
-    const didMount = useDidMount()
     const hours = useValidNumberValue(0)
     const minutes = useValidNumberValue(0)
 

@@ -103,7 +103,6 @@ export const useValidNumberValue = (val = 0) => {
             // invalid and unblurred
             setValid(true)
         }
-        // value > 0 && blurred ? setValid(false) : setValid(true)
     }, [blurred, value])
 
     return {
@@ -111,6 +110,40 @@ export const useValidNumberValue = (val = 0) => {
         onChange: handleChange,
         onFocus: handleFocus,
         type: 'number',
+        valid,
+        value
+    }
+}
+
+export const useValidTextValue = (val = '') => {
+    const [valid, setValid] = useState(true)
+    const [value, setValue] = useState(val)
+
+    const handleChange = e => {
+        setValue(e.target.value)
+        e.target.value ? setValid(true) : setValid(false)
+    }
+
+    return {
+        onChange: handleChange,
+        type: 'text',
+        valid,
+        value
+    }
+}
+
+export const useValidTextAreaValue = (val = '') => {
+    const [valid, setValid] = useState(true)
+    const [value, setValue] = useState(val)
+
+    const handleChange = e => {
+        setValue(e.target.value)
+        e.target.value ? setValid(true) : setValid(false)
+    }
+
+    return {
+        className: 'materialize-textarea',
+        onChange: handleChange,
         valid,
         value
     }

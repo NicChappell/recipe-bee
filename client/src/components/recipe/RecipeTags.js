@@ -1,10 +1,11 @@
 // import dependencies
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 // import components
 import Autocomplete from '../utility/Autocomplete'
 
-const CreateRecipeTags = props => {
+const RecipeTags = props => {
     // state hook variables
     const [options, setOptions] = useState([])
     const [tagList, setTagList] = useState([])
@@ -12,7 +13,9 @@ const CreateRecipeTags = props => {
     // destructure props
     const {
         liftState,
-        tags
+        tags,
+        valid,
+        validate
     } = props
 
     // set options when tags prop changes
@@ -21,8 +24,10 @@ const CreateRecipeTags = props => {
         setOptions(options)
     }, [tags])
 
+    // lift state when tagList changes
     useEffect(() => {
         liftState(tagList)
+        validate(true)
     }, [tagList])
 
     // add tag
@@ -31,8 +36,8 @@ const CreateRecipeTags = props => {
 
         const updatedOptions = options.filter(option => option !== tag)
         setOptions(updatedOptions)
-
     }
+
     // remove tag
     const removeTag = tag => {
         const updatedTagList = tagList.filter(tagName => tagName !== tag)
@@ -42,7 +47,7 @@ const CreateRecipeTags = props => {
     }
 
     return (
-        <div className="row">
+        <div className="row tag-search">
             <div className="col s12 l6 search">
                 <Autocomplete
                     options={options}
@@ -63,4 +68,11 @@ const CreateRecipeTags = props => {
     )
 }
 
-export default CreateRecipeTags
+RecipeTags.propTypes = {
+    liftState: PropTypes.func.isRequired,
+    tags: PropTypes.array.isRequired,
+    valid: PropTypes.bool.isRequired,
+    validate: PropTypes.func.isRequired
+}
+
+export default RecipeTags

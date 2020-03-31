@@ -2,18 +2,18 @@
 import React, { useState } from 'react'
 
 // import components
-import CreateRecipeDescription from './CreateRecipeDescription'
+import RecipeDescription from './RecipeDescription'
 import CreateRecipeIngredient from './CreateRecipeIngredient'
 import CreateRecipeInstruction from './CreateRecipeInstruction'
 import CreateRecipePhoto from './CreateRecipePhoto'
 import CreateRecipePreparation from './CreateRecipePreparation'
-import CreateRecipeTags from './CreateRecipeTags'
+import RecipeShare from './RecipeShare'
+import RecipeTags from './RecipeTags'
 import CreateRecipeTime from './CreateRecipeTime'
-import CreateRecipeTitle from './CreateRecipeTitle'
+import RecipeTitle from './RecipeTitle'
 import InstructionsList from './InstructionsList'
 import IngredientsList from './IngredientsList'
 import PreparationsList from './PreparationsList'
-import ShareSetting from '../utility/ShareSetting'
 
 const CreateRecipe = props => {
     // state hook variables
@@ -26,9 +26,8 @@ const CreateRecipe = props => {
     const [prepTimeHours, setPrepTimeHours] = useState(0)
     const [prepTimeMinutes, setPrepTimeMinutes] = useState(0)
     const [preparations, setPreparations] = useState([])
-    const [share, setShare] = useState(true)
+    const [share, setShare] = useState(false)
     const [tagList, setTagList] = useState([])
-    console.log(tagList)
     const [title, setTitle] = useState('')
     const [validCookTime, setValidCookTime] = useState(true)
     const [validDescription, setValidDescription] = useState(true)
@@ -36,8 +35,8 @@ const CreateRecipe = props => {
     const [validIngredients, setValidIngredients] = useState(true)
     const [validPrepTime, setValidPrepTime] = useState(true)
     // const [validPreparations, setValidPreparations] = useState(true)
-    // const [validShare, setValidShare] = useState(true)
-    // const [validTags, setValidTags] = useState(true)
+    const [validShare, setValidShare] = useState(true)
+    const [validTags, setValidTags] = useState(true)
     const [validTitle, setValidTitle] = useState(true)
 
     // destructure props
@@ -230,33 +229,40 @@ const CreateRecipe = props => {
         <div className="card-panel white">
             <div className="row">
                 <div className="col s12 m6">
-                    <div className={validTitle ? '' : 'invalid-recipe-title'}>
-                        <CreateRecipeTitle liftState={setTitle} />
-                    </div>
-                    <div className={validDescription ? '' : 'invalid-recipe-description'}>
-                        <CreateRecipeDescription liftState={setDescription} />
-                    </div>
-                </div>
-                <CreateRecipePhoto
-                    addPhoto={addPhoto}
-                    photo={photo}
-                    removePhoto={removePhoto}
-                />
-            </div>
-            <div className="row">
-                <div className="col s12">
-                    <h5>Tags</h5>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col s12 l8 recipe-tags">
-                    <CreateRecipeTags
-                        liftState={setTagList}
-                        tags={tags}
+                    <RecipeTitle
+                        liftState={setTitle}
+                        valid={validTitle}
+                        validate={setValidTitle}
+                    />
+                    <RecipeDescription
+                        liftState={setDescription}
+                        valid={validDescription}
+                        validate={setValidDescription}
                     />
                 </div>
-                <div className="col s12 l4 recipe-share-setting">
-                    <ShareSetting liftState={shareSetting} />
+                <div className="col s12 m6">
+                    <CreateRecipePhoto
+                        addPhoto={addPhoto}
+                        photo={photo}
+                        removePhoto={removePhoto}
+                    />
+                </div>
+            </div>
+            <div className="row">
+                <div className="col s12 l8">
+                    <RecipeTags
+                        liftState={setTagList}
+                        tags={tags}
+                        valid={validTags}
+                        validate={setValidTags}
+                    />
+                </div>
+                <div className="col s12 l4">
+                    <RecipeShare
+                        liftState={shareSetting}
+                        valid={validShare}
+                        validate={setValidShare}
+                    />
                 </div>
             </div>
             <div className="row">
@@ -265,6 +271,8 @@ const CreateRecipe = props => {
                         liftHours={recipePrepTimeHours}
                         liftMinutes={recipePrepTimeMinutes}
                         type="Prep"
+                        valid={validPrepTime}
+                        validate={setValidPrepTime}
                     />
                 </div>
                 <div className="col s12 m6">
@@ -272,6 +280,8 @@ const CreateRecipe = props => {
                         liftHours={recipeCookTimeHours}
                         liftMinutes={recipeCookTimeMinutes}
                         type="Cook"
+                        valid={validCookTime}
+                        validate={setValidCookTime}
                     />
                 </div>
             </div>
