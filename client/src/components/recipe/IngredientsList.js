@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import DeleteEditUpdateButtons from './DeleteEditUpdateButtons'
+import EditButtons from './EditButtons'
 
 import {
     quantities,
@@ -168,7 +168,7 @@ class IngredientsList extends Component {
                         </div>
                     </div>
                 </div>
-                <DeleteEditUpdateButtons
+                <EditButtons
                     disabled={disabled}
                     handleEditClick={this.handleEditClick}
                     handleDeleteClick={this.handleDeleteClick}

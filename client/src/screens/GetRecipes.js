@@ -200,7 +200,7 @@ const GetRecipes = props => {
     console.log(recipes[sortMethod])
 
     return (
-        <div className="container get-recipes router" onScroll={handleScroll} style={{ height: routerHeight }}>
+        <div className="container router" id="get-recipes" onScroll={handleScroll} style={{ height: routerHeight }}>
             <div className="row">
                 <div className="col s12 l6 recipe-sort-methods">
                     <button className={`btn-flat ${sortMethod === 'trendingRecipes' ? 'active' : null}`} onClick={() => setSortMethod('trendingRecipes')}><i className="material-icons left">trending_up</i>trending</button>
@@ -214,15 +214,15 @@ const GetRecipes = props => {
                         liftState={addFilter}
                     />
                 </div>
-                <div className="col s12 l3 recipe-tags">
+                <div className="col s12 l3 recipe-tag-list">
                     {filters.map(filter => {
                         return (
                             <div className="chip orange lighten-2" key={filter}>
-                                {filter.toUpperCase()}
                                 <i className="close material-icons" onClick={() => removeFilter(filter)}>close</i>
+                                <span>{filter.toUpperCase()}</span>
                             </div>
                         )
-                    })}
+                    }).reverse()}
                 </div>
             </div>
             <div className="row">

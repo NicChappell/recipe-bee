@@ -6,45 +6,50 @@ import PropTypes from 'prop-types'
 import { useCheckboxValue } from '../../helpers/customHooks'
 
 const ShareSetting = props => {
-    // custom hook variables
-    const checkbox = useCheckboxValue(false)
+	// custom hook variables
+	const checkbox = useCheckboxValue(false)
 
-    // destructure props
-    const {
-        liftState,
-        valid,
-        validate
-    } = props
+	// destructure props
+	const {
+		liftState,
+		valid,
+		validate
+	} = props
 
-    // update share setting
-    useEffect(() => {
-        liftState(checkbox.checked)
-        validate(true)
-    }, [checkbox.checked])
+	// update share setting
+	useEffect(() => {
+		liftState(checkbox.checked)
+		validate(true)
+	}, [checkbox.checked])
 
-    return (
-        <div className="row share">
-            <div className="col s12">
-                <span className="left mr-1">
-                    <i className="material-icons left">share</i> Share
-                </span>
-                <div className="switch">
-                    <label>
-                        Off
-                        <input {...checkbox} />
-                        <span className="lever"></span>
-                        On
-                    </label>
-                </div>
-            </div>
-        </div>
-    )
+	return (
+		<div className="row share">
+			<div className="col s12">
+				<div className="switch-container">
+					<span className="left mr-1">
+						<i className="material-icons left">share</i> Share
+					</span>
+					<div className="switch">
+						<label>
+							Off
+							<input {...checkbox} />
+							<span className="lever"></span>
+							On
+						</label>
+					</div>
+				</div>
+			</div>
+			<div className="col s12 center-align invalid-message">
+				{valid ? null : "Invalid share"}
+			</div>
+		</div>
+	)
 }
 
 ShareSetting.propTypes = {
-    liftState: PropTypes.func.isRequired,
-    valid: PropTypes.bool.isRequired,
-    validate: PropTypes.func.isRequired
+	liftState: PropTypes.func.isRequired,
+	valid: PropTypes.bool.isRequired,
+	validate: PropTypes.func.isRequired
 }
 
 export default ShareSetting

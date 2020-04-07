@@ -47,14 +47,14 @@ const RecipeTags = props => {
     }
 
     return (
-        <div className="row tag-search">
-            <div className="col s12 l6 search">
+        <div className="row tags">
+            <div className="col s12 l6 recipe-tag-search">
                 <Autocomplete
                     options={options}
                     liftState={addTag}
                 />
             </div>
-            <div className="col s12 l6 tags">
+            <div className="col s12 l6 recipe-tag-list">
                 {tagList.map(tag => {
                     return (
                         <div className="chip orange lighten-2" key={tag}>

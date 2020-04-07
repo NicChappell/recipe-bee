@@ -16,7 +16,7 @@ const RecipeTitle = props => {
         validate
     } = props
 
-    // update title
+    // lift and validate title
     useEffect(() => {
         liftState(title.value)
         validate(title.valid)

@@ -41,11 +41,6 @@ const PostRecipe = props => {
         return (
             <div className="container router" id="post-recipe" style={{ height: routerHeight }}>
                 <div className="row">
-                    <div className="center-align col s12">
-                        <h3>Create New Recipe</h3>
-                    </div>
-                </div>
-                <div className="row">
                     <div className="col s12">
                         <CreateRecipe
                             addRecipe={addRecipe}
