@@ -115,6 +115,23 @@ export const useValidNumberValue = (val = 0) => {
     }
 }
 
+export const useValidSelectValue = (val = '') => {
+    const [valid, setValid] = useState(true)
+    const [value, setValue] = useState(val)
+
+    const handleChange = e => {
+        setValue(e.target.value)
+        e.target.value ? setValid(true) : setValid(false)
+    }
+
+    return {
+        className: 'browser-default',
+        onChange: handleChange,
+        valid,
+        value
+    }
+}
+
 export const useValidTextValue = (val = '') => {
     const [valid, setValid] = useState(true)
     const [value, setValue] = useState(val)

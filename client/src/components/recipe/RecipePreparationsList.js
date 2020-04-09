@@ -35,9 +35,9 @@ const RecipePreparationsList = props => {
 	}
 
 	return (
-		<div className={`row ${preparations.length > 0 ? 'preparations-list' : null}`}>
+		<div className={`row ${preparations && preparations.length > 0 ? 'preparations-list' : null}`}>
 			<div className="col s12">
-				{preparations.map((prepObj, index) => (
+				{preparations && preparations.map((prepObj, index) => (
 					<RecipePreparationsListItem
 						deletePreparation={deletePreparation}
 						index={index}

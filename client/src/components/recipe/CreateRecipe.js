@@ -2,18 +2,18 @@
 import React, { useState } from 'react'
 
 // import components
-import RecipeDescription from './RecipeDescription'
-import CreateRecipeIngredient from './CreateRecipeIngredient'
-import CreateRecipeInstruction from './CreateRecipeInstruction'
-import CreateRecipePhoto from './CreateRecipePhoto'
 import RecipeAddPreparation from './RecipeAddPreparation'
+import RecipeAddIngredient from './RecipeAddIngredient'
+import RecipeAddInstruction from './RecipeAddInstruction'
+import RecipeDescription from './RecipeDescription'
+import RecipePhoto from './RecipePhoto'
+import RecipeIngredientsList from './RecipeIngredientsList'
+import RecipeInstructionsList from './RecipeInstructionsList'
 import RecipePreparationsList from './RecipePreparationsList'
 import RecipeShare from './RecipeShare'
 import RecipeTags from './RecipeTags'
 import RecipeTime from './RecipeTime'
 import RecipeTitle from './RecipeTitle'
-import InstructionsList from './InstructionsList'
-import IngredientsList from './IngredientsList'
 
 const CreateRecipe = props => {
 	// state hook variables
@@ -45,93 +45,6 @@ const CreateRecipe = props => {
 		history,
 		tags
 	} = props
-
-	// add photo to recipe
-	const addPhoto = e => {
-		// access the uploaded file from the files array
-		const file = e.target.files[0]
-
-		// create a new FileReader object
-		const reader = new FileReader()
-
-		if (file) {
-			// The progress event is fired periodically as the FileReader reads data
-			reader.onprogress = e => {
-				// evt is an ProgressEvent.
-				if (e.lengthComputable) {
-					var percentLoaded = Math.round((e.loaded / e.total) * 100)
-					console.log(percentLoaded)
-				}
-			}
-
-			// The load event is fired when a file has been read successfully
-			reader.onload = e => {
-				// update state
-				setPhoto(e.target.result)
-			}
-
-			// the readAsDataURL method is used to read the contents of the specified file
-			// when the read operation is finished, the the loadend event is triggered
-			// at that time, the result attribute contains the data as a data: URL
-			// which represents the file's data as a base64 encoded string
-			reader.readAsDataURL(file)
-		}
-	}
-	// remove photo from recipe
-	const removePhoto = e => {
-		// update state
-		setPhoto(undefined)
-	}
-
-	// add new ingredient to ingredients array
-	const addIngredient = ingredient => setIngredients([...ingredients, ingredient])
-	// delete ingredient from ingredients array
-	const deleteIngredient = ingredient => {
-		// filter target ingredient from ingredients array
-		const updatedIngredients = ingredients.filter(obj => obj.id !== ingredient.id)
-
-		// update state
-		setIngredients(updatedIngredients)
-	}
-	// update ingredient in ingredients array
-	const updateIngredient = ingredient => {
-		// find index of target ingredient in ingredients array
-		const index = ingredients.findIndex(obj => obj.id === ingredient.id)
-
-		// make a mutable copy of ingredients array
-		const updatedIngredients = ingredients
-
-		// update target ingredient in ingredients array
-		updatedIngredients[index] = ingredient
-
-		// update state
-		setIngredients(updatedIngredients)
-	}
-
-	// add new instruction to instructions array
-	const addInstruction = instruction => setInstructions([...instructions, instruction])
-	// delete instruction from instructions array
-	const deleteInstruction = instruction => {
-		// filter target instruction from instructions array
-		const updatedInstructions = instructions.filter(obj => obj.id !== instruction.id)
-
-		// update state
-		setInstructions(updatedInstructions)
-	}
-	// update instruction in instructions array
-	const updateInstruction = instruction => {
-		// find index of target instruction in instructions array
-		const index = instructions.findIndex(obj => obj.id === instruction.id)
-
-		// make a mutable copy of instructions array
-		const updatedInstructions = instructions
-
-		// update target instruction in instructions array
-		updatedInstructions[index] = instruction
-
-		// update state
-		setInstructions(updatedInstructions)
-	}
 
 	// submit recipe
 	const submitRecipe = () => {
@@ -190,7 +103,7 @@ const CreateRecipe = props => {
 	return (
 		<div className="card-panel white">
 			<div className="row">
-				<div className="col s12 m6">
+				<div className="col s12 l6">
 					<RecipeTitle
 						liftState={setTitle}
 						valid={validTitle}
@@ -202,41 +115,44 @@ const CreateRecipe = props => {
 						validate={setValidDescription}
 					/>
 				</div>
-				<div className="col s12 m6">
-					<CreateRecipePhoto
-						addPhoto={addPhoto}
+				<div className="col s12 l6">
+					<RecipePhoto
+						liftState={setPhoto}
 						photo={photo}
-						removePhoto={removePhoto}
 					/>
 				</div>
 			</div>
 			<div className="row">
 				<div className="col s12 m6 l4">
+					<div className="row">
+						<div className="col s12">
+							<h5>Prep Time</h5>
+						</div>
+					</div>
 					<RecipeTime
-						config={{ name: 'Prep' }}
 						liftHours={setPrepTimeHours}
 						liftMinutes={setPrepTimeMinutes}
-						valid={validPrepTime}
-						validate={setValidPrepTime}
 					/>
 				</div>
 				<div className="col s12 m6 l4 push-l2">
+					<div className="row">
+						<div className="col s12">
+							<h5>Cook Time</h5>
+						</div>
+					</div>
 					<RecipeTime
-						config={{ name: 'Cook' }}
 						liftHours={setCookTimeHours}
 						liftMinutes={setCookTimeMinutes}
-						valid={validCookTime}
-						validate={setValidCookTime}
 					/>
 				</div>
 			</div>
 			<div className="row">
 				<div className="col s12">
-					<h5>Preparations</h5>
-				</div>
-			</div>
-			<div className="row">
-				<div className="col s12">
+					<div className="row">
+						<div className="col s12">
+							<h5>Preparations</h5>
+						</div>
+					</div>
 					<RecipePreparationsList
 						liftState={setPreparations}
 						preparations={preparations}
@@ -254,56 +170,55 @@ const CreateRecipe = props => {
 			</div>
 			<div className="row">
 				<div className="col s12">
-					<h5>Ingredients</h5>
+					<div className="row">
+						<div className="col s12">
+							<h5>Ingredients</h5>
+						</div>
+					</div>
+					<RecipeIngredientsList
+						liftState={setIngredients}
+						ingredients={ingredients}
+					/>
 				</div>
-			</div>
-			<div className={`row ${ingredients.length > 0 ? 'ingredients' : null}`}>
-				<div className="col s12">
-					{ingredients.map((ingredient, index) => {
-						return (
-							<IngredientsList
-								deleteIngredient={deleteIngredient}
-								index={index}
-								ingredient={ingredient}
-								key={ingredient.id}
-								updateIngredient={updateIngredient}
-							/>
-						)
-					})}
-				</div>
-			</div>
-			<div className="row">
-				<CreateRecipeIngredient
-					addIngredient={addIngredient}
-					index={ingredients.length + 1}
-				/>
 			</div>
 			<div className="row">
 				<div className="col s12">
-					<h5>Instructions</h5>
+					<RecipeAddIngredient
+						index={ingredients.length}
+						liftState={setIngredients}
+						ingredients={ingredients}
+					/>
 				</div>
 			</div>
-			<div className={`row ${instructions.length > 0 ? 'instructions' : null}`}>
+			<div className="row">
 				<div className="col s12">
-					{instructions.map((instruction, index) => (
-						<InstructionsList
-							deleteInstruction={deleteInstruction}
-							index={index}
-							instruction={instruction}
-							key={instruction.id}
-							updateInstruction={updateInstruction}
-						/>
-					))}
+					<div className="row">
+						<div className="col s12">
+							<h5>Instructions</h5>
+						</div>
+					</div>
+					<RecipeInstructionsList
+						liftState={setInstructions}
+						instructions={instructions}
+					/>
 				</div>
 			</div>
 			<div className="row">
-				<CreateRecipeInstruction
-					addInstruction={addInstruction}
-					index={instructions.length + 1}
-				/>
+				<div className="col s12">
+					<RecipeAddInstruction
+						index={instructions.length}
+						liftState={setInstructions}
+						instructions={instructions}
+					/>
+				</div>
 			</div>
 			<div className="row">
-				<div className="col s8">
+				<div className="col s12 m6 l8">
+					<div className="row">
+						<div className="col s12">
+							<h5>Tags</h5>
+						</div>
+					</div>
 					<RecipeTags
 						liftState={setTagList}
 						tags={tags}
@@ -311,7 +226,12 @@ const CreateRecipe = props => {
 						validate={setValidTags}
 					/>
 				</div>
-				<div className="col s4">
+				<div className="col s12 m6 l4">
+					<div className="row">
+						<div className="col s12">
+							<h5>Share</h5>
+						</div>
+					</div>
 					<RecipeShare
 						liftState={setShare}
 						valid={validShare}

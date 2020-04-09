@@ -8,35 +8,35 @@ import EditButtons from './EditButtons'
 // import custom hooks
 import { useValidTextAreaValue } from '../../helpers/customHooks'
 
-const RecipePreparationsListItem = props => {
+const RecipeInstructionsListItem = props => {
 	// state hook variables
 	const [modify, setModify] = useState(false)
 
 	// destructure props
 	const {
-		deletePreparation,
+		deleteInstruction,
 		index,
-		prepObj,
-		updatePreparation
+		instObj,
+		updateInstruction
 	} = props
 
 	// custom hook variables
-	const textArea = useValidTextAreaValue(prepObj.value)
+	const textArea = useValidTextAreaValue(instObj.value)
 
-	const handleDeleteClick = () => deletePreparation(prepObj)
+	const handleDeleteClick = () => deleteInstruction(instObj)
 
 	const handleEditClick = () => setModify(true)
 
 	const handleUpdateClick = () => {
 		if (textArea.valid) {
-			// create updated preparation object
-			const updatedPrepObj = {
-				...prepObj,
+			// create updated instruction object
+			const updatedInstObj = {
+				...instObj,
 				value: textArea.value
 			}
 
-			// update preparation in recipe
-			updatePreparation(updatedPrepObj)
+			// update instruction in recipe
+			updateInstruction(updatedInstObj)
 
 			// update state
 			setModify(false)
@@ -44,7 +44,7 @@ const RecipePreparationsListItem = props => {
 	}
 
 	return (
-		<div className="row preparation">
+		<div className="row instruction">
 			<div className="col s8 m9 l10">
 				<div className="row">
 					<div className="col s2 m1 index">
@@ -54,8 +54,8 @@ const RecipePreparationsListItem = props => {
 						<textarea
 							{...textArea}
 							disabled={!modify}
-							name="preparation"
-							placeholder={textArea.valid ? 'Preparation' : 'Preparation is required'}
+							name="instruction"
+							placeholder={textArea.valid ? 'Instruction' : 'Instruction is required'}
 						>
 						</textarea>
 					</div>
@@ -72,11 +72,11 @@ const RecipePreparationsListItem = props => {
 	)
 }
 
-RecipePreparationsListItem.propTypes = {
-	deletePreparation: PropTypes.func.isRequired,
+RecipeInstructionsListItem.propTypes = {
+	deleteInstruction: PropTypes.func.isRequired,
 	index: PropTypes.number.isRequired,
-	prepObj: PropTypes.object.isRequired,
-	updatePreparation: PropTypes.func.isRequired
+	instObj: PropTypes.object.isRequired,
+	updateInstruction: PropTypes.func.isRequired
 }
 
-export default RecipePreparationsListItem
+export default RecipeInstructionsListItem

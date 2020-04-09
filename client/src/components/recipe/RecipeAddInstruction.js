@@ -10,7 +10,7 @@ const initialState = {
 
 const reducer = (state, action) => {
 	switch (action.type) {
-		case 'changePreparation':
+		case 'changeInstruction':
 			return {
 				active: true,
 				valid: action.value ? true : false,
@@ -28,7 +28,7 @@ const reducer = (state, action) => {
 	}
 }
 
-const RecipeAddPreparation = props => {
+const RecipeAddInstruction = props => {
 	// reducer hook variables
 	const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -43,7 +43,7 @@ const RecipeAddPreparation = props => {
 	const {
 		index,
 		liftState,
-		preparations
+		instructions
 	} = props
 
 	const handleBlur = () => dispatch({ type: 'deactivate' })
@@ -53,28 +53,28 @@ const RecipeAddPreparation = props => {
 		const { value } = e.target
 
 		// update user input
-		dispatch({ type: 'changePreparation', value })
+		dispatch({ type: 'changeInstruction', value })
 	}
 
 	const handleClick = () => {
 		// generate unique id
 		const id = uuid()
 
-		// create preparation object
-		const newPreparation = {
+		// create instruction object
+		const newInstruction = {
 			id,
 			value
 		}
 
 		// lift state
-		liftState([...preparations, newPreparation])
+		liftState([...instructions, newInstruction])
 
 		// reset state
 		dispatch({ type: 'resetState' })
 	}
 
 	return (
-		<div className="row preparation">
+		<div className="row instruction">
 			<div className="col s8 m9 l10">
 				<div className="row">
 					<div className="col s2 m1 index">
@@ -83,10 +83,10 @@ const RecipeAddPreparation = props => {
 					<div className={`input-field col s10 m11 ${valid || !active ? '' : 'invalid-input'}`}>
 						<textarea
 							className="materialize-textarea"
-							name="preparation"
+							name="instruction"
 							onBlur={handleBlur}
 							onChange={handleChange}
-							placeholder={valid || !active ? 'Preparation' : 'Preparation is required'}
+							placeholder={valid || !active ? 'Instruction' : 'Instruction is required'}
 							value={value}
 						>
 						</textarea>
@@ -102,10 +102,10 @@ const RecipeAddPreparation = props => {
 	)
 }
 
-RecipeAddPreparation.propTypes = {
+RecipeAddInstruction.propTypes = {
 	index: PropTypes.number.isRequired,
 	liftState: PropTypes.func.isRequired,
 	instructions: PropTypes.array.isRequired
 }
 
-export default RecipeAddPreparation
+export default RecipeAddInstruction
