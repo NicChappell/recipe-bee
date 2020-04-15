@@ -7,8 +7,8 @@ import EditButtons from './EditButtons'
 
 // import data
 import {
-    quantities,
-    units,
+	quantities,
+	units,
 } from '../../data/recipe'
 
 // import custom hooks
@@ -64,31 +64,39 @@ const RecipeIngredientsListItem = props => {
 					<div className="col s2 l1 index">
 						<p>{`${index + 1})`}</p>
 					</div>
-					<div className={`input-field col s3 l2 ${quantity.valid ? '' : 'invalid-input'}`}>
-						<select
-							{...quantity}
-							disabled={!modify}
-							name="quantity"
-						>
-							{quantities && quantities.map(quantity => <option key={quantity} value={quantity}>{quantity}</option>)}
-						</select>
-					</div>
-					<div className={'input-field col s7 l3'}>
-						<select
-							{...unit}
-							disabled={!modify}
-							name="unit"
-						>
-							{units && units.map(unit => <option key={unit} value={unit}>{unit}</option>)}
-						</select>
-					</div>
-					<div className={`input-field col s12 l6 ${name.valid ? '' : 'invalid-input'}`}>
-						<input
-							{...name}
-							disabled={!modify}
-							name="name"
-							placeholder={name.valid ? 'Ingredient' : 'Ingredient is required'}
-						/>
+					<div className="col s10 l11">
+						<div className="row">
+							<div className={`input-field col s4 l2 ${quantity.valid ? '' : 'invalid-input'}`}>
+								<select
+									{...quantity}
+									disabled={!modify}
+									name="quantity"
+								>
+									<option disabled selected value=""></option>
+									{quantities && quantities.map(quantity => <option key={quantity} value={quantity}>{quantity}</option>)}
+								</select>
+								{index === 0 ? <label>Quantity</label> : null}
+							</div>
+							<div className={'input-field col s8 l4'}>
+								<select
+									{...unit}
+									disabled={!modify}
+									name="unit"
+								>
+									<option selected value=""></option>
+									{units && units.map(unit => <option key={unit} value={unit}>{unit}</option>)}
+								</select>
+								{index === 0 ? <label>Unit</label> : null}
+							</div>
+							<div className={`input-field col s12 l6 ${name.valid ? '' : 'invalid-input'}`}>
+								<input
+									{...name}
+									disabled={!modify}
+									name="name"
+									placeholder={name.valid ? 'Name' : 'Name is required'}
+								/>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -104,10 +112,10 @@ const RecipeIngredientsListItem = props => {
 }
 
 RecipeIngredientsListItem.propTypes = {
-	deleteIngredient: PropTypes.func.isRequired,
-	index: PropTypes.number.isRequired,
-	ingrObj: PropTypes.object.isRequired,
-	updateIngredient: PropTypes.func.isRequired
+	deleteIngredient: PropTypes.func,
+	index: PropTypes.number,
+	ingrObj: PropTypes.object,
+	updateIngredient: PropTypes.func
 }
 
 export default RecipeIngredientsListItem

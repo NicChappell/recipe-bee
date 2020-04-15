@@ -16,8 +16,22 @@ $min-extra-large: 1201px;
 // font-family: 'Source Serif Pro', serif;
 // font-family: 'Source Code Pro', monospace;
 
+$primary: #000000; // black
+$secondary: #9e9e9e; // grey
+$important: #2196f3; // blue
+$information: #03a9f4; // light blue
+$success: #8bc34a; // light green
+$warning: #ff9800; // orange
+$danger: #ff5722; // deep-orange
+
+$brand-primary: #ffc107; // amber
+$brand-secondary: #ffeb3b; // yellow
+$brand-grey: #9e9e9e; //grey
+$brand-light: #f5f5f5; // grey lighten-4
+$brand-dark: #212121; // grey darken-4
+
 body {
-  background-color: #eeeeee;
+  background-color: $brand-light;
   font-family: "Source Sans Pro", sans-serif;
 }
 
@@ -52,7 +66,7 @@ nav {
     }
     img {
       height: auto;
-      max-width: 3rem;
+      max-height: 3rem;
       max-height: 3rem;
       width: auto;
     }
@@ -104,7 +118,7 @@ span {
         }
       }
       .suggestions {
-        background-color: white;
+        background-color: $brand-light;
         font-size: 0.875rem;
         height: auto;
         margin: 0 0 0 2.3rem;
@@ -120,7 +134,7 @@ span {
           }
         }
         li.active {
-          color: #ffb74d;
+          color: $brand-primary;
         }
       }
     }
@@ -165,8 +179,19 @@ span {
 }
 
 #post-recipe {
-  .row:not(:first-child) {
+  hr {
+    border-top: 1px solid $brand-light;
+    margin: 2rem 0 1.5rem;
+  }
+  .error-message {
+    color: $danger;
+  }
+  .row {
     margin-bottom: 0em;
+  }
+  // recipe title
+  .title {
+    // styles go here
   }
   // recipe description
   .description {
@@ -178,8 +203,7 @@ span {
   // recipe instructions
   // recipe preparations
   .ingredient,
-  .instruction,
-  .preparation {
+  .list-item {
     @media screen and (max-width: $max-medium) {
       padding: 1rem 0;
     }
@@ -195,15 +219,18 @@ span {
       margin: 0;
       input {
         height: 4rem;
-        &:disabled {
-          color: #000000;
-        }
+      }
+      label {
+        color: $secondary;
+        font-size: .75rem;
+        line-height: 1.5rem;
+        top: -2rem;
       }
       select {
         height: 3rem;
         margin: 0.5rem 0;
         &:disabled {
-          color: #000000;
+          color: $secondary;
           appearance: none;
           -moz-appearance: none;
           -webkit-appearance: none;
@@ -215,9 +242,6 @@ span {
       textarea {
         height: 4rem;
         overflow: scroll;
-        &:disabled {
-          color: #000000;
-        }
       }
     }
     .buttons {
@@ -238,10 +262,16 @@ span {
       }
     }
   }
+  .notes {
+    textarea {
+      height: 8rem;
+      overflow: scroll;
+    }
+  }
   .ingredients-list,
   .instructions-list,
   .preparations-list {
-    border: 1px dotted #bdbdbd;
+    border: 1px dotted $brand-light;
     .row {
       margin-bottom: 0em;
     }
@@ -285,11 +315,6 @@ span {
   }
   // recipe share setting
   .share {
-    .switch-container {
-      align-items: center;
-      display: flex;
-      justify-content: space-around;
-    }
   }
   // recipe title
   .title {
@@ -300,28 +325,27 @@ span {
       @media screen and (max-width: $max-medium) {
         margin-top: 1rem;
       }
+      span {
+        display: block;
+        margin-top: 0.5rem;
+      }
       .autocomplete {
-        padding-left: 1rem;
         .input-field {
-          margin: 0;
+          margin-bottom: 0;
           input[type="text"] {
-            font-size: 0.875rem;
             height: 2rem;
             line-height: 2rem;
             margin: 0;
           }
           .prefix {
-            font-size: 1.3rem;
-            ~ input {
-              margin-left: 2.3rem;
-            }
+            display: none;
           }
         }
         .suggestions {
-          background-color: white;
+          background-color: $brand-light;
           font-size: 0.875rem;
           height: auto;
-          margin: 0 0 0 2.3rem;
+          margin: 0;
           max-height: 9rem;
           overflow: scroll;
           padding: 0.875rem 0;
@@ -334,7 +358,7 @@ span {
             }
           }
           li.active {
-            color: #ffb74d;
+            color: $brand-primary;
           }
         }
       }
@@ -398,13 +422,13 @@ span {
       input[type="range"] {
         flex-grow: 4;
         &::-webkit-slider-thumb {
-          background: #ffc107;
+          background: $brand-primary;
         }
         &::-moz-range-thumb {
-          background: #ffc107;
+          background: $brand-primary;
         }
         &::-ms-thumb {
-          background: #ffc107;
+          background: $brand-primary;
         }
       }
     }
@@ -453,17 +477,17 @@ $size: 100px;
 .breadcrumbs {
   line-height: 1.15;
   .breadcrumb {
-    color: black;
+    color: $primary;
     &:before {
-      color: black;
+      color: $primary;
     }
   }
 }
 
 .card {
-  color: #000000;
+  color: $primary;
   a {
-    color: #000000;
+    color: $primary;
   }
   // REVIEW THIS STYLE
   // WHERE IS IT BEING USED?
@@ -545,20 +569,20 @@ $size: 100px;
   input[type="number"]:not(.browser-default):focus:not([readonly]),
   input[type="search"]:not(.browser-default):focus:not([readonly]),
   textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #ff8a65;
-    box-shadow: 0 1px 0 0 #ff8a65;
-    color: #ff8a65;
+    border-bottom: 1px solid $danger;
+    box-shadow: 0 1px 0 0 $danger;
+    color: $danger;
     &::placeholder {
-      color: #ff8a65;
+      color: $danger;
     }
   }
   select {
-    outline: 1px solid #ff8a65;
+    outline: 1px solid $danger;
   }
 }
 
 .invalid-message {
-  color: #ff8a65;
+  color: $danger;
 }
 
 .no-recipes {
@@ -578,8 +602,8 @@ $size: 100px;
 }
 
 .side-nav {
-  background-color: #eeeeee;
-  border-right: 1px solid #757575;
+  background-color: $brand-light;
+  border-right: 1px solid $brand-dark;
   height: 100vh;
   left: 0;
   margin: 0;
@@ -624,7 +648,7 @@ $size: 100px;
       margin: 0;
       li {
         a {
-          background-color: #eeeeee;
+          background-color: $brand-light;
           display: block;
           padding: 1rem 2rem;
           transition: 0.3s;
@@ -674,7 +698,7 @@ $size: 100px;
       }
     }
     .suggestions {
-      background-color: white;
+      background-color: $brand-light;
       font-size: 0.875rem;
       margin: 0 0 0 2.3rem;
       overflow: hidden;
@@ -688,7 +712,7 @@ $size: 100px;
         }
       }
       li.active {
-        color: #ffb74d;
+        color: $brand-primary;
       }
     }
   }
@@ -997,7 +1021,7 @@ $size: 100px;
 // ********************* //
 
 blockquote {
-  border-left: 5px solid #ffc107;
+  border-left: 5px solid $brand-primary;
 }
 
 input:not([type]):focus:not([readonly]),
@@ -1013,14 +1037,58 @@ input[type="tel"]:not(.browser-default):focus:not([readonly]),
 input[type="number"]:not(.browser-default):focus:not([readonly]),
 input[type="search"]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #ffc107;
-  box-shadow: 0 1px 0 0 #ffc107;
+  border-bottom: 1px solid $brand-primary;
+  box-shadow: 0 1px 0 0 $brand-primary;
 }
 
 select:focus {
-  outline: 1px solid #ffc107;
+  outline: 1px solid $brand-primary;
 }
 
 textarea.materialize-textarea {
   height: 4rem;
+}
+
+// ***** //
+// Forms //
+// ***** //
+
+button,
+input,
+select,
+textarea {
+  font-family: "Source Sans Pro", sans-serif;
+  &:disabled {
+    color: $secondary;
+  }
+  &::placeholder {
+    color: $secondary;
+  }
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid $brand-grey;
+  border-radius: 0;
+  outline: none;
+  height: 3rem;
+  width: 100%;
+  font-size: 16px;
+  margin: 0 0 8px 0;
+  padding: 0;
+  box-shadow: none;
+  transition: box-shadow 0.3s, border 0.3s, -webkit-box-shadow 0.3s;
+  &::placeholder {
+    font-size: 16px;
+  }
 }

@@ -132,35 +132,56 @@ export const useValidSelectValue = (val = '') => {
     }
 }
 
-export const useValidTextValue = (val = '') => {
+export const useValidTextAreaValue = (val = '', errorMessage = '') => {
     const [valid, setValid] = useState(true)
     const [value, setValue] = useState(val)
+
+    const handleBlur = e => e.target.value ? setValid(true) : setValid(false)
 
     const handleChange = e => {
         setValue(e.target.value)
         e.target.value ? setValid(true) : setValid(false)
     }
 
+    const handleFocus = () => setValid(true)
+
+    useEffect(() => {
+        setValid(errorMessage ? false : true)
+    }, [errorMessage])
+
     return {
+        className: 'materialize-textarea',
+        onBlur: handleBlur,
         onChange: handleChange,
-        type: 'text',
+        onFocus: handleFocus,
         valid,
         value
     }
 }
 
-export const useValidTextAreaValue = (val = '') => {
+export const useValidTextValue = (val = '', errorMessage = '') => {
     const [valid, setValid] = useState(true)
     const [value, setValue] = useState(val)
+
+    const handleBlur = e => e.target.value ? setValid(true) : setValid(false)
 
     const handleChange = e => {
         setValue(e.target.value)
         e.target.value ? setValid(true) : setValid(false)
     }
 
+    const handleFocus = () => setValid(true)
+
+    useEffect(() => {
+        setValid(errorMessage ? false : true)
+    }, [errorMessage])
+
     return {
-        className: 'materialize-textarea',
+        autoComplete: "off",
+        onBlur: handleBlur,
         onChange: handleChange,
+        onFocus: handleFocus,
+        type: 'text',
         valid,
         value
     }

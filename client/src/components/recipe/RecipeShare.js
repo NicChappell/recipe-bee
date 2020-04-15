@@ -1,55 +1,64 @@
 // import dependencies
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import isEmpty from 'lodash.isempty'
 
 // import custom hooks
 import { useCheckboxValue } from '../../helpers/customHooks'
 
 const ShareSetting = props => {
+	// destructure props
+	const {
+		errors,
+		liftState,
+		resolveErrors
+	} = props
+
+	// state hook variables
+	const [valid, setValid] = useState(true)
+
 	// custom hook variables
 	const checkbox = useCheckboxValue(false)
 
-	// destructure props
-	const {
-		liftState,
-		valid,
-		validate
-	} = props
+    const handleFocus = () => {
+        setValid(true)
+        resolveErrors('share')
+    }
 
-	// update share setting
+	// update state when checked value changes
 	useEffect(() => {
 		liftState(checkbox.checked)
-		validate(true)
 	}, [checkbox.checked])
+
+	// update state when errors value changes
+	useEffect(() => {
+		isEmpty(errors) ? setValid(true) : setValid(false)
+	}, [errors])
 
 	return (
 		<div className="row share">
 			<div className="col s12">
-				<div className="switch-container">
-					<span className="left mr-1">
-						<i className="material-icons left">share</i> Share
-					</span>
-					<div className="switch">
-						<label>
-							Off
-							<input {...checkbox} />
-							<span className="lever"></span>
-							On
-						</label>
-					</div>
+				<div className="switch">
+					<label>
+						Off
+						<input
+							{...checkbox}
+							onFocus={handleFocus}
+						/>
+						<span className="lever"></span>
+						On
+					</label>
 				</div>
-			</div>
-			<div className="col s12 center-align invalid-message">
-				{valid ? null : "Invalid share"}
+				{valid ? null : <span className="error-message">{errors.share}</span>}
 			</div>
 		</div>
 	)
 }
 
 ShareSetting.propTypes = {
-	liftState: PropTypes.func.isRequired,
-	valid: PropTypes.bool.isRequired,
-	validate: PropTypes.func.isRequired
+	errors: PropTypes.object,
+	liftState: PropTypes.func,
+	resolveErrors: PropTypes.func
 }
 
 export default ShareSetting

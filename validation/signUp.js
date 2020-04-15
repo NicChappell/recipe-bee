@@ -1,6 +1,6 @@
 // import dependencies
 const Validator = require('validator')
-const isEmpty = require('is-empty')
+const isEmpty = require('lodash.isempty')
 
 // validate user input
 const validateSignUpInput = data => {
@@ -10,7 +10,6 @@ const validateSignUpInput = data => {
     // destructure data
     const {
         address1,
-        address2,
         city,
         email,
         firstName,
@@ -23,35 +22,22 @@ const validateSignUpInput = data => {
     } = data
 
     // convert empty fields into empty strings for Validator methods
-    const validateAddress1 = !isEmpty(address1) ? address1 : ''
-    const validateAddress2 = !isEmpty(address2) ? address2 : ''
-    const validateCity = !isEmpty(city) ? city : ''
     const validateEmail = !isEmpty(email) ? email : ''
-    const validateFirstName = !isEmpty(firstName) ? firstName : ''
-    const validateLastName = !isEmpty(lastName) ? lastName : ''
     const validatePassword = !isEmpty(password) ? password : ''
     const validatePassword2 = !isEmpty(password2) ? password2 : ''
-    const validatePostalCode = !isEmpty(postalCode) ? postalCode : ''
-    const validateState = !isEmpty(state) ? state : ''
-    const validateUsername = !isEmpty(username) ? username : ''
 
     // validate address1 input
-    if (Validator.isEmpty(validateAddress1)) {
+    if (!address1) {
         errors.address1 = 'Street address is required'
     }
 
-    // // validate address2 input
-    // if (Validator.isEmpty(validateAddress2)) {
-    //     errors.address2 = 'Street address is required'
-    // }
-
     // validate city input
-    if (Validator.isEmpty(validateCity)) {
+    if (!city) {
         errors.city = 'City is required'
     }
 
     // validate email input
-    if (Validator.isEmpty(validateEmail)) {
+    if (!email) {
         errors.email = 'Email is required'
     }
     if (!Validator.isEmail(validateEmail)) {
@@ -59,17 +45,17 @@ const validateSignUpInput = data => {
     }
 
     // validate firstName input
-    if (Validator.isEmpty(validateFirstName)) {
+    if (!firstName) {
         errors.firstName = 'First name is required'
     }
 
     // validate lastName input
-    if (Validator.isEmpty(validateLastName)) {
+    if (!lastName) {
         errors.lastName = 'Last name is required'
     }
 
     // validate password input
-    if (Validator.isEmpty(validatePassword)) {
+    if (!password) {
         errors.password = 'Password is required'
     }
     if (!Validator.isLength(validatePassword, { min: 6, max: 30 })) {
@@ -77,7 +63,7 @@ const validateSignUpInput = data => {
     }
 
     // validate password2 input
-    if (Validator.isEmpty(validatePassword2)) {
+    if (!password2) {
         errors.password2 = 'Confirm password is required'
     }
 
@@ -87,17 +73,17 @@ const validateSignUpInput = data => {
     }
 
     // validate postalCode input
-    if (Validator.isEmpty(validatePostalCode)) {
+    if (!postalCode) {
         errors.postalCode = 'Postal code is required'
     }
 
     // validate state input
-    if (Validator.isEmpty(validateState)) {
+    if (!state) {
         errors.state = 'State is required'
     }
 
     // validate username input
-    if (Validator.isEmpty(validateUsername)) {
+    if (!username) {
         errors.username = 'Username is required'
     }
 

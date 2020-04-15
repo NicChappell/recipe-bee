@@ -10,7 +10,7 @@ import SignedInLinks from '../auth/SignedInLinks'
 import SignedOutLinks from '../auth/SignedOutLinks'
 
 // import images
-import icon from '../../images/icons/icon.png'
+import logo from '../../images/logos/logo.svg'
 
 const Navbar = (props) => {
     // destructure props
@@ -42,7 +42,7 @@ const Navbar = (props) => {
                         </ul>
                         <Link to="/" className="brand-logo center">
                             <div className="logo">
-                                <img src={icon} alt="RecipeBee" />
+                                <img src={logo} alt="RecipeBee" />
                             </div>
                         </Link>
                         {authLinks}

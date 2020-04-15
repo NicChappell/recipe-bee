@@ -6,41 +6,42 @@ import PropTypes from 'prop-types'
 import { useValidTextValue } from '../../helpers/customHooks'
 
 const RecipeTitle = props => {
-    // custom hook variables
-    const title = useValidTextValue('')
-
     // destructure props
     const {
-        liftState,
-        valid,
-        validate
+        errors,
+        liftState
     } = props
 
-    // lift and validate title
+    // custom hook variables
+    const title = useValidTextValue('', errors.title)
+
+    // lift state when title value changes
     useEffect(() => {
         liftState(title.value)
-        validate(title.valid)
-    }, [title.valid, title.value])
+    }, [title.value])
 
     return (
         <div className="row title">
-            <div className={`input-field col s12 ${valid ? null : 'invalid-input'}`}>
+            <div className={`input-field col s12 ${title.valid ? '' : 'invalid-input'}`}>
                 <input
+                    autoComplete={title.autoComplete}
                     name="title"
+                    onBlur={title.onBlur}
                     onChange={title.onChange}
-                    placeholder={valid ? "Title" : "Title is required"}
+                    onFocus={title.onFocus}
+                    placeholder="Title"
                     type={title.type}
                     value={title.value}
                 />
+                {title.valid ? null : <span className="error-message">{errors.title}</span>}
             </div>
         </div>
     )
 }
 
 RecipeTitle.propTypes = {
-    liftState: PropTypes.func.isRequired,
-    valid: PropTypes.bool.isRequired,
-    validate: PropTypes.func.isRequired
+    errors: PropTypes.object,
+    liftState: PropTypes.func
 }
 
 export default RecipeTitle

@@ -1,7 +1,8 @@
 // import dependencies
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import PropTypes from 'prop-types'
 import { v4 as uuid } from 'uuid'
+import isEmpty from 'lodash.isempty'
 
 // import data
 import {
@@ -10,13 +11,10 @@ import {
 } from '../../data/recipe'
 
 const initialState = {
-    nameActive: false,
-    nameValid: false,
+    nameValid: true,
     nameValue: '',
-    quantityActive: false,
-    quantityValid: false,
+    quantityValid: true,
     quantityValue: '',
-    unitActive: false,
     // unitValid: false,
     unitValue: ''
 }
@@ -26,28 +24,24 @@ const reducer = (state, action) => {
         case 'changeName':
             return {
                 ...state,
-                nameActive: true,
-                nameValid: action.value ? true : false,
                 nameValue: action.value
             }
         case 'changeQuantity':
             return {
                 ...state,
-                quantityActive: true,
-                quantityValid: action.value ? true : false,
                 quantityValue: action.value
             }
         case 'changeUnit':
             return {
                 ...state,
-                unitActive: true,
-                // unitValid: action.value ? true : false,
                 unitValue: action.value
             }
-        case 'deactivate':
+        case 'validate':
             return {
                 ...state,
-                [action.value]: false
+                nameValid: action.value,
+                quantityValid: action.value,
+                // unitValid: action.value
             }
         case 'resetState':
             return initialState
@@ -57,39 +51,27 @@ const reducer = (state, action) => {
 }
 
 const RecipeAddIngredient = props => {
+    // destructure props
+    const {
+        errors,
+        index,
+        ingredients,
+        liftState,
+        resolveErrors
+    } = props
+
     // reducer hook variables
     const [state, dispatch] = useReducer(reducer, initialState)
 
     // destructure state
     const {
-        nameActive,
         nameValid,
         nameValue,
-        quantityActive,
         quantityValid,
         quantityValue,
-        unitActive,
         // unitValid,
         unitValue
     } = state
-
-    // destructure props
-    const {
-        index,
-        liftState,
-        ingredients
-    } = props
-
-    const handleBlur = e => {
-        // destructure event
-        const { name } = e.target
-
-        // concatenate value
-        const key = `${name}Active`
-
-        // update state
-        dispatch({ type: 'deactivate', value: key })
-    }
 
     const handleChange = e => {
         // destructure event
@@ -126,6 +108,18 @@ const RecipeAddIngredient = props => {
         dispatch({ type: 'resetState' })
     }
 
+    const handleFocus = () => {
+        dispatch({ type: 'validate', value: true })
+        resolveErrors('ingredients')
+    }
+
+    // update state when errors value changes
+    useEffect(() => {
+        if (errors.ingredients) {
+            dispatch({ type: 'validate', value: false })
+        }
+    }, [errors.ingredients])
+
     return (
         <div className="row ingredient">
             <div className="col s8 m9 l10">
@@ -133,42 +127,51 @@ const RecipeAddIngredient = props => {
                     <div className="col s2 l1 index">
                         <p>{`${index + 1})`}</p>
                     </div>
-                    <div className={`input-field col s3 l2 ${quantityValid || !quantityActive ? '' : 'invalid-input'}`}>
-                        <select
-                            className='browser-default'
-                            name="quantity"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={quantityValue}
-                        >
-                            {quantities && quantities.map(quantity => <option key={quantity} value={quantity}>{quantity}</option>)}
-                        </select>
-                    </div>
-                    <div className={'input-field col s7 l3'}>
-                        <select
-                            className='browser-default'
-                            name="unit"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={unitValue}
-                        >
-                            {units && units.map(unit => <option key={unit} value={unit}>{unit}</option>)}
-                        </select>
-                    </div>
-                    <div className={`input-field col s12 l6 ${nameValid || !nameActive ? '' : 'invalid-input'}`}>
-                        <input
-                            name="name"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            placeholder={nameValid || !nameActive ? 'Ingredient' : 'Ingredient is required'}
-                            type='text'
-                            value={nameValue}
-                        />
+                    <div className="col s10 l11">
+                        <div className="row">
+                            <div className={`input-field col s4 l2 ${!quantityValid ? 'invalid-input' : ''}`}>
+                                <select
+                                    className='browser-default'
+                                    name="quantity"
+                                    onChange={handleChange}
+                                    onFocus={handleFocus}
+                                    value={quantityValue}
+                                >
+                                    <option disabled selected value=""></option>
+                                    {quantities && quantities.map(quantity => <option key={quantity} value={quantity}>{quantity}</option>)}
+                                </select>
+                                {isEmpty(ingredients) ? <label>Quantity</label> : null}
+                            </div>
+                            <div className="input-field col s8 l4">
+                                <select
+                                    className='browser-default'
+                                    name="unit"
+                                    onChange={handleChange}
+                                    onFocus={handleFocus}
+                                    value={unitValue}
+                                >
+                                    <option selected value=""></option>
+                                    {units && units.map(unit => <option key={unit} value={unit}>{unit}</option>)}
+                                </select>
+                                {isEmpty(ingredients) ? <label>Unit</label> : null}
+                            </div>
+                            <div className={`input-field col s12 l6 ${!nameValid ? 'invalid-input' : ''}`}>
+                                <input
+                                    name="name"
+                                    onChange={handleChange}
+                                    onFocus={handleFocus}
+                                    placeholder="Name"
+                                    type='text'
+                                    value={nameValue}
+                                />
+                            </div>
+                        </div>
+                        {!nameValid || !quantityValid ? <span className="error-message">{errors.ingredients}</span> : null}
                     </div>
                 </div>
             </div>
             <div className="col s4 m3 l2 buttons">
-                <button className="btn orange lighten-2" disabled={!nameValid || !quantityValid} onClick={handleClick}>
+                <button className="btn orange lighten-2" disabled={!nameValue || !quantityValue} onClick={handleClick}>
                     <i className="black-text material-icons">add</i>
                 </button>
             </div>
@@ -177,9 +180,11 @@ const RecipeAddIngredient = props => {
 }
 
 RecipeAddIngredient.propTypes = {
-    index: PropTypes.number.isRequired,
-    liftState: PropTypes.func.isRequired,
-    ingredients: PropTypes.array.isRequired
+    errors: PropTypes.object,
+    index: PropTypes.number,
+    ingredients: PropTypes.array,
+    liftState: PropTypes.func,
+    resolveErrorse: PropTypes.func
 }
 
 export default RecipeAddIngredient

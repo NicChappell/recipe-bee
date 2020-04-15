@@ -1,6 +1,5 @@
 // import dependencies
-const Validator = require('validator')
-const isEmpty = require('is-empty')
+const isEmpty = require('lodash.isempty')
 
 // validate user input
 const validateSomething = data => {
@@ -18,12 +17,12 @@ const validateSomething = data => {
     const validateThing2 = !isEmpty(thing2) ? thing2 : ''
 
     // validate email input
-    if (Validator.isEmpty(validateThing1)) {
+    if (isEmpty(validateThing1)) {
         errors.thing1 = 'Thing 1 is required'
     }
 
     // validate password input
-    if (Validator.isEmpty(validateThing2)) {
+    if (isEmpty(validateThing2)) {
         errors.thing2 = 'Thing 2 is required'
     }
 

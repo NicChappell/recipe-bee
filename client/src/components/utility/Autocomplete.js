@@ -6,17 +6,19 @@ import PropTypes from 'prop-types'
 import Suggestions from './Suggestions'
 
 const Autocomplete = props => {
+    // destructure props
+    const {
+        handleBlur,
+        handleFocus,
+        options,
+        liftState
+    } = props
+
     // useState hook variables
     const [activeSuggestion, setActiveSuggestion] = useState(0)
     const [filteredSuggestions, setFilteredSuggestions] = useState([])
     const [showSuggestions, setShowSuggestions] = useState(false)
     const [userInput, setUserInput] = useState('')
-
-    // destructure props
-    const {
-        options,
-        liftState
-    } = props
 
     const handleChange = e => {
         // destructure event
@@ -63,7 +65,7 @@ const Autocomplete = props => {
             } else {
                 return
             }
-            
+
             // update state
             setActiveSuggestion(0)
             setFilteredSuggestions([])
@@ -89,7 +91,9 @@ const Autocomplete = props => {
                 <input
                     autoComplete="off"
                     name="autocomplete"
+                    onBlur={handleBlur}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                     onKeyDown={handleKeyDown}
                     placeholder="Tag Name"
                     type='text'
@@ -108,8 +112,10 @@ const Autocomplete = props => {
 }
 
 Autocomplete.propTypes = {
-    liftState: PropTypes.func.isRequired,
-    options: PropTypes.array.isRequired
+    handleBlur: PropTypes.func,
+    handleFocus: PropTypes.func,
+    liftState: PropTypes.func,
+    options: PropTypes.array
 }
 
 export default Autocomplete

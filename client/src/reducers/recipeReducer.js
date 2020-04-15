@@ -2,6 +2,8 @@
 import {
     GET_RECIPE,
     GET_RECIPES,
+    GET_UPLOAD,
+    GET_UPLOADS,
     UPDATE_RECIPE
 } from '../actions/types'
 
@@ -42,14 +44,21 @@ const recipeReducer = (state = initialState, action) => {
                 ...state,
                 [key]: newValue
             }
-        case UPDATE_RECIPE:
-            // destructure payload
-            const {
-                message,
-                recipe
-            } = payload
+        case GET_UPLOAD:
+            const { recipe } = state
 
-            // return state without any changes
+            recipe = {
+                ...recipe,
+                photo: payload
+            }
+
+            return {
+                ...state,
+                recipe: payload
+            }
+        case GET_UPLOADS:
+            return state
+        case UPDATE_RECIPE:
             return state
         default:
             return state

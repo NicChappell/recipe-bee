@@ -1,6 +1,5 @@
 // import dependencies
-const Validator = require('validator')
-const isEmpty = require('is-empty')
+const isEmpty = require('lodash.isempty')
 
 // validate user input
 const validateTag = data => {
@@ -13,17 +12,13 @@ const validateTag = data => {
         category
     } = data
 
-    // convert empty fields into empty strings for Validator methods
-    const validateTag = !isEmpty(tag) ? tag : ''
-    const validateCategory = !isEmpty(category) ? category : ''
-
     // validate tag input
-    if (Validator.isEmpty(validateTag)) {
+    if (isEmpty(tag)) {
         errors.tag = 'Tag is required'
     }
 
     // validate category input
-    if (Validator.isEmpty(validateCategory)) {
+    if (isEmpty(category)) {
         errors.category = 'Category is required'
     }
 

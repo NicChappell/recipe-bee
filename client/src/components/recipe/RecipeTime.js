@@ -1,16 +1,21 @@
 // import dependencies
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 const RecipeTime = props => {
+	// destructure props
+	const {
+		errors,
+		liftHours,
+		liftMinutes,
+		name,
+		resolveErrors
+	} = props
+
 	// state hook variables
 	const [hours, setHours] = useState(0)
 	const [minutes, setMinutes] = useState(0)
-
-	// destructure props
-	const {
-		liftHours,
-		liftMinutes,
-	} = props
+	const [valid, setValid] = useState(true)
 
 	const handleBlur = e => {
 		// destructure event
@@ -21,9 +26,9 @@ const RecipeTime = props => {
 
 		// updsate state
 		if (name === 'hours') {
-			setHours(value ? value : 0)
+			setHours(value ? parseInt(value) : 0)
 		} else {
-			setMinutes(value ? value : 0)
+			setMinutes(value ? parseInt(value) : 0)
 		}
 	}
 
@@ -41,7 +46,7 @@ const RecipeTime = props => {
 			} else if (value > 23) {
 				setHours(23)
 			} else {
-				setHours(value)
+				setHours(parseInt(value))
 			}
 		} else {
 			if (value < 0) {
@@ -49,29 +54,41 @@ const RecipeTime = props => {
 			} else if (value > 59) {
 				setMinutes(59)
 			} else {
-				setMinutes(value)
+				setMinutes(parseInt(value))
 			}
 		}
 	}
 
-	// lift hours
+	const handleFocus = () => {
+		setValid(true)
+		resolveErrors(name)
+	}
+
+	// update state when errors value changes
+	useEffect(() => {
+		if (errors[name]) {
+			setValid(false)
+		}
+	}, [errors[name]])
+
+	// lift hours when hours value changes
 	useEffect(() => {
 		liftHours(hours)
 	}, [hours])
 
-	// lift minutes
+	// lift minutes when minutes value changes
 	useEffect(() => {
 		liftMinutes(minutes)
 	}, [minutes])
 
-	console.log()
 	return (
 		<div className="row time">
-			<div className="col s12 time-input">
+			<div className={`col s12 time-input ${!valid ? 'invalid-input' : ''}`}>
 				<span>Hours:</span>
 				<input
 					onBlur={handleBlur}
 					onChange={handleChange}
+					onFocus={handleFocus}
 					min="0"
 					max="23"
 					name="hours"
@@ -83,15 +100,17 @@ const RecipeTime = props => {
 					max="23"
 					name="hours"
 					onChange={handleChange}
+					onFocus={handleFocus}
 					type="range"
 					value={hours}
 				/>
 			</div>
-			<div className="col s12 time-input">
+			<div className={`col s12 time-input ${!valid ? 'invalid-input' : ''}`}>
 				<span>Minutes:</span>
 				<input
 					onBlur={handleBlur}
 					onChange={handleChange}
+					onFocus={handleFocus}
 					min="0"
 					max="59"
 					name="minutes"
@@ -103,6 +122,7 @@ const RecipeTime = props => {
 					max="59"
 					name="minutes"
 					onChange={handleChange}
+					onFocus={handleFocus}
 					type="range"
 					value={minutes}
 				/>
@@ -110,8 +130,17 @@ const RecipeTime = props => {
 			<div className="col s12 time-output">
 				{("00" + hours).slice(-2)}:{("00" + minutes).slice(-2)}
 			</div>
+			{!valid ? <div className="col s12 error-message">{errors[name]}</div> : null}
 		</div>
 	)
+}
+
+RecipeTime.propTypes = {
+    errorMessage: PropTypes.string,
+	liftHours: PropTypes.func,
+	liftMinutes: PropTypes.func,
+	name: PropTypes.string,
+	resolveErrors: PropTypes.func
 }
 
 export default RecipeTime

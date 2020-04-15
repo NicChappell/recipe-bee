@@ -1,5 +1,5 @@
 body {
-  background-color: #eeeeee;
+  background-color: #f5f5f5;
   font-family: "Source Sans Pro", sans-serif;
 }
 
@@ -38,7 +38,7 @@ nav .logo {
 }
 nav .logo img {
   height: auto;
-  max-width: 3rem;
+  max-height: 3rem;
   max-height: 3rem;
   width: auto;
 }
@@ -89,7 +89,7 @@ span {
   margin-left: 2.3rem;
 }
 #get-recipes .recipe-tag-search .autocomplete .suggestions {
-  background-color: white;
+  background-color: #f5f5f5;
   font-size: 0.875rem;
   height: auto;
   margin: 0 0 0 2.3rem;
@@ -106,7 +106,7 @@ span {
   color: black;
 }
 #get-recipes .recipe-tag-search .autocomplete .suggestions li.active {
-  color: #ffb74d;
+  color: #ffc107;
 }
 #get-recipes .recipe-tag-list {
   display: flex;
@@ -146,7 +146,14 @@ span {
   width: auto;
 }
 
-#post-recipe .row:not(:first-child) {
+#post-recipe hr {
+  border-top: 1px solid #f5f5f5;
+  margin: 2rem 0 1.5rem;
+}
+#post-recipe .error-message {
+  color: #ff5722;
+}
+#post-recipe .row {
   margin-bottom: 0em;
 }
 #post-recipe .description textarea {
@@ -154,14 +161,12 @@ span {
 }
 @media screen and (max-width: 992px) {
   #post-recipe .ingredient,
-#post-recipe .instruction,
-#post-recipe .preparation {
+#post-recipe .list-item {
     padding: 1rem 0;
   }
 }
 #post-recipe .ingredient .index,
-#post-recipe .instruction .index,
-#post-recipe .preparation .index {
+#post-recipe .list-item .index {
   align-items: center;
   display: flex;
   font-size: 1rem;
@@ -170,53 +175,43 @@ span {
   justify-content: center;
 }
 #post-recipe .ingredient .input-field,
-#post-recipe .instruction .input-field,
-#post-recipe .preparation .input-field {
+#post-recipe .list-item .input-field {
   margin: 0;
 }
 #post-recipe .ingredient .input-field input,
-#post-recipe .instruction .input-field input,
-#post-recipe .preparation .input-field input {
+#post-recipe .list-item .input-field input {
   height: 4rem;
 }
-#post-recipe .ingredient .input-field input:disabled,
-#post-recipe .instruction .input-field input:disabled,
-#post-recipe .preparation .input-field input:disabled {
-  color: #000000;
+#post-recipe .ingredient .input-field label,
+#post-recipe .list-item .input-field label {
+  color: #9e9e9e;
+  font-size: 0.75rem;
+  line-height: 1.5rem;
+  top: -2rem;
 }
 #post-recipe .ingredient .input-field select,
-#post-recipe .instruction .input-field select,
-#post-recipe .preparation .input-field select {
+#post-recipe .list-item .input-field select {
   height: 3rem;
   margin: 0.5rem 0;
 }
 #post-recipe .ingredient .input-field select:disabled,
-#post-recipe .instruction .input-field select:disabled,
-#post-recipe .preparation .input-field select:disabled {
-  color: #000000;
+#post-recipe .list-item .input-field select:disabled {
+  color: #9e9e9e;
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
 }
 #post-recipe .ingredient .input-field select:disabled::-ms-expand,
-#post-recipe .instruction .input-field select:disabled::-ms-expand,
-#post-recipe .preparation .input-field select:disabled::-ms-expand {
+#post-recipe .list-item .input-field select:disabled::-ms-expand {
   display: none;
 }
 #post-recipe .ingredient .input-field textarea,
-#post-recipe .instruction .input-field textarea,
-#post-recipe .preparation .input-field textarea {
+#post-recipe .list-item .input-field textarea {
   height: 4rem;
   overflow: scroll;
 }
-#post-recipe .ingredient .input-field textarea:disabled,
-#post-recipe .instruction .input-field textarea:disabled,
-#post-recipe .preparation .input-field textarea:disabled {
-  color: #000000;
-}
 #post-recipe .ingredient .buttons,
-#post-recipe .instruction .buttons,
-#post-recipe .preparation .buttons {
+#post-recipe .list-item .buttons {
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -226,27 +221,28 @@ span {
 }
 @media screen and (max-width: 992px) {
   #post-recipe .ingredient .buttons,
-#post-recipe .instruction .buttons,
-#post-recipe .preparation .buttons {
+#post-recipe .list-item .buttons {
     flex-direction: column;
   }
 }
 #post-recipe .ingredient .buttons button,
-#post-recipe .instruction .buttons button,
-#post-recipe .preparation .buttons button {
+#post-recipe .list-item .buttons button {
   margin: 0 0.25rem;
 }
 @media screen and (max-width: 992px) {
   #post-recipe .ingredient .buttons button,
-#post-recipe .instruction .buttons button,
-#post-recipe .preparation .buttons button {
+#post-recipe .list-item .buttons button {
     margin: 0.25rem 0;
   }
+}
+#post-recipe .notes textarea {
+  height: 8rem;
+  overflow: scroll;
 }
 #post-recipe .ingredients-list,
 #post-recipe .instructions-list,
 #post-recipe .preparations-list {
-  border: 1px dotted #bdbdbd;
+  border: 1px dotted #f5f5f5;
 }
 #post-recipe .ingredients-list .row,
 #post-recipe .instructions-list .row,
@@ -286,39 +282,31 @@ span {
     width: 100%;
   }
 }
-#post-recipe .share .switch-container {
-  align-items: center;
-  display: flex;
-  justify-content: space-around;
-}
 @media screen and (max-width: 992px) {
   #post-recipe .tags .recipe-tag-search {
     margin-top: 1rem;
   }
 }
-#post-recipe .tags .recipe-tag-search .autocomplete {
-  padding-left: 1rem;
+#post-recipe .tags .recipe-tag-search span {
+  display: block;
+  margin-top: 0.5rem;
 }
 #post-recipe .tags .recipe-tag-search .autocomplete .input-field {
-  margin: 0;
+  margin-bottom: 0;
 }
 #post-recipe .tags .recipe-tag-search .autocomplete .input-field input[type=text] {
-  font-size: 0.875rem;
   height: 2rem;
   line-height: 2rem;
   margin: 0;
 }
 #post-recipe .tags .recipe-tag-search .autocomplete .input-field .prefix {
-  font-size: 1.3rem;
-}
-#post-recipe .tags .recipe-tag-search .autocomplete .input-field .prefix ~ input {
-  margin-left: 2.3rem;
+  display: none;
 }
 #post-recipe .tags .recipe-tag-search .autocomplete .suggestions {
-  background-color: white;
+  background-color: #f5f5f5;
   font-size: 0.875rem;
   height: auto;
-  margin: 0 0 0 2.3rem;
+  margin: 0;
   max-height: 9rem;
   overflow: scroll;
   padding: 0.875rem 0;
@@ -332,7 +320,7 @@ span {
   color: black;
 }
 #post-recipe .tags .recipe-tag-search .autocomplete .suggestions li.active {
-  color: #ffb74d;
+  color: #ffc107;
 }
 #post-recipe .tags .recipe-tag-list {
   display: flex;
@@ -445,10 +433,10 @@ span {
   line-height: 1.15;
 }
 .breadcrumbs .breadcrumb {
-  color: black;
+  color: #000000;
 }
 .breadcrumbs .breadcrumb:before {
-  color: black;
+  color: #000000;
 }
 
 .card {
@@ -536,9 +524,9 @@ span {
 .invalid-input input[type=number]:not(.browser-default):focus:not([readonly]),
 .invalid-input input[type=search]:not(.browser-default):focus:not([readonly]),
 .invalid-input textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #ff8a65;
-  box-shadow: 0 1px 0 0 #ff8a65;
-  color: #ff8a65;
+  border-bottom: 1px solid #ff5722;
+  box-shadow: 0 1px 0 0 #ff5722;
+  color: #ff5722;
 }
 .invalid-input input:not([type])::placeholder,
 .invalid-input input[type=text]::placeholder,
@@ -566,14 +554,14 @@ span {
 .invalid-input input[type=number]:not(.browser-default):focus:not([readonly])::placeholder,
 .invalid-input input[type=search]:not(.browser-default):focus:not([readonly])::placeholder,
 .invalid-input textarea.materialize-textarea:focus:not([readonly])::placeholder {
-  color: #ff8a65;
+  color: #ff5722;
 }
 .invalid-input select {
-  outline: 1px solid #ff8a65;
+  outline: 1px solid #ff5722;
 }
 
 .invalid-message {
-  color: #ff8a65;
+  color: #ff5722;
 }
 
 .no-recipes {
@@ -593,8 +581,8 @@ span {
 }
 
 .side-nav {
-  background-color: #eeeeee;
-  border-right: 1px solid #757575;
+  background-color: #f5f5f5;
+  border-right: 1px solid #212121;
   height: 100vh;
   left: 0;
   margin: 0;
@@ -637,7 +625,7 @@ span {
   margin: 0;
 }
 .side-nav .links ul li a {
-  background-color: #eeeeee;
+  background-color: #f5f5f5;
   display: block;
   padding: 1rem 2rem;
   transition: 0.3s;
@@ -682,7 +670,7 @@ span {
   margin-left: 2.3rem;
 }
 .recipe-tags > .search .autocomplete .suggestions {
-  background-color: white;
+  background-color: #f5f5f5;
   font-size: 0.875rem;
   margin: 0 0 0 2.3rem;
   overflow: hidden;
@@ -697,7 +685,7 @@ span {
   color: black;
 }
 .recipe-tags > .search .autocomplete .suggestions li.active {
-  color: #ffb74d;
+  color: #ffc107;
 }
 
 .marketing.card-image {
@@ -1061,6 +1049,60 @@ select:focus {
 
 textarea.materialize-textarea {
   height: 4rem;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: "Source Sans Pro", sans-serif;
+}
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  color: #9e9e9e;
+}
+button::placeholder,
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+  color: #9e9e9e;
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0;
+  outline: none;
+  height: 3rem;
+  width: 100%;
+  font-size: 16px;
+  margin: 0 0 8px 0;
+  padding: 0;
+  box-shadow: none;
+  transition: box-shadow 0.3s, border 0.3s, -webkit-box-shadow 0.3s;
+}
+input:-webkit-autofill::placeholder,
+input:-webkit-autofill:hover::placeholder,
+input:-webkit-autofill:focus::placeholder,
+textarea:-webkit-autofill::placeholder,
+textarea:-webkit-autofill:hover::placeholder,
+textarea:-webkit-autofill:focus::placeholder,
+select:-webkit-autofill::placeholder,
+select:-webkit-autofill:hover::placeholder,
+select:-webkit-autofill:focus::placeholder {
+  font-size: 16px;
 }
 
 /*# sourceMappingURL=styles.css.map */

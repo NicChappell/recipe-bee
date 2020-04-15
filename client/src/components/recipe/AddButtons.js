@@ -13,21 +13,21 @@ const AddButtons = props => {
     if (imgSrc) {
         return (
             <button className="black-text btn-small lighten-2 orange" onClick={rmImgSrc}>
-                Remove Image
+                Remove Photo
             </button>
         )
     }
     return (
         <button className="black-text btn-small lighten-2 orange" onClick={addImgSrc}>
-            Add Image
+            Add Photo
         </button>
     )
 }
 
 AddButtons.propTypes = {
-    addImgSrc: PropTypes.func.isRequired,
-    imgSrc: PropTypes.string.isRequired,
-    rmImgSrc: PropTypes.func.isRequired
+    addImgSrc: PropTypes.func,
+    imgSrc: PropTypes.string,
+    rmImgSrc: PropTypes.func
 }
 
 export default AddButtons

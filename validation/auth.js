@@ -1,5 +1,5 @@
 // import dependencies
-const isEmpty = require('is-empty')
+const isEmpty = require('lodash.isempty')
 
 // validate auth status
 const validateAuthStatus = token => {

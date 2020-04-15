@@ -1,5 +1,5 @@
 {
-  "name": "RecipeBee - Making meal planning easy and fun",
+  "name": "RecipeBee",
   "short_name": "RecipeBee",
   "icons": [
       {
@@ -19,7 +19,7 @@
       }
   ],
   "start_url": ".",
-  "theme_color": "#ffb74d",
+  "theme_color": "#ffc107",
   "background_color": "#eeeeee",
   "display": "standalone"
 }

@@ -34,10 +34,10 @@ const EditButtons = props => {
 }
 
 EditButtons.propTypes = {
-    disabled: PropTypes.bool.isRequired,
-    handleDeleteClick: PropTypes.func.isRequired,
-    handleEditClick: PropTypes.func.isRequired,
-    handleUpdateClick: PropTypes.func.isRequired
+    disabled: PropTypes.bool,
+    handleDeleteClick: PropTypes.func,
+    handleEditClick: PropTypes.func,
+    handleUpdateClick: PropTypes.func
 }
 
 export default EditButtons

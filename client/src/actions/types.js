@@ -13,5 +13,9 @@ export const UPDATE_RECIPE = 'UPDATE_RECIPE'
 // tag actions
 export const GET_TAGS = 'GET_TAGS'
 
+// upload actions
+export const GET_UPLOAD = 'GET_UPLOAD'
+export const GET_UPLOADS = 'GET_UPLOADS'
+
 // utility actions
 export const SET_ROUTER_HEIGHT = 'SET_ROUTER_HEIGHT'

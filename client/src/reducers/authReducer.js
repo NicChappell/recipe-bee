@@ -1,8 +1,8 @@
+// import dependenices
+import isEmpty from 'lodash.isempty'
+
 // import actions
 import { SET_CURRENT_USER } from '../actions/types'
-
-// import dependenices
-const isEmpty = require('is-empty')
 
 // define initial state
 const initialState = {

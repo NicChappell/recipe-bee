@@ -11,6 +11,7 @@ import placeholder from '../../images/placeholders/dish.svg'
 const RecipePhoto = props => {
     // destructure props
     const {
+        errorMessage,
         liftState,
         photo
     } = props
@@ -76,9 +77,8 @@ const RecipePhoto = props => {
 }
 
 RecipePhoto.propTypes = {
-    liftState: PropTypes.func.isRequired,
-    valid: PropTypes.bool.isRequired,
-    validate: PropTypes.func.isRequired
+    errorMessage: PropTypes.string,
+    liftState: PropTypes.func
 }
 
 export default RecipePhoto

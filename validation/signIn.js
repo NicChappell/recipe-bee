@@ -1,6 +1,6 @@
 // import dependencies
 const Validator = require('validator')
-const isEmpty = require('is-empty')
+const isEmpty = require('lodash.isempty')
 
 // validate user input
 const validateSignInInput = data => {
@@ -15,10 +15,9 @@ const validateSignInInput = data => {
 
     // convert empty fields into empty strings for Validator methods
     const validateEmail = !isEmpty(email) ? email : ''
-    const validatePassword = !isEmpty(password) ? password : ''
 
     // validate email input
-    if (Validator.isEmpty(validateEmail)) {
+    if (!email) {
         errors.email = 'Email is required'
     }
     if (!Validator.isEmail(validateEmail)) {
@@ -26,7 +25,7 @@ const validateSignInInput = data => {
     }
 
     // validate password input
-    if (Validator.isEmpty(validatePassword)) {
+    if (!password) {
         errors.password = 'Password is required'
     }
 

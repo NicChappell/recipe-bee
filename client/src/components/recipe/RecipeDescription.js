@@ -6,42 +6,42 @@ import PropTypes from 'prop-types'
 import { useValidTextAreaValue } from '../../helpers/customHooks'
 
 const RecipeDescription = props => {
-    // custom hook variables
-    const description = useValidTextAreaValue('')
-
     // destructure props
     const {
-        liftState,
-        valid,
-        validate
+        errors,
+        liftState
     } = props
 
-    // update description
+    // custom hook variables
+    const description = useValidTextAreaValue('', errors.description)
+
+    // lift state when description value changes
     useEffect(() => {
         liftState(description.value)
-        validate(description.valid)
-    }, [description.valid, description.value])
+    }, [description.value])
 
     return (
         <div className="row description">
-            <div className={`input-field col s12 ${valid ? null : 'invalid-input'}`}>
+            <div className={`input-field col s12 ${description.valid ? null : 'invalid-input'}`}>
                 <textarea
                     className={description.className}
                     name="description"
+                    onBlur={description.onBlur}
                     onChange={description.onChange}
-                    placeholder={valid ? "Description" : "Description is required"}
+                    onFocus={description.onFocus}
+                    placeholder="Description"
                     value={description.value}
                 >
                 </textarea>
+                {description.valid ? null : <span className="error-message">{errors.description}</span>}
             </div>
         </div>
     )
 }
 
 RecipeDescription.propTypes = {
-    liftState: PropTypes.func.isRequired,
-    valid: PropTypes.bool.isRequired,
-    validate: PropTypes.func.isRequired
+    errors: PropTypes.object,
+    liftState: PropTypes.func
 }
 
 export default RecipeDescription

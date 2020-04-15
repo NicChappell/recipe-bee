@@ -52,8 +52,8 @@ const RecipeIngredientsList = props => {
 }
 
 RecipeIngredientsList.propTypes = {
-	liftState: PropTypes.func.isRequired,
-	ingredients: PropTypes.array.isRequired
+	liftState: PropTypes.func,
+	ingredients: PropTypes.array
 }
 
 export default RecipeIngredientsList

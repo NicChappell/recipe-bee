@@ -2,43 +2,39 @@
 import React, { useState } from 'react'
 
 // import components
-import RecipeAddPreparation from './RecipeAddPreparation'
 import RecipeAddIngredient from './RecipeAddIngredient'
-import RecipeAddInstruction from './RecipeAddInstruction'
+import RecipeAddListItem from './RecipeAddListItem'
 import RecipeDescription from './RecipeDescription'
-import RecipePhoto from './RecipePhoto'
 import RecipeIngredientsList from './RecipeIngredientsList'
-import RecipeInstructionsList from './RecipeInstructionsList'
-import RecipePreparationsList from './RecipePreparationsList'
+import RecipeList from './RecipeList'
+import RecipeNotes from './RecipeNotes'
+import RecipePhoto from './RecipePhoto'
 import RecipeShare from './RecipeShare'
 import RecipeTags from './RecipeTags'
 import RecipeTime from './RecipeTime'
 import RecipeTitle from './RecipeTitle'
 
+// import validation
+import validateRecipe from '../../validation/recipe'
+
 const CreateRecipe = props => {
 	// state hook variables
-	const [cookTimeHours, setCookTimeHours] = useState(0)
-	const [cookTimeMinutes, setCookTimeMinutes] = useState(0)
+	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')
-	const [ingredients, setIngredients] = useState([])
-	const [instructions, setInstructions] = useState([])
 	const [photo, setPhoto] = useState(undefined)
 	const [prepTimeHours, setPrepTimeHours] = useState(0)
 	const [prepTimeMinutes, setPrepTimeMinutes] = useState(0)
+	const [cookTimeHours, setCookTimeHours] = useState(0)
+	const [cookTimeMinutes, setCookTimeMinutes] = useState(0)
 	const [preparations, setPreparations] = useState([])
-	const [share, setShare] = useState(false)
+	const [ingredients, setIngredients] = useState([])
+	const [instructions, setInstructions] = useState([])
+	const [notes, setNotes] = useState('')
 	const [tagList, setTagList] = useState([])
-	const [title, setTitle] = useState('')
-	const [validCookTime, setValidCookTime] = useState(true)
-	const [validDescription, setValidDescription] = useState(true)
-	const [validInstructions, setValidInstructions] = useState(true)
-	const [validIngredients, setValidIngredients] = useState(true)
-	const [validPreparations, setValidPreparations] = useState(true)
-	const [validPrepTime, setValidPrepTime] = useState(true)
-	const [validShare, setValidShare] = useState(true)
-	const [validTags, setValidTags] = useState(true)
-	const [validTitle, setValidTitle] = useState(true)
-
+	const [share, setShare] = useState(false)
+	// ---------------------------------- //
+	const [errors, setErrors] = useState({})
+	
 	// destructure props
 	const {
 		addRecipe,
@@ -46,55 +42,40 @@ const CreateRecipe = props => {
 		tags
 	} = props
 
-	// submit recipe
+	const resolveErrors = key => {
+		console.log(errors)
+		console.log(key)
+		delete errors[key]
+		console.log(errors)
+		setErrors(errors)
+	}
+
 	const submitRecipe = () => {
 		// create new recipe object
-		const recipe = {
-			cookTimeHours,
-			cookTimeMinutes,
+		const newRecipe = {
+			title,
 			description,
-			ingredients,
-			instructions,
 			photo,
 			prepTimeHours,
 			prepTimeMinutes,
+			cookTimeHours,
+			cookTimeMinutes,
 			preparations,
-			share,
+			ingredients,
+			instructions,
+			notes,
 			tagList,
-			title,
+			share
 		}
-		console.log(recipe)
 
-		// // validate required user inputs
-		// if (!description.value) {
-		//	 console.log('invalid description')
+		// validate user input
+		const validate = validateRecipe(newRecipe)
 
-		//	 // update state
-		//	 setValidDescription(false)
-		// }
-		// if (ingredients.length === 0) {
-		//	 console.log('invalid ingredients')
-
-		//	 // update state
-		//	 setValidIngredients(false)
-		// }
-		// if (instructions.length === 0) {
-		//	 console.log('invalid instructions')
-		// }
-		// if (!title.value) {
-		//	 console.log('invalid title')
-
-		//	 // update state
-		//	 setValidTitle(false)
-		// }
-
-		// if (
-		//	 validDescription &&
-		//	 validInstructions &&
-		//	 // validPhotoSource &&
-		//	 validIngredients &&
-		//	 validTitle
-		// ) {
+		// check for validation errors
+		if (!validate.isValid) {
+			setErrors(validate.errors)
+		}
+		// else {
 		//	 addRecipe(recipe)
 		//	 history.push(`/recipes/${recipe.id}`)
 		// }
@@ -104,24 +85,35 @@ const CreateRecipe = props => {
 		<div className="card-panel white">
 			<div className="row">
 				<div className="col s12 l6">
+					<div className="row">
+						<div className="col s12">
+							<h5>Title</h5>
+						</div>
+					</div>
 					<RecipeTitle
+						errors={errors}
 						liftState={setTitle}
-						valid={validTitle}
-						validate={setValidTitle}
 					/>
+					<div className="row">
+						<div className="col s12">
+							<h5>Description</h5>
+						</div>
+					</div>
 					<RecipeDescription
+						errors={errors}
 						liftState={setDescription}
-						valid={validDescription}
-						validate={setValidDescription}
 					/>
 				</div>
 				<div className="col s12 l6">
 					<RecipePhoto
+						errors={errors}
 						liftState={setPhoto}
 						photo={photo}
+						resolveErrors={resolveErrors}
 					/>
 				</div>
 			</div>
+			<hr />
 			<div className="row">
 				<div className="col s12 m6 l4">
 					<div className="row">
@@ -130,8 +122,11 @@ const CreateRecipe = props => {
 						</div>
 					</div>
 					<RecipeTime
+						errors={errors}
 						liftHours={setPrepTimeHours}
 						liftMinutes={setPrepTimeMinutes}
+						name={'prepTime'}
+						resolveErrors={resolveErrors}
 					/>
 				</div>
 				<div className="col s12 m6 l4 push-l2">
@@ -141,11 +136,15 @@ const CreateRecipe = props => {
 						</div>
 					</div>
 					<RecipeTime
+						errors={errors}
 						liftHours={setCookTimeHours}
 						liftMinutes={setCookTimeMinutes}
+						name={'cookTime'}
+						resolveErrors={resolveErrors}
 					/>
 				</div>
 			</div>
+			<hr />
 			<div className="row">
 				<div className="col s12">
 					<div className="row">
@@ -153,21 +152,27 @@ const CreateRecipe = props => {
 							<h5>Preparations</h5>
 						</div>
 					</div>
-					<RecipePreparationsList
+					<RecipeList
 						liftState={setPreparations}
-						preparations={preparations}
+						list={preparations}
+						placeholder={'Preparation'}
 					/>
 				</div>
 			</div>
 			<div className="row">
 				<div className="col s12">
-					<RecipeAddPreparation
+					<RecipeAddListItem
+						errors={errors}
 						index={preparations.length}
 						liftState={setPreparations}
-						preparations={preparations}
+						listItems={preparations}
+						name={'preparations'}
+						placeholder={'Preparation (e.g. Wash and dry all produce)'}
+						resolveErrors={resolveErrors}
 					/>
 				</div>
 			</div>
+			<hr />
 			<div className="row">
 				<div className="col s12">
 					<div className="row">
@@ -184,12 +189,15 @@ const CreateRecipe = props => {
 			<div className="row">
 				<div className="col s12">
 					<RecipeAddIngredient
+						errors={errors}
 						index={ingredients.length}
-						liftState={setIngredients}
 						ingredients={ingredients}
+						liftState={setIngredients}
+						resolveErrors={resolveErrors}
 					/>
 				</div>
 			</div>
+			<hr />
 			<div className="row">
 				<div className="col s12">
 					<div className="row">
@@ -197,21 +205,38 @@ const CreateRecipe = props => {
 							<h5>Instructions</h5>
 						</div>
 					</div>
-					<RecipeInstructionsList
+					<RecipeList
 						liftState={setInstructions}
-						instructions={instructions}
+						list={instructions}
+						placeholder={'Instruction'}
 					/>
 				</div>
 			</div>
 			<div className="row">
 				<div className="col s12">
-					<RecipeAddInstruction
+					<RecipeAddListItem
+						errors={errors}
 						index={instructions.length}
 						liftState={setInstructions}
-						instructions={instructions}
+						listItems={instructions}
+						name={'instructions'}
+						placeholder={'Instruction (e.g. Combine ingredients and mix thoroughly)'}
+						resolveErrors={resolveErrors}
 					/>
 				</div>
 			</div>
+			<hr />
+			<div className="row">
+				<div className="col s12">
+					<div className="row">
+						<div className="col s12">
+							<h5>Notes</h5>
+						</div>
+					</div>
+					<RecipeNotes liftState={setNotes} />
+				</div>
+			</div>
+			<hr />
 			<div className="row">
 				<div className="col s12 m6 l8">
 					<div className="row">
@@ -220,10 +245,10 @@ const CreateRecipe = props => {
 						</div>
 					</div>
 					<RecipeTags
+						errors={errors}
 						liftState={setTagList}
+						resolveErrors={resolveErrors}
 						tags={tags}
-						valid={validTags}
-						validate={setValidTags}
 					/>
 				</div>
 				<div className="col s12 m6 l4">
@@ -233,9 +258,9 @@ const CreateRecipe = props => {
 						</div>
 					</div>
 					<RecipeShare
+						errors={errors}
 						liftState={setShare}
-						valid={validShare}
-						validate={setValidShare}
+						resolveErrors={resolveErrors}
 					/>
 				</div>
 			</div>
@@ -243,7 +268,7 @@ const CreateRecipe = props => {
 				<div className="col s12">
 					<div className="row save center-align">
 						<div className="col s12">
-							<button className="black-text btn orange lighten-2" onClick={submitRecipe}>
+							<button className="black-text btn orange lighten-2" disabled={false} onClick={submitRecipe}>
 								Save Recipe
 							</button>
 						</div>
