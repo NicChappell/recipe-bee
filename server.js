@@ -10,6 +10,7 @@ const { mongoURI } = require('./config/keys')
 // import routers
 const recipes = require("./routes/api/v1/recipes")
 const tags = require("./routes/api/v1/tags")
+const uploads = require("./routes/api/v1/uploads")
 const users = require("./routes/api/v1/users")
 
 // passport config
@@ -36,6 +37,7 @@ mongoose.connect(db, { useNewUrlParser: true })
 app.use("/api/v1/recipes", recipes)
 app.use("/api/v1/tags", tags)
 app.use("/api/v1/users", users)
+app.use("/api/v1/uploads", uploads)
 
 // use process.env.port if deployed to Heroku or localhost:5000 in dev
 const PORT = process.env.port || 5000

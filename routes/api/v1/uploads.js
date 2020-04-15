@@ -1,210 +1,122 @@
 // import dependencies
 const express = require('express')
+const mongoose = require('mongoose')
+const multer = require('multer')
+const GridFsStorage = require('multer-gridfs-storage')
+const Grid = require('gridfs-stream')
+const crypto = require('crypto')
+const path = require('path')
+
+// import config keys
+const { mongoURI } = require('../../../config/keys')
+
+// create connection
+const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true })
+
+// init gfs
+let gfs
+
+// init stream
+conn.once('open', () => {
+    gfs = Grid(conn.db, mongoose.mongo)
+    gfs.collection('uploads')
+})
+
+// create storage engine
+const storage = new GridFsStorage({
+    url: mongoURI,
+    file: (req, file) => {
+        return new Promise((resolve, reject) => {
+            crypto.randomBytes(16, (err, buf) => {
+                if (err) {
+                    return reject(err)
+                }
+                const filename = buf.toString('hex') + path.extname(file.originalname)
+                const fileInfo = {
+                    filename: filename,
+                    bucketName: 'uploads'
+                }
+                resolve(fileInfo)
+            })
+        })
+    }
+})
+const upload = multer({ storage })
 
 // instantiate a new Router class
 const router = express.Router()
 
 // @route:  GET api/v1/uploads/
-// @desc:   Return all uploads
-// @access: Public
+// @desc:   Return all files
 router.get('/', (req, res) => {
-    User.find({})
-        .then(users => res.status(200).json(users))
-        .catch(err => res.status(400).json(err))
-})
-
-// @route:  DELETE api/v1/users/:userId
-// @desc:   Delete user
-// @access: Public
-router.delete('/:userId', (req, res) => {
-    // destructure request params
-    const { userId } = req.params
-
-    // find user and delete
-    User.findByIdAndDelete(userId)
-        .then(() => res.status(200).json({ message: 'successfully deleted user' }))
-        .catch(err => res.status(400).json({ message: 'falied to delete user', err }))
-})
-
-// @route:  GET api/v1/users/:userId
-// @desc:   Return user
-// @access: Public
-router.get('/:userId', (req, res) => {
-    // destructure request params
-    const { userId } = req.params
-
-    // find user
-    User.findById(userId)
-        .then(user => res.status(200).json(user))
-        .catch(err => res.status(400).json(err))
-})
-
-// @route:  PUT api/v1/users/:userId
-// @desc:   Update user
-// @access: Public
-router.put('/:userId', (req, res) => {
-    // destructure request params
-    const { userId } = req.params
-
-    // find user and update
-    User.findByIdAndUpdate(userId, { ...req.body }, { new: true })
-        .then(user => res.status(200).json({ message: 'successfully updated user', user }))
-        .catch(err => res.status(400).json({ message: 'falied to update user', err }))
-})
-
-// @route:  POST api/v1/users/sign-in
-// @desc:   Sign in user and return JWT token
-// @access: Public
-router.post('/sign-in', (req, res) => {
-    // destructure validateSignInInput()
-    const {
-        errors,
-        isValid
-    } = validateSignInInput(req.body)
-
-    // check validation
-    if (!isValid) {
-        return res
-            .status(400)
-            .json(errors)
-    }
-
-    // destructure request body
-    const {
-        email,
-        password
-    } = req.body
-
-    User.findOne({ email }).then(user => {
-        // check for existing user
-        if (!user) {
-            return res
-                .status(404)
-                .json({ email: 'Email not found' })
+    gfs.files.find().toArray((err, files) => {
+        // no files found
+        if (!files || files.length === 0) {
+            return res.status(404).json({
+                err: 'no files found'
+            })
         }
 
-        // check password
-        bcrypt.compare(password, user.password)
-            .then(isMatch => {
-                // matched user
-                if (isMatch) {
-                    // create jwt payload
-                    const payload = {
-                        id: user.id,
-                        address1: user.address1,
-                        address2: user.address2,
-                        city: user.city,
-                        email: user.email,
-                        firstName: user.firstName,
-                        fullName: user.fullName,
-                        lastName: user.lastName,
-                        password: user.password,
-                        postalCode: user.postalCode,
-                        slug: user.slug,
-                        state: user.state,
-                        username: user.username
-                    }
-
-                    // 1 year in seconds
-                    const oneYear = 31556926
-
-                    // sign token
-                    jwt.sign(
-                        payload,
-                        secretOrKey,
-                        { expiresIn: oneYear },
-                        (err, token) => {
-                            return res
-                                .status(200)
-                                .json({ token: `Bearer ${token}` })
-                        }
-                    )
-                }
-                // unmatched user
-                else {
-                    return res
-                        .status(400)
-                        .json({ password: 'Password incorrect' })
-                }
-            })
-            .catch(err => console.log(err))
+        // files found
+        return res.json(files)
     })
 })
 
-// @route:  POST api/v1/users/sign-up
-// @desc:   Sign up new user
-// @access: Public
-router.post('/sign-up', (req, res) => {
-    // destructure validateSignUpInput()
-    const {
-        errors,
-        isValid
-    } = validateSignUpInput(req.body)
+// @route:  POST api/v1/uploads/
+// @desc:   Upload new file
+router.post('/', upload.single('file'), (req, res) => {
+    res.json({ file: req.file })
+    // as part of response
+    // i can send back the name of the file -- or whatever is needed to associate the image with a recipe -- an id or something
+})
 
-    // check validation
-    if (!isValid) {
-        return res
-            .status(400)
-            .json(errors)
-    }
-
-    // destructure request body
-    const {
-        address1,
-        address2,
-        city,
-        email,
-        firstName,
-        lastName,
-        password,
-        postalCode,
-        state,
-        username
-    } = req.body
-
-    // check for existing email
-    User.findOne({ email }).then(user => {
-        if (user) {
-            return res
-                .status(400)
-                .json({ email: 'Email already exists' })
+// @route:  GET api/v1/uploads/file/:filename
+// @desc:   Return a file
+router.get('/files/:filename', (req, res) => {
+    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+        // no file found
+        if (!file) {
+            return res.status(404).json({
+                err: 'no file found'
+            })
         }
 
-        // check for existing username
-        User.findOne({ username }).then(user => {
-            if (user) {
-                return res
-                    .status(400)
-                    .json({ username: 'Username already exists' })
-            }
+        // file found
+        return res.json(file)
+    })
+})
 
-            // instantiate new User object 
-            const newUser = new User({
-                address1,
-                address2,
-                city,
-                email,
-                firstName,
-                fullName: `${firstName} ${lastName}`,
-                lastName,
-                password,
-                postalCode,
-                slug: `${firstName.toLowerCase()}-${lastName.toLowerCase()}`,
-                state,
-                username
-            })
+// @route:  DELETE api/v1/uploads/file/:id
+// @desc:   Delete a file
+router.delete('/files/:id', (req, res) => {
+    gfs.remove({ _id: req.params.id, root: 'uploads' }, (err) => {
+        if (err) {
+            return res.status(404).json({ err })
+        }
+        return res.status(200).json({ message: 'successfully deleted file' })
+    })
+})
 
-            // hash password before saving to database
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(newUser.password, salt, (err, hash) => {
-                    if (err) throw err
-                    newUser.password = hash
-                    newUser.save()
-                        .then(user => res.status(200).json(user))
-                        .catch(err => console.log(err))
-                })
+// @route:  GET api/v1/uploads/image/:filename
+// @desc:   Display an image file
+router.get('/image/:filename', (req, res) => {
+    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+        // no file found
+        if (!file) {
+            return res.status(404).json({
+                err: 'no file found'
             })
-        })
+        }
+
+        // confirm file type
+        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+            const readstream = gfs.createReadStream(file.filename)
+            readstream.pipe(res)
+        } else {
+            res.status(404).json({
+                err: 'file not an image'
+            })
+        }
     })
 })
 
