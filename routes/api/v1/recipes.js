@@ -14,7 +14,6 @@ const router = express.Router()
 
 // @route:  GET api/v1/recipes/?limit=limit&skip=skip&sortMethod=sortMethod
 // @desc:   Return all recipes
-// @access: Public
 router.get('/', (req, res) => {
     // destructure query parameters
     const {
@@ -58,41 +57,76 @@ router.get('/', (req, res) => {
 
 // @route:  POST api/v1/recipes/
 // @desc:   Create new recipe
-// @access: Public
 router.post('/', (req, res) => {
-    // destructure validateRecipe()
-    const {
-        errors,
-        isValid
-    } = validateRecipe(req.body)
+    // // destructure validateRecipe()
+    // const {
+    //     errors,
+    //     isValid
+    // } = validateRecipe(req.body)
 
-    // check validation
-    if (!isValid) {
-        return res
-            .status(400)
-            .json(errors)
+    // // check validation
+    // if (!isValid) {
+    //     return res
+    //         .status(400)
+    //         .json(errors)
+    // }
+
+    // destructure request body
+    const {
+        user,
+        title,
+        description,
+        photo,
+        prepTimeHours,
+        prepTimeMinutes,
+        cookTimeHours,
+        cookTimeMinutes,
+        preparations,
+        ingredients,
+        instructions,
+        notes,
+        tagList,
+        share
+    } = req.body
+
+    let totalTimeHours = 0
+    let totalTimeMinutes = 0
+
+    if (prepTimeMinutes + cookTimeMinutes >= 60) {
+        totalTimeHours = prepTimeHours + cookTimeHours + 1
+        totalTimeMinutes = prepTimeMinutes + cookTimeMinutes - 60
+    } else {
+        totalTimeHours = prepTimeHours + cookTimeHours
+        totalTimeMinutes = prepTimeMinutes + cookTimeMinutes
     }
 
-    // // destructure request body
-    // const {
-    //     user,
-    //     title,
-    //     description,
-    //     photo,
-    //     ingredients,
-    //     preparation,
-    //     instructions,
-    //     prepTime,
-    //     cookTime,
-    //     shared,
-    //     upVotes,
-    //     downVotes,
-    //     hearts,
-    //     tags
-    // } = req.body
-
     // instantiate new Recipe object
-    const newRecipe = new Recipe({ ...req.body })
+    const newRecipe = new Recipe({
+        user,
+        title,
+        description,
+        photo,
+        prepTime: {
+            hours: prepTimeHours,
+            minutes: prepTimeMinutes
+        },
+        cookTime: {
+            hours: cookTimeHours,
+            minutes: cookTimeMinutes
+        },
+        totalTime: {
+            hours: totalTimeHours,
+            minutes: totalTimeMinutes
+        },
+        preparations,
+        ingredients,
+        instructions,
+        notes,
+        tagList,
+        share,
+        upVotes: [user],
+        netVotes: 1
+    })
 
     // save recipe to database
     newRecipe.save()
@@ -102,7 +136,6 @@ router.post('/', (req, res) => {
 
 // @route:  DELETE api/v1/recipes/:recipeId
 // @desc:   Delete recipe
-// @access: Public
 router.delete('/:recipeId', (req, res) => {
     // destructure request params
     const { recipeId } = req.params
@@ -115,7 +148,6 @@ router.delete('/:recipeId', (req, res) => {
 
 // @route:  GET api/v1/recipes/:recipeId
 // @desc:   Return recipe
-// @access: Public
 router.get('/:recipeId', (req, res) => {
     // destructure request params
     const { recipeId } = req.params
@@ -129,7 +161,6 @@ router.get('/:recipeId', (req, res) => {
 
 // @route:  PUT api/v1/recipes/:recipeId
 // @desc:   Update recipe
-// @access: Public
 router.put('/:recipeId', (req, res) => {
     // destructure validateAuthStatus()
     const {

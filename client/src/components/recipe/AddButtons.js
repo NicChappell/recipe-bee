@@ -12,13 +12,13 @@ const AddButtons = props => {
 
     if (imgSrc) {
         return (
-            <button className="black-text btn-small lighten-2 orange" onClick={rmImgSrc}>
+            <button className="black-text btn-small btn-flat amber lighten-2 my-1" onClick={rmImgSrc}>
                 Remove Photo
             </button>
         )
     }
     return (
-        <button className="black-text btn-small lighten-2 orange" onClick={addImgSrc}>
+        <button className="black-text btn-small btn-flat amber lighten-2 my-1" onClick={addImgSrc}>
             Add Photo
         </button>
     )
@@ -26,7 +26,7 @@ const AddButtons = props => {
 
 AddButtons.propTypes = {
     addImgSrc: PropTypes.func,
-    imgSrc: PropTypes.string,
+    imgSrc: PropTypes.bool,
     rmImgSrc: PropTypes.func
 }
 

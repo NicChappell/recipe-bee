@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { isEmpty } from 'lodash'
 
-// // import actions
-// import { createRecipe } from '../actions/recipeActions'
+// import actions
+import { createRecipe } from '../actions/recipeActions'
 import { getTags } from '../actions/tagActions'
 
 // import components
@@ -16,7 +16,7 @@ const PostRecipe = props => {
     // destructure props
     const {
         auth,
-        addRecipe,
+        createRecipe,
         getTags,
         history,
         tags,
@@ -24,7 +24,10 @@ const PostRecipe = props => {
     } = props
 
     // destructure auth
-    const { isAuthenticated } = auth
+    const {
+        isAuthenticated,
+        user
+    } = auth
 
     // destructure utilities
     const { routerHeight } = utilities
@@ -43,9 +46,10 @@ const PostRecipe = props => {
                 <div className="row">
                     <div className="col s12">
                         <CreateRecipe
-                            addRecipe={addRecipe}
+                            createRecipe={createRecipe}
                             history={history}
                             tags={tags}
+                            user={user}
                         />
                     </div>
                 </div>
@@ -57,12 +61,12 @@ const PostRecipe = props => {
 }
 
 PostRecipe.propTypes = {
-    auth: PropTypes.object.isRequired,
-    // createRecipe: PropTypes.func.isRequired,
-    errors: PropTypes.object.isRequired,
-    getTags: PropTypes.func.isRequired,
-    tags: PropTypes.array.isRequired,
-    utilities: PropTypes.object.isRequired
+    auth: PropTypes.object,
+    createRecipe: PropTypes.func,
+    errors: PropTypes.object,
+    getTags: PropTypes.func,
+    tags: PropTypes.array,
+    utilities: PropTypes.object
 }
 
 const mapStateToProps = state => ({
@@ -74,5 +78,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { /* createRecipe, */ getTags }
+    { createRecipe, getTags }
 )(PostRecipe)

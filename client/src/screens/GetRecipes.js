@@ -243,15 +243,15 @@ const GetRecipes = props => {
 }
 
 GetRecipes.propTypes = {
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    getRecipe: PropTypes.func.isRequired,
-    getRecipes: PropTypes.func.isRequired,
-    getTags: PropTypes.func.isRequired,
-    recipes: PropTypes.object.isRequired,
-    tags: PropTypes.array.isRequired,
-    updateRecipe: PropTypes.func.isRequired,
-    utilities: PropTypes.object.isRequired
+    auth: PropTypes.object,
+    errors: PropTypes.object,
+    getRecipe: PropTypes.func,
+    getRecipes: PropTypes.func,
+    getTags: PropTypes.func,
+    recipes: PropTypes.object,
+    tags: PropTypes.array,
+    updateRecipe: PropTypes.func,
+    utilities: PropTypes.object
 }
 
 const mapStateToProps = state => ({

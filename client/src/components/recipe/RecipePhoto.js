@@ -1,24 +1,31 @@
 // import dependencies
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 // import components
 import AddButtons from './AddButtons'
 
-// import images
-import placeholder from '../../images/placeholders/dish.svg'
-
 const RecipePhoto = props => {
     // destructure props
     const {
-        errorMessage,
+        errors,
         liftState,
-        photo
+        resolveErrors
     } = props
+
+    // state hook variables
+    const [base64, setbase64] = useState('')
+    const [valid, setValid] = useState(true)
 
     const handleChange = e => {
         // access the uploaded file from the files array
         const file = e.target.files[0]
+
+        // lift state
+        liftState(file)
+
+        // resolve errors
+        resolveErrors('photo')
 
         // create a new FileReader object
         const reader = new FileReader()
@@ -26,17 +33,16 @@ const RecipePhoto = props => {
         if (file) {
             // The progress event is fired periodically as the FileReader reads data
             reader.onprogress = e => {
-                // evt is an ProgressEvent.
                 if (e.lengthComputable) {
                     var percentLoaded = Math.round((e.loaded / e.total) * 100)
-                    console.log(percentLoaded)
+                    // console.log(percentLoaded)
                 }
             }
 
             // The load event is fired when a file has been read successfully
             reader.onload = e => {
                 // update state
-                liftState(e.target.result)
+                setbase64(e.target.result)
             }
 
             // the readAsDataURL method is used to read the contents of the specified file
@@ -47,38 +53,53 @@ const RecipePhoto = props => {
         }
     }
 
-    const addImgSrc = () => document.querySelector('.image-input').click()
+    const addImgSrc = () => document.querySelector('.photo-input').click()
 
     const rmImgSrc = e => {
         // reset (hidden) input field
-        document.querySelector('.image-input').value = null
+        document.querySelector('.photo-input').value = null
 
         // update state
+        setbase64('')
+
+        // lift state
         liftState(undefined)
+
+        // resolve errors
+        resolveErrors('photo')
     }
+
+    // update state when errors value changes
+    useEffect(() => {
+        errors.photo
+            ? setValid(false)
+            : setValid(true)
+    }, [errors.photo])
 
     return (
         <div className="row photo">
             <div className="col s12">
-                <div className="grey lighten-3 recipe-image">
-                    <img src={photo ? photo : placeholder} alt="" />
+                <div className={`photo-container ${base64 ? 'base64' : 'placeholder'} ${!base64 && !valid ? 'invalid-upload' : ''}`}>
+                    <img className={!valid ? 'invalid-photo' : ''} src={base64} alt="" />
                 </div>
             </div>
             <div className="col s12 center-align">
-                <input className="image-input" onChange={handleChange} type="file" />
+                <input className="photo-input" name="file" onChange={handleChange} type="file" />
                 <AddButtons
                     addImgSrc={addImgSrc}
-                    imgSrc={photo}
+                    imgSrc={base64 ? true : false}
                     rmImgSrc={rmImgSrc}
                 />
+                {!valid ? <span className="error-message">{errors.photo}</span> : null}
             </div>
         </div>
     )
 }
 
 RecipePhoto.propTypes = {
-    errorMessage: PropTypes.string,
-    liftState: PropTypes.func
+    errors: PropTypes.object,
+    liftState: PropTypes.func,
+    resolveErrors: PropTypes.func
 }
 
 export default RecipePhoto

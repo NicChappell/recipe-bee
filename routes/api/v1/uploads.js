@@ -6,6 +6,7 @@ const GridFsStorage = require('multer-gridfs-storage')
 const Grid = require('gridfs-stream')
 const crypto = require('crypto')
 const path = require('path')
+const isEmpty = require('lodash.isempty')
 
 // import config keys
 const { mongoURI } = require('../../../config/keys')
@@ -64,11 +65,8 @@ router.get('/', (req, res) => {
 
 // @route:  POST api/v1/uploads/
 // @desc:   Upload new file
-router.post('/', upload.single('file'), (req, res) => {
-    res.json({ file: req.file })
-    // as part of response
-    // i can send back the name of the file -- or whatever is needed to associate the image with a recipe -- an id or something
-})
+// @note:   'file' corresponds to matching form-data key from request
+router.post('/', upload.single('file'), (req, res) => res.json({ file: req.file }))
 
 // @route:  GET api/v1/uploads/file/:filename
 // @desc:   Return a file

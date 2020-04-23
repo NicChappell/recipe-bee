@@ -5,8 +5,7 @@ import jwt_decode from 'jwt-decode'
 // import actions
 import {
     GET_ERRORS,
-    SET_CURRENT_USER,
-    UPDATE_CURRENT_USER
+    SET_CURRENT_USER
 } from './types'
 
 // import helper funtions
@@ -55,14 +54,3 @@ export const signOutUser = () => dispatch => {
 
 // set current user
 export const setCurrentUser = decoded => ({ type: SET_CURRENT_USER, payload: decoded })
-
-// WORK IN PROGRESS
-// ****************
-// update current user
-export const udpateCurrentUser = (userId, userData) => dispatch => {
-    axios.put(`/api/v1/users/${userId}`, userData)
-        .then(res => dispatch({ type: UPDATE_CURRENT_USER, payload: res.data }))
-        .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }))
-}
-// ****************
-// WORK IN PROGRESS

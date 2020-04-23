@@ -12,7 +12,6 @@ const router = express.Router()
 
 // @route:  GET api/v1/tags/
 // @desc:   Return all tags
-// @access: Public
 router.get('/', (req, res) => {
 	Tag.find({})
 		.then(tags => res.status(200).json(tags))
@@ -21,7 +20,6 @@ router.get('/', (req, res) => {
 
 // @route:  POST api/v1/tags/
 // @desc:   Create new tag
-// @access: Public
 router.post('/', (req, res) => {
 	// destructure validateTag()
 	const {
@@ -56,7 +54,6 @@ router.post('/', (req, res) => {
 
 // @route:  POST api/v1/tags/bulk/
 // @desc:   Bulk write new tags
-// @access: Public
 router.post('/bulk/', (req, res) => {
 	// create array of documents to insert into collection
 	const documents = req.body.map(document => {

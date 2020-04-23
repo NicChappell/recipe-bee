@@ -1,10 +1,7 @@
 // import actions
 import {
     GET_RECIPE,
-    GET_RECIPES,
-    GET_UPLOAD,
-    GET_UPLOADS,
-    UPDATE_RECIPE
+    GET_RECIPES
 } from '../actions/types'
 
 // define initial state
@@ -44,22 +41,6 @@ const recipeReducer = (state = initialState, action) => {
                 ...state,
                 [key]: newValue
             }
-        case GET_UPLOAD:
-            const { recipe } = state
-
-            recipe = {
-                ...recipe,
-                photo: payload
-            }
-
-            return {
-                ...state,
-                recipe: payload
-            }
-        case GET_UPLOADS:
-            return state
-        case UPDATE_RECIPE:
-            return state
         default:
             return state
     }

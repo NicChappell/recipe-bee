@@ -57,7 +57,7 @@ const RecipeCard = props => {
                     </button>
                 </div> */}
                 <div className="card-image">
-                    <img src="https://via.placeholder.com/400x300" alt="" />
+                    <img src="http://localhost:5000/api/v1/uploads/image/1fee116a422ecdba33b1d789e4654f84.png" alt="" />
                     <span className="card-title">{recipe.title}</span>
                 </div>
                 <div className="card-content">

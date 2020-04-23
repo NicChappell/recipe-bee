@@ -18,6 +18,14 @@ import RecipeTitle from './RecipeTitle'
 import validateRecipe from '../../validation/recipe'
 
 const CreateRecipe = props => {
+	// destructure props
+	const {
+		createRecipe,
+		history,
+		tags,
+		user
+	} = props
+
 	// state hook variables
 	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')
@@ -34,25 +42,16 @@ const CreateRecipe = props => {
 	const [share, setShare] = useState(false)
 	// ---------------------------------- //
 	const [errors, setErrors] = useState({})
-	
-	// destructure props
-	const {
-		addRecipe,
-		history,
-		tags
-	} = props
 
 	const resolveErrors = key => {
-		console.log(errors)
-		console.log(key)
 		delete errors[key]
-		console.log(errors)
 		setErrors(errors)
 	}
 
 	const submitRecipe = () => {
 		// create new recipe object
 		const newRecipe = {
+			user,
 			title,
 			description,
 			photo,
@@ -72,13 +71,11 @@ const CreateRecipe = props => {
 		const validate = validateRecipe(newRecipe)
 
 		// check for validation errors
-		if (!validate.isValid) {
-			setErrors(validate.errors)
-		}
-		// else {
-		//	 addRecipe(recipe)
-		//	 history.push(`/recipes/${recipe.id}`)
-		// }
+		!validate.isValid
+			? setErrors(validate.errors)
+			: createRecipe(newRecipe, history)
+
+		// createRecipe(newRecipe, history)
 	}
 
 	return (
@@ -108,7 +105,6 @@ const CreateRecipe = props => {
 					<RecipePhoto
 						errors={errors}
 						liftState={setPhoto}
-						photo={photo}
 						resolveErrors={resolveErrors}
 					/>
 				</div>
@@ -268,20 +264,13 @@ const CreateRecipe = props => {
 				<div className="col s12">
 					<div className="row save center-align">
 						<div className="col s12">
-							<button className="black-text btn orange lighten-2" disabled={false} onClick={submitRecipe}>
+							<button className="black-text btn-small btn-flat amber lighten-2 mt-1" disabled={false} onClick={submitRecipe}>
 								Save Recipe
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			{/* <div className="row">
-				<div className={`col s12 center-align ${validInstructions ? null : 'mt-2'}`}>
-					<button className="black-text btn orange lighten-2" onClick={submitRecipe}>
-						Save Recipe
-					</button>
-				</div>
-			</div> */}
 		</div>
 	)
 }

@@ -1,7 +1,7 @@
 // import dependencies
 import isEmpty from 'lodash/isEmpty'
-
-// USE LODASH INSTEAD OF WHATEVER THOSE THINGS ARE
+import fileExtension from './fileExtension'
+import fileSize from './fileSize'
 
 // validate user input
 const validateRecipe = data => {
@@ -25,13 +25,6 @@ const validateRecipe = data => {
         share
     } = data
 
-    
-    // // convert empty fields into empty strings for Validator methods
-    // const newObj = {}
-    // Object.entries(obj).forEach(([key, value]) => {
-    //     newObj[key] = value ? value : 'penis'
-    // })
-
     // validate title input
     if (!title) {
         errors.title = 'Title is required'
@@ -45,6 +38,22 @@ const validateRecipe = data => {
     // validate photo
     if (!photo) {
         errors.photo = 'Photo is required'
+    } else {
+        // validate file extension
+        const validateFileExtension = fileExtension(photo)
+        // destructure validateFileExtension
+        const [validExtension, extension] = validateFileExtension
+
+        if (!validExtension) {
+            errors.photo = `Invalid file type: ${extension}`
+        }
+    
+        // validate file size
+        const validateFileSize = fileSize(photo, 16)
+
+        if (validateFileSize) {
+            errors.photo = 'File size too large'
+        }
     }
 
     // validate prep time

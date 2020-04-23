@@ -121,7 +121,7 @@ const RecipeAddIngredient = props => {
     }, [errors.ingredients])
 
     return (
-        <div className="row ingredient">
+        <div className="row add-list-item">
             <div className="col s8 m9 l10">
                 <div className="row">
                     <div className="col s2 l1 index">
@@ -129,7 +129,7 @@ const RecipeAddIngredient = props => {
                     </div>
                     <div className="col s10 l11">
                         <div className="row">
-                            <div className={`input-field col s4 l2 ${!quantityValid ? 'invalid-input' : ''}`}>
+                            <div className={`input-field col s5 l2 ${!quantityValid ? 'invalid-input' : ''}`}>
                                 <select
                                     className='browser-default'
                                     name="quantity"
@@ -137,12 +137,12 @@ const RecipeAddIngredient = props => {
                                     onFocus={handleFocus}
                                     value={quantityValue}
                                 >
-                                    <option disabled selected value=""></option>
+                                    <option disabled value=""></option>
                                     {quantities && quantities.map(quantity => <option key={quantity} value={quantity}>{quantity}</option>)}
                                 </select>
                                 {isEmpty(ingredients) ? <label>Quantity</label> : null}
                             </div>
-                            <div className="input-field col s8 l4">
+                            <div className="input-field col s7 l4">
                                 <select
                                     className='browser-default'
                                     name="unit"
@@ -150,8 +150,13 @@ const RecipeAddIngredient = props => {
                                     onFocus={handleFocus}
                                     value={unitValue}
                                 >
-                                    <option selected value=""></option>
-                                    {units && units.map(unit => <option key={unit} value={unit}>{unit}</option>)}
+                                    <option value=""></option>
+                                    {units && units.map(unit => {
+                                        if (unit === 'Volume' || unit === 'Mass') {
+                                            return <option disabled key={unit} value={unit}>{unit}</option>
+                                        }
+                                        return <option key={unit} value={unit}>{unit}</option>
+                                    })}
                                 </select>
                                 {isEmpty(ingredients) ? <label>Unit</label> : null}
                             </div>

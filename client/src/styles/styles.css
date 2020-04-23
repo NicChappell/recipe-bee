@@ -152,6 +152,7 @@ span {
 }
 #post-recipe .error-message {
   color: #ff5722;
+  display: block;
 }
 #post-recipe .row {
   margin-bottom: 0em;
@@ -159,191 +160,33 @@ span {
 #post-recipe .description textarea {
   overflow: scroll;
 }
-@media screen and (max-width: 992px) {
-  #post-recipe .ingredient,
-#post-recipe .list-item {
-    padding: 1rem 0;
-  }
-}
-#post-recipe .ingredient .index,
-#post-recipe .list-item .index {
+#post-recipe .photo .photo-container {
   align-items: center;
   display: flex;
-  font-size: 1rem;
-  font-weight: bold;
-  height: 4rem;
   justify-content: center;
+  margin: 0 auto;
+  height: auto;
+  max-height: 22.5rem;
+  max-width: 30rem;
+  min-height: 17.5rem;
+  width: auto;
 }
-#post-recipe .ingredient .input-field,
-#post-recipe .list-item .input-field {
-  margin: 0;
+#post-recipe .photo .base64 img {
+  height: auto;
+  max-height: 22.5rem;
+  width: auto;
 }
-#post-recipe .ingredient .input-field input,
-#post-recipe .list-item .input-field input {
-  height: 4rem;
+#post-recipe .photo .base64 .invalid-photo {
+  border: 1px solid #ff5722;
 }
-#post-recipe .ingredient .input-field label,
-#post-recipe .list-item .input-field label {
-  color: #9e9e9e;
-  font-size: 0.75rem;
-  line-height: 1.5rem;
-  top: -2rem;
+#post-recipe .photo .placeholder {
+  background-color: #f5f5f5;
 }
-#post-recipe .ingredient .input-field select,
-#post-recipe .list-item .input-field select {
-  height: 3rem;
-  margin: 0.5rem 0;
-}
-#post-recipe .ingredient .input-field select:disabled,
-#post-recipe .list-item .input-field select:disabled {
-  color: #9e9e9e;
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-}
-#post-recipe .ingredient .input-field select:disabled::-ms-expand,
-#post-recipe .list-item .input-field select:disabled::-ms-expand {
-  display: none;
-}
-#post-recipe .ingredient .input-field textarea,
-#post-recipe .list-item .input-field textarea {
-  height: 4rem;
-  overflow: scroll;
-}
-#post-recipe .ingredient .buttons,
-#post-recipe .list-item .buttons {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  height: 4rem;
-  justify-content: center;
-  margin: 0.25rem 0;
-}
-@media screen and (max-width: 992px) {
-  #post-recipe .ingredient .buttons,
-#post-recipe .list-item .buttons {
-    flex-direction: column;
-  }
-}
-#post-recipe .ingredient .buttons button,
-#post-recipe .list-item .buttons button {
-  margin: 0 0.25rem;
-}
-@media screen and (max-width: 992px) {
-  #post-recipe .ingredient .buttons button,
-#post-recipe .list-item .buttons button {
-    margin: 0.25rem 0;
-  }
-}
-#post-recipe .notes textarea {
-  height: 8rem;
-  overflow: scroll;
-}
-#post-recipe .ingredients-list,
-#post-recipe .instructions-list,
-#post-recipe .preparations-list {
-  border: 1px dotted #f5f5f5;
-}
-#post-recipe .ingredients-list .row,
-#post-recipe .instructions-list .row,
-#post-recipe .preparations-list .row {
-  margin-bottom: 0em;
-}
-#post-recipe .photo .image-input {
+#post-recipe .photo .photo-input {
   display: block;
   height: 0;
   visibility: hidden;
   width: 0;
-}
-#post-recipe .photo .recipe-image {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  height: auto;
-  margin: 0 auto;
-  max-height: 22.5rem;
-  max-width: 30rem;
-  padding: 1.5rem;
-  width: auto;
-}
-@media screen and (max-width: 600px) {
-  #post-recipe .photo .recipe-image img {
-    height: auto;
-    max-height: calc(22.5rem - 3rem);
-    max-width: calc(30rem - 3rem);
-    width: 100%;
-  }
-}
-@media screen and (min-width: 601px) {
-  #post-recipe .photo .recipe-image img {
-    height: auto;
-    max-height: calc(22.5rem - 3rem);
-    max-width: calc(30rem - 3rem);
-    width: 100%;
-  }
-}
-@media screen and (max-width: 992px) {
-  #post-recipe .tags .recipe-tag-search {
-    margin-top: 1rem;
-  }
-}
-#post-recipe .tags .recipe-tag-search span {
-  display: block;
-  margin-top: 0.5rem;
-}
-#post-recipe .tags .recipe-tag-search .autocomplete .input-field {
-  margin-bottom: 0;
-}
-#post-recipe .tags .recipe-tag-search .autocomplete .input-field input[type=text] {
-  height: 2rem;
-  line-height: 2rem;
-  margin: 0;
-}
-#post-recipe .tags .recipe-tag-search .autocomplete .input-field .prefix {
-  display: none;
-}
-#post-recipe .tags .recipe-tag-search .autocomplete .suggestions {
-  background-color: #f5f5f5;
-  font-size: 0.875rem;
-  height: auto;
-  margin: 0;
-  max-height: 9rem;
-  overflow: scroll;
-  padding: 0.875rem 0;
-  width: calc(100% - 3rem);
-}
-#post-recipe .tags .recipe-tag-search .autocomplete .suggestions li {
-  color: black;
-  padding: 0.125rem 1rem;
-}
-#post-recipe .tags .recipe-tag-search .autocomplete .suggestions li a {
-  color: black;
-}
-#post-recipe .tags .recipe-tag-search .autocomplete .suggestions li.active {
-  color: #ffc107;
-}
-#post-recipe .tags .recipe-tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  height: auto;
-  max-height: 11rem;
-  overflow: scroll;
-}
-@media screen and (max-width: 992px) {
-  #post-recipe .tags .recipe-tag-list {
-    margin-top: 1rem;
-  }
-}
-#post-recipe .tags .recipe-tag-list .chip {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden;
-}
-#post-recipe .tags .recipe-tag-list .chip span {
-  white-space: nowrap;
-}
-#post-recipe .tags .recipe-tag-list .chip i {
-  padding: 0 0.5rem 0 0;
 }
 #post-recipe .time {
   margin-bottom: 0;
@@ -396,7 +239,163 @@ span {
   font-size: 2.5rem;
   margin-left: 1rem;
 }
-
+#post-recipe .add-list-item,
+#post-recipe .list-item {
+  display: flex;
+}
+#post-recipe .add-list-item .index,
+#post-recipe .list-item .index {
+  align-items: center;
+  display: flex;
+  font-size: 1rem;
+  font-weight: bold;
+  height: 4rem;
+  justify-content: center;
+}
+#post-recipe .add-list-item .input-field,
+#post-recipe .list-item .input-field {
+  margin: 0;
+}
+#post-recipe .add-list-item .input-field input,
+#post-recipe .list-item .input-field input {
+  height: 4rem;
+}
+#post-recipe .add-list-item .input-field label,
+#post-recipe .list-item .input-field label {
+  color: #9e9e9e;
+  font-size: 0.75rem;
+  line-height: 1.5rem;
+  top: -2rem;
+}
+#post-recipe .add-list-item .input-field select,
+#post-recipe .list-item .input-field select {
+  height: 3rem;
+  margin: 0.5rem 0;
+}
+#post-recipe .add-list-item .input-field select:disabled,
+#post-recipe .list-item .input-field select:disabled {
+  color: #9e9e9e;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+#post-recipe .add-list-item .input-field select:disabled::-ms-expand,
+#post-recipe .list-item .input-field select:disabled::-ms-expand {
+  display: none;
+}
+#post-recipe .add-list-item .input-field textarea,
+#post-recipe .list-item .input-field textarea {
+  height: 4rem;
+  overflow: scroll;
+}
+#post-recipe .add-list-item .buttons,
+#post-recipe .list-item .buttons {
+  align-items: center;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: row;
+  height: 4rem;
+  justify-content: center;
+  margin: 0;
+}
+#post-recipe .add-list-item .buttons button,
+#post-recipe .list-item .buttons button {
+  margin: 0 0.25rem;
+}
+#post-recipe .add-list-item {
+  margin-top: 1rem;
+}
+@media screen and (max-width: 600px) {
+  #post-recipe .list-item .buttons {
+    align-self: center;
+    flex-direction: column;
+    margin: 0.75rem 0;
+  }
+  #post-recipe .list-item .buttons button {
+    margin: 0.25rem 0;
+  }
+}
+#post-recipe .list {
+  border: 1px dotted #9e9e9e;
+  margin-top: 1rem;
+  padding: 1rem 0;
+}
+#post-recipe .notes textarea {
+  height: 8rem;
+  overflow: scroll;
+}
+#post-recipe .tags .recipe-tag-search span {
+  display: block;
+  margin-top: 0.5rem;
+}
+#post-recipe .tags .recipe-tag-search .autocomplete .input-field {
+  margin-bottom: 0;
+}
+#post-recipe .tags .recipe-tag-search .autocomplete .input-field input[type=text] {
+  height: 2rem;
+  line-height: 2rem;
+  margin: 0;
+}
+#post-recipe .tags .recipe-tag-search .autocomplete .input-field .prefix {
+  display: none;
+}
+#post-recipe .tags .recipe-tag-search .autocomplete .suggestions {
+  background-color: #f5f5f5;
+  font-size: 0.875rem;
+  height: auto;
+  margin: 0;
+  max-height: 9rem;
+  overflow: scroll;
+  padding: 0.875rem 0;
+  width: calc(100% - 3rem);
+}
+#post-recipe .tags .recipe-tag-search .autocomplete .suggestions li {
+  color: black;
+  padding: 0.125rem 1rem;
+}
+#post-recipe .tags .recipe-tag-search .autocomplete .suggestions li a {
+  color: black;
+}
+#post-recipe .tags .recipe-tag-search .autocomplete .suggestions li.active {
+  color: #ffc107;
+}
+#post-recipe .tags .recipe-tag-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  justify-content: flex-start;
+  max-height: 11rem;
+  overflow: scroll;
+  padding: 0.25rem;
+}
+@media screen and (max-width: 600px) {
+  #post-recipe .tags .recipe-tag-list {
+    margin-top: 1rem;
+  }
+}
+@media screen and (min-width: 601px) {
+  #post-recipe .tags .recipe-tag-list {
+    min-height: calc(3rem + 1px);
+  }
+}
+#post-recipe .tags .recipe-tag-list .chip {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0.25rem;
+  overflow: hidden;
+}
+#post-recipe .tags .recipe-tag-list .chip span {
+  white-space: nowrap;
+}
+#post-recipe .tags .recipe-tag-list .chip i {
+  padding: 0 0.5rem 0 0;
+}
+#post-recipe .share .switch {
+  align-items: center;
+  display: flex;
+  height: calc(3rem + 1px);
+}
 #no-match img,
 #no-match div {
   width: 100px;
@@ -562,6 +561,10 @@ span {
 
 .invalid-message {
   color: #ff5722;
+}
+
+.invalid-upload {
+  border: 1px solid #ff5722;
 }
 
 .no-recipes {

@@ -25,12 +25,9 @@ const RecipeSchema = new Schema({
         required: true
     },
     photo: {
-        type: String,
-        default: undefined
+        type: Schema.Types.ObjectId,
+        ref: "uploads.files"
     },
-    ingredients: Array,
-    preparation: Array,
-    instructions: Array,
     prepTime: {
         hours: {
             type: Number,
@@ -61,12 +58,38 @@ const RecipeSchema = new Schema({
             default: 0
         }
     },
-    shared: {
+    preparations: {
+        type: Array,
+        default: []
+    },
+    ingredients: {
+        type: Array,
+        default: []
+    },
+    instructions: {
+        type: Array,
+        default: []
+    },
+    notes: {
+        type: String,
+        required: false
+    },
+    tagList: {
+        type: Array,
+        default: []
+    },
+    share: {
         type: Boolean,
         default: false
     },
-    upVotes: Array,
-    downVotes: Array,
+    upVotes: {
+        type: Array,
+        default: []
+    },
+    downVotes: {
+        type: Array,
+        default: []
+    },
     netVotes: {
         type: Number,
         default: 0
@@ -79,12 +102,14 @@ const RecipeSchema = new Schema({
         type: Number,
         default: 0.0
     },
-    hearts: Array,
+    hearts: {
+        type: Array,
+        default: []
+    },
     totalHearts: {
         type: Number,
         default: 0
-    },
-    tags: Array
+    }
 })
 
 // export schema

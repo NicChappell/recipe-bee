@@ -35,7 +35,7 @@ const RecipeIngredientsList = props => {
 	}
 
 	return (
-		<div className={`row ${ingredients && ingredients.length > 0 ? 'ingredients-list' : ''}`}>
+		<div className={`row ${ingredients && ingredients.length > 0 ? 'list' : ''}`}>
 			<div className="col s12">
 				{ingredients && ingredients.map((ingrObj, index) => (
 					<RecipeIngredientsListItem

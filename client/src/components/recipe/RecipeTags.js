@@ -76,7 +76,7 @@ const RecipeTags = props => {
             <div className="col s12 m6 recipe-tag-list">
                 {tagList.map(tag => {
                     return (
-                        <div className="chip orange lighten-2" key={tag}>
+                        <div className="chip amber lighten-2" key={tag}>
                             {tag.toUpperCase()}
                             <i className="close material-icons" onClick={() => removeTag(tag)}>close</i>
                         </div>

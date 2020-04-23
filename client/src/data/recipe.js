@@ -6,14 +6,20 @@ for (let i = 1; i <= 16; i++) {
 
 // options for unit select list
 export const units = [
+    'Volume',
     'Pinch',
     'Milliliter',
     'Teaspoon',
     'Tablespoon',
-    'Ounce',
+    'Ounce (fl oz)',
     'Cup',
     'Pint',
     'Liter',
     'Quart',
-    'Gallon'
+    'Gallon',
+    'Mass',
+    'Kilogram',
+    'Gram',
+    'Pound',
+    'Ounce (oz)'
 ]

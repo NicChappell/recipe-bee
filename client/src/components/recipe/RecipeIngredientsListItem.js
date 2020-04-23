@@ -58,33 +58,38 @@ const RecipeIngredientsListItem = props => {
 	}
 
 	return (
-		<div className="row ingredient">
+		<div className="row list-item mt-1">
 			<div className="col s8 m9 l10">
-				<div className="row">
+                <div className="row">
 					<div className="col s2 l1 index">
 						<p>{`${index + 1})`}</p>
 					</div>
 					<div className="col s10 l11">
 						<div className="row">
-							<div className={`input-field col s4 l2 ${quantity.valid ? '' : 'invalid-input'}`}>
+							<div className={`input-field col s5 l2 ${quantity.valid ? '' : 'invalid-input'}`}>
 								<select
 									{...quantity}
 									disabled={!modify}
 									name="quantity"
 								>
-									<option disabled selected value=""></option>
+									<option disabled value=""></option>
 									{quantities && quantities.map(quantity => <option key={quantity} value={quantity}>{quantity}</option>)}
 								</select>
 								{index === 0 ? <label>Quantity</label> : null}
 							</div>
-							<div className={'input-field col s8 l4'}>
+							<div className="input-field col s7 l4">
 								<select
 									{...unit}
 									disabled={!modify}
 									name="unit"
 								>
-									<option selected value=""></option>
-									{units && units.map(unit => <option key={unit} value={unit}>{unit}</option>)}
+									<option value=""></option>
+                                    {units && units.map(unit => {
+                                        if (unit === 'Volume' || unit === 'Mass') {
+                                            return <option disabled key={unit} value={unit}>{unit}</option>
+                                        }
+                                        return <option key={unit} value={unit}>{unit}</option>
+                                    })}
 								</select>
 								{index === 0 ? <label>Unit</label> : null}
 							</div>

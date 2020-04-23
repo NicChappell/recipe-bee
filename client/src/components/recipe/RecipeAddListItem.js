@@ -86,7 +86,7 @@ const RecipeAddListItem = props => {
 	}, [errors[name]])
 
 	return (
-		<div className="row list-item">
+		<div className="row add-list-item">
 			<div className="col s8 m9 l10">
 				<div className="row">
 					<div className="col s2 m1 index">

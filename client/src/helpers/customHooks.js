@@ -116,12 +116,12 @@ export const useValidNumberValue = (val = 0) => {
 }
 
 export const useValidSelectValue = (val = '') => {
-    const [valid, setValid] = useState(true)
+    const [valid, setValid] = useState(1)
     const [value, setValue] = useState(val)
 
     const handleChange = e => {
         setValue(e.target.value)
-        e.target.value ? setValid(true) : setValid(false)
+        e.target.value ? setValid(1) : setValid(0)
     }
 
     return {
@@ -133,20 +133,20 @@ export const useValidSelectValue = (val = '') => {
 }
 
 export const useValidTextAreaValue = (val = '', errorMessage = '') => {
-    const [valid, setValid] = useState(true)
+    const [valid, setValid] = useState(1)
     const [value, setValue] = useState(val)
 
-    const handleBlur = e => e.target.value ? setValid(true) : setValid(false)
+    const handleBlur = e => e.target.value ? setValid(1) : setValid(0)
 
     const handleChange = e => {
         setValue(e.target.value)
-        e.target.value ? setValid(true) : setValid(false)
+        e.target.value ? setValid(1) : setValid(0)
     }
 
-    const handleFocus = () => setValid(true)
+    const handleFocus = () => setValid(1)
 
     useEffect(() => {
-        setValid(errorMessage ? false : true)
+        setValid(errorMessage ? 0 : 1)
     }, [errorMessage])
 
     return {
@@ -160,20 +160,20 @@ export const useValidTextAreaValue = (val = '', errorMessage = '') => {
 }
 
 export const useValidTextValue = (val = '', errorMessage = '') => {
-    const [valid, setValid] = useState(true)
+    const [valid, setValid] = useState(1)
     const [value, setValue] = useState(val)
 
-    const handleBlur = e => e.target.value ? setValid(true) : setValid(false)
+    const handleBlur = e => e.target.value ? setValid(1) : setValid(0)
 
     const handleChange = e => {
         setValue(e.target.value)
-        e.target.value ? setValid(true) : setValid(false)
+        e.target.value ? setValid(1) : setValid(0)
     }
 
-    const handleFocus = () => setValid(true)
+    const handleFocus = () => setValid(1)
 
     useEffect(() => {
-        setValid(errorMessage ? false : true)
+        setValid(errorMessage ? 0 : 1)
     }, [errorMessage])
 
     return {

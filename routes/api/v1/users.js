@@ -16,7 +16,6 @@ const router = express.Router()
 
 // @route:  GET api/v1/users/
 // @desc:   Return all users
-// @access: Public
 router.get('/', (req, res) => {
     User.find({})
         .then(users => res.status(200).json(users))
@@ -25,7 +24,6 @@ router.get('/', (req, res) => {
 
 // @route:  DELETE api/v1/users/:userId
 // @desc:   Delete user
-// @access: Public
 router.delete('/:userId', (req, res) => {
     // destructure request params
     const { userId } = req.params
@@ -38,7 +36,6 @@ router.delete('/:userId', (req, res) => {
 
 // @route:  GET api/v1/users/:userId
 // @desc:   Return user
-// @access: Public
 router.get('/:userId', (req, res) => {
     // destructure request params
     const { userId } = req.params
@@ -51,7 +48,6 @@ router.get('/:userId', (req, res) => {
 
 // @route:  PUT api/v1/users/:userId
 // @desc:   Update user
-// @access: Public
 router.put('/:userId', (req, res) => {
     // destructure request params
     const { userId } = req.params
@@ -64,7 +60,6 @@ router.put('/:userId', (req, res) => {
 
 // @route:  POST api/v1/users/sign-in
 // @desc:   Sign in user and return JWT token
-// @access: Public
 router.post('/sign-in', (req, res) => {
     // destructure validateSignInInput()
     const {
@@ -143,7 +138,6 @@ router.post('/sign-in', (req, res) => {
 
 // @route:  POST api/v1/users/sign-up
 // @desc:   Sign up new user
-// @access: Public
 router.post('/sign-up', (req, res) => {
     // destructure validateSignUpInput()
     const {
