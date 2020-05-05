@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash/isEmpty'
 
 // import actions
 import { createRecipe } from '../actions/recipeActions'
@@ -17,6 +17,7 @@ const PostRecipe = props => {
     const {
         auth,
         createRecipe,
+        errors,
         getTags,
         history,
         tags,
@@ -47,6 +48,7 @@ const PostRecipe = props => {
                     <div className="col s12">
                         <CreateRecipe
                             createRecipe={createRecipe}
+                            errors={errors}
                             history={history}
                             tags={tags}
                             user={user}

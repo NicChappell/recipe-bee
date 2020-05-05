@@ -2,6 +2,10 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+// import uploads schema
+const { Upload } = require('./Upload')
+const { User } = require('./User')
+
 // create schema
 const RecipeSchema = new Schema({
     createdAt: {
@@ -14,11 +18,15 @@ const RecipeSchema = new Schema({
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: "users"
+        ref: 'users'
     },
     title: {
         type: String,
         required: true
+    },
+    slug: {
+        type: String,
+        default: ''
     },
     description: {
         type: String,
@@ -26,7 +34,7 @@ const RecipeSchema = new Schema({
     },
     photo: {
         type: Schema.Types.ObjectId,
-        ref: "uploads.files"
+        ref: 'uploads'
     },
     prepTime: {
         hours: {

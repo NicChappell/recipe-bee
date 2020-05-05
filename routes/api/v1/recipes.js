@@ -58,23 +58,25 @@ router.get('/', (req, res) => {
 // @route:  POST api/v1/recipes/
 // @desc:   Create new recipe
 router.post('/', (req, res) => {
-    // // destructure validateRecipe()
-    // const {
-    //     errors,
-    //     isValid
-    // } = validateRecipe(req.body)
+    console.log(req.body)
+    // destructure validateRecipe()
+    const {
+        errors,
+        isValid
+    } = validateRecipe(req.body)
 
-    // // check validation
-    // if (!isValid) {
-    //     return res
-    //         .status(400)
-    //         .json(errors)
-    // }
+    // check validation
+    if (!isValid) {
+        return res
+            .status(400)
+            .json(errors)
+    }
 
     // destructure request body
     const {
         user,
         title,
+        slug,
         description,
         photo,
         prepTimeHours,
@@ -104,6 +106,7 @@ router.post('/', (req, res) => {
     const newRecipe = new Recipe({
         user,
         title,
+        slug,
         description,
         photo,
         prepTime: {
@@ -134,18 +137,6 @@ router.post('/', (req, res) => {
         .catch(err => res.status(500).json({ mesage: "faled to create recipe", err }))
 })
 
-// @route:  DELETE api/v1/recipes/:recipeId
-// @desc:   Delete recipe
-router.delete('/:recipeId', (req, res) => {
-    // destructure request params
-    const { recipeId } = req.params
-
-    // find recipe and delete
-    Recipe.findByIdAndDelete(recipeId)
-        .then(() => res.status(200).json({ message: 'successfully deleted recipe' }))
-        .catch(err => res.status(400).json({ message: 'falied to delete recipe', err }))
-})
-
 // @route:  GET api/v1/recipes/:recipeId
 // @desc:   Return recipe
 router.get('/:recipeId', (req, res) => {
@@ -155,6 +146,7 @@ router.get('/:recipeId', (req, res) => {
     // find recipe
     Recipe.findById(recipeId)
         .populate('user')
+        .populate('photo')
         .then(recipe => res.status(200).json(recipe))
         .catch(err => res.status(404).json({ recipe: 'Recipe not found', err }))
 })
@@ -185,6 +177,18 @@ router.put('/:recipeId', (req, res) => {
     Recipe.findByIdAndUpdate(recipeId, { ...body }, { new: true })
         .then(recipe => res.status(200).json({ message: 'successfully updated recipe', recipe }))
         .catch(err => res.status(400).json({ message: 'falied to update recipe', err }))
+})
+
+// @route:  DELETE api/v1/recipes/:recipeId
+// @desc:   Delete recipe
+router.delete('/:recipeId', (req, res) => {
+    // destructure request params
+    const { recipeId } = req.params
+
+    // find recipe and delete
+    Recipe.findByIdAndDelete(recipeId)
+        .then(() => res.status(200).json({ message: 'successfully deleted recipe' }))
+        .catch(err => res.status(400).json({ message: 'falied to delete recipe', err }))
 })
 
 // export router

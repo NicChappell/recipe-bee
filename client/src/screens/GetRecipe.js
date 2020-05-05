@@ -2,13 +2,17 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { isEmpty } from 'lodash.isempty'
+import isEmpty from 'lodash/isEmpty'
+import axios from 'axios'
 
 // import actions
 import {
     getRecipe,
     updateRecipe
 } from '../actions/recipeActions'
+
+// import helper functions
+import { formatTime } from '../helpers/utilities'
 
 // import components
 import Breadcrumb from '../components/layout/Breadcrumb'
@@ -38,31 +42,34 @@ const GetRecipe = props => {
 
     // destructure recipes object
     const { recipe } = recipes
-    console.log(recipe)
 
     // destructure recipe object
     const {
-        createdAt,
-        updatedAt,
-        // user,
-        title,
-        description,
-        photo,
-        ingredients,
-        preparation,
-        instructions,
-        prepTime,
         cookTime,
-        shared,
-        upVotes,
+        createdAt,
+        description,
         downVotes,
+        hearts,
+        ingredients,
+        instructions,
         netVotes,
+        notes,
         percentDownVotes,
         percentUpVotes,
-        hearts,
+        photo,
+        prepTime,
+        preparations,
+        share,
+        slug,
+        tagList,
+        title,
         totalHearts,
-        tags
+        upVotes,
+        updatedAt
+        // user
+        // _id
     } = recipe
+    const recipeUser = recipe.user
     const recipeId = recipe._id
 
     // destructure utilities object
@@ -70,11 +77,8 @@ const GetRecipe = props => {
 
     // get recipe after component mount
     useEffect(() => {
-        // destructure props
-        const { params } = match
-
-        // destructure params
-        const { recipeId } = params
+        // destructure router props
+        const { recipeId } = match.params
 
         // dispatch getRecipe action
         getRecipe(recipeId)
@@ -92,90 +96,96 @@ const GetRecipe = props => {
     //     )
     // }
 
-    // if (recipeId) {
-    //     return (
-    //         <div className="container get-recipe router" style={{ height: routerHeight }}>
-    //             <Breadcrumb location={location} />
-    //             <div className="row">
-    //                 <div className="col s12">
-    //                     <div className="card-panel">
-    //                         <div className="row">
-    //                             <div className="col s12 m6">
-    //                                 <div className="row">
-    //                                     <div className="col s12">
-    //                                         <h3>{title}</h3>
-    //                                     </div>
-    //                                     <div className="col s6 m12 l6">
-    //                                         <p><i className="material-icons left">timer</i> Prep Time: {prepTime}</p>
-    //                                     </div>
-    //                                     <div className="col s6 m12 l6">
-    //                                         <p><i className="material-icons left">timer</i> Cook Time: {cookTime}</p>
-    //                                     </div>
-    //                                     <div className="col s12">
-    //                                         <p className="flow-text">{description}</p>
-    //                                     </div>
-    //                                 </div>
-    //                             </div>
-    //                             <div className="col s12 m6 recipe-image">
-    //                                 <div className="row">
-    //                                     <div className="col s12">
-    //                                         <img alt="" src="https://via.placeholder.com/4000x3000" />
-    //                                     </div>
-    //                                 </div>
-    //                                 <div className="row">
-    //                                     <div className="col s12 recipe-actions">
-    //                                         <HeartAction
-    //                                             hearts={hearts}
-    //                                             isAuthenticated={isAuthenticated}
-    //                                             recipeId={recipeId}
-    //                                             totalHearts={totalHearts}
-    //                                             updateRecipe={updateRecipe}
-    //                                             userId={userId}
-    //                                         />
-    //                                         <VoteAction
-    //                                             downVotes={downVotes}
-    //                                             isAuthenticated={isAuthenticated}
-    //                                             recipeId={recipeId}
-    //                                             netVotes={netVotes}
-    //                                             updateRecipe={updateRecipe}
-    //                                             upVotes={upVotes}
-    //                                             userId={userId}
-    //                                         />
-    //                                     </div>
-    //                                 </div>
-    //                             </div>
-    //                         </div>
-    //                         <div className="row">
-    //                             <div className="col s12 m6">
-    //                                 <h5>Ingredients</h5>
-    //                                 <ul>
-    //                                     {ingredients && ingredients.map(ingredient => <li className="ingredient" key={ingredient.sequence}>{ingredient.quantity} {ingredient.unit} {ingredient.name}</li>)}
-    //                                 </ul>
-    //                             </div>
-    //                             <div className="col s12 m6">
-    //                                 <h5>Preparation</h5>
-    //                                 <ul>
-    //                                     {preparation && preparation.map(action => <li className="action" key={action.sequence}>{action.action}</li>)}
-    //                                 </ul>
-    //                             </div>
-    //                             <div className="col s12 m12">
-    //                                 <h5>Instructions</h5>
-    //                                 <ol>
-    //                                     {instructions && instructions.map(instruction => <li className="instruction" key={instruction.sequence}>{instruction.instruction}</li>)}
-    //                                 </ol>
-    //                             </div>
-    //                         </div>
-    //                         <div className="row">
-    //                             <div className="col s12">
-    //                                 {tags && tags.map((tag, i) => <div className="chip orange lighten-2" key={i}>{tag.toUpperCase()}</div>)}
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     )
-    // }
+    if (!isEmpty(recipeId)) {
+        return (
+            <div className="container router" id="get-recipe" style={{ height: routerHeight }}>
+                <Breadcrumb location={location} />
+                <div className="row">
+                    <div className="col s12">
+                        <div className="card-panel">
+                            <div className="row">
+                                <div className="col s12 m6">
+                                    <div className="row">
+                                        <div className="col s12">
+                                            <h3>{title}</h3>
+                                        </div>
+                                        <div className="col s6 m12 l6">
+                                            <p><i className="material-icons left">timer</i> Prep Time: {formatTime(prepTime.hours)}:{formatTime(prepTime.minutes)}</p>
+                                        </div>
+                                        <div className="col s6 m12 l6">
+                                            <p><i className="material-icons left">timer</i> Cook Time:  {formatTime(cookTime.hours)}:{formatTime(cookTime.minutes)}</p>
+                                        </div>
+                                        <div className="col s12">
+                                            <p className="flow-text">{description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col s12 m6 recipe-image">
+                                    <div className="row">
+                                        <div className="col s12">
+                                            <img alt="" src={`/api/v1/uploads/image/${photo.filename}`} />
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col s12 recipe-actions">
+                                            <HeartAction
+                                                hearts={hearts}
+                                                isAuthenticated={isAuthenticated}
+                                                recipeId={recipeId}
+                                                totalHearts={totalHearts}
+                                                updateRecipe={updateRecipe}
+                                                userId={userId}
+                                            />
+                                            <VoteAction
+                                                downVotes={downVotes}
+                                                isAuthenticated={isAuthenticated}
+                                                recipeId={recipeId}
+                                                netVotes={netVotes}
+                                                updateRecipe={updateRecipe}
+                                                upVotes={upVotes}
+                                                userId={userId}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col s12 m6">
+                                    <h5>Ingredients</h5>
+                                    <ul>
+                                        {ingredients && ingredients.map(ingredient => <li className="ingredient" key={ingredient.id}>{ingredient.quantity} {ingredient.unit} {ingredient.name}</li>)}
+                                    </ul>
+                                </div>
+                                <div className="col s12 m6">
+                                    <h5>Preparations</h5>
+                                    <ul>
+                                        {preparations && preparations.map(preparation => <li className="preparation" key={preparation.id}>{preparation.value}</li>)}
+                                    </ul>
+                                </div>
+                                <div className="col s12">
+                                    <h5>Instructions</h5>
+                                    <ul>
+                                        {instructions && instructions.map(instruction => <li className="instruction" key={instruction.id}>{instruction.value}</li>)}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col s12">
+                                    <h5>Notes</h5>
+                                    <p>{notes}</p>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col s12">
+                                    {tagList && tagList.map((tag, i) => <div className="chip orange lighten-2" key={i}>{tag.toUpperCase()}</div>)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     return <Preloader />
 }

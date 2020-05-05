@@ -77,19 +77,21 @@ const RecipePhoto = props => {
     }, [errors.photo])
 
     return (
-        <div className="row photo">
+        <div className="row center-align photo">
             <div className="col s12">
                 <div className={`photo-container ${base64 ? 'base64' : 'placeholder'} ${!base64 && !valid ? 'invalid-upload' : ''}`}>
                     <img className={!valid ? 'invalid-photo' : ''} src={base64} alt="" />
                 </div>
             </div>
-            <div className="col s12 center-align">
+            <div className="col s12">
                 <input className="photo-input" name="file" onChange={handleChange} type="file" />
                 <AddButtons
                     addImgSrc={addImgSrc}
                     imgSrc={base64 ? true : false}
                     rmImgSrc={rmImgSrc}
                 />
+            </div>
+            <div className="col s12">
                 {!valid ? <span className="error-message">{errors.photo}</span> : null}
             </div>
         </div>

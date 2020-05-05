@@ -9,15 +9,17 @@ const RecipeDescription = props => {
     // destructure props
     const {
         errors,
-        liftState
+        liftState,
+        resolveErrors
     } = props
 
     // custom hook variables
     const description = useValidTextAreaValue('', errors.description)
 
-    // lift state when description value changes
+    // lift state and resolve errors when description value changes
     useEffect(() => {
         liftState(description.value)
+        resolveErrors('description')
     }, [description.value])
 
     return (
@@ -41,7 +43,8 @@ const RecipeDescription = props => {
 
 RecipeDescription.propTypes = {
     errors: PropTypes.object,
-    liftState: PropTypes.func
+    liftState: PropTypes.func,
+    resolveErrors: PropTypes.func
 }
 
 export default RecipeDescription

@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
+// import helper functions
+import { formatTime } from '../../helpers/utilities'
+
 const RecipeTime = props => {
 	// destructure props
 	const {
@@ -128,7 +131,7 @@ const RecipeTime = props => {
 				/>
 			</div>
 			<div className="col s12 time-output">
-				{("00" + hours).slice(-2)}:{("00" + minutes).slice(-2)}
+				{formatTime(hours)}:{formatTime(minutes)}
 			</div>
 			{!valid ? <div className="col s12 error-message">{errors[name]}</div> : null}
 		</div>

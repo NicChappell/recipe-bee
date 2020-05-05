@@ -39,6 +39,7 @@ const Navbar = (props) => {
                         <ul className="left hide-on-small-and-down">
                             <li><NavLink className="black-text" exact to="/">Home</NavLink></li>
                             <li><NavLink className="black-text" exact to="/recipes">Recipes</NavLink></li>
+                            <li><NavLink className="black-text btn-flat btn-small amber lighten-2" exact to="/recipes/create">Create Recipe</NavLink></li>
                         </ul>
                         <Link to="/" className="brand-logo center">
                             <div className="logo">

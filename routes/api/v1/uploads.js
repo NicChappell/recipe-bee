@@ -6,7 +6,6 @@ const GridFsStorage = require('multer-gridfs-storage')
 const Grid = require('gridfs-stream')
 const crypto = require('crypto')
 const path = require('path')
-const isEmpty = require('lodash.isempty')
 
 // import config keys
 const { mongoURI } = require('../../../config/keys')

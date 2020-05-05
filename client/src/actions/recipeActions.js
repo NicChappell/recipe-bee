@@ -9,44 +9,28 @@ import {
 } from './types'
 
 // create recipe
-export const createRecipe = (recipeData, history) => dispatch => {
-
+export const createRecipe = (recipe, history) => dispatch => {
     // instantiate a new FormData object
     const formData = new FormData()
 
     // append file to form data
-    // 'file' corresponds to matching post method paramter
-    formData.append('file', recipeData.photo)
+    // 'file' corresponds to matching POST method paramter
+    formData.append('file', recipe.photo)
 
-    // send upload post request
     axios.post('/api/v1/uploads/', formData)
         .then(res => {
-            console.log('attempting image upload')
-            // update recipe object
-            recipeData = {
-                ...recipeData,
-                user: recipeData.user.id,
+            // use response to update recipe object
+            recipe = {
+                ...recipe,
                 photo: res.data.file.id
             }
 
-            // send recipe post request
-            return axios.post('/api/v1/recipes/', recipeData)
+            return axios.post('/api/v1/recipes/', recipe)
         })
         .then(res => {
-            console.log('successful image upload')
-            console.log(res)
-            history.push(`/recipes/${res.data.recipe._id}`)
+            history.push(`/recipes/${res.data.recipe.slug}/${res.data.recipe._id}`)
         })
-        // .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }))
-        .catch(err => {
-            console.log('error')
-            console.log(err)
-        })
-
-
-    // axios.post('/api/v1/users/sign-up', userData)
-    //     .then(res => history.push('/sign-in'))
-    //     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }))
+        .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }))
 }
 
 // get recipe

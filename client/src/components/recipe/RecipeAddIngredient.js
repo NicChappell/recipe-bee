@@ -152,7 +152,7 @@ const RecipeAddIngredient = props => {
                                 >
                                     <option value=""></option>
                                     {units && units.map(unit => {
-                                        if (unit === 'Volume' || unit === 'Mass') {
+                                        if (unit === 'Volume' || unit === 'Mass' || unit === 'Portion') {
                                             return <option disabled key={unit} value={unit}>{unit}</option>
                                         }
                                         return <option key={unit} value={unit}>{unit}</option>

@@ -87,6 +87,15 @@ span {
   flex-direction: column;
 }
 
+#get-recipe {
+  .recipe-image {
+    img {
+      height: auto;
+      width: 100%;
+    }
+  }
+}
+
 #get-recipes {
   .recipe-sort-methods {
     display: flex;
@@ -186,7 +195,6 @@ span {
   }
   .error-message {
     color: $danger;
-    display: block;
   }
   .row {
     margin-bottom: 0em;
@@ -448,7 +456,7 @@ span {
     }
   }
   // recipe save button
-  .save {
+  .save-button {
   }
 }
 
@@ -485,6 +493,16 @@ $size: 100px;
   height: 0;
   justify-content: flex-start;
   overflow-y: hidden;
+}
+
+// UTILITIES
+.indeterminate-progress {
+  font-size: 1rem;
+  .dots {
+    display: inline-block;
+    overflow: visible;
+    width: 0;
+  }
 }
 
 .breadcrumbs {
@@ -1107,5 +1125,12 @@ select:-webkit-autofill:focus {
   transition: box-shadow 0.3s, border 0.3s, -webkit-box-shadow 0.3s;
   &::placeholder {
     font-size: 16px;
+  }
+}
+
+.progress {
+  background-color: $brand-secondary;
+  .indeterminate {
+    background-color: $brand-primary;
   }
 }

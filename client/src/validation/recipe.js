@@ -1,7 +1,9 @@
 // import dependencies
 import isEmpty from 'lodash/isEmpty'
-import fileExtension from './fileExtension'
-import fileSize from './fileSize'
+import {
+    fileExtension,
+    fileSize
+} from '../helpers/utilities'
 
 // validate user input
 const validateRecipe = data => {
@@ -20,7 +22,6 @@ const validateRecipe = data => {
         preparations,
         ingredients,
         instructions,
-        // notes,
         tagList,
         share
     } = data
@@ -80,11 +81,6 @@ const validateRecipe = data => {
     if (isEmpty(instructions)) {
         errors.instructions = 'Instructions are required'
     }
-
-    // // validatae notes
-    // if (!notes) {
-    //     errors.notes = 'Notes are required'
-    // }
 
     // validate tag list
     if (isEmpty(tagList)) {

@@ -202,27 +202,45 @@ const GetRecipes = props => {
     return (
         <div className="container router" id="get-recipes" onScroll={handleScroll} style={{ height: routerHeight }}>
             <div className="row">
-                <div className="col s12 l6 recipe-sort-methods">
-                    <button className={`btn-flat ${sortMethod === 'trendingRecipes' ? 'active' : null}`} onClick={() => setSortMethod('trendingRecipes')}><i className="material-icons left">trending_up</i>trending</button>
-                    <button className={`btn-flat ${sortMethod === 'topRecipes' ? 'active' : null}`} onClick={() => setSortMethod('topRecipes')}><i className="material-icons left">thumb_up</i>top</button>
-                    <button className={`btn-flat ${sortMethod === 'mostLovedRecipes' ? 'active' : null}`} onClick={() => setSortMethod('mostLovedRecipes')}><i className="material-icons left">favorite</i>loved</button>
-                    <button className={`btn-flat ${sortMethod === 'newRecipes' ? 'active' : null}`} onClick={() => setSortMethod('newRecipes')}><i className="material-icons left">new_releases</i>new</button>
+                <div className="col s12 l6">
+                    <div className="row">
+                        <div className="col s12">
+                            Sort recipes
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col s12 recipe-sort-methods">
+                            <button className={`btn-flat ${sortMethod === 'trendingRecipes' ? 'active' : null}`} onClick={() => setSortMethod('trendingRecipes')}><i className="material-icons left">trending_up</i>trending</button>
+                            <button className={`btn-flat ${sortMethod === 'topRecipes' ? 'active' : null}`} onClick={() => setSortMethod('topRecipes')}><i className="material-icons left">thumb_up</i>top</button>
+                            <button className={`btn-flat ${sortMethod === 'mostLovedRecipes' ? 'active' : null}`} onClick={() => setSortMethod('mostLovedRecipes')}><i className="material-icons left">favorite</i>loved</button>
+                            <button className={`btn-flat ${sortMethod === 'newRecipes' ? 'active' : null}`} onClick={() => setSortMethod('newRecipes')}><i className="material-icons left">new_releases</i>new</button>
+                        </div>
+                    </div>
                 </div>
-                <div className="col s12 l3 recipe-tag-search">
-                    <Autocomplete
-                        options={options}
-                        liftState={addFilter}
-                    />
-                </div>
-                <div className="col s12 l3 recipe-tag-list">
-                    {filters.map(filter => {
-                        return (
-                            <div className="chip orange lighten-2" key={filter}>
-                                <i className="close material-icons" onClick={() => removeFilter(filter)}>close</i>
-                                <span>{filter.toUpperCase()}</span>
-                            </div>
-                        )
-                    }).reverse()}
+                <div className="col s12 l6">
+                    <div className="row">
+                        <div className="col s12">
+                            Add filters
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col s12 l6 recipe-tag-search">
+                            <Autocomplete
+                                options={options}
+                                liftState={addFilter}
+                            />
+                        </div>
+                        <div className="col s12 l6 recipe-tag-list">
+                            {filters.map(filter => {
+                                return (
+                                    <div className="chip orange lighten-2" key={filter}>
+                                        <i className="close material-icons" onClick={() => removeFilter(filter)}>close</i>
+                                        <span>{filter.toUpperCase()}</span>
+                                    </div>
+                                )
+                            }).reverse()}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="row">

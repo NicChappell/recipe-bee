@@ -5,19 +5,28 @@ import PropTypes from 'prop-types'
 // import custom hooks
 import { useValidTextValue } from '../../helpers/customHooks'
 
+// import utility functions
+import { hyphenate } from '../../helpers/utilities'
+
 const RecipeTitle = props => {
     // destructure props
     const {
         errors,
-        liftState
+        liftSlug,
+        liftTitle,
+        resolveErrors
     } = props
 
     // custom hook variables
     const title = useValidTextValue('', errors.title)
 
-    // lift state when title value changes
+    // lift state and resolve errors when title value changes
     useEffect(() => {
-        liftState(title.value)
+        const slug = hyphenate(title.value)
+
+        liftSlug(slug)
+        liftTitle(title.value)
+        resolveErrors('title')
     }, [title.value])
 
     return (
@@ -41,7 +50,9 @@ const RecipeTitle = props => {
 
 RecipeTitle.propTypes = {
     errors: PropTypes.object,
-    liftState: PropTypes.func
+    liftSlug: PropTypes.func,
+    liftTitle: PropTypes.func,
+    resolveErrors: PropTypes.func
 }
 
 export default RecipeTitle

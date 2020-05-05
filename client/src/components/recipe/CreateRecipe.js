@@ -1,7 +1,10 @@
 // import dependencies
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import isEmpty from 'lodash.isempty'
 
 // import components
+import ErrorMessage from '../utility/ErrorMessage'
+import IndeterminateProgress from '../utility/IndeterminateProgress'
 import RecipeAddIngredient from './RecipeAddIngredient'
 import RecipeAddListItem from './RecipeAddListItem'
 import RecipeDescription from './RecipeDescription'
@@ -13,6 +16,7 @@ import RecipeShare from './RecipeShare'
 import RecipeTags from './RecipeTags'
 import RecipeTime from './RecipeTime'
 import RecipeTitle from './RecipeTitle'
+import SaveButton from './SaveButton'
 
 // import validation
 import validateRecipe from '../../validation/recipe'
@@ -22,12 +26,14 @@ const CreateRecipe = props => {
 	const {
 		createRecipe,
 		history,
+		// errors,
 		tags,
 		user
 	} = props
 
 	// state hook variables
 	const [title, setTitle] = useState('')
+	const [slug, setSlug] = useState('')
 	const [description, setDescription] = useState('')
 	const [photo, setPhoto] = useState(undefined)
 	const [prepTimeHours, setPrepTimeHours] = useState(0)
@@ -40,19 +46,20 @@ const CreateRecipe = props => {
 	const [notes, setNotes] = useState('')
 	const [tagList, setTagList] = useState([])
 	const [share, setShare] = useState(false)
-	// ---------------------------------- //
 	const [errors, setErrors] = useState({})
+	const [transmitting, setTransmitting] = useState(false)
 
 	const resolveErrors = key => {
 		delete errors[key]
 		setErrors(errors)
 	}
 
-	const submitRecipe = () => {
+	const saveRecipe = () => {
 		// create new recipe object
 		const newRecipe = {
-			user,
+			user: user.id,
 			title,
+			slug,
 			description,
 			photo,
 			prepTimeHours,
@@ -71,12 +78,18 @@ const CreateRecipe = props => {
 		const validate = validateRecipe(newRecipe)
 
 		// check for validation errors
-		!validate.isValid
-			? setErrors(validate.errors)
-			: createRecipe(newRecipe, history)
-
-		// createRecipe(newRecipe, history)
+		if (!validate.isValid) {
+			setErrors(validate.errors)
+		} else {
+			setTransmitting(true)
+			createRecipe(newRecipe, history)
+		}
 	}
+
+	// set errors when props.errors changes
+	useEffect(() => {
+		setErrors(props.errors)
+	}, [props.errors])
 
 	return (
 		<div className="card-panel white">
@@ -89,7 +102,9 @@ const CreateRecipe = props => {
 					</div>
 					<RecipeTitle
 						errors={errors}
-						liftState={setTitle}
+						liftSlug={setSlug}
+						liftTitle={setTitle}
+						resolveErrors={resolveErrors}
 					/>
 					<div className="row">
 						<div className="col s12">
@@ -99,6 +114,7 @@ const CreateRecipe = props => {
 					<RecipeDescription
 						errors={errors}
 						liftState={setDescription}
+						resolveErrors={resolveErrors}
 					/>
 				</div>
 				<div className="col s12 l6">
@@ -262,15 +278,14 @@ const CreateRecipe = props => {
 			</div>
 			<div className="row">
 				<div className="col s12">
-					<div className="row save center-align">
-						<div className="col s12">
-							<button className="black-text btn-small btn-flat amber lighten-2 mt-1" disabled={false} onClick={submitRecipe}>
-								Save Recipe
-							</button>
-						</div>
-					</div>
+					{
+						transmitting
+							? <IndeterminateProgress message='Saving recipe' />
+							: <SaveButton onClick={saveRecipe} />
+					}
 				</div>
 			</div>
+			{isEmpty(errors) ? null : <ErrorMessage errors={errors} />}
 		</div>
 	)
 }

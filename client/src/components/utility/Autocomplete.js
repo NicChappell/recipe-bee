@@ -95,7 +95,7 @@ const Autocomplete = props => {
                     onChange={handleChange}
                     onFocus={handleFocus}
                     onKeyDown={handleKeyDown}
-                    placeholder="Tag Name"
+                    placeholder="Tag name"
                     type='text'
                     value={userInput}
                 />

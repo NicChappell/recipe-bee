@@ -21,5 +21,12 @@ export const units = [
     'Kilogram',
     'Gram',
     'Pound',
-    'Ounce (oz)'
+    'Ounce (oz)',
+    'Portion',
+    'Piece',
+    'Section',
+    'Segment',
+    'Slice',
+    'Wedge',
+    'Slab'
 ]

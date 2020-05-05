@@ -57,6 +57,11 @@ span {
   flex-direction: column;
 }
 
+#get-recipe .recipe-image img {
+  height: auto;
+  width: 100%;
+}
+
 #get-recipes .recipe-sort-methods {
   display: flex;
   justify-content: flex-start;
@@ -152,7 +157,6 @@ span {
 }
 #post-recipe .error-message {
   color: #ff5722;
-  display: block;
 }
 #post-recipe .row {
   margin-bottom: 0em;
@@ -426,6 +430,15 @@ span {
   height: 0;
   justify-content: flex-start;
   overflow-y: hidden;
+}
+
+.indeterminate-progress {
+  font-size: 1rem;
+}
+.indeterminate-progress .dots {
+  display: inline-block;
+  overflow: visible;
+  width: 0;
 }
 
 .breadcrumbs {
@@ -1106,6 +1119,13 @@ select:-webkit-autofill::placeholder,
 select:-webkit-autofill:hover::placeholder,
 select:-webkit-autofill:focus::placeholder {
   font-size: 16px;
+}
+
+.progress {
+  background-color: #ffeb3b;
+}
+.progress .indeterminate {
+  background-color: #ffc107;
 }
 
 /*# sourceMappingURL=styles.css.map */

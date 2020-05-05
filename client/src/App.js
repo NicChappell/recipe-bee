@@ -34,6 +34,9 @@ import SignIn from './screens/SignIn'
 import SignUp from './screens/SignUp'
 // import account screens
 import Account from './screens/Account'
+// import legalese screens
+import PrivacyPolicy from './screens/PrivacyPolicy'
+import TermsAndConditions from './screens/TermsAndConditions'
 // import unmatched screen
 import NoMatch from './screens/NoMatch'
 
@@ -105,13 +108,15 @@ const App = props => {
 						<Route exact path="/" component={Home} />
 						<Route exact path="/recipes" component={GetRecipes} />
 						<Route exact path="/recipes/create" component={PostRecipe} />
-						<Route path="/recipes/:recipeId" component={GetRecipe} />
+						<Route path="/recipes/:recipeSlug/:recipeId" component={GetRecipe} />
 						<Route exact path="/shopping-lists" component={GetShoppingLists} />
 						<Route exact path="/shopping-lists/create" component={PostShoppingList} />
 						<Route path="/shopping-lists/:id" component={GetShoppingList} />
 						<Route path="/sign-in" component={SignIn} />
 						<Route path="/sign-up" component={SignUp} />
-						<Route path="/account/:slug" component={Account} />
+						<Route path="/account/:userSlug" component={Account} />
+						<Route path="/privacy-policy" component={PrivacyPolicy} />
+						<Route path="/terms-and-conditions" component={TermsAndConditions} />
 						<Route component={NoMatch} />
 					</Switch>
 				</div>
