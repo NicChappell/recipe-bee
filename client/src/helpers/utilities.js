@@ -1,3 +1,10 @@
+export const capitalize = str => {
+    // get first character of the string
+    // convert first character to uppercase
+    // concatenate with remainder of string
+    return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 export const fileExtension = (file) => {
     // destructure file object
     const { name } = file

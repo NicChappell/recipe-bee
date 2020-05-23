@@ -1,31 +1,34 @@
 // import dependencies
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 // import custom hooks
 import { useDidMount } from '../../helpers/customHooks'
 
 const HeartAction = props => {
-    // custom hook variables
-    const didMount = useDidMount()
-
     // destructure props
     const {
+        action,
         hearts,
         isAuthenticated,
         recipeId,
         totalHearts,
-        updateRecipe,
         userId
     } = props
 
-    // determine if user is already in hearts array
-    const alreadyLoved = hearts && hearts.includes(userId)
+    // // determine if user is already in hearts array
+    // const alreadyLoved = hearts && hearts.includes(userId)
 
     // state hook variables
-    const [loved, setLoved] = useState(alreadyLoved)
+    const [loved, setLoved] = useState(hearts.includes(userId))
     const [newHearts, setNewHearts] = useState(hearts)
     const [newHeartsCount, setNewHeartsCount] = useState(totalHearts)
-    const [prevHeartsCount, setPrevHeartsCount] = useState(alreadyLoved ? totalHearts - 1 : totalHearts)
+    // console.log(newHeartsCount)
+    const [prevHeartsCount, setPrevHeartsCount] = useState(hearts.includes(userId) ? totalHearts - 1 : totalHearts)
+    // console.log(prevHeartsCount)
+
+    // custom hook variables
+    const didMount = useDidMount()
 
     // temporary variables
     let tempHearts = newHearts
@@ -67,20 +70,29 @@ const HeartAction = props => {
                 totalHearts: newHeartsCount
             }
 
-            updateRecipe(recipeId, recipeData)
+            action(recipeId, recipeData)
         }
     }, [newHeartsCount])
 
     return (
         <div className="heart-action">
             {loved
-                ? <button className="btn-flat heart-button" disabled={!isAuthenticated} onClick={handleHeartClick}><i className="material-icons orange-text lighten-2">favorite</i></button>
+                ? <button className="btn-flat heart-button" disabled={!isAuthenticated} onClick={handleHeartClick}><i className="material-icons red-text lighten-2">favorite</i></button>
                 : <button className="btn-flat heart-button" disabled={!isAuthenticated} onClick={handleHeartClick}><i className="material-icons">favorite_border</i></button>
             }
             <span className="heart-count">{newHeartsCount && newHeartsCount.toLocaleString()}</span>
         </div>
     )
 
+}
+
+HeartAction.propTypes = {
+    action: PropTypes.func,
+    hearts: PropTypes.array,
+    isAuthenticated: PropTypes.bool,
+    recipeId: PropTypes.string,
+    totalHearts: PropTypes.number,
+    userId: PropTypes.string
 }
 
 export default HeartAction

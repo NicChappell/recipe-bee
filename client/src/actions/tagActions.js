@@ -1,7 +1,7 @@
 // import dependencies
 import axios from 'axios'
 
-// import actions
+// import action types
 import {
     GET_ERRORS,
     GET_TAGS

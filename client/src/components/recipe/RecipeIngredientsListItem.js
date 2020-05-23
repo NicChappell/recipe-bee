@@ -68,9 +68,11 @@ const RecipeIngredientsListItem = props => {
 						<div className="row">
 							<div className={`input-field col s5 l2 ${quantity.valid ? '' : 'invalid-input'}`}>
 								<select
-									{...quantity}
+									className={quantity.className}
+									onChange={quantity.handleChange}
 									disabled={!modify}
 									name="quantity"
+									value={quantity.value}
 								>
 									<option disabled value=""></option>
 									{quantities && quantities.map(quantity => <option key={quantity} value={quantity}>{quantity}</option>)}
@@ -95,10 +97,15 @@ const RecipeIngredientsListItem = props => {
 							</div>
 							<div className={`input-field col s12 l6 ${name.valid ? '' : 'invalid-input'}`}>
 								<input
-									{...name}
+									autoComplete={name.autoComplete}
+									onBlur={name.handleBlur}
+									onChange={name.handleChange}
+									onFocus={name.handleFocus}
 									disabled={!modify}
 									name="name"
 									placeholder={name.valid ? 'Name' : 'Name is required'}
+									type={name.type}
+									value={name.value}
 								/>
 							</div>
 						</div>

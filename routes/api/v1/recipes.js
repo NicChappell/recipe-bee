@@ -1,6 +1,7 @@
 // import dependencies
 const express = require('express')
 const moment = require('moment')
+const isEmpty = require('lodash.isempty')
 
 // import validation
 const validateRecipe = require('../../../validation/recipe')
@@ -15,39 +16,45 @@ const router = express.Router()
 // @route:  GET api/v1/recipes/?limit=limit&skip=skip&sortMethod=sortMethod
 // @desc:   Return all recipes
 router.get('/', (req, res) => {
-    // destructure query parameters
+    // destructure query params
     const {
         limit,
         skip,
-        sortMethod
+        sortMethod,
+        days
     } = req.query
+
+    // get the current date and time
+    const now = moment()
 
     let find = {}
     let sort = {}
     switch (sortMethod) {
         case 'mostLovedRecipes':
+            // filter for previous x days
+            find = { createdAt: { $gt: now.subtract(parseInt(days), 'days') } }
             sort = { totalHearts: -1, createdAt: 1 }
             break
         case 'newRecipes':
             sort = { createdAt: -1 }
             break
         case 'topRecipes':
+            // filter for previous x days
+            find = { createdAt: { $gt: now.subtract(parseInt(days), 'days') } }
             sort = { netVotes: -1, createdAt: 1 }
             break
         case 'trendingRecipes':
-            // get the current date and time
-            const now = moment()
-            // filter for previous n days and more than 99 net (up)votes
-            find = { createdAt: { $gt: now.subtract(1, 'days') }, netVotes: { $gt: 99 } }
+            // filter for previous x days and more than y net (up)votes
+            find = { createdAt: { $gt: now.subtract(parseInt(days), 'days') }, netVotes: { $gt: 0 } }
             sort = { percentUpVotes: -1 }
             break
         default:
             find = {}
             sort = {}
-            break
     }
 
     Recipe.find(find)
+        .populate(['user', 'photo'])
         .limit(limit ? parseInt(limit) : 0)
         .skip(skip ? parseInt(skip) : 0)
         .sort(sort)
@@ -58,7 +65,6 @@ router.get('/', (req, res) => {
 // @route:  POST api/v1/recipes/
 // @desc:   Create new recipe
 router.post('/', (req, res) => {
-    console.log(req.body)
     // destructure validateRecipe()
     const {
         errors,
@@ -83,6 +89,8 @@ router.post('/', (req, res) => {
         prepTimeMinutes,
         cookTimeHours,
         cookTimeMinutes,
+        servings,
+        production,
         preparations,
         ingredients,
         instructions,
@@ -121,6 +129,8 @@ router.post('/', (req, res) => {
             hours: totalTimeHours,
             minutes: totalTimeMinutes
         },
+        servings,
+        production,
         preparations,
         ingredients,
         instructions,
@@ -133,8 +143,8 @@ router.post('/', (req, res) => {
 
     // save recipe to database
     newRecipe.save()
-        .then(recipe => res.status(200).json({ mesage: "successfully created recipe", recipe }))
-        .catch(err => res.status(500).json({ mesage: "faled to create recipe", err }))
+        .then(recipe => res.status(200).json({ mesage: 'created recipe', recipe }))
+        .catch(err => res.status(500).json({ mesage: 'failed to create recipe', err }))
 })
 
 // @route:  GET api/v1/recipes/:recipeId
@@ -145,10 +155,9 @@ router.get('/:recipeId', (req, res) => {
 
     // find recipe
     Recipe.findById(recipeId)
-        .populate('user')
-        .populate('photo')
-        .then(recipe => res.status(200).json(recipe))
-        .catch(err => res.status(404).json({ recipe: 'Recipe not found', err }))
+        .populate(['user', 'photo'])
+        .then(recipe => res.status(200).json({ mesage: 'found recipe', recipe }))
+        .catch(err => res.status(404).json({ recipe: 'failed to find recipe', err }))
 })
 
 // @route:  PUT api/v1/recipes/:recipeId
@@ -175,8 +184,9 @@ router.put('/:recipeId', (req, res) => {
 
     // find recipe and update
     Recipe.findByIdAndUpdate(recipeId, { ...body }, { new: true })
-        .then(recipe => res.status(200).json({ message: 'successfully updated recipe', recipe }))
-        .catch(err => res.status(400).json({ message: 'falied to update recipe', err }))
+        .populate(['user', 'photo'])
+        .then(recipe => res.status(200).json({ message: 'updated recipe', recipe }))
+        .catch(err => res.status(400).json({ message: 'error updating recipe', err }))
 })
 
 // @route:  DELETE api/v1/recipes/:recipeId
@@ -187,8 +197,80 @@ router.delete('/:recipeId', (req, res) => {
 
     // find recipe and delete
     Recipe.findByIdAndDelete(recipeId)
-        .then(() => res.status(200).json({ message: 'successfully deleted recipe' }))
-        .catch(err => res.status(400).json({ message: 'falied to delete recipe', err }))
+        .then(() => res.status(200).json({ message: 'deleted recipe' }))
+        .catch(err => res.status(400).json({ message: 'error deleting recipe', err }))
+})
+
+// @route:  GET api/v1/recipes/utilities/count
+// @desc:   Return document count for the recipes collection
+router.get('/utilities/count', (req, res) => {
+    Recipe.countDocuments()
+        .then(count => res.status(200).json({ message: 'counted recipe documnents', count }))
+        .catch(err => res.status(400).json({ message: 'error counting recipe documents', err }))
+})
+
+// @route:  GET api/v1/recipes/:userId/down-votes/
+// @desc:   Return a user's down-voted recipes
+router.get('/:userId/down-votes', (req, res) => {
+    // destructure request params
+    const { userId } = req.params
+
+    Recipe.find({ downVotes: userId })
+        .populate(['user', 'photo'])
+        .then(recipes => {
+            isEmpty(recipes)
+                ? res.status(200).json({ mesage: 'no down-voted recipes found', recipes })
+                : res.status(200).json({ mesage: `found ${recipes.length} down-voted recipes`, recipes })
+        })
+        .catch(err => res.status(500).json({ recipe: 'error finding recipes', err }))
+})
+
+// @route:  GET api/v1/recipes/:userId/favorites/
+// @desc:   Return a user's favorite recipes
+router.get('/:userId/favorites', (req, res) => {
+    // destructure request params
+    const { userId } = req.params
+
+    Recipe.find({ hearts: userId })
+        .populate(['user', 'photo'])
+        .then(recipes => {
+            isEmpty(recipes)
+                ? res.status(200).json({ mesage: 'no favorite recipes found', recipes })
+                : res.status(200).json({ mesage: `found ${recipes.length} favorite recipes`, recipes })
+        })
+        .catch(err => res.status(500).json({ recipe: 'error finding recipes', err }))
+})
+
+// @route:  GET api/v1/recipes/:userId/submissions/
+// @desc:   Return a user's submitted recipes
+router.get('/:userId/submissions', (req, res) => {
+    // destructure request params
+    const { userId } = req.params
+
+    Recipe.find({ user: userId })
+        .populate(['user', 'photo'])
+        .then(recipes => {
+            isEmpty(recipes)
+                ? res.status(200).json({ mesage: 'no recipe submissions found', recipes })
+                : res.status(200).json({ mesage: `found ${recipes.length} recipe submissions`, recipes })
+        })
+        .catch(err => res.status(500).json({ recipe: 'error finding recipes', err }))
+})
+
+// @route:  GET api/v1/recipes/:userId/up-votes/
+// @desc:   Return a user's up-voted recipes
+router.get('/:userId/up-votes', (req, res) => {
+    // destructure request params
+    const { userId } = req.params
+
+    Recipe.find({ upVotes: userId })
+        .populate(['user', 'photo'])
+        .then(recipes => {
+            isEmpty(recipes)
+                ? res.status(200).json({ mesage: 'no up-voted recipes found', recipes })
+                : res.status(200).json({ mesage: `found ${recipes.length} up-voted recipes`, recipes })
+        })
+        .catch(err => res.status(500).json({ recipe: 'error finding recipes', err }))
 })
 
 // export router

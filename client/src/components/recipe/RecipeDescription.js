@@ -28,9 +28,9 @@ const RecipeDescription = props => {
                 <textarea
                     className={description.className}
                     name="description"
-                    onBlur={description.onBlur}
-                    onChange={description.onChange}
-                    onFocus={description.onFocus}
+                    onBlur={description.handleBlur}
+                    onChange={description.handleChange}
+                    onFocus={description.handleFocus}
                     placeholder="Description"
                     value={description.value}
                 >

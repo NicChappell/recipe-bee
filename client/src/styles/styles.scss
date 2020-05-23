@@ -81,6 +81,193 @@ span {
   font-family: "Source Sans Pro", sans-serif;
 }
 
+#account {
+  .navigation {
+    button {
+      overflow: hidden;
+      text-align: left;
+      white-space: nowrap;
+      width: 100%;
+      &:focus,
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+    .active {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+  .profile {
+    .edit-account {
+    }
+    .personal-information {
+    }
+  }
+  .recipes {
+    border: 1px solid $brand-light;
+    height: auto;
+    max-height: 450px;
+    overflow: scroll;
+    .card.recipe-card {
+      .card-image {
+        .card-title {
+          color: $brand-light;
+          text-shadow: 1px 1px $primary;
+        }
+      }
+      .card-content {
+        .card-title {
+          color: $primary;
+          font-weight: 400;
+        }
+      }
+      .card-action.recipe-action {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        overflow: hidden;
+        .actions,
+        .tags {
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          width: auto;
+        }
+        .actions {
+          justify-content: flex-start;
+          .heart-action,
+          .vote-action {
+            margin: 0;
+            overflow: hidden;
+            padding: 0;
+            white-space: nowrap;
+            button {
+              &:focus {
+                background-color: transparent;
+              }
+            }
+          }
+          .heart-action {
+            margin-right: 25px;
+          }
+        }
+        .tags {
+          justify-content: flex-end;
+          padding: 4px 16px;
+          .chip {
+            margin: 4px;
+            white-space: nowrap;
+          }
+        }
+        @media screen and (min-width: $min-medium) and (max-width: $max-medium) {
+          flex-direction: column;
+          .actions,
+          .tags {
+            justify-content: center;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .settings {
+    .delete-account {
+      button {
+        margin: 1.0933333333rem 0 0.656rem 0;
+      }
+      h5 {
+        line-height: 36px;
+      }
+    }
+    .update-password {
+    }
+  }
+}
+
+#index {
+  .recipes-preview {
+    .overflow-x-container {
+      background-color: yellowgreen;
+      overflow: scroll;
+      padding: 0.75rem;
+      .overflow-x-content {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        .card.recipe-card {
+          display: inline-block;
+          margin: 0.75rem;
+          min-width: 500px;
+          width: 100%;
+          .card-image {
+            .card-title {
+              color: $brand-light;
+              text-shadow: 1px 1px $primary;
+            }
+          }
+          .card-content {
+            .card-title {
+              color: $primary;
+              font-weight: 400;
+            }
+          }
+          .card-action.recipe-action {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            overflow: hidden;
+            .actions,
+            .tags {
+              align-items: center;
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              width: auto;
+            }
+            .actions {
+              justify-content: flex-start;
+              .heart-action,
+              .vote-action {
+                margin: 0;
+                overflow: hidden;
+                padding: 0;
+                white-space: nowrap;
+                button {
+                  &:focus {
+                    background-color: transparent;
+                  }
+                }
+              }
+              .heart-action {
+                margin-right: 25px;
+              }
+            }
+            .tags {
+              justify-content: flex-end;
+              padding: 4px 16px;
+              .chip {
+                margin: 4px;
+                white-space: nowrap;
+              }
+            }
+            @media screen and (min-width: $min-medium) and (max-width: $max-medium) {
+              flex-direction: column;
+              .actions,
+              .tags {
+                justify-content: center;
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 #app-content {
   display: flex;
   min-height: 100vh;
@@ -94,15 +281,144 @@ span {
       width: 100%;
     }
   }
+  .recipe-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+    .actions,
+    .tags {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 50%;
+    }
+    .actions {
+      justify-content: flex-start;
+      .heart-action,
+      .vote-action {
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        white-space: nowrap;
+        button {
+          &:focus {
+            background-color: transparent;
+          }
+        }
+      }
+      .heart-action {
+        margin-right: 25px;
+      }
+    }
+    .tags {
+      height: auto;
+      justify-content: flex-end;
+      max-height: 80px;
+      min-height: 40px;
+      overflow: auto;
+      padding: 0 16px;
+      .chip {
+        margin: 4px;
+        white-space: nowrap;
+      }
+    }
+    @media screen and (min-width: $min-medium) and (max-width: $max-medium) {
+      flex-direction: column;
+      .actions,
+      .tags {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+  }
 }
 
 #get-recipes {
+  .card.recipe-card {
+    .card-image {
+      .card-title {
+        color: $brand-light;
+        text-shadow: 1px 1px $primary;
+      }
+    }
+    .card-content {
+      .card-title {
+        color: $primary;
+        font-weight: 400;
+      }
+    }
+    .card-action.recipe-action {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      overflow: hidden;
+      .actions,
+      .tags {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: auto;
+      }
+      .actions {
+        justify-content: flex-start;
+        .heart-action,
+        .vote-action {
+          margin: 0;
+          overflow: hidden;
+          padding: 0;
+          white-space: nowrap;
+          button {
+            &:focus {
+              background-color: transparent;
+            }
+          }
+        }
+        .heart-action {
+          margin-right: 25px;
+        }
+      }
+      .tags {
+        justify-content: flex-end;
+        padding: 4px 16px;
+        .chip {
+          margin: 4px;
+          white-space: nowrap;
+        }
+      }
+      @media screen and (min-width: $min-medium) and (max-width: $max-medium) {
+        flex-direction: column;
+        .actions,
+        .tags {
+          justify-content: center;
+          width: 100%;
+        }
+      }
+    }
+  }
   .recipe-sort-methods {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     .active {
       background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+  .date-ranges {
+    align-items: center;
+    color: $primary;
+    display: flex;
+    padding: 0 16px;
+    width: auto;
+    select {
+      background-color: transparent;
+      border: none;
+      width: auto;
+      &:focus {
+        outline: none;
+      }
     }
   }
   .recipe-tag-search {
@@ -226,7 +542,7 @@ span {
       img {
         height: auto;
         max-height: 22.5rem;
-        width: auto;
+        width: 100%;
       }
       .invalid-photo {
         border: 1px solid $danger;
@@ -292,6 +608,94 @@ span {
     .time-output {
       font-size: 2.5rem;
       margin-left: 1rem;
+    }
+  }
+  // recipe servings
+  .number {
+    // background-color: yellowgreen;
+    overflow: hidden;
+    .number-input {
+      align-items: center;
+      display: flex;
+      justify-content: flex-start;
+    }
+    .button-controls {
+      // background-color: aqua;
+      display: flex;
+      flex-direction: column;
+      button {
+        &:focus,
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+    input[type="number"] {
+      // background-color: cornflowerblue;
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0;
+      text-align: center;
+      width: 50px;
+      -moz-appearance: textfield;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+  }
+  // recipe yield
+  .yield {
+    display: flex;
+    .index {
+      align-items: center;
+      display: flex;
+      font-size: 1rem;
+      font-weight: bold;
+      height: 4rem;
+      justify-content: center;
+    }
+    .input-field {
+      margin: 0;
+      input {
+        height: 4rem;
+      }
+      label {
+        color: $secondary;
+        font-size: 0.75rem;
+        line-height: 1.5rem;
+        top: -2rem;
+      }
+      select {
+        height: 3rem;
+        margin: 0.5rem 0;
+        &:disabled {
+          color: $secondary;
+          appearance: none;
+          -moz-appearance: none;
+          -webkit-appearance: none;
+          &::-ms-expand {
+            display: none;
+          }
+        }
+      }
+      textarea {
+        height: 4rem;
+        overflow: scroll;
+      }
+    }
+    .buttons {
+      align-items: center;
+      align-self: flex-start;
+      display: flex;
+      flex-direction: row;
+      height: 4rem;
+      justify-content: center;
+      margin: 0;
+      button {
+        margin: 0 0.25rem;
+      }
     }
   }
   // recipe preparations
@@ -490,14 +894,15 @@ $size: 100px;
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
-  height: 0;
   justify-content: flex-start;
-  overflow-y: hidden;
 }
 
 // UTILITIES
-.indeterminate-progress {
+.indeterminate-message {
   font-size: 1rem;
+  .message {
+    display: inline-block;
+  }
   .dots {
     display: inline-block;
     overflow: visible;
@@ -531,44 +936,6 @@ $size: 100px;
     .create-recipe,
     .create-shopping-list {
       margin: 0.75rem;
-    }
-  }
-}
-
-.recipe-actions {
-  display: flex;
-  flex-direction: row;
-  .heart-action,
-  .vote-action {
-    margin: 0;
-    overflow: hidden;
-    padding: 0;
-    white-space: nowrap;
-    button {
-      &:focus {
-        background-color: transparent;
-      }
-    }
-  }
-  .heart-action {
-    text-align: left;
-    width: 35%;
-  }
-  .vote-action {
-    text-align: right;
-    width: 65%;
-  }
-  @media screen and (min-width: $min-medium) and (max-width: $max-medium) {
-    flex-direction: column-reverse;
-    .heart-action,
-    .vote-action {
-      text-align: center;
-    }
-    .heart-action {
-      width: 100%;
-    }
-    .vote-action {
-      width: 100%;
     }
   }
 }
@@ -630,10 +997,6 @@ $size: 100px;
     max-width: 10rem;
     width: auto;
   }
-}
-
-.router {
-  overflow: auto;
 }
 
 .side-nav {

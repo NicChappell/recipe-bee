@@ -19,11 +19,12 @@ const validateRecipe = data => {
         prepTimeMinutes,
         cookTimeHours,
         cookTimeMinutes,
+        servings,
+        production,
         preparations,
         ingredients,
         instructions,
-        tagList,
-        share
+        tagList
     } = data
 
     // validate title input
@@ -67,6 +68,22 @@ const validateRecipe = data => {
         errors.cookTime = 'Cook time is required'
     }
 
+    // validate servings input
+    if (!servings) {
+        errors.servings = 'Servings is required'
+    }
+
+    // destructure production (i.e. yield)
+    const {
+        name,
+        quantity
+    } = production
+
+    // validate production (i.e. yield)
+    if (!name || !quantity) {
+        errors.production = 'Yield is required'
+    }
+
     // validate preparations
     if (isEmpty(preparations)) {
         errors.preparations = 'Preparations are required'
@@ -85,11 +102,6 @@ const validateRecipe = data => {
     // validate tag list
     if (isEmpty(tagList)) {
         errors.tagList = 'Tags are required'
-    }
-
-    // validate share
-    if (share && !photo) {
-        errors.share = 'Photo is required to share'
     }
 
     // return errors object and isValid boolean

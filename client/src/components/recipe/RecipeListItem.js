@@ -7,6 +7,7 @@ import EditButtons from './EditButtons'
 
 // import custom hooks
 import { useValidTextAreaValue } from '../../helpers/customHooks'
+import { text } from 'body-parser'
 
 const RecipeListItem = props => {
 	// state hook variables
@@ -53,9 +54,13 @@ const RecipeListItem = props => {
 					</div>
 					<div className={`input-field col s10 m11 ${textArea.valid ? '' : 'invalid-input'}`}>
 						<textarea
-							{...textArea}
+							className={textArea.className}
+							onBlur={textArea.handleBlur}
+							onChange={textArea.handleChange}
+							onFocus={textArea.handleFocus}
 							disabled={!modify}
 							placeholder={placeholder}
+							value={textArea.value}
 						>
 						</textarea>
 					</div>

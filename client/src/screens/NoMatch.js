@@ -1,34 +1,17 @@
 // import dependencies
 import React from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 
 // import images
-import icon from '../images/icons/icon.png'
+import logo from '../images/logos/logo.svg'
 
-const NoMatch = ({ utilities }) => {
-    // destructure utilities
-    const { routerHeight } = utilities
-
+const NoMatch = () => {
     return (
-        <div className="container router" id="no-match" style={{ height: routerHeight }}>
+        <div className="container" id="no-match">
             <div className="x">
-                <img className="y" src={icon} alt="" />
+                <img className="y" src={logo} alt="" />
             </div>
         </div>
     )
 }
 
-NoMatch.propTypes = {
-    auth: PropTypes.object.isRequired,
-    utilities: PropTypes.object.isRequired
-}
-
-const mapStateToProps = state => ({
-    auth: state.auth,
-    utilities: state.utilities
-})
-
-export default connect(
-    mapStateToProps
-)(NoMatch)
+export default NoMatch

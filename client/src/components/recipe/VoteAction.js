@@ -1,5 +1,6 @@
 // import dependencies
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 // import custom hooks
 import { useDidMount } from '../../helpers/customHooks'
@@ -10,11 +11,11 @@ const VoteAction = props => {
 
     // destructure props
     const {
+        action,
         downVotes,
         isAuthenticated,
         recipeId,
         netVotes,
-        updateRecipe,
         upVotes,
         userId
     } = props
@@ -145,7 +146,7 @@ const VoteAction = props => {
                 upVotes: newUpVotes
             }
 
-            updateRecipe(recipeId, recipeData)
+            action(recipeId, recipeData)
         }
     }, [newVotesCount])
 
@@ -160,6 +161,16 @@ const VoteAction = props => {
             </button>
         </div>
     )
+}
+
+VoteAction.propTypes = {
+    action: PropTypes.func,
+    downVotes: PropTypes.array,
+    isAuthenticated: PropTypes.bool,
+    recipeId: PropTypes.string,
+    netVotes: PropTypes.number,
+    upVotes: PropTypes.array,
+    userId: PropTypes.string
 }
 
 export default VoteAction

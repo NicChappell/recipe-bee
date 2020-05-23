@@ -1,9 +1,5 @@
 // import dependencies
-import React, {
-	useEffect,
-	useRef,
-	useState
-} from 'react'
+import React, { useEffect, useState } from 'react'
 import {
 	BrowserRouter as Router,
 	Route,
@@ -12,23 +8,17 @@ import {
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-// import auth actions
-import { setRouterHeight } from './actions/utilityActions'
+// import actions
+import { getRecipes } from './actions/recipeActions'
+import { getTags } from './actions/tagActions'
 import { signOutUser } from './actions/authActions'
 
-// import custom hooks
-import { useWindowSize } from './helpers/customHooks'
-
-// import default screen
-import Home from './screens/Home'
+// import index screen
+import Index from './screens/Index'
 // import recipe screens
 import GetRecipe from './screens/GetRecipe'
 import GetRecipes from './screens/GetRecipes'
 import PostRecipe from './screens/PostRecipe'
-// import shopping screens
-import GetShoppingList from './screens/GetShoppingList'
-import GetShoppingLists from './screens/GetShoppingLists'
-import PostShoppingList from './screens/PostShoppingList'
 // import auth screens
 import SignIn from './screens/SignIn'
 import SignUp from './screens/SignUp'
@@ -49,22 +39,17 @@ import SideNav from './components/layout/SideNav'
 import './styles/styles.css'
 
 const App = props => {
-	// state hook variables
-	const [open, setOpen] = useState(false)
-
-	// ref hook variables
-	const routerContent = useRef(null)
-
-    // custom hook variables
-	const [width, height] = useWindowSize()
-
 	// destructure props
 	const {
 		auth,
-		setRouterHeight,
+		getRecipes,
+		getTags,
+		recipes,
 		signOutUser
 	} = props
-	console.log(auth)
+
+	// state hook variables
+	const [open, setOpen] = useState(false)
 
 	const closeSideNav = () => {
 		setOpen(!open)
@@ -74,20 +59,39 @@ const App = props => {
 		setOpen(!open)
 	}
 
-	// update routerHeight when window size changes
-	useEffect(() => {
-		// destructure routerContent
-		const { current } = routerContent
+    // get tags when component mounts
+    useEffect(() => getTags(), [])
 
-		// calculate routerContent size and relative position
-		const rect = current.getBoundingClientRect()
+    // get recipes when component mounts
+    useEffect(() => {
+		// reset: true
+		// limit: 25
+		// skip: 0
+		// sortMethod: 'mostLovedRecipes'
+		// days: 30
+		getRecipes(true, 25, 0, 'mostLovedRecipes', 30)
 
-		// update state
-		setRouterHeight(Math.round(rect.height))
+		// reset: true
+		// limit: 25
+		// skip: 0
+		// sortMethod: 'newRecipes'
+		// days: null
+		getRecipes(true, 25, 0, 'newRecipes', null)
 
-		// clean up after this effect
-		return () => setRouterHeight(0)
-	}, [width, height])
+		// reset: true
+		// limit: 25
+		// skip: 0
+		// sortMethod: 'topRecipes'
+		// days: 30
+		getRecipes(true, 25, 0, 'topRecipes', 30)
+
+		// reset: true
+		// limit: 25
+		// skip: 0
+		// sortMethod: 'trendingRecipes'
+		// days: 30
+		getRecipes(true, 25, 0, 'trendingRecipes', 30)
+	}, [])
 
 	return (
 		<Router>
@@ -103,15 +107,12 @@ const App = props => {
 					open={open}
 					signOutUser={signOutUser}
 				/>
-				<div className="my-3" id="router-content" ref={routerContent}>
+				<div className="my-3" id="router-content">
 					<Switch>
-						<Route exact path="/" component={Home} />
+						<Route exact path="/" component={Index} />
 						<Route exact path="/recipes" component={GetRecipes} />
 						<Route exact path="/recipes/create" component={PostRecipe} />
 						<Route path="/recipes/:recipeSlug/:recipeId" component={GetRecipe} />
-						<Route exact path="/shopping-lists" component={GetShoppingLists} />
-						<Route exact path="/shopping-lists/create" component={PostShoppingList} />
-						<Route path="/shopping-lists/:id" component={GetShoppingList} />
 						<Route path="/sign-in" component={SignIn} />
 						<Route path="/sign-up" component={SignUp} />
 						<Route path="/account/:userSlug" component={Account} />
@@ -127,16 +128,18 @@ const App = props => {
 }
 
 App.propTypes = {
-	auth: PropTypes.object.isRequired,
-	setRouterHeight: PropTypes.func.isRequired,
-	signOutUser: PropTypes.func.isRequired
+	auth: PropTypes.object,
+	getRecipes: PropTypes.func,
+	getTags: PropTypes.func,
+	signOutUser: PropTypes.func
 }
 
 const mapStateToProps = state => ({
-	auth: state.auth
+	auth: state.auth,
+    recipes: state.recipes
 })
 
 export default connect(
 	mapStateToProps,
-	{ setRouterHeight, signOutUser }
+	{ getRecipes, getTags, signOutUser }
 )(App)

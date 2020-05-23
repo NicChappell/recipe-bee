@@ -15,8 +15,7 @@ const SignIn = props => {
     const {
         auth,
         errors,
-        signInUser,
-        utilities
+        signInUser
     } = props
 
     // destructure auth
@@ -25,13 +24,10 @@ const SignIn = props => {
         user
     } = auth
 
-    // destructure utilities
-    const { routerHeight } = utilities
-
     // allow access if user is not authenticated
     if (!isAuthenticated) {
         return (
-            <div className="container router" style={{ height: routerHeight }}>
+            <div className="container">
                 <div className="row">
                     <SignInForm
                         errors={errors}
@@ -48,14 +44,12 @@ const SignIn = props => {
 SignIn.propTypes = {
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
-    signInUser: PropTypes.func.isRequired,
-    utilities: PropTypes.object.isRequired
+    signInUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    errors: state.errors,
-    utilities: state.utilities
+    errors: state.errors
 })
 
 export default connect(

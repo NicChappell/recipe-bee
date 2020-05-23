@@ -66,6 +66,24 @@ const RecipeSchema = new Schema({
             default: 0
         }
     },
+    servings: {
+        type: Number,
+        default: 0
+    },
+    production: {
+        name: {
+            type: String,
+            default: ''
+        },
+        quantity: {
+            type: String,
+            default: ''
+        },
+        unit: {
+            type: String,
+            default: ''
+        }
+    },
     preparations: {
         type: Array,
         default: []

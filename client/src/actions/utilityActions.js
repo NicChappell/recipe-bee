@@ -1,4 +1,4 @@
-// import actions
+// import action types
 import { SET_ROUTER_HEIGHT } from './types'
 
 // calculate router height

@@ -75,10 +75,10 @@ export const useTextAreaValue = (val = '') => {
     }
 }
 
-export const useValidNumberValue = (val = 0) => {
+export const useValidNumberValue = (val = '', errorMessage = '') => {
     const [blurred, setBlurred] = useState(false)
+    const [valid, setValid] = useState(1)
     const [value, setValue] = useState(val)
-    const [valid, setValid] = useState(true)
 
     const handleBlur = e => {
         setBlurred(true)
@@ -92,23 +92,27 @@ export const useValidNumberValue = (val = 0) => {
     useEffect(() => {
         if (value > 0 && blurred === true) {
             // valid and blurred
-            setValid(true)
+            setValid(1)
         } else if (value > 0 && blurred === false) {
             // valid and unblurred
-            setValid(true)
+            setValid(1)
         } else if (value < 1 && blurred === true) {
             // invalid and blurred
-            setValid(false)
+            setValid(0)
         } else if (value < 1 && blurred === false) {
             // invalid and unblurred
-            setValid(true)
+            setValid(1)
         }
     }, [blurred, value])
 
+    useEffect(() => {
+        setValid(errorMessage ? 0 : 1)
+    }, [errorMessage])
+
     return {
-        onBlur: handleBlur,
-        onChange: handleChange,
-        onFocus: handleFocus,
+        handleBlur,
+        handleChange,
+        handleFocus,
         type: 'number',
         valid,
         value
@@ -126,7 +130,7 @@ export const useValidSelectValue = (val = '') => {
 
     return {
         className: 'browser-default',
-        onChange: handleChange,
+        handleChange,
         valid,
         value
     }
@@ -151,9 +155,9 @@ export const useValidTextAreaValue = (val = '', errorMessage = '') => {
 
     return {
         className: 'materialize-textarea',
-        onBlur: handleBlur,
-        onChange: handleChange,
-        onFocus: handleFocus,
+        handleBlur,
+        handleChange,
+        handleFocus,
         valid,
         value
     }
@@ -178,9 +182,9 @@ export const useValidTextValue = (val = '', errorMessage = '') => {
 
     return {
         autoComplete: "off",
-        onBlur: handleBlur,
-        onChange: handleChange,
-        onFocus: handleFocus,
+        handleBlur,
+        handleChange,
+        handleFocus,
         type: 'text',
         valid,
         value

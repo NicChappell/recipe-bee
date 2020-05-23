@@ -29,8 +29,7 @@ const Footer = () => {
                     <div className="col s6 m3">
                         <h5 className="black-text">About</h5>
                         <ul>
-                            <li><Link className="black-text" to="/">Blog</Link></li>
-                            <li><Link className="black-text" to="/">Our Team</Link></li>
+                            <li><Link className="black-text" to="/">Company</Link></li>
                             <li><Link className="black-text" to="/">Contact</Link></li>
                         </ul>
                     </div>

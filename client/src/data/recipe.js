@@ -23,10 +23,14 @@ export const units = [
     'Pound',
     'Ounce (oz)',
     'Portion',
+    'Quarter',
+    'Third',
+    'Half',
+    'Whole',
     'Piece',
     'Section',
     'Segment',
+    'Slab',
     'Slice',
-    'Wedge',
-    'Slab'
+    'Wedge'
 ]

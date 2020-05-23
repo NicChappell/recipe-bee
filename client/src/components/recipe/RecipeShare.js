@@ -6,34 +6,14 @@ import isEmpty from 'lodash.isempty'
 // import custom hooks
 import { useCheckboxValue } from '../../helpers/customHooks'
 
-const ShareSetting = props => {
-	// destructure props
-	const {
-		errors,
-		liftState,
-		resolveErrors
-	} = props
-
-	// state hook variables
-	const [valid, setValid] = useState(true)
-
+const ShareSetting = ({ liftState }) => {
 	// custom hook variables
 	const checkbox = useCheckboxValue(false)
-
-    const handleFocus = () => {
-        setValid(true)
-        resolveErrors('share')
-    }
 
 	// update state when checked value changes
 	useEffect(() => {
 		liftState(checkbox.checked)
 	}, [checkbox.checked])
-
-	// update state when errors value changes
-	useEffect(() => {
-		isEmpty(errors) ? setValid(true) : setValid(false)
-	}, [errors])
 
 	return (
 		<div className="row share">
@@ -41,15 +21,11 @@ const ShareSetting = props => {
 				<div className="switch">
 					<label>
 						Off
-						<input
-							{...checkbox}
-							onFocus={handleFocus}
-						/>
+						<input {...checkbox} />
 						<span className="lever"></span>
 						On
 					</label>
 				</div>
-				{valid ? null : <span className="error-message">{errors.share}</span>}
 			</div>
 		</div>
 	)

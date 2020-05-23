@@ -38,28 +38,24 @@ const RecipeTags = props => {
 
     const handleBlur = () => isEmpty(tagList) ? setValid(false) : setValid(true)
 
-    const handleFocus = () => {
-        setValid(true)
-        resolveErrors('tagList')
-    }
-
     // set options when tags value changes
     useEffect(() => {
         const options = tags.map(tagObj => tagObj.tag)
         setOptions(options)
     }, [tags])
 
-    // update state when tag array changes
+    // update state when tag list changes
     useEffect(() => {
         setValid(true)
         liftState(tagList)
+        resolveErrors('tagList')
     }, [tagList])
 
     // update state when errors value changes
     useEffect(() => {
-        if (errors.tagList) {
-            setValid(false)
-        }
+        errors.tagList
+            ? setValid(false)
+            : setValid(true)
     }, [errors.tagList])
 
     return (
@@ -67,7 +63,6 @@ const RecipeTags = props => {
             <div className="col s12 m6 recipe-tag-search">
                 <Autocomplete
                     handleBlur={handleBlur}
-                    handleFocus={handleFocus}
                     liftState={addTag}
                     options={options}
                 />

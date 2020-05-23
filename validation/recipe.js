@@ -18,6 +18,8 @@ const validateRecipe = data => {
         prepTimeMinutes,
         cookTimeHours,
         cookTimeMinutes,
+        servings,
+        production,
         preparations,
         ingredients,
         instructions,
@@ -42,6 +44,22 @@ const validateRecipe = data => {
     // validate cook time
     if (!cookTimeHours && !cookTimeMinutes) {
         errors.cookTime = 'Cook time is required'
+    }
+
+    // validate servings
+    if (!servings) {
+        errors.servings = 'Servings is required'
+    }
+
+    // destructure production (i.e. yield)
+    const {
+        name,
+        quantity
+    } = production
+
+    // validate production (i.e. yield)
+    if (!name || !quantity) {
+        errors.production = 'Yield is required'
     }
 
     // validate preparations

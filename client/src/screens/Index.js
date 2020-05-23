@@ -1,8 +1,15 @@
 // import dependencies
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import isEmpty from 'lodash/isEmpty'
+
+// import actions
+import { updateRecipe } from '../actions/recipeActions'
+
+// import components
+import RecipesPreview from '../components/recipe/RecipesPreview'
 
 // import images
 import find from '../images/marketing/find-rgb.svg'
@@ -10,27 +17,112 @@ import create from '../images/marketing/create-rgb.svg'
 import save from '../images/marketing/save-rgb.svg'
 import share from '../images/marketing/share-rgb.svg'
 
-const Home = (props) => {
+const Index = (props) => {
     // destructure props
     const {
         auth,
         recipes,
-        utilities
+        updateRecipe
     } = props
+    console.log(recipes)
 
     // destructure auth
-    const { isAuthenticated } = auth
+    const {
+        isAuthenticated,
+        user
+    } = auth
 
-    // destructure utilities
-    const { routerHeight } = utilities
+    // destructure recipes
+    const { searchableRecipes } = recipes
+
+    // destructure searchable recipes
+    const {
+        mostLovedRecipes,
+        newRecipes,
+        topRecipes,
+        trendingRecipes
+    } = searchableRecipes
+
+    // state hook variables
+    const [mostLovedRecipesSlice, setMostLovedRecipesSlice] = useState([])
+    const [newRecipesSlice, setNewRecipesSlice] = useState([])
+    const [topRecipesSlice, setTopRecipesSlice] = useState([])
+    const [trendingRecipesSlice, setTrendingRecipesSlice] = useState([])
+    console.log(mostLovedRecipesSlice)
+    console.log(newRecipesSlice)
+    console.log(topRecipesSlice)
+    console.log(trendingRecipesSlice)
+
+    // slice recipes arrays when values change
+    useEffect(() => {
+        if (!isEmpty(mostLovedRecipes)) {
+            setMostLovedRecipesSlice(mostLovedRecipes.slice(0, 5))
+        }
+        if (!isEmpty(newRecipes)) {
+            setNewRecipesSlice(newRecipes.slice(0, 5))
+        }
+        if (!isEmpty(topRecipes)) {
+            setTopRecipesSlice(topRecipes.slice(0, 5))
+        }
+        if (!isEmpty(trendingRecipes)) {
+            setTrendingRecipesSlice(trendingRecipes.slice(0, 5))
+        }
+    }, [searchableRecipes])
 
     // authenticated content
     if (isAuthenticated) {
         return (
-            <div className="container router" style={{ height: routerHeight }}>
+            <div className="container" id="index">
                 <div className="row">
                     <div className="col s12">
-                        Authenticated Home
+                        <h5>Most Loved Recipes</h5>
+                    </div>
+                    <div className="col s12">
+                        <RecipesPreview
+                            isAuthenticated={isAuthenticated}
+                            recipes={mostLovedRecipesSlice}
+                            updateRecipe={updateRecipe}
+                            user={user}
+                        />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12">
+                        <h5>Newest Recipes</h5>
+                    </div>
+                    <div className="col s12">
+                        <RecipesPreview
+                            isAuthenticated={isAuthenticated}
+                            recipes={newRecipesSlice}
+                            updateRecipe={updateRecipe}
+                            user={user}
+                        />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12">
+                        <h5>Top Recipes</h5>
+                    </div>
+                    <div className="col s12">
+                        <RecipesPreview
+                            isAuthenticated={isAuthenticated}
+                            recipes={topRecipesSlice}
+                            updateRecipe={updateRecipe}
+                            user={user}
+                        />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12">
+                        <h5>Trending Recipes</h5>
+                    </div>
+                    <div className="col s12">
+                        <RecipesPreview
+                            isAuthenticated={isAuthenticated}
+                            recipes={trendingRecipesSlice}
+                            updateRecipe={updateRecipe}
+                            user={user}
+                        />
                     </div>
                 </div>
             </div>
@@ -38,10 +130,10 @@ const Home = (props) => {
     }
     // unauthenticated content
     return (
-        <div className="container router" style={{ height: routerHeight }}>
+        <div className="container" id="index">
             <div className="row">
                 <div className="center-align col s12">
-                    <h3>Make meal planning easy and fun</h3>
+                    <h5>Make meal planning easy and fun</h5>
                     <p className="flow-text">RecipeBee keeps track of the meals you love and creates customized meal plans</p>
                 </div>
             </div>
@@ -99,7 +191,7 @@ const Home = (props) => {
             <hr className="mb-3 mt-5" />
             <div className="row">
                 <div className="center-align col s12">
-                    <h3>RecipeBee keeps it simple</h3>
+                    <h5>RecipeBee keeps it simple</h5>
                     <p className="flow-text">There are plenty of things to worry about, but meal planning shouldn't be one of them</p>
                 </div>
             </div>
@@ -126,7 +218,7 @@ const Home = (props) => {
             <hr className="mb-3 mt-5" />
             <div className="row">
                 <div className="center-align col s12">
-                    <h3>The results are in</h3>
+                    <h5>The results are in</h5>
                     <p className="flow-text">These are RecipeBee's most popular recipes</p>
                 </div>
             </div>
@@ -200,18 +292,18 @@ const Home = (props) => {
     )
 }
 
-Home.propTypes = {
-    auth: PropTypes.object.isRequired,
-	recipes: PropTypes.object.isRequired,
-    utilities: PropTypes.object.isRequired
+Index.propTypes = {
+    auth: PropTypes.object,
+    recipes: PropTypes.object,
+    updateRecipe: PropTypes.func
 }
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    recipes: state.recipes,
-    utilities: state.utilities
+    recipes: state.recipes
 })
 
 export default connect(
-    mapStateToProps
-)(Home)
+    mapStateToProps,
+    { updateRecipe }
+)(Index)

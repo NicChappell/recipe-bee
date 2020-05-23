@@ -3,16 +3,12 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
-import axios from 'axios'
 
 // import actions
 import {
     getRecipe,
     updateRecipe
 } from '../actions/recipeActions'
-
-// import helper functions
-import { formatTime } from '../helpers/utilities'
 
 // import components
 import Breadcrumb from '../components/layout/Breadcrumb'
@@ -29,8 +25,7 @@ const GetRecipe = props => {
         location,
         match,
         recipes,
-        updateRecipe,
-        utilities
+        updateRecipe
     } = props
 
     // destructure auth object
@@ -38,7 +33,6 @@ const GetRecipe = props => {
         isAuthenticated,
         user
     } = auth
-    const userId = user.id
 
     // destructure recipes object
     const { recipe } = recipes
@@ -59,21 +53,18 @@ const GetRecipe = props => {
         photo,
         prepTime,
         preparations,
+        production,
+        servings,
         share,
         slug,
         tagList,
         title,
         totalHearts,
         upVotes,
-        updatedAt
-        // user
-        // _id
+        updatedAt,
+        user: recipeUser,
+        _id: recipeId
     } = recipe
-    const recipeUser = recipe.user
-    const recipeId = recipe._id
-
-    // destructure utilities object
-    const { routerHeight } = utilities
 
     // get recipe after component mount
     useEffect(() => {
@@ -82,6 +73,9 @@ const GetRecipe = props => {
 
         // dispatch getRecipe action
         getRecipe(recipeId)
+
+        // reset recipe when component unmounts
+        return () => getRecipe('reset')
     }, [])
 
     // if (!isEmpty(errors)) {
@@ -96,10 +90,22 @@ const GetRecipe = props => {
     //     )
     // }
 
-    if (!isEmpty(recipeId)) {
+    if (!isEmpty(recipe)) {
+        console.log(user.id)
+        console.log(recipeUser._id)
         return (
-            <div className="container router" id="get-recipe" style={{ height: routerHeight }}>
-                <Breadcrumb location={location} />
+            <div className="container" id="get-recipe">
+                <div className="row">
+                    <div className="col s9 left-align">
+                        <Breadcrumb location={location} />
+                    </div>
+                    <div className="col s3 right-align">
+                        {user.id === recipeUser._id
+                            ? <button className="btn btn-small"><i className="material-icons left">edit</i> Edit Recipe</button>
+                            : null
+                        }
+                    </div>
+                </div>
                 <div className="row">
                     <div className="col s12">
                         <div className="card-panel">
@@ -109,11 +115,22 @@ const GetRecipe = props => {
                                         <div className="col s12">
                                             <h3>{title}</h3>
                                         </div>
-                                        <div className="col s6 m12 l6">
-                                            <p><i className="material-icons left">timer</i> Prep Time: {formatTime(prepTime.hours)}:{formatTime(prepTime.minutes)}</p>
+                                        <div className="col s12">
+                                            <p>Crafted by {recipeUser.fullName}</p>
                                         </div>
                                         <div className="col s6 m12 l6">
-                                            <p><i className="material-icons left">timer</i> Cook Time:  {formatTime(cookTime.hours)}:{formatTime(cookTime.minutes)}</p>
+                                            <p>
+                                                <i className="material-icons left">timer</i>
+                                                Prep Time: {prepTime.hours ? `${prepTime.hours} hours` : null} {prepTime.minutes ? `${prepTime.minutes} minutes` : null}
+                                            </p>
+                                            <p>
+                                                <i className="material-icons left">timer</i>
+                                                Cook Time: {cookTime.hours ? `${cookTime.hours} hours` : null} {cookTime.minutes ? `${cookTime.minutes} minutes` : null}
+                                            </p>
+                                        </div>
+                                        <div className="col s6 m12 l6">
+                                            <p><i className="material-icons left">room_service</i> Servings: {servings}</p>
+                                            <p><i className="material-icons left">add_circle_outline</i> Yield: {production.quantity} {production.unit} {production.name}</p>
                                         </div>
                                         <div className="col s12">
                                             <p className="flow-text">{description}</p>
@@ -127,24 +144,29 @@ const GetRecipe = props => {
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div className="col s12 recipe-actions">
-                                            <HeartAction
-                                                hearts={hearts}
-                                                isAuthenticated={isAuthenticated}
-                                                recipeId={recipeId}
-                                                totalHearts={totalHearts}
-                                                updateRecipe={updateRecipe}
-                                                userId={userId}
-                                            />
-                                            <VoteAction
-                                                downVotes={downVotes}
-                                                isAuthenticated={isAuthenticated}
-                                                recipeId={recipeId}
-                                                netVotes={netVotes}
-                                                updateRecipe={updateRecipe}
-                                                upVotes={upVotes}
-                                                userId={userId}
-                                            />
+                                        <div className="col s12 recipe-action">
+                                            <div className="actions">
+                                                <HeartAction
+                                                    action={updateRecipe}
+                                                    hearts={hearts}
+                                                    isAuthenticated={isAuthenticated}
+                                                    recipeId={recipeId}
+                                                    totalHearts={totalHearts}
+                                                    userId={user.id}
+                                                />
+                                                <VoteAction
+                                                    action={updateRecipe}
+                                                    downVotes={downVotes}
+                                                    isAuthenticated={isAuthenticated}
+                                                    recipeId={recipeId}
+                                                    netVotes={netVotes}
+                                                    upVotes={upVotes}
+                                                    userId={user.id}
+                                                />
+                                            </div>
+                                            <div className="tags">
+                                                {tagList.map((tag, i) => <div className="chip amber lighten-2" key={i}>{tag}</div>)}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -175,11 +197,6 @@ const GetRecipe = props => {
                                     <p>{notes}</p>
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="col s12">
-                                    {tagList && tagList.map((tag, i) => <div className="chip orange lighten-2" key={i}>{tag.toUpperCase()}</div>)}
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -191,19 +208,17 @@ const GetRecipe = props => {
 }
 
 GetRecipe.propTypes = {
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    getRecipe: PropTypes.func.isRequired,
-    recipes: PropTypes.object.isRequired,
-    updateRecipe: PropTypes.func.isRequired,
-    utilities: PropTypes.object.isRequired
+    auth: PropTypes.object,
+    errors: PropTypes.object,
+    getRecipe: PropTypes.func,
+    recipes: PropTypes.object,
+    updateRecipe: PropTypes.func
 }
 
 const mapStateToProps = state => ({
     auth: state.auth,
     errors: state.errors,
-    recipes: state.recipes,
-    utilities: state.utilities
+    recipes: state.recipes
 })
 
 export default connect(

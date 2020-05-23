@@ -1,90 +1,96 @@
 // import dependencies
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 // import components
 import HeartAction from './HeartAction'
 import VoteAction from './VoteAction'
 
-// import custom hooks
-import { useDidMount } from '../../helpers/customHooks'
-
 const RecipeCard = props => {
-    // custom hook variables
-    const didMount = useDidMount()
-
     // destructure props
     const {
+        action,
         isAuthenticated,
         recipe,
-        updateRecipe,
         userId
     } = props
 
     // destructure recipe object
     const {
-        createdAt,
-        updatedAt,
-        // user,
-        title,
-        description,
-        photo,
-        ingredients,
-        preparation,
-        instructions,
-        prepTime,
         cookTime,
-        shared,
-        upVotes,
+        createdAt,
+        description,
         downVotes,
+        hearts,
+        ingredients,
+        instructions,
         netVotes,
+        notes,
         percentDownVotes,
         percentUpVotes,
-        hearts,
+        photo,
+        prepTime,
+        preparations,
+        share,
+        slug,
+        tagList,
+        title,
         totalHearts,
-        tags
+        upVotes,
+        updatedAt
+        // user
+        // _id
     } = recipe
+    const recipeUser = recipe.user
     const recipeId = recipe._id
 
     return (
-        <div className="card recipe-card">
-            <Link to={`recipes/${recipe._id}`}>
-                {/* <div className="card-image">
-                    <img src={recipe.image} alt="" />
-                    <span className="card-title">{recipe.title}</span>
-                    <button className="btn-floating btn-large halfway-fab amber">
-                        <i className="material-icons">favorite_border</i>
-                    </button>
-                </div> */}
+        <div className="card z-depth-1 recipe-card">
+            <Link to={`/recipes/${slug}/${recipeId}`}>
                 <div className="card-image">
-                    <img src="http://localhost:5000/api/v1/uploads/image/1fee116a422ecdba33b1d789e4654f84.png" alt="" />
-                    <span className="card-title">{recipe.title}</span>
+                    <img alt="" src={`/api/v1/uploads/image/${photo.filename}`} />
+                    {/* <span className="card-title">{recipe.title}</span> */}
                 </div>
                 <div className="card-content">
+                    <span className="card-title">{recipe.title}</span>
                     <p>{recipe.description}</p>
                 </div>
             </Link>
-            <div className="card-action recipe-actions">
-                <HeartAction
-                    hearts={hearts}
-                    isAuthenticated={isAuthenticated}
-                    recipeId={recipeId}
-                    totalHearts={totalHearts}
-                    updateRecipe={updateRecipe}
-                    userId={userId}
-                />
-                <VoteAction
-                    downVotes={downVotes}
-                    isAuthenticated={isAuthenticated}
-                    recipeId={recipeId}
-                    netVotes={netVotes}
-                    updateRecipe={updateRecipe}
-                    upVotes={upVotes}
-                    userId={userId}
-                />
+            <div className="card-action recipe-action">
+                <div className="actions">
+                    <HeartAction
+                        action={action}
+                        hearts={hearts}
+                        isAuthenticated={isAuthenticated}
+                        recipeId={recipeId}
+                        totalHearts={totalHearts}
+                        userId={userId}
+                    />
+                    <VoteAction
+                        action={action}
+                        downVotes={downVotes}
+                        isAuthenticated={isAuthenticated}
+                        recipeId={recipeId}
+                        netVotes={netVotes}
+                        upVotes={upVotes}
+                        userId={userId}
+                    />
+                </div>
+                <div className="tags">
+                    {tagList.slice(0, 2).map((tag, i) => <div className="chip amber lighten-2" key={i}>{tag}</div>)}
+                    {tagList.slice(2).length ? <div className="chip amber lighten-2">+{tagList.slice(2).length}</div> : null}
+                </div>
             </div>
         </div>
     )
+}
+
+RecipeCard.propTypes = {
+    action: PropTypes.func,
+    isAuthenticated: PropTypes.bool,
+    recipe: PropTypes.object,
+    userId: PropTypes.string
 }
 
 export default RecipeCard

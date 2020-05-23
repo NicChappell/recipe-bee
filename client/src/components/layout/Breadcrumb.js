@@ -37,12 +37,8 @@ const Breadcrumb = ({ location }) => {
     })
 
     return (
-        <div className="row hide-on-small-only">
-            <div className="col s12">
-                <div className="breadcrumbs">
-                    {breadcrumbs}
-                </div>
-            </div>
+        <div className="breadcrumbs hide-on-small-only">
+            {breadcrumbs}
         </div>
     )
 }

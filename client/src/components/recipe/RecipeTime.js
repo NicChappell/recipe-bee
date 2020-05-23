@@ -42,7 +42,7 @@ const RecipeTime = props => {
 			value
 		} = e.target
 
-		// updsate state
+		// update state
 		if (name === 'hours') {
 			if (value < 0) {
 				setHours(0)
@@ -62,27 +62,19 @@ const RecipeTime = props => {
 		}
 	}
 
-	const handleFocus = () => {
-		setValid(true)
-		resolveErrors(name)
-	}
-
 	// update state when errors value changes
 	useEffect(() => {
-		if (errors[name]) {
-			setValid(false)
-		}
+		errors[name]
+			? setValid(false)
+			: setValid(true)
 	}, [errors[name]])
 
-	// lift hours when hours value changes
+	// lift state when hours or minutes value changes
 	useEffect(() => {
 		liftHours(hours)
-	}, [hours])
-
-	// lift minutes when minutes value changes
-	useEffect(() => {
 		liftMinutes(minutes)
-	}, [minutes])
+		resolveErrors(name)
+	}, [hours, minutes])
 
 	return (
 		<div className="row time">
@@ -91,7 +83,6 @@ const RecipeTime = props => {
 				<input
 					onBlur={handleBlur}
 					onChange={handleChange}
-					onFocus={handleFocus}
 					min="0"
 					max="23"
 					name="hours"
@@ -103,7 +94,6 @@ const RecipeTime = props => {
 					max="23"
 					name="hours"
 					onChange={handleChange}
-					onFocus={handleFocus}
 					type="range"
 					value={hours}
 				/>
@@ -113,7 +103,6 @@ const RecipeTime = props => {
 				<input
 					onBlur={handleBlur}
 					onChange={handleChange}
-					onFocus={handleFocus}
 					min="0"
 					max="59"
 					name="minutes"
@@ -125,7 +114,6 @@ const RecipeTime = props => {
 					max="59"
 					name="minutes"
 					onChange={handleChange}
-					onFocus={handleFocus}
 					type="range"
 					value={minutes}
 				/>

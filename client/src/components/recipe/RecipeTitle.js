@@ -13,7 +13,7 @@ const RecipeTitle = props => {
     const {
         errors,
         liftSlug,
-        liftTitle,
+        liftState,
         resolveErrors
     } = props
 
@@ -25,7 +25,7 @@ const RecipeTitle = props => {
         const slug = hyphenate(title.value)
 
         liftSlug(slug)
-        liftTitle(title.value)
+        liftState(title.value)
         resolveErrors('title')
     }, [title.value])
 
@@ -35,9 +35,9 @@ const RecipeTitle = props => {
                 <input
                     autoComplete={title.autoComplete}
                     name="title"
-                    onBlur={title.onBlur}
-                    onChange={title.onChange}
-                    onFocus={title.onFocus}
+                    onBlur={title.handleBlur}
+                    onChange={title.handleChange}
+                    onFocus={title.handleFocus}
                     placeholder="Title"
                     type={title.type}
                     value={title.value}
@@ -51,7 +51,7 @@ const RecipeTitle = props => {
 RecipeTitle.propTypes = {
     errors: PropTypes.object,
     liftSlug: PropTypes.func,
-    liftTitle: PropTypes.func,
+    liftState: PropTypes.func,
     resolveErrors: PropTypes.func
 }
 

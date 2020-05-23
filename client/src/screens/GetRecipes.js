@@ -2,58 +2,88 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash/isEmpty'
 
 // import actions
 import {
-    getRecipe,
+    countRecipes,
     getRecipes,
     updateRecipe
 } from '../actions/recipeActions'
-import { getTags } from '../actions/tagActions'
+
+// import custom hooks
+import { useDidMount } from '../helpers/customHooks'
 
 // import components
 import Autocomplete from '../components/utility/Autocomplete'
-import RecipesList from '../components/recipe/RecipesList'
+import IndeterminateMessage from '../components/utility/IndeterminateMessage'
+import RecipeCardList from '../components/recipe/RecipeCardList'
+import DateRanges from '../components/recipe/DateRanges'
+
+const initFetchRecord = {
+    trendingRecipes: {
+        prevCount: 0,
+        currCount: 0,
+    },
+    topRecipes: {
+        prevCount: 0,
+        currCount: 0,
+    },
+    mostLovedRecipes: {
+        prevCount: 0,
+        currCount: 0,
+    },
+    newRecipes: {
+        prevCount: 0,
+        currCount: 0,
+    }
+}
 
 const GetRecipes = props => {
-    // state hook variables
-    const [arrayHalves, setArrayHalves] = useState([[], []])
-    const [filters, setFilters] = useState([])
-    const [options, setOptions] = useState([])
-    const [sortMethod, setSortMethod] = useState('trendingRecipes')
-
     // destructure props
     const {
         auth,
         errors,
-        getRecipe,
+        countRecipes,
         getRecipes,
-        getTags,
         recipes,
-        tags,
-        updateRecipe,
-        utilities
+        // tags,
+        updateRecipe
     } = props
+    console.log(recipes)
 
-    // destructure auth object
+    // state hook variables
+    const [dateRange, setDateRange] = useState('30')
+    const [fetchLimit, setFetchLimit] = useState(false)
+    const [fetchRecord, setFetchRecord] = useState(initFetchRecord)
+    const [filteredRecipes, setFilteredRecipes] = useState([])
+    const [filters, setFilters] = useState([])
+    const [options, setOptions] = useState([])
+    const [sortMethod, setSortMethod] = useState('trendingRecipes')
+
+    // custom hook variables
+    const didMount = useDidMount()
+
+    // destructure auth
     const {
         isAuthenticated,
         user
     } = auth
 
-    // destructure recipes object
+    // destructure recipes
+    const {
+        recipesCount,
+        searchableRecipes
+    } = recipes
+
+    // destructure searchable recipes
     const {
         mostLovedRecipes,
         newRecipes,
         topRecipes,
         trendingRecipes
-    } = recipes
+    } = searchableRecipes
 
-    // destructure utilities object
-    const { routerHeight } = utilities
-
-    // add filter
     const addFilter = filter => {
         setFilters([...filters, filter])
 
@@ -61,128 +91,147 @@ const GetRecipes = props => {
         setOptions(updatedOptions)
     }
 
-    // remove filter
+    const appendRecipes = () => {
+        if (fetchLimit) {
+            console.log(`searchableRecipes[sortMethod].length: ${searchableRecipes[sortMethod].length}`)
+            console.log(`recipesCount: ${recipesCount}`)
+            console.log(`fetchLimit: ${fetchLimit}`)
+
+            console.log('Stop fetching recipes')
+        } else {
+            console.log(`searchableRecipes[sortMethod].length: ${searchableRecipes[sortMethod].length}`)
+            console.log(`recipesCount: ${recipesCount}`)
+            console.log(`fetchLimit: ${fetchLimit}`)
+
+            console.log('fetch more recipes')
+
+            // reset: false
+            // limit: 25
+            // skip: searchableRecipes[sortMethod].length
+            // sortMethod: sortMethod
+            // days: dateRange
+            getRecipes(false, 25, searchableRecipes[sortMethod].length, sortMethod, dateRange)
+        }
+    }
+
     const removeFilter = filter => {
-        const updatedFilters = filters.filter(tag => tag !== filter)
+        const updatedFilters = filters.filter(filterName => filterName !== filter)
         setFilters(updatedFilters)
 
         setOptions([...options, filter])
     }
 
-    const halveArray = (arr, updateState) => {
-        // create local variables
-        const firstHalf = []
-        const secondHalf = []
+    const handleSortMethodClick = e => setSortMethod(e.currentTarget.name)
 
-        arr.forEach((item, index) => {
-            if (index % 2 === 0) {
-                firstHalf.push(item)
-            } else {
-                secondHalf.push(item)
-            }
+    const handleScroll = () => {
+        // skip initial render
+        if (didMount) {
+            // calculate scroll bottom
+            const bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight
+
+            // // load more recipes if at bottom
+            if (bottom) { appendRecipes() }
+        }
+    }
+
+    // set options when searchableRecipes[sortMethod] changes
+    useEffect(() => {
+        // create mutable copy of options
+        const optionsCopy = options.map(option => option)
+
+        // iterate over searchable recipes
+        searchableRecipes[sortMethod].forEach(recipe => {
+            // destructure recipe
+            const { tagList } = recipe
+
+            // itereate over tagList array
+            tagList.forEach(tag => {
+                // add tag to optionsCopy array if it does not exist
+                if (optionsCopy.indexOf(tag) === -1) { optionsCopy.push(tag) }
+            })
         })
 
         // update state
-        updateState([firstHalf, secondHalf])
-    }
+        setOptions(optionsCopy)
+    }, [searchableRecipes[sortMethod]])
 
-    const handleScroll = e => {
-        // destructure event.target
-        const {
-            clientHeight,
-            scrollHeight,
-            scrollTop,
-        } = e.target
-
-        // calculate scroll bottom
-        const bottom = scrollHeight - scrollTop === clientHeight
-        // calculate lazy load
-        const lazyLoad = scrollHeight - scrollTop === clientHeight + 300
-
-        // load more content
-        if (bottom || lazyLoad) {
-            // dispatch getRecipes action
-            //   limit: 10
-            //   skip: recipes[sortMethod].length
-            //   sortMethod: sortMethod
-            getRecipes(10, recipes[sortMethod].length, sortMethod)
-        }
-    }
-
-    // halve recipes array when filters, recipes or sortMethod changes
+    // set fetch limit when searchableRecipes[sortMethod] array changes
     useEffect(() => {
-        // get nested recipes array from recipes object
-        const nestedRecipesArray = recipes[sortMethod]
+        const len = searchableRecipes[sortMethod].length
 
-        // filter nestedRecipesArray using filters array
-        let filteredRecipesArray = []
-        if (filters.length) {
-            filteredRecipesArray = nestedRecipesArray.filter(recipe => {
-                // destructure recipe
-                const { tags } = recipe
-
-                // check if any tag matches any filters
-                return tags.some(tag => filters.includes(tag.toLowerCase()))
-            })
+        if (len >= recipesCount) {
+            // console.log('len >= recipesCount')
+            setFetchLimit(true)
+        } else if (len >= 500) {
+            // console.log('len >= 500')
+            setFetchLimit(true)
         } else {
-            filteredRecipesArray = nestedRecipesArray
+            // console.log('len < recipesCount')
+            setFetchLimit(false)
         }
+    }, [recipesCount, searchableRecipes[sortMethod]])
 
-        halveArray(filteredRecipesArray, setArrayHalves)
-    }, [filters, sortMethod, recipes])
-
-    // set options when tags changes
+    // filter recipes when filters or searchableRecipes[sortMethod] changes
     useEffect(() => {
-        const options = tags.map(tagObj => tagObj.tag)
-        setOptions(options)
-    }, [tags])
+        // check if filters array is empty
+        if (isEmpty(filters)) {
+            // update state
+            setFilteredRecipes(searchableRecipes[sortMethod])
 
-    // get recipe after component mount
+            // return early
+            return
+        }
+
+        // filter searchableRecipes[sortMethod] array
+        const filteredRecipes = searchableRecipes[sortMethod].filter(recipe => {
+            // destructure recipe
+            const { tagList } = recipe
+
+            // check if any recipe tags match any selected filters
+            return tagList.some(tag => filters.includes(tag.toLowerCase()))
+        })
+
+        // update state
+        setFilteredRecipes(filteredRecipes)
+    }, [filters, searchableRecipes[sortMethod]])
+
+    // get recipes when date range option changes
     useEffect(() => {
-        getRecipe('')
-    }, [])
+        // skip initial render
+        if (didMount) {
+            // reset: true
+            // limit: 25
+            // skip: 0
+            // sortMethod: 'trendingRecipes'
+            // days: dateRange
+            getRecipes(true, 25, 0, 'trendingRecipes', dateRange)
 
-    // get recipes after component mount
+            // reset: true
+            // limit: 25
+            // skip: 0
+            // sortMethod: 'topRecipes'
+            // days: dateRange
+            getRecipes(true, 25, 0, 'topRecipes', dateRange)
+
+            // reset: true
+            // limit: 25
+            // skip: 0
+            // sortMethod: 'mostLovedRecipes'
+            // days: dateRange
+            getRecipes(true, 25, 0, 'mostLovedRecipes', dateRange)
+        }
+    }, [dateRange])
+
+    // add scroll event listener to window when component mounts
     useEffect(() => {
-        if (isEmpty(mostLovedRecipes)) {
-            // dispatch getRecipes action
-            //   limit: 10
-            //   skip: 0
-            //   sortMethod: 'mostLovedRecipes'
-            getRecipes(10, 0, 'mostLovedRecipes')
-        }
+        window.addEventListener('scroll', handleScroll)
 
-        if (isEmpty(newRecipes)) {
-            // dispatch getRecipes action
-            //   limit: 10
-            //   skip: 0
-            //   sortMethod: 'newRecipes'
-            getRecipes(10, 0, 'newRecipes')
-        }
+        // remove scroll event listener to window when component unmounts
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [recipesCount, searchableRecipes[sortMethod]])
 
-        if (isEmpty(topRecipes)) {
-            // dispatch getRecipes action
-            //   limit: 10
-            //   skip: 0
-            //   sortMethod: 'topRecipes'
-            getRecipes(10, 0, 'topRecipes')
-        }
-
-        if (isEmpty(trendingRecipes)) {
-            // dispatch getRecipes action
-            //   limit: 10
-            //   skip: 0
-            //   sortMethod: 'trendingRecipes'
-            getRecipes(10, 0, 'trendingRecipes')
-        }
-    }, [])
-
-    // get tags after component mount
-    useEffect(() => {
-        if (isEmpty(tags)) {
-            getTags()
-        }
-    }, [])
+    // count recipes when component mounts
+    useEffect(() => countRecipes(), [])
 
     if (!isEmpty(errors)) {
         console.log(errors)
@@ -197,10 +246,8 @@ const GetRecipes = props => {
         )
     }
 
-    console.log(recipes[sortMethod])
-
     return (
-        <div className="container router" id="get-recipes" onScroll={handleScroll} style={{ height: routerHeight }}>
+        <div className="container" id="get-recipes" /* onScroll={handleScroll} */>
             <div className="row">
                 <div className="col s12 l6">
                     <div className="row">
@@ -210,17 +257,42 @@ const GetRecipes = props => {
                     </div>
                     <div className="row">
                         <div className="col s12 recipe-sort-methods">
-                            <button className={`btn-flat ${sortMethod === 'trendingRecipes' ? 'active' : null}`} onClick={() => setSortMethod('trendingRecipes')}><i className="material-icons left">trending_up</i>trending</button>
-                            <button className={`btn-flat ${sortMethod === 'topRecipes' ? 'active' : null}`} onClick={() => setSortMethod('topRecipes')}><i className="material-icons left">thumb_up</i>top</button>
-                            <button className={`btn-flat ${sortMethod === 'mostLovedRecipes' ? 'active' : null}`} onClick={() => setSortMethod('mostLovedRecipes')}><i className="material-icons left">favorite</i>loved</button>
-                            <button className={`btn-flat ${sortMethod === 'newRecipes' ? 'active' : null}`} onClick={() => setSortMethod('newRecipes')}><i className="material-icons left">new_releases</i>new</button>
+                            <button
+                                className={`btn-flat ${sortMethod === 'trendingRecipes' ? 'active' : null}`}
+                                name='trendingRecipes'
+                                onClick={handleSortMethodClick}
+                            >
+                                <i className="material-icons left">trending_up</i>trending
+                            </button>
+                            <button
+                                className={`btn-flat ${sortMethod === 'topRecipes' ? 'active' : null}`}
+                                name='topRecipes'
+                                onClick={handleSortMethodClick}
+                            >
+                                <i className="material-icons left">thumb_up</i>top
+                            </button>
+                            <button
+                                className={`btn-flat ${sortMethod === 'mostLovedRecipes' ? 'active' : null}`}
+                                name='mostLovedRecipes'
+                                onClick={handleSortMethodClick}
+                            >
+                                <i className="material-icons left">favorite</i>loved
+                            </button>
+                            <button
+                                className={`btn-flat ${sortMethod === 'newRecipes' ? 'active' : null}`}
+                                name='newRecipes'
+                                onClick={handleSortMethodClick}
+                            >
+                                <i className="material-icons left">new_releases</i>new
+                            </button>
                         </div>
+                        {sortMethod !== 'newRecipes' ? <DateRanges initState={dateRange} liftState={setDateRange} /> : null}
                     </div>
                 </div>
                 <div className="col s12 l6">
                     <div className="row">
                         <div className="col s12">
-                            Add filters
+                            Filter recipes
                         </div>
                     </div>
                     <div className="row">
@@ -246,41 +318,49 @@ const GetRecipes = props => {
             <div className="row">
                 <div className="col s12">
                     <span className="sm-text">
-                        {`${recipes[sortMethod].length} recipes found`}
+                        {filteredRecipes.length ? `${filteredRecipes.length} recipes found` : <IndeterminateMessage message="Searching for recipes" />}
                     </span>
                 </div>
             </div>
-            <RecipesList
+            <RecipeCardList
                 isAuthenticated={isAuthenticated}
-                recipes={arrayHalves}
+                recipes={filteredRecipes}
                 updateRecipe={updateRecipe}
                 user={user}
             />
+            <div className="row center-align">
+                <div className="col s12">
+                    <button
+                        className="btn-small amber lighten-2 black-text"
+                        disabled={fetchLimit}
+                        onClick={appendRecipes}
+                    >
+                        View more recipes
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }
 
 GetRecipes.propTypes = {
     auth: PropTypes.object,
+    countRecipes: PropTypes.func,
     errors: PropTypes.object,
-    getRecipe: PropTypes.func,
     getRecipes: PropTypes.func,
-    getTags: PropTypes.func,
     recipes: PropTypes.object,
-    tags: PropTypes.array,
-    updateRecipe: PropTypes.func,
-    utilities: PropTypes.object
+    // tags: PropTypes.array,
+    updateRecipe: PropTypes.func
 }
 
 const mapStateToProps = state => ({
     auth: state.auth,
     errors: state.errors,
     recipes: state.recipes,
-    tags: state.tags,
-    utilities: state.utilities
+    // tags: state.tags
 })
 
 export default connect(
     mapStateToProps,
-    { getRecipe, getRecipes, getTags, updateRecipe }
+    { countRecipes, getRecipes, updateRecipe }
 )(GetRecipes)

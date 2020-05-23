@@ -90,6 +90,7 @@ const Autocomplete = props => {
                 <i className="material-icons prefix">add_box</i>
                 <input
                     autoComplete="off"
+                    disabled={!options.length}
                     name="autocomplete"
                     onBlur={handleBlur}
                     onChange={handleChange}

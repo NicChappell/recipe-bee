@@ -64,9 +64,6 @@ const RecipePhoto = props => {
 
         // lift state
         liftState(undefined)
-
-        // resolve errors
-        resolveErrors('photo')
     }
 
     // update state when errors value changes
