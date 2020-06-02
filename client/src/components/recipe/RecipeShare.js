@@ -6,9 +6,21 @@ import isEmpty from 'lodash.isempty'
 // import custom hooks
 import { useCheckboxValue } from '../../helpers/customHooks'
 
-const ShareSetting = ({ liftState }) => {
+const ShareSetting = props => {
+    // destructure props
+    const {
+        initValue: initShare,
+        liftState
+	} = props
+
+	// state hook variables
+	const [checked, setChecked] = useState(false)
+
 	// custom hook variables
 	const checkbox = useCheckboxValue(false)
+
+    // update state when initial value changes
+    useEffect(() => initShare && setChecked(initShare), [initShare])
 
 	// update state when checked value changes
 	useEffect(() => {
@@ -21,7 +33,11 @@ const ShareSetting = ({ liftState }) => {
 				<div className="switch">
 					<label>
 						Off
-						<input {...checkbox} />
+						<input
+							onChange={() => setChecked(!checked)}
+							type="checkbox"
+							checked={checked}
+						/>
 						<span className="lever"></span>
 						On
 					</label>
@@ -33,6 +49,7 @@ const ShareSetting = ({ liftState }) => {
 
 ShareSetting.propTypes = {
 	errors: PropTypes.object,
+    initValue: PropTypes.bool,
 	liftState: PropTypes.func,
 	resolveErrors: PropTypes.func
 }

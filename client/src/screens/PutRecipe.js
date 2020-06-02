@@ -6,21 +6,27 @@ import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
 
 // import actions
-import { createRecipe } from '../actions/recipeActions'
-import { getTags } from '../actions/tagActions'
+import {
+    getRecipe,
+    updateRecipe
+} from '../actions/recipeActions'
+import { deleteFile } from '../actions/uploadActions'
 
 // import components
-import CreateRecipe from '../components/recipe/CreateRecipe'
+import RecipeForm from '../components/recipe/RecipeForm'
 
-const PostRecipe = props => {
+const PutRecipe = props => {
     // destructure props
     const {
         auth,
-        createRecipe,
+        deleteFile,
         errors,
-        getTags,
+        getRecipe,
         history,
-        tags
+        match,
+        recipes,
+        tags,
+        updateRecipe
     } = props
 
     // destructure auth
@@ -29,24 +35,34 @@ const PostRecipe = props => {
         user
     } = auth
 
-    // get tags after component mount
+    // destructure recipes
+    const { recipe } = recipes
+
+    // get recipe after component mount
     useEffect(() => {
-        if (isEmpty(tags)) {
-            getTags()
-        }
+        // destructure router props
+        const { recipeId } = match.params
+
+        // dispatch getRecipe action
+        getRecipe(recipeId)
+
+        // reset recipe when component unmounts
+        return () => getRecipe('reset')
     }, [])
 
     // allow access if user is authenticated
     if (isAuthenticated) {
         return (
-            <div className="container" id="post-recipe">
+            <div className="container" id="put-recipe">
                 <div className="row">
                     <div className="col s12">
-                        <CreateRecipe
-                            createRecipe={createRecipe}
+                        <RecipeForm
+                            recipeAction={updateRecipe}
                             errors={errors}
                             history={history}
+                            recipe={recipe}
                             tags={tags}
+                            uploadAction={deleteFile}
                             user={user}
                         />
                     </div>
@@ -58,21 +74,24 @@ const PostRecipe = props => {
     return <Redirect to='/sign-in' />
 }
 
-PostRecipe.propTypes = {
+PutRecipe.propTypes = {
     auth: PropTypes.object,
-    createRecipe: PropTypes.func,
+    deleteFile: PropTypes.func,
     errors: PropTypes.object,
-    getTags: PropTypes.func,
-    tags: PropTypes.array
+    getRecipe: PropTypes.func,
+    recipes: PropTypes.object,
+    tags: PropTypes.array,
+    updateRecipe: PropTypes.func
 }
 
 const mapStateToProps = state => ({
     auth: state.auth,
     errors: state.errors,
+    recipes: state.recipes,
     tags: state.tags
 })
 
 export default connect(
     mapStateToProps,
-    { createRecipe, getTags }
-)(PostRecipe)
+    { deleteFile, getRecipe, updateRecipe }
+)(PutRecipe)

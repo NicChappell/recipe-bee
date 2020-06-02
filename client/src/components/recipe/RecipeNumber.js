@@ -6,33 +6,34 @@ const RecipeNumber = props => {
     // destructure props
     const {
         errors,
+        initValue: initNumber,
         liftState,
         name,
         resolveErrors
     } = props
 
     // state hook variables
-    const [value, setValue] = useState(0)
+    const [number, setNumber] = useState(0)
     const [valid, setValid] = useState(true)
 
     const handleAddClick = () => {
         // update state
-        if (value >= 0) {
+        if (number >= 0) {
+            setNumber(number => number + 1)
             setValid(true)
-            setValue(value => value + 1)
         } else {
+            setNumber(1)
             setValid(false)
-            setValue(1)
         }
     }
 
     const handleBlur = () => {
         // update state
-        if (value >= 1) {
+        if (number >= 1) {
             setValid(true)
         } else {
+            setNumber(0)
             setValid(false)
-            setValue(0)
         }
     }
 
@@ -41,12 +42,12 @@ const RecipeNumber = props => {
         const { value } = e.target
 
         // update state
-        if (value >= 1) {
+        if (number >= 1) {
+            setNumber(value)
             setValid(true)
-            setValue(value)
         } else {
+            setNumber(0)
             setValid(false)
-            setValue(0)
         }
     }
 
@@ -56,23 +57,26 @@ const RecipeNumber = props => {
 
         // update state
         setValid(true)
-        if (value >= 1) {
-            setValue(value)
+        if (number >= 1) {
+            setNumber(value)
         } else {
-            setValue('')
+            setNumber('')
         }
     }
 
     const handleSubtractClick = () => {
         // update state
-        if (value >= 2) {
+        if (number >= 2) {
+            setNumber(number => number - 1)
             setValid(true)
-            setValue(value => value - 1)
         } else {
+            setNumber(0)
             setValid(false)
-            setValue(0)
         }
     }
+
+    // update state when initial value changes
+    useEffect(() => initNumber && setNumber(initNumber), [initNumber])
 
     // update state when errors value changes
     useEffect(() => {
@@ -83,9 +87,9 @@ const RecipeNumber = props => {
 
     // lift state and resolve errors when value changes
     useEffect(() => {
-        liftState(value)
+        liftState(number)
         resolveErrors(name)
-    }, [value])
+    }, [number])
 
     return (
         <div className="row number">
@@ -111,7 +115,7 @@ const RecipeNumber = props => {
                     min={0}
                     name={name}
                     type="number"
-                    value={value}
+                    value={number}
                 />
             </div>
             {!valid && errors[name] ? <span className="error-message">{errors[name]}</span> : null}
@@ -121,6 +125,7 @@ const RecipeNumber = props => {
 
 RecipeNumber.propTypes = {
     errors: PropTypes.object,
+    initValue: PropTypes.string,
     liftState: PropTypes.func,
     name: PropTypes.string,
     resolveErrors: PropTypes.func

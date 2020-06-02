@@ -2,69 +2,145 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-// import components
-import AddButtons from './AddButtons'
+const Buttons = props => {
+    // destructure props
+    const {
+        addImage,
+        deleteImage,
+        photoStatus,
+        removeImage
+    } = props
+
+    // state hook variables
+    const [confirmDelete, setConfirmDelete] = useState(false)
+
+    switch (photoStatus) {
+        case 'existing':
+            if (confirmDelete) {
+                return (
+                    <div className="confirm-delete">
+                        <span>Are you sure?</span>
+                        <div className="buttons">
+                            <button className="black-text btn-small btn-flat deep-orange lighten-2" onClick={deleteImage}>
+                                <i className="material-icons left">delete_forever</i>
+                                Delete
+                            </button>
+                            <button className="black-text btn-small btn-flat grey lighten-2" onClick={() => setConfirmDelete(false)}>
+                                <i className="material-icons left">undo</i>
+                                Undo
+                            </button>
+                        </div>
+                    </div>
+                )
+            }
+            return (
+                <button className="black-text btn-small btn-flat amber lighten-2 my-1" onClick={() => setConfirmDelete(true)}>
+                    Delete Photo
+                </button>
+            )
+        case 'new':
+            return (
+                <button className="black-text btn-small btn-flat amber lighten-2 my-1" onClick={removeImage}>
+                    Remove Photo
+                </button>
+            )
+        default:
+            return (
+                <button className="black-text btn-small btn-flat amber lighten-2 my-1" onClick={addImage}>
+                    Add Photo
+                </button>
+            )
+    }
+}
+
+Buttons.propTypes = {
+    addImage: PropTypes.func,
+    deleteImage: PropTypes.func,
+    photoStatus: PropTypes.string,
+    removeImage: PropTypes.func
+}
 
 const RecipePhoto = props => {
     // destructure props
     const {
         errors,
+        initValue: initPhoto,
         liftState,
-        resolveErrors
+        photoStatus,
+        resolveErrors,
+        setPhotoStatus,
+        uploadAction
     } = props
 
     // state hook variables
-    const [base64, setbase64] = useState('')
+    const [imageSource, setImageSource] = useState('')
+    const [photo, setPhoto] = useState(undefined)
     const [valid, setValid] = useState(true)
 
     const handleChange = e => {
         // access the uploaded file from the files array
         const file = e.target.files[0]
 
-        // lift state
-        liftState(file)
-
-        // resolve errors
-        resolveErrors('photo')
+        // update state
+        setPhoto(file)
+        setPhotoStatus('new')
 
         // create a new FileReader object
         const reader = new FileReader()
 
         if (file) {
-            // The progress event is fired periodically as the FileReader reads data
-            reader.onprogress = e => {
-                if (e.lengthComputable) {
-                    var percentLoaded = Math.round((e.loaded / e.total) * 100)
-                    // console.log(percentLoaded)
-                }
-            }
+            // // The progress event is fired periodically as the FileReader reads data
+            // reader.onprogress = e => {
+            //     if (e.lengthComputable) {
+            //         var percentLoaded = Math.round((e.loaded / e.total) * 100)
+            //         console.log(percentLoaded)
+            //     }
+            // }
 
             // The load event is fired when a file has been read successfully
             reader.onload = e => {
                 // update state
-                setbase64(e.target.result)
+                setImageSource(e.target.result)
             }
 
             // the readAsDataURL method is used to read the contents of the specified file
-            // when the read operation is finished, the the loadend event is triggered
+            // when the read operation is finished, the loadend event is triggered
             // at that time, the result attribute contains the data as a data: URL
             // which represents the file's data as a base64 encoded string
             reader.readAsDataURL(file)
         }
     }
 
-    const addImgSrc = () => document.querySelector('.photo-input').click()
+    const addImage = () => document.querySelector('.photo-input').click()
 
-    const rmImgSrc = e => {
+    const deleteImage = () => {
+        // delete image
+        uploadAction(photo._id)
+
+        // update state
+        setImageSource('')
+        setPhoto(undefined)
+        setPhotoStatus(undefined)
+    }
+
+    const removeImage = e => {
         // reset (hidden) input field
         document.querySelector('.photo-input').value = null
 
         // update state
-        setbase64('')
-
-        // lift state
-        liftState(undefined)
+        setImageSource('')
+        setPhoto(undefined)
+        setPhotoStatus(undefined)
     }
+
+    // update state when initial value changes
+    useEffect(() => {
+        if (initPhoto) {
+            setImageSource(`/api/v1/uploads/image/${initPhoto.filename}`)
+            setPhoto(initPhoto)
+            setPhotoStatus('existing')
+        }
+    }, [initPhoto])
 
     // update state when errors value changes
     useEffect(() => {
@@ -73,19 +149,26 @@ const RecipePhoto = props => {
             : setValid(true)
     }, [errors.photo])
 
+    // lift state and resolve errors when photo changes
+    useEffect(() => {
+        liftState(photo)
+        if (errors.photo) {
+            resolveErrors('photo')
+        }
+    }, [photo])
+
     return (
         <div className="row center-align photo">
             <div className="col s12">
-                <div className={`photo-container ${base64 ? 'base64' : 'placeholder'} ${!base64 && !valid ? 'invalid-upload' : ''}`}>
-                    <img className={!valid ? 'invalid-photo' : ''} src={base64} alt="" />
-                </div>
+                <div className={`photo-container ${!valid ? 'invalid-photo' : ''}`} style={{ 'background-image': `url(${imageSource})` }}></div>
             </div>
             <div className="col s12">
                 <input className="photo-input" name="file" onChange={handleChange} type="file" />
-                <AddButtons
-                    addImgSrc={addImgSrc}
-                    imgSrc={base64 ? true : false}
-                    rmImgSrc={rmImgSrc}
+                <Buttons
+                    addImage={addImage}
+                    deleteImage={deleteImage}
+                    photoStatus={photoStatus}
+                    removeImage={removeImage}
                 />
             </div>
             <div className="col s12">
@@ -97,8 +180,12 @@ const RecipePhoto = props => {
 
 RecipePhoto.propTypes = {
     errors: PropTypes.object,
+    initValue: PropTypes.string,
     liftState: PropTypes.func,
-    resolveErrors: PropTypes.func
+    photoStatus: PropTypes.string,
+    resolveErrors: PropTypes.func,
+    setPhotoStatus: PropTypes.func,
+    uploadAction: PropTypes.func
 }
 
 export default RecipePhoto

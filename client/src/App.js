@@ -19,6 +19,7 @@ import Index from './screens/Index'
 import GetRecipe from './screens/GetRecipe'
 import GetRecipes from './screens/GetRecipes'
 import PostRecipe from './screens/PostRecipe'
+import PutRecipe from './screens/PutRecipe'
 // import auth screens
 import SignIn from './screens/SignIn'
 import SignUp from './screens/SignUp'
@@ -44,7 +45,6 @@ const App = props => {
 		auth,
 		getRecipes,
 		getTags,
-		recipes,
 		signOutUser
 	} = props
 
@@ -112,7 +112,8 @@ const App = props => {
 						<Route exact path="/" component={Index} />
 						<Route exact path="/recipes" component={GetRecipes} />
 						<Route exact path="/recipes/create" component={PostRecipe} />
-						<Route path="/recipes/:recipeSlug/:recipeId" component={GetRecipe} />
+						<Route exact path="/recipes/:recipeSlug/:recipeId" component={GetRecipe} />
+						<Route exact path="/recipes/:recipeSlug/:recipeId/edit" component={PutRecipe} />
 						<Route path="/sign-in" component={SignIn} />
 						<Route path="/sign-up" component={SignUp} />
 						<Route path="/account/:userSlug" component={Account} />
@@ -135,8 +136,7 @@ App.propTypes = {
 }
 
 const mapStateToProps = state => ({
-	auth: state.auth,
-    recipes: state.recipes
+	auth: state.auth
 })
 
 export default connect(

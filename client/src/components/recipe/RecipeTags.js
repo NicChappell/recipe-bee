@@ -10,6 +10,7 @@ const RecipeTags = props => {
     // destructure props
     const {
         errors,
+        initValue: initTags,
         liftState,
         resolveErrors,
         tags
@@ -38,6 +39,16 @@ const RecipeTags = props => {
 
     const handleBlur = () => isEmpty(tagList) ? setValid(false) : setValid(true)
 
+    // update state when initial value changes
+    useEffect(() => {
+        if (initTags) {
+            setTagList(initTags)
+
+            const updatedOptions = options.filter(option => !initTags.includes(option))
+            setOptions(updatedOptions)
+        }
+    }, [initTags])
+
     // set options when tags value changes
     useEffect(() => {
         const options = tags.map(tagObj => tagObj.tag)
@@ -60,7 +71,7 @@ const RecipeTags = props => {
 
     return (
         <div className="row tags">
-            <div className="col s12 m6 recipe-tag-search">
+            <div className="col s12 m4 recipe-tag-search">
                 <Autocomplete
                     handleBlur={handleBlur}
                     liftState={addTag}
@@ -68,7 +79,7 @@ const RecipeTags = props => {
                 />
                 {valid ? null : <span className="error-message">{errors.tagList}</span>}
             </div>
-            <div className="col s12 m6 recipe-tag-list">
+            <div className="col s12 m8 recipe-tag-list">
                 {tagList.map(tag => {
                     return (
                         <div className="chip amber lighten-2" key={tag}>
@@ -84,6 +95,7 @@ const RecipeTags = props => {
 
 RecipeTags.propTypes = {
     errors: PropTypes.object,
+    initValue: PropTypes.array,
     liftState: PropTypes.func,
     resolveErrors: PropTypes.func,
     tags: PropTypes.array

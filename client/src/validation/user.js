@@ -1,9 +1,9 @@
 // import dependencies
-const Validator = require('validator')
-const isEmpty = require('lodash.isempty')
+// const Validator = require('validator')
+import isEmpty from 'lodash/isEmpty'
 
 // validate user input
-const validateSignUpInput = data => {
+export const validateProfileInput = data => {
     // create an errors object
     let errors = {}
 
@@ -93,6 +93,3 @@ const validateSignUpInput = data => {
         isValid: isEmpty(errors)
     }
 }
-
-// export function
-module.exports = validateSignUpInput

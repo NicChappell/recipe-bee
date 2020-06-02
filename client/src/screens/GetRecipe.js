@@ -28,16 +28,16 @@ const GetRecipe = props => {
         updateRecipe
     } = props
 
-    // destructure auth object
+    // destructure auth
     const {
         isAuthenticated,
         user
     } = auth
 
-    // destructure recipes object
+    // destructure recipes
     const { recipe } = recipes
 
-    // destructure recipe object
+    // destructure recipe
     const {
         cookTime,
         createdAt,
@@ -91,8 +91,6 @@ const GetRecipe = props => {
     // }
 
     if (!isEmpty(recipe)) {
-        console.log(user.id)
-        console.log(recipeUser._id)
         return (
             <div className="container" id="get-recipe">
                 <div className="row">
@@ -101,7 +99,7 @@ const GetRecipe = props => {
                     </div>
                     <div className="col s3 right-align">
                         {user.id === recipeUser._id
-                            ? <button className="btn btn-small"><i className="material-icons left">edit</i> Edit Recipe</button>
+                            ? <button className="btn btn-small amber lighten-2 black-text"><i className="material-icons left">edit</i> Edit Recipe</button>
                             : null
                         }
                     </div>
@@ -140,7 +138,7 @@ const GetRecipe = props => {
                                 <div className="col s12 m6 recipe-image">
                                     <div className="row">
                                         <div className="col s12">
-                                            <img alt="" src={`/api/v1/uploads/image/${photo.filename}`} />
+                                            <img alt="" src={photo && `/api/v1/uploads/image/${photo.filename}`} />
                                         </div>
                                     </div>
                                     <div className="row">

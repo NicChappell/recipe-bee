@@ -1,48 +1,72 @@
 // import dependencies
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-// import custom hooks
-import { useValidTextValue } from '../../helpers/customHooks'
-
 // import utility functions
-import { hyphenate } from '../../helpers/utilities'
+import { slugify } from '../../helpers/utilities'
 
 const RecipeTitle = props => {
     // destructure props
     const {
         errors,
+        initValue: initTitle,
         liftSlug,
         liftState,
         resolveErrors
     } = props
 
-    // custom hook variables
-    const title = useValidTextValue('', errors.title)
+    // state hook variables
+    const [title, setTitle] = useState('')
+    const [valid, setValid] = useState(true)
 
-    // lift state and resolve errors when title value changes
+    const handleBlur = e => e.target.value ? setValid(true) : setValid(false)
+
+    const handleChange = e => {
+        // destructure event
+        const { value } = e.target
+
+        // update state
+        setTitle(value)
+        value
+            ? setValid(true)
+            : setValid(false)
+    }
+
+    const handleFocus = () => setValid(true)
+
+    // update state when initial value changes
+    useEffect(() => initTitle && setTitle(initTitle), [initTitle])
+
+    // update state when errors value changes
     useEffect(() => {
-        const slug = hyphenate(title.value)
+        errors.title
+            ? setValid(false)
+            : setValid(true)
+    }, [errors.title])
 
-        liftSlug(slug)
-        liftState(title.value)
-        resolveErrors('title')
-    }, [title.value])
+    // lift state and resolve errors when title changes
+    useEffect(() => {
+        liftSlug(slugify(title))
+        liftState(title)
+        if (errors.title) {
+            resolveErrors('title')
+        }
+    }, [title])
 
     return (
         <div className="row title">
-            <div className={`input-field col s12 ${title.valid ? '' : 'invalid-input'}`}>
+            <div className={`input-field col s12 ${!valid ? 'invalid-input' : ''}`}>
                 <input
-                    autoComplete={title.autoComplete}
+                    autoComplete="off"
                     name="title"
-                    onBlur={title.handleBlur}
-                    onChange={title.handleChange}
-                    onFocus={title.handleFocus}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    onFocus={handleFocus}
                     placeholder="Title"
-                    type={title.type}
-                    value={title.value}
+                    type="text"
+                    value={title}
                 />
-                {title.valid ? null : <span className="error-message">{errors.title}</span>}
+                {valid ? null : <span className="error-message">{errors.title}</span>}
             </div>
         </div>
     )
@@ -50,6 +74,7 @@ const RecipeTitle = props => {
 
 RecipeTitle.propTypes = {
     errors: PropTypes.object,
+    initValue: PropTypes.string,
     liftSlug: PropTypes.func,
     liftState: PropTypes.func,
     resolveErrors: PropTypes.func

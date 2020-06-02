@@ -8,6 +8,9 @@ const { secretOrKey } = require('../../../config/keys')
 const validateSignUpInput = require('../../../validation/signUp')
 const validateSignInInput = require('../../../validation/signIn')
 
+// import helpers
+const { slugify } = require('../../../helpers/utilities')
+
 // import models
 const User = require('../../../models/User')
 
@@ -30,7 +33,7 @@ router.delete('/:userId', (req, res) => {
 
     // find user and delete
     User.findByIdAndDelete(userId)
-        .then(() => res.status(200).json({ message: 'successfully deleted user' }))
+        .then(() => res.status(200).json({ message: 'deleted user' }))
         .catch(err => res.status(400).json({ message: 'falied to delete user', err }))
 })
 
@@ -54,7 +57,7 @@ router.put('/:userId', (req, res) => {
 
     // find user and update
     User.findByIdAndUpdate(userId, { ...req.body }, { new: true })
-        .then(user => res.status(200).json({ message: 'successfully updated user', user }))
+        .then(user => res.status(200).json({ message: 'updated user', user }))
         .catch(err => res.status(400).json({ message: 'falied to update user', err }))
 })
 
@@ -189,11 +192,11 @@ router.post('/sign-up', (req, res) => {
                 city,
                 email,
                 firstName,
-                fullName: `${firstName} ${lastName}`,
+                fullName: firstName + ' ' + lastName,
                 lastName,
                 password,
                 postalCode,
-                slug: `${firstName.toLowerCase()}-${lastName.toLowerCase()}`,
+                slug: slugify(firstName + ' ' + lastName),
                 state,
                 username
             })

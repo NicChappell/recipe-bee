@@ -9,6 +9,10 @@ import {
     setUserRecipes,
     updateRecipe
 } from '../actions/recipeActions'
+import {
+    deleteUser,
+    updateUser
+} from '../actions/userActions'
 
 // import components
 import Profile from '../components/account/Profile'
@@ -19,16 +23,21 @@ const Account = props => {
     // destructure props
     const {
         auth,
+        deleteUser,
         errors,
+        history,
         recipes,
         setUserRecipes,
-        updateRecipe
+        updateRecipe,
+        updateUser
     } = props
     // console.log(auth)
+    // console.log(deleteUser)
     // console.log(errors)
     // console.log(recipes)
     // console.log(setUserRecipes)
     // console.log(updateRecipe)
+    // console.log(updateUser)
 
     // destructure auth
     const {
@@ -40,7 +49,9 @@ const Account = props => {
 
     // state hook variables
     const [component, setComponent] = useState('profile')
+    const [validationErrors, setValidationErrors] = useState({})
     // console.log(component)
+    // console.log(validationErrors)
 
     const handleClick = e => {
         // destructure event
@@ -48,6 +59,11 @@ const Account = props => {
 
         // update state
         setComponent(name)
+    }
+
+    const resolveValidationErrors = (...keys) => {
+        keys.forEach(key => delete validationErrors[key])
+        setValidationErrors(validationErrors)
     }
 
     // set user recipes when viewing recipes component
@@ -118,7 +134,12 @@ const Account = props => {
                     </div>
                     <div className="col s12 l9">
                         {component === 'profile'
-                            ? <Profile user={user} />
+                            ? <Profile
+                                errors={validationErrors}
+                                resolveErrors={resolveValidationErrors}
+                                updateUser={updateUser}
+                                user={user}
+                            />
                             : null
                         }
                         {component === 'recipes'
@@ -132,7 +153,13 @@ const Account = props => {
                         {component === 'meal-plans' ? <div className="card-panel">Meal Plans</div> : null}
                         {component === 'shopping-lists' ? <div className="card-panel">Shopping Lists</div> : null}
                         {component === 'settings'
-                            ? <Settings user={user} />
+                            ? <Settings
+                                deleteUser={deleteUser}
+                                errors={validationErrors}
+                                history={history}
+                                resolveErrors={resolveValidationErrors}
+                                user={user}
+                            />
                             : null
                         }
                     </div>
@@ -159,7 +186,11 @@ const mapStateToProps = state => ({
     recipes: state.recipes
 })
 
-export default connect(
-    mapStateToProps,
-    { setUserRecipes, updateRecipe }
-)(Account)
+const actionCreators = {
+    deleteUser,
+    setUserRecipes,
+    updateRecipe,
+    updateUser
+}
+
+export default connect(mapStateToProps, actionCreators)(Account)

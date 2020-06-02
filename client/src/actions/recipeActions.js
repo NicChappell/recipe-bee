@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // import action types
 import {
-    GET_ERRORS,
+    SET_ERRORS,
     COUNT_RECIPES,
     GET_RECIPE,
     GET_RECIPES,
@@ -12,28 +12,28 @@ import {
 } from './types'
 
 // create recipe
-export const createRecipe = (recipe, history) => dispatch => {
+export const createRecipe = (recipeData, history) => dispatch => {
     // instantiate a new FormData object
     const formData = new FormData()
 
-    // append file to form data
+    // append image file to form data
     // 'file' corresponds to matching POST method paramter
-    formData.append('file', recipe.photo)
+    formData.append('file', recipeData.photo)
 
     axios.post('/api/v1/uploads/', formData)
         .then(res => {
-            // use response to update recipe object
-            recipe = {
-                ...recipe,
+            // update recipe data
+            recipeData = {
+                ...recipeData,
                 photo: res.data.file.id
             }
 
-            return axios.post('/api/v1/recipes/', recipe)
+            return axios.post('/api/v1/recipes/', recipeData)
         })
         .then(res => {
             history.push(`/recipes/${res.data.recipe.slug}/${res.data.recipe._id}`)
         })
-        .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }
 
 // get recipe
@@ -43,7 +43,7 @@ export const getRecipe = recipeId => dispatch => {
     } else {
         axios.get(`/api/v1/recipes/${recipeId}`)
             .then(res => dispatch({ type: GET_RECIPE, payload: res.data }))
-            .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }))
+            .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
     }
 }
 
@@ -51,7 +51,7 @@ export const getRecipe = recipeId => dispatch => {
 export const getRecipes = (reset, limit, skip, sortMethod, days) => dispatch => {
     axios.get(`/api/v1/recipes/?limit=${limit}&skip=${skip}&sortMethod=${sortMethod}&days=${days}`)
         .then(res => dispatch({ type: GET_RECIPES, payload: { key: sortMethod, reset, value: res.data } }))
-        .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }
 
 // set user recipes
@@ -88,19 +88,53 @@ export const setUserRecipes = userId => dispatch => {
 
             dispatch({ type: SET_USER_RECIPES, payload: { userRecipes } })
         })
-        .catch(err => dispatch({ type: GET_ERRORS, payload: err }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err }))
 }
 
 // update recipe
-export const updateRecipe = (recipeId, recipeData) => dispatch => {
-    axios.put(`/api/v1/recipes/${recipeId}`, recipeData)
-        .then(res => dispatch({ type: UPDATE_RECIPE, payload: res.data }))
-        .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }))
+export const updateRecipe = (recipeData, photoStatus, history) => dispatch => {
+    // remove user property from recipe data
+    delete recipeData.user
+
+    // extract and remove id property from recipe data
+    const recipeId = recipeData.id
+    delete recipeData.id
+
+    if (photoStatus === 'new') {
+        // instantiate a new FormData object
+        const formData = new FormData()
+
+        // append image file to form data
+        // 'file' corresponds to matching POST method paramter
+        formData.append('file', recipeData.photo)
+
+        axios.post('/api/v1/uploads/', formData)
+            .then(res => {
+                // update recipe data
+                recipeData = {
+                    ...recipeData,
+                    photo: res.data.file.id
+                }
+
+                // update recipe
+                return axios.put(`/api/v1/recipes/${recipeId}`, recipeData)
+            })
+            .then(res => history.push(`/recipes/${res.data.recipe.slug}/${res.data.recipe._id}`))
+            .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
+    } else {
+        // remove photo property from recipe
+        delete recipeData.photo
+
+        // update recipe
+        axios.put(`/api/v1/recipes/${recipeId}`, recipeData)
+            .then(res => history.push(`/recipes/${res.data.recipe.slug}/${res.data.recipe._id}`))
+            .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
+    }
 }
 
 // count recipes
 export const countRecipes = () => dispatch => {
     axios.get('/api/v1/recipes/utilities/count')
         .then(res => dispatch({ type: COUNT_RECIPES, payload: res.data }))
-        .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }

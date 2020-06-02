@@ -23,17 +23,17 @@ const initialState = {
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'changeName':
+        case 'setName':
             return {
                 ...state,
                 nameValue: action.value
             }
-        case 'changeQuantity':
+        case 'setQuantity':
             return {
                 ...state,
                 quantityValue: action.value
             }
-        case 'changeUnit':
+        case 'setUnit':
             return {
                 ...state,
                 unitValue: action.value
@@ -69,6 +69,7 @@ const RecipeYield = props => {
     // destructure props
     const {
         errors,
+        initValue: initProduction,
         liftState,
         resolveErrors
     } = props
@@ -116,32 +117,16 @@ const RecipeYield = props => {
         const nameCapitalized = capitalize(name)
 
         // concatenate action type
-        const changeType = `change${nameCapitalized}`
+        const setType = `set${nameCapitalized}`
         const validateType = `validate${nameCapitalized}`
 
         // update state
-        dispatch({ type: changeType, value })
+        dispatch({ type: setType, value })
         if (name !== 'unit' && value) {
             dispatch({ type: validateType, value: true })
         } else {
             dispatch({ type: validateType, value: false })
         }
-    }
-
-    const handleClick = () => {
-        // generate unique id
-        const id = uuid()
-
-        // create ingredient object
-        const newIngredient = {
-            id,
-            name: nameValue,
-            quantity: quantityValue,
-            unit: unitValue
-        }
-
-        // lift state
-        liftState([newIngredient])
     }
 
     const handleFocus = e => {
@@ -157,6 +142,22 @@ const RecipeYield = props => {
         // update state
         dispatch({ type: validateType, value: true })
     }
+
+    // update state when initial value changes
+    useEffect(() => {
+        if (initProduction) {
+            for (const property in initProduction) {
+                // capitalize property
+                const propertyCapitalized = capitalize(property)
+
+                // concatenate action type
+                const setType = `set${propertyCapitalized}`
+
+                // update state
+                dispatch({ type: setType, value: initProduction[property] })
+            }
+        }
+    }, [initProduction])
 
     // update state when errors value changes
     useEffect(() => {
@@ -244,6 +245,7 @@ const RecipeYield = props => {
 
 RecipeYield.propTypes = {
     errors: PropTypes.object,
+    initValue: PropTypes.object,
     liftState: PropTypes.func,
     resolveErrorse: PropTypes.func
 }

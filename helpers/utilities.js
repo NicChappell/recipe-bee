@@ -30,7 +30,15 @@ const fileSize = (file, megabyteLimit) => {
     return megabytes > megabyteLimit ? true : false
 }
 
+const slugify = (str = '') => {
+    // split string on empty space ' ' separator
+    // join array using hyphen '-' separator
+    // convert string to lowercase
+    return str.split(' ').join('-').toLowerCase()
+}
+
 module.exports = {
     fileExtension,
-    fileSize
+    fileSize,
+    slugify
 }

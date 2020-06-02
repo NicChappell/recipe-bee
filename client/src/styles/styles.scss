@@ -98,9 +98,32 @@ span {
     }
   }
   .profile {
-    .edit-account {
-    }
-    .personal-information {
+    .update-profile {
+      .confirm-update {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        button {
+          margin-right: 1rem;
+          margin-top: 1rem;
+        }
+        @media screen and (max-width: $max-small) {
+          align-items: flex-start;
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
+      .update {
+        align-content: center;
+        display: flex;
+        justify-content: flex-start;
+        button {
+          margin-right: 1rem;
+          margin-top: 1rem;
+        }
+      }
     }
   }
   .recipes {
@@ -172,15 +195,56 @@ span {
     }
   }
   .settings {
-    .delete-account {
-      button {
-        margin: 1.0933333333rem 0 0.656rem 0;
+    .change-password {
+      .button {
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 1rem;
       }
-      h5 {
-        line-height: 36px;
+      .password-inputs {
+        .save-changes {
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          button {
+            margin-right: 1rem;
+            margin-top: 1rem;
+          }
+          @media screen and (max-width: $max-small) {
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+        }
       }
     }
-    .update-password {
+    .delete-account {
+      .button {
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 1rem;
+      }
+      .confirm-delete {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        button,
+        span {
+          margin-right: 1rem;
+          margin-top: 1rem;
+        }
+        @media screen and (max-width: $max-small) {
+          align-items: flex-start;
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
     }
   }
 }
@@ -503,7 +567,8 @@ span {
   }
 }
 
-#post-recipe {
+#post-recipe,
+#put-recipe {
   // miscellaneous components
   hr {
     border-top: 1px solid $brand-light;
@@ -528,6 +593,10 @@ span {
   // recipe photo
   .photo {
     .photo-container {
+      background-color: $brand-light;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
       align-items: center;
       display: flex;
       justify-content: center;
@@ -538,24 +607,30 @@ span {
       min-height: 17.5rem;
       width: auto;
     }
-    .base64 {
-      img {
-        height: auto;
-        max-height: 22.5rem;
-        width: 100%;
-      }
-      .invalid-photo {
-        border: 1px solid $danger;
-      }
-    }
-    .placeholder {
-      background-color: $brand-light;
-    }
     .photo-input {
       display: block;
       height: 0;
       visibility: hidden;
       width: 0;
+    }
+    .confirm-delete {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0.5rem 0;
+      span {
+        margin: 0.5rem;
+      }
+      .buttons {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        button {
+          margin: 0.5rem;
+        }
+      }
     }
   }
   // recipe prep time
@@ -940,6 +1015,8 @@ $size: 100px;
   }
 }
 
+// INVALID STYLES
+
 .invalid-input {
   input:not([type]),
   input[type="text"],
@@ -983,7 +1060,7 @@ $size: 100px;
   color: $danger;
 }
 
-.invalid-upload {
+.invalid-photo {
   border: 1px solid $danger;
 }
 

@@ -50,7 +50,7 @@ const reducer = (state, action) => {
     }
 }
 
-const RecipeAddIngredient = props => {
+const RecipeAddIngredientItem = props => {
     // destructure props
     const {
         errors,
@@ -184,7 +184,7 @@ const RecipeAddIngredient = props => {
     )
 }
 
-RecipeAddIngredient.propTypes = {
+RecipeAddIngredientItem.propTypes = {
     errors: PropTypes.object,
     index: PropTypes.number,
     ingredients: PropTypes.array,
@@ -192,4 +192,4 @@ RecipeAddIngredient.propTypes = {
     resolveErrorse: PropTypes.func
 }
 
-export default RecipeAddIngredient
+export default RecipeAddIngredientItem

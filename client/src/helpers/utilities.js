@@ -5,22 +5,30 @@ export const capitalize = str => {
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export const fileExtension = (file) => {
+export const fileExtension = (file = {}) => {
     // destructure file object
     const { name } = file
 
-    // array of valid extensions
-    const validExtensions = ['jpg', 'jpeg', 'png']
+    let extension = undefined
+    let validExtension = false
 
-    // get file extension
-    const extension = name.split('.').pop().toLowerCase()
+    if (name) {
+        // array of valid extensions
+        const validExtensions = ['jpg', 'jpeg', 'png']
 
-    // validate file extension
-    // true === valid file extension
-    // false === invalid file extension
-    const validExtension = validExtensions.includes(extension)
+        // get file extension
+        extension = name.split('.').pop().toLowerCase()
 
-    // return validExtension and extension
+        // validate file extension
+        // true === valid file extension
+        // false === invalid file extension
+        validExtension = validExtensions.includes(extension)
+
+        // return evaluated validExtension and extension values
+        return [validExtension, extension]
+    }
+
+    // return default validExtension and extension values
     return [validExtension, extension]
 }
 
@@ -28,22 +36,27 @@ export const fileSize = (file, megabyteLimit) => {
     // destructure file object
     const { size } = file
 
-    // convert file size to megabytes
-    const megabytes = Math.round(size / 1000000)
+    if (size) {
+        // convert file size to megabytes
+        const megabytes = Math.round(size / 1000000)
 
-    // validate file size
-    // true === file size too large
-    // false === file size within limit
-    return megabytes > megabyteLimit ? true : false
+        // validate file size
+        // return true if file size too large
+        // return false if file size within limit
+        return megabytes > megabyteLimit ? true : false
+    }
+
+    // return false by default
+    return false
 }
 
-export const formatTime = int => ("00" + int).slice(-2)
+export const formatTime = int => ('00' + int).slice(-2)
 
-export const hyphenate = str => {
-    // split string on empty space " " separator
-    // join array using hyphen "-" separator
+export const slugify = (str = '') => {
+    // split string on empty space ' ' separator
+    // join array using hyphen '-' separator
     // convert string to lowercase
-    return str.split(" ").join("-").toLowerCase()
+    return str.split(' ').join('-').toLowerCase()
 }
 
 export const toTitleCase = str => {

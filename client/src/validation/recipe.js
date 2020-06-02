@@ -38,9 +38,9 @@ const validateRecipe = data => {
     }
 
     // validate photo
-    if (!photo) {
+    if (photo === undefined) {
         errors.photo = 'Photo is required'
-    } else {
+    } else if (photo instanceof File) {
         // validate file extension
         const validateFileExtension = fileExtension(photo)
         // destructure validateFileExtension

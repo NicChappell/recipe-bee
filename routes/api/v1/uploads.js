@@ -83,7 +83,7 @@ router.get('/files/:filename', (req, res) => {
     })
 })
 
-// @route:  DELETE api/v1/uploads/file/:id
+// @route:  DELETE api/v1/uploads/files/:id
 // @desc:   Delete a file
 router.delete('/files/:id', (req, res) => {
     gfs.remove({ _id: req.params.id, root: 'uploads' }, (err) => {

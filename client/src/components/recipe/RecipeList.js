@@ -1,5 +1,5 @@
 // import dependencies
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 // import components
@@ -8,6 +8,7 @@ import RecipeListItem from './RecipeListItem'
 const RecipeList = props => {
 	// destructure props
 	const {
+		initValue: initList,
 		liftState,
 		list,
 		placeholder
@@ -35,6 +36,9 @@ const RecipeList = props => {
 		liftState(updatedInstructions)
 	}
 
+	// lift state when initial value changes
+	useEffect(() => initList && liftState(initList), [initList])
+
 	return (
 		<div className={`row ${list && list.length > 0 ? 'list' : null}`}>
 			<div className="col s12">
@@ -54,6 +58,7 @@ const RecipeList = props => {
 }
 
 RecipeList.propTypes = {
+	initValue: PropTypes.array,
 	liftState: PropTypes.func,
 	list: PropTypes.array,
 	placeholder: PropTypes.string

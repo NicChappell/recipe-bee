@@ -1,41 +1,67 @@
 // import dependencies
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-
-// import custom hooks
-import { useValidTextAreaValue } from '../../helpers/customHooks'
 
 const RecipeDescription = props => {
     // destructure props
     const {
         errors,
+        initValue: initDescription,
         liftState,
         resolveErrors
     } = props
 
     // custom hook variables
-    const description = useValidTextAreaValue('', errors.description)
+    const [description, setDescription] = useState('')
+    const [valid, setValid] = useState(true)
 
-    // lift state and resolve errors when description value changes
+    const handleBlur = e => e.target.value ? setValid(true) : setValid(false)
+
+    const handleChange = e => {
+        // destructure event
+        const { value } = e.target
+
+        // update state
+        setDescription(value)
+        value
+            ? setValid(true)
+            : setValid(false)
+    }
+
+    const handleFocus = () => setValid(true)
+
+    // update state when initial value changes
+    useEffect(() => initDescription && setDescription(initDescription), [initDescription])
+
+    // update state when errors value changes
     useEffect(() => {
-        liftState(description.value)
-        resolveErrors('description')
-    }, [description.value])
+        errors.description
+            ? setValid(false)
+            : setValid(true)
+    }, [errors.description])
+
+    // lift state and resolve errors when title changes
+    useEffect(() => {
+        liftState(description)
+        if (errors.description) {
+            resolveErrors('description')
+        }
+    }, [description])
 
     return (
         <div className="row description">
-            <div className={`input-field col s12 ${description.valid ? null : 'invalid-input'}`}>
+            <div className={`input-field col s12 ${!valid ? 'invalid-input' : ''}`}>
                 <textarea
-                    className={description.className}
+                    className="materialize-textarea"
                     name="description"
-                    onBlur={description.handleBlur}
-                    onChange={description.handleChange}
-                    onFocus={description.handleFocus}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    onFocus={handleFocus}
                     placeholder="Description"
-                    value={description.value}
+                    value={description}
                 >
                 </textarea>
-                {description.valid ? null : <span className="error-message">{errors.description}</span>}
+                {valid ? null : <span className="error-message">{errors.description}</span>}
             </div>
         </div>
     )
@@ -43,6 +69,7 @@ const RecipeDescription = props => {
 
 RecipeDescription.propTypes = {
     errors: PropTypes.object,
+    initValue: PropTypes.string,
     liftState: PropTypes.func,
     resolveErrors: PropTypes.func
 }

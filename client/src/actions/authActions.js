@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode'
 
 // import action types
 import {
-    GET_ERRORS,
+    SET_ERRORS,
     SET_CURRENT_USER
 } from './types'
 
@@ -15,7 +15,7 @@ import setAuthToken from '../helpers/setAuthToken'
 export const signUpUser = (userData, history) => dispatch => {
     axios.post('/api/v1/users/sign-up', userData)
         .then(res => history.push('/sign-in'))
-        .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }
 
 // sign-in user
@@ -37,7 +37,7 @@ export const signInUser = userData => dispatch => {
             // set current user
             dispatch(setCurrentUser(decoded))
         })
-        .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }
 
 // sign-out user
@@ -50,6 +50,13 @@ export const signOutUser = () => dispatch => {
 
     // reset current user (will also set isAuthenticated to false)
     dispatch(setCurrentUser({}))
+}
+
+// change user password
+export const changePassword = (userData) => dispatch => {
+    console.log(userData)
+    // Do I need to use UPDATE_USER action type?
+    // If a user updates their password, I don't need to update that in state
 }
 
 // set current user

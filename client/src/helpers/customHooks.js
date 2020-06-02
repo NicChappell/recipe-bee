@@ -9,7 +9,7 @@ export const useCheckboxValue = (val = false) => {
     const [checked, setChecked] = useState(val)
 
     return {
-        onChange: e => setChecked(!checked),
+        onChange: () => setChecked(!checked),
         type: 'checkbox',
         checked: checked
     }
@@ -181,7 +181,7 @@ export const useValidTextValue = (val = '', errorMessage = '') => {
     }, [errorMessage])
 
     return {
-        autoComplete: "off",
+        autoComplete: 'off',
         handleBlur,
         handleChange,
         handleFocus,
