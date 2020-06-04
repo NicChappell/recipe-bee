@@ -160,7 +160,7 @@ const RecipePhoto = props => {
     return (
         <div className="row center-align photo">
             <div className="col s12">
-                <div className={`photo-container ${!valid ? 'invalid-photo' : ''}`} style={{ 'background-image': `url(${imageSource})` }}></div>
+                <div className={`photo-container ${!valid ? 'invalid-photo' : ''}`} style={{ 'backgroundImage': `url(${imageSource})` }}></div>
             </div>
             <div className="col s12">
                 <input className="photo-input" name="file" onChange={handleChange} type="file" />

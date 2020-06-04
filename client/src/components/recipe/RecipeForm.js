@@ -96,7 +96,7 @@ const RecipeForm = props => {
         }
     }
 
-    // set application errors when errors prop changes
+    // update state when errors prop changes
     useEffect(() => {
         setApplicationErrors(errors)
         setTransmitting(false)

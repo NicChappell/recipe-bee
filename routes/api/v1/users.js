@@ -57,7 +57,15 @@ router.put('/:userId', (req, res) => {
 
     // find user and update
     User.findByIdAndUpdate(userId, { ...req.body }, { new: true })
-        .then(user => res.status(200).json({ message: 'updated user', user }))
+        .then(newUser => {
+            // create jwt payload
+
+            // delete password before responding
+            const user = {...newUser._doc}
+            delete user.password
+
+            res.status(200).json({ message: 'updated user', user })
+        })
         .catch(err => res.status(400).json({ message: 'falied to update user', err }))
 })
 
@@ -84,7 +92,7 @@ router.post('/sign-in', (req, res) => {
     } = req.body
 
     User.findOne({ email }).then(user => {
-        // check for existing user
+        // confirm user exists
         if (!user) {
             return res
                 .status(404)
@@ -94,24 +102,13 @@ router.post('/sign-in', (req, res) => {
         // check password
         bcrypt.compare(password, user.password)
             .then(isMatch => {
-                // matched user
+                // password correct
                 if (isMatch) {
                     // create jwt payload
-                    const payload = {
-                        id: user.id,
-                        address1: user.address1,
-                        address2: user.address2,
-                        city: user.city,
-                        email: user.email,
-                        firstName: user.firstName,
-                        fullName: user.fullName,
-                        lastName: user.lastName,
-                        password: user.password,
-                        postalCode: user.postalCode,
-                        slug: user.slug,
-                        state: user.state,
-                        username: user.username
-                    }
+                    const payload = {...user._doc}
+
+                    // delete password from payload
+                    delete payload.password
 
                     // 1 year in seconds
                     const oneYear = 31556926
@@ -128,14 +125,14 @@ router.post('/sign-in', (req, res) => {
                         }
                     )
                 }
-                // unmatched user
+                // password incorret
                 else {
                     return res
                         .status(400)
                         .json({ password: 'Password incorrect' })
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => res.status(500).json({ recipe: 'There was a problem signing in, please try again later.', err }))
     })
 })
 

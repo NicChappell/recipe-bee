@@ -1,15 +1,21 @@
 // import dependencies
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 // import components
+import Address1 from './Address1'
+import Address2 from './Address2'
+import City from './City'
+import EmailAddress from './EmailAddress'
 import FirstName from './FirstName'
+import Transmitting from '../utility/Transmitting'
+import LastName from './LastName'
+import PostalCode from './PostalCode'
+import ProfileErrors from './ProfileErrors'
+import State from './State'
 
-// import custom hooks
-import {
-    useEmailValue,
-    useTextValue
-} from '../../helpers/customHooks'
+// import validation
+import validateProfile from '../../validation/profile'
 
 // import helpers
 import { slugify } from '../../helpers/utilities'
@@ -18,36 +24,37 @@ const Buttons = props => {
     // destructure props
     const {
         disabled,
+        handleGoBackClick,
+        handleSaveClick,
         handleUpdateClick,
-        setDisabled
+        transmitting
     } = props
-
-    const handleClick = () => setDisabled(!disabled)
 
     if (disabled) {
         return (
             <div className="update">
                 <button
                     className="black-text btn-small btn-flat grey lighten-2"
-                    onClick={handleClick}
+                    onClick={handleUpdateClick}
                 >
                     Update Profile
                 </button>
             </div>
         )
     }
+    if (transmitting) return <span className="transmitting">Saving changes<Transmitting /></span>
     return (
         <div className="confirm-update">
             <button
                 className="black-text btn-small btn-flat grey lighten-2"
-                onClick={handleClick}
+                onClick={handleGoBackClick}
             >
                 <i className="material-icons left">undo</i>
                 Go Back
             </button>
             <button
                 className="black-text btn-small btn-flat light-green lighten-2"
-                onClick={handleUpdateClick}
+                onClick={handleSaveClick}
             >
                 <i className="material-icons left">save</i>
                 Save Changes
@@ -58,48 +65,32 @@ const Buttons = props => {
 
 Buttons.propTypes = {
     disabled: PropTypes.bool,
-    handleDeleteClick: PropTypes.func,
+    handleGoBackClick: PropTypes.func,
     handleSaveClick: PropTypes.func,
     handleUpdateClick: PropTypes.func,
-    setDisabled: PropTypes.func
+    transmitting: PropTypes.bool
 }
 
 const Profile = props => {
     // destructure props
     const {
         errors,
-        resolveErrors,
         updateUser,
         user
     } = props
 
-    // // destructure user
-    // const {
-    //     address1,
-    //     address2,
-    //     city,
-    //     email,
-    //     firstName,
-    //     lastName,
-    //     postalCode,
-    //     state,
-    //     username
-    // } = user
-
-    // custom hook variables
-    const address1Input = useTextValue(user.address1)
-    const address2Input = useTextValue(user.address2)
-    const cityInput = useTextValue(user.city)
-    const emailInput = useEmailValue(user.email)
-    // const firstNameInput = useTextValue(user.firstName)
-    const lastNameInput = useTextValue(user.lastName)
-    const postalCodeInput = useTextValue(user.postalCode)
-    const stateInput = useTextValue(user.state)
-    const usernameInput = useTextValue(user.username)
-
     // state hook variables
-    const [disabled, setDisabled] = useState(true)
     const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [emailAddress, setEmailAddress] = useState('')
+    const [address1, setAddress1] = useState('')
+    const [address2, setAddress2] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [postalCode, setPostalCode] = useState('')
+    const [disabled, setDisabled] = useState(true)
+    const [transmitting, setTransmitting] = useState(false)
+    const [applicationErrors, setApplicationErrors] = useState({})
     const [validationErrors, setValidationErrors] = useState({})
 
     const resolveValidationErrors = (...keys) => {
@@ -107,23 +98,64 @@ const Profile = props => {
         setValidationErrors(validationErrors)
     }
 
-    const handleUpdateClick = () => {
-        const userId = user.id
+    const handleGoBackClick = () => {
+        // reset state variables
+        setFirstName(user.firstName)
+        setLastName(user.lastName)
+        setEmailAddress(user.email)
+        setAddress1(user.address1)
+        setAddress2(user.address2)
+        setCity(user.city)
+        setState(user.state)
+        setPostalCode(user.postalCode)
+        setDisabled(true)
+        setTransmitting(false)
+        setApplicationErrors({})
+        setValidationErrors({})
+    }
+
+    const handleSaveClick = () => {
+        const userId = user._id
 
         // compile updateable user properties
-        const userData = {
-            address1: address1Input.value,
-            address2: address2Input.value,
-            city: cityInput.value,
-            firstName: firstName,
-            fullName: `${firstName} ${lastNameInput.value}`,
-            lastName: lastNameInput.value,
-            slug: slugify(`${firstName} ${lastNameInput.value}`),
-            state: stateInput.value
+        const profileData = {
+            address1,
+            address2,
+            city,
+            firstName,
+            fullName: `${firstName} ${lastName}`,
+            lastName,
+            postalCode,
+            slug: slugify(`${firstName} ${lastName}`),
+            state
         }
 
-        updateUser(userId, userData)
+        // validate user input
+        const validate = validateProfile(profileData)
+
+        // check for validation errors
+        if (!validate.isValid) {
+            setValidationErrors(validate.errors)
+        } else {
+            setTransmitting(true)
+            updateUser(userId, profileData)
+        }
     }
+
+    const handleUpdateClick = () => setDisabled(false)
+
+    // update state when errors prop changes
+    useEffect(() => {
+        setApplicationErrors(errors)
+        setTransmitting(false)
+    }, [errors])
+
+    // update state when user prop changes
+    useEffect(() => {
+        console.log(user)
+        setDisabled(true)
+        setTransmitting(false)
+    }, [user])
 
     return (
         <div className="card-panel profile">
@@ -137,85 +169,77 @@ const Profile = props => {
                     initValue={user.firstName}
                     liftState={setFirstName}
                     resolveErrors={resolveValidationErrors}
+                    value={firstName}
                 />
-                <div className="input-field col s6">
-                    <span>Last Name</span>
-                    <input
-                        {...lastNameInput}
-                        disabled={disabled}
-                        name="lastName"
-                        placeholder="Last Name"
-                    />
-                </div>
-                <div className="input-field col s12 m6">
-                    <span>Username</span>
-                    <input
-                        {...usernameInput}
-                        disabled={disabled}
-                        name="username"
-                        placeholder="Username"
-                    />
-                </div>
-                <div className="input-field col s12 m6">
-                    <span>Email Address</span>
-                    <input
-                        {...emailInput}
-                        disabled={disabled}
-                        name="email"
-                        placeholder="Email Address"
-                    />
-                </div>
-                <div className="input-field col s12">
-                    <span>Mailing Address</span>
-                    <input
-                        {...address1Input}
-                        disabled={disabled}
-                        name="address1"
-                        placeholder="Street Address"
-                    />
-                </div>
-                <div className="input-field col s12">
-                    <input
-                        {...address2Input}
-                        disabled={disabled}
-                        name="address2"
-                        placeholder=""
-                    />
-                </div>
-                <div className="input-field col s12 m5">
-                    <span>City</span>
-                    <input
-                        {...cityInput}
-                        disabled={disabled}
-                        name="city"
-                        placeholder="City"
-                    />
-                </div>
-                <div className="input-field col s12 m3">
-                    <span>State</span>
-                    <input
-                        {...stateInput}
-                        disabled={disabled}
-                        name="state"
-                        placeholder="State"
-                    />
-                </div>
-                <div className="input-field col s12 m4">
-                    <span>Postal Code</span>
-                    <input
-                        {...postalCodeInput}
-                        disabled={disabled}
-                        name="postalCode"
-                        placeholder="Postal Code"
-                    />
-                </div>
+                <LastName
+                    disabled={disabled}
+                    errors={validationErrors}
+                    initValue={user.lastName}
+                    liftState={setLastName}
+                    resolveErrors={resolveValidationErrors}
+                    value={lastName}
+                />
+                <EmailAddress
+                    // disabled={disabled}
+                    errors={validationErrors}
+                    initValue={user.email}
+                    liftState={setEmailAddress}
+                    resolveErrors={resolveValidationErrors}
+                    value={emailAddress}
+                />
+                <Address1
+                    disabled={disabled}
+                    errors={validationErrors}
+                    initValue={user.address1}
+                    liftState={setAddress1}
+                    resolveErrors={resolveValidationErrors}
+                    value={address1}
+                />
+                <Address2
+                    disabled={disabled}
+                    errors={validationErrors}
+                    initValue={user.address2}
+                    liftState={setAddress2}
+                    resolveErrors={resolveValidationErrors}
+                    value={address2}
+                />
+                <City
+                    disabled={disabled}
+                    errors={validationErrors}
+                    initValue={user.city}
+                    liftState={setCity}
+                    resolveErrors={resolveValidationErrors}
+                    value={city}
+                />
+                <State
+                    disabled={disabled}
+                    errors={validationErrors}
+                    initValue={user.state}
+                    liftState={setState}
+                    resolveErrors={resolveValidationErrors}
+                    value={state}
+                />
+                <PostalCode
+                    disabled={disabled}
+                    errors={validationErrors}
+                    initValue={user.postalCode}
+                    liftState={setPostalCode}
+                    resolveErrors={resolveValidationErrors}
+                    value={postalCode}
+                />
             </div>
             <div className="row update-profile">
                 <div className="col s12">
                     <Buttons
                         disabled={disabled}
+                        handleGoBackClick={handleGoBackClick}
+                        handleSaveClick={handleSaveClick}
                         handleUpdateClick={handleUpdateClick}
-                        setDisabled={setDisabled}
+                        transmitting={transmitting}
+                    />
+                    <ProfileErrors
+                        applicationErrors={applicationErrors}
+                        validationErrors={validationErrors}
                     />
                 </div>
             </div>

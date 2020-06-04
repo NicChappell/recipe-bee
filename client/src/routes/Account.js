@@ -61,11 +61,6 @@ const Account = props => {
         setComponent(name)
     }
 
-    const resolveValidationErrors = (...keys) => {
-        keys.forEach(key => delete validationErrors[key])
-        setValidationErrors(validationErrors)
-    }
-
     // set user recipes when viewing recipes component
     useEffect(() => {
         if (component === 'recipes') {
@@ -135,8 +130,7 @@ const Account = props => {
                     <div className="col s12 l9">
                         {component === 'profile'
                             ? <Profile
-                                errors={validationErrors}
-                                resolveErrors={resolveValidationErrors}
+                                errors={errors}
                                 updateUser={updateUser}
                                 user={user}
                             />
@@ -155,9 +149,8 @@ const Account = props => {
                         {component === 'settings'
                             ? <Settings
                                 deleteUser={deleteUser}
-                                errors={validationErrors}
+                                errors={errors}
                                 history={history}
-                                resolveErrors={resolveValidationErrors}
                                 user={user}
                             />
                             : null

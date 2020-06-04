@@ -7,49 +7,34 @@ import {
     SET_ERRORS,
 } from './types'
 
-// update recipe
+// import helper funtions
+import setAuthToken from '../helpers/setAuthToken'
+
+// delete user
 export const deleteUser = (user, history) => dispatch => {
-    console.log(user)
-    console.log(history)
-    // // extract and remove id property from recipe data
-    // const userId = userData._id
-    // delete userData._id
+    axios.delete(`/api/v1/users/${user._id}`)
+        .then(() => {
+            // remove token from local storage
+            localStorage.removeItem('jwtToken')
 
-    // if (photoStatus === 'new') {
-    //     // instantiate a new FormData object
-    //     const formData = new FormData()
+            // remove auth header for future requests
+            setAuthToken(false)
 
-    //     // append image file to form data
-    //     // 'file' corresponds to matching POST method paramter
-    //     formData.append('file', recipeData.photo)
+            // reset current user (will also set isAuthenticated to false)
+            dispatch(setCurrentUser({}))
 
-    //     axios.post('/api/v1/uploads/', formData)
-    //         .then(res => {
-    //             // update recipe data
-    //             recipeData = {
-    //                 ...recipeData,
-    //                 photo: res.data.file.id
-    //             }
-
-    //             // update recipe
-    //             return axios.put(`/api/v1/recipes/${recipeId}`, recipeData)
-    //         })
-    //         .then(res => history.push(`/recipes/${res.data.recipe.slug}/${res.data.recipe._id}`))
-    //         .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
-    // } else {
-    //     // remove photo property from recipe
-    //     delete recipeData.photo
-
-    //     // update recipe
-    //     axios.put(`/api/v1/recipes/${recipeId}`, recipeData)
-    //         .then(res => history.push(`/recipes/${res.data.recipe.slug}/${res.data.recipe._id}`))
-    //         .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
-    // }
+            // redirect to application root
+            history.push('/')
+        })
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }
 
+// set current user
+export const setCurrentUser = (user) => dispatch => dispatch({ type: SET_CURRENT_USER, payload: user })
+
 // update user
-export const updateUser = (userId, userData) => dispatch => {
-    axios.put(`/api/v1/users/${userId}`, userData)
+export const updateUser = (userId, profileData) => dispatch => {
+    axios.put(`/api/v1/users/${userId}`, profileData)
         .then(res => dispatch({ type: SET_CURRENT_USER, payload: res.data.user }))
         .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }

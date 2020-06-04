@@ -7,13 +7,13 @@ const LastName = props => {
     const {
         disabled,
         errors,
-        initValue: initLastName,
+        initValue,
         liftState,
-        resolveErrors
+        resolveErrors,
+        value
     } = props
 
     // state hook variables
-    const [firstName, setLastName] = useState('')
     const [valid, setValid] = useState(true)
 
     const handleBlur = e => e.target.value ? setValid(true) : setValid(false)
@@ -22,8 +22,13 @@ const LastName = props => {
         // destructure event
         const { value } = e.target
 
-        // update state
-        setLastName(value)
+        // resolve errors
+        if (errors.lastName) {
+            resolveErrors('lastName')
+        }
+
+        // lift and update state
+        liftState(value)
         value
             ? setValid(true)
             : setValid(false)
@@ -31,48 +36,45 @@ const LastName = props => {
 
     const handleFocus = () => setValid(true)
 
-    // update state when initial value changes
-    useEffect(() => initLastName && setLastName(initLastName), [initLastName])
+    // lift state when initial value changes
+    useEffect(() => liftState(initValue), [initValue])
 
     // update state when errors value changes
     useEffect(() => {
-        errors.firstName
+        errors.lastName
             ? setValid(false)
             : setValid(true)
-    }, [errors.firstName])
+    }, [errors.lastName])
 
-    // lift state and resolve errors when first name changes
-    useEffect(() => {
-        liftState(firstName)
-        if (errors.firstName) {
-            resolveErrors('firstName')
-        }
-    }, [firstName])
+    // update state when disabled value changes
+    useEffect(() => setValid(true), [disabled])
 
     return (
-        <div className="input-field col s6 first-name">
-            <span>First Name</span>
+        <div className={`input-field col s6 last-name ${!valid ? 'invalid-input' : ''}`}>
+            <span>Last Name</span>
             <input
                 autoComplete="off"
                 disabled={disabled}
-                name="firstName"
+                name="lastName"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                placeholder="First Name"
+                placeholder="Last Name"
                 type="text"
-                value={firstName}
+                value={value}
             />
+            {valid ? null : <span className="error-message">{errors.lastName}</span>}
         </div>
     )
 }
 
 LastName.propTypes = {
+    disabled: PropTypes.bool,
     errors: PropTypes.object,
     initValue: PropTypes.string,
-    liftSlug: PropTypes.func,
     liftState: PropTypes.func,
-    resolveErrors: PropTypes.func
+    resolveErrors: PropTypes.func,
+    value: PropTypes.string
 }
 
 export default LastName

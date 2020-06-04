@@ -14,7 +14,7 @@ import setAuthToken from '../helpers/setAuthToken'
 // sign-up user
 export const signUpUser = (userData, history) => dispatch => {
     axios.post('/api/v1/users/sign-up', userData)
-        .then(res => history.push('/sign-in'))
+        .then(() => history.push('/sign-in'))
         .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }
 

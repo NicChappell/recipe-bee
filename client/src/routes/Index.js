@@ -24,7 +24,7 @@ const Index = (props) => {
         recipes,
         updateRecipe
     } = props
-    console.log(recipes)
+    // console.log(recipes)
 
     // destructure auth
     const {
@@ -48,10 +48,10 @@ const Index = (props) => {
     const [newRecipesSlice, setNewRecipesSlice] = useState([])
     const [topRecipesSlice, setTopRecipesSlice] = useState([])
     const [trendingRecipesSlice, setTrendingRecipesSlice] = useState([])
-    console.log(mostLovedRecipesSlice)
-    console.log(newRecipesSlice)
-    console.log(topRecipesSlice)
-    console.log(trendingRecipesSlice)
+    // console.log(mostLovedRecipesSlice)
+    // console.log(newRecipesSlice)
+    // console.log(topRecipesSlice)
+    // console.log(trendingRecipesSlice)
 
     // slice recipes arrays when values change
     useEffect(() => {

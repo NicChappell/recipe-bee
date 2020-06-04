@@ -1,7 +1,7 @@
 // import dependencies
 import React, { useEffect, useState } from 'react'
 
-const IndeterminateMessage = ({ message }) => {
+const Dots = () => {
     // state hook variables
     const [dots, setDots] = useState('.')
 
@@ -25,12 +25,7 @@ const IndeterminateMessage = ({ message }) => {
         return () => clearInterval(interval)
     }, [])
 
-    return (
-        <div className="indeterminate-message">
-            <span className="message">{message}</span>
-            <span className="dots">{dots}</span>
-        </div>
-    )
+    return <span className="dots">{dots}</span>
 }
 
-export default IndeterminateMessage
+export default Dots

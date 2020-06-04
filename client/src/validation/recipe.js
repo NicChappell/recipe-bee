@@ -7,10 +7,10 @@ import {
 
 // validate user input
 const validateRecipe = data => {
-    // instantiate an errors object
+    // create an errors object
     let errors = {}
 
-    // destructure data
+    // destructure required data
     const {
         title,
         description,

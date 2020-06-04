@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-const FirstName = props => {
+const Address1 = props => {
     // destructure props
     const {
         disabled,
@@ -23,8 +23,8 @@ const FirstName = props => {
         const { value } = e.target
 
         // resolve errors
-        if (errors.firstName) {
-            resolveErrors('firstName')
+        if (errors.address1) {
+            resolveErrors('address1')
         }
 
         // lift and update state
@@ -41,34 +41,34 @@ const FirstName = props => {
 
     // update state when errors value changes
     useEffect(() => {
-        errors.firstName
+        errors.address1
             ? setValid(false)
             : setValid(true)
-    }, [errors.firstName])
+    }, [errors.address1])
 
     // update state when disabled value changes
     useEffect(() => setValid(true), [disabled])
 
     return (
-        <div className={`input-field col s6 first-name ${!valid ? 'invalid-input' : ''}`}>
-            <span>First Name</span>
+        <div className={`input-field col s12 street-address ${!valid ? 'invalid-input' : ''}`}>
+            <span>Mailing Address</span>
             <input
                 autoComplete="off"
                 disabled={disabled}
-                name="firstName"
+                name="address1"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                placeholder="First Name"
+                placeholder="Street Address"
                 type="text"
                 value={value}
             />
-            {valid ? null : <span className="error-message">{errors.firstName}</span>}
+            {valid ? null : <span className="error-message">{errors.address1}</span>}
         </div>
     )
 }
 
-FirstName.propTypes = {
+Address1.propTypes = {
     disabled: PropTypes.bool,
     errors: PropTypes.object,
     initValue: PropTypes.string,
@@ -77,4 +77,4 @@ FirstName.propTypes = {
     value: PropTypes.string
 }
 
-export default FirstName
+export default Address1
