@@ -63,9 +63,6 @@ span {
 #account .navigation .active {
   background-color: rgba(0, 0, 0, 0.1);
 }
-#account .profile .error-message {
-  color: #ff5722;
-}
 #account .profile .update-profile .confirm-update {
   align-items: center;
   display: flex;
@@ -168,49 +165,108 @@ span {
   display: flex;
   justify-content: flex-start;
   margin-top: 1rem;
+  padding: 0 0.75rem;
 }
-#account .settings .change-password .password-inputs .save-changes {
+#account .settings .change-password .confirm-change {
   align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  padding: 0 0.75rem;
 }
-#account .settings .change-password .password-inputs .save-changes button {
+#account .settings .change-password .confirm-change button,
+#account .settings .change-password .confirm-change span {
   margin-right: 1rem;
   margin-top: 1rem;
 }
 @media screen and (max-width: 600px) {
-  #account .settings .change-password .password-inputs .save-changes {
+  #account .settings .change-password .confirm-change {
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
   }
 }
-#account .settings .delete-account .button {
+#account .settings .change-password .success {
+  color: #4caf50;
+}
+#account .settings .change-password .success,
+#account .settings .change-password .transmitting {
+  display: inline-block;
+  font-size: 1rem;
+  height: 32.4px;
+  line-height: 32.4px;
+  margin-top: 1rem;
+  padding: 0 0.75rem;
+}
+#account .settings .delete-user .button {
   align-items: center;
   display: flex;
   justify-content: flex-start;
   margin-top: 1rem;
+  padding: 0 0.75rem;
 }
-#account .settings .delete-account .confirm-delete {
+#account .settings .delete-user .confirm-delete {
   align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  padding: 0 0.75rem;
 }
-#account .settings .delete-account .confirm-delete button,
-#account .settings .delete-account .confirm-delete span {
+#account .settings .delete-user .confirm-delete button,
+#account .settings .delete-user .confirm-delete span {
   margin-right: 1rem;
   margin-top: 1rem;
 }
 @media screen and (max-width: 600px) {
-  #account .settings .delete-account .confirm-delete {
+  #account .settings .delete-user .confirm-delete {
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
   }
+}
+#account .settings .delete-user .transmitting {
+  display: inline-block;
+  font-size: 1rem;
+  height: 32.4px;
+  line-height: 32.4px;
+  margin-top: 1rem;
+  padding: 0 0.75rem;
+}
+
+#contact .message textarea {
+  height: 4rem;
+  overflow: scroll;
+}
+#contact .success {
+  color: #4caf50;
+}
+#contact .success,
+#contact .transmitting {
+  display: inline-block;
+  font-size: 1rem;
+  height: 32.4px;
+  line-height: 32.4px;
+  padding: 0 0.75rem;
+}
+
+#forgot-password button,
+#forgot-password span {
+  margin-right: 1rem;
+  margin-top: 1rem;
+}
+#forgot-password .success {
+  color: #4caf50;
+}
+#forgot-password .success,
+#forgot-password .transmitting {
+  display: inline-block;
+  font-size: 1rem;
+  height: 32.4px;
+  line-height: 32.4px;
+  margin-top: 1rem;
+  padding: 0 0.75rem;
 }
 
 #index .recipes-preview .overflow-x-container {
@@ -410,6 +466,33 @@ span {
     width: 100%;
   }
 }
+#get-recipes .banner .background {
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 1.625rem;
+  width: auto;
+}
+#get-recipes .banner .background .content {
+  align-items: center;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.25rem;
+  justify-content: space-between;
+  padding: 0.75rem;
+}
+#get-recipes .banner .background .content button {
+  margin: 0.75rem;
+}
+#get-recipes .banner .background .content p {
+  margin: 0.75rem;
+  padding: 0;
+  width: auto;
+}
 #get-recipes .recipe-sort-methods {
   display: flex;
   justify-content: flex-start;
@@ -474,7 +557,7 @@ span {
   color: black;
 }
 #get-recipes .recipe-tag-search .autocomplete .suggestions li.active {
-  color: #ffc107;
+  color: #ffd54f;
 }
 #get-recipes .recipe-tag-list {
   display: flex;
@@ -518,10 +601,6 @@ span {
 #put-recipe hr {
   border-top: 1px solid #f5f5f5;
   margin: 2rem 0 1.5rem;
-}
-#post-recipe .error-message,
-#put-recipe .error-message {
-  color: #ff5722;
 }
 #post-recipe .row,
 #put-recipe .row {
@@ -627,15 +706,15 @@ span {
 }
 #post-recipe .time .time-input input[type=range]::-webkit-slider-thumb,
 #put-recipe .time .time-input input[type=range]::-webkit-slider-thumb {
-  background: #ffc107;
+  background: #ffd54f;
 }
 #post-recipe .time .time-input input[type=range]::-moz-range-thumb,
 #put-recipe .time .time-input input[type=range]::-moz-range-thumb {
-  background: #ffc107;
+  background: #ffd54f;
 }
 #post-recipe .time .time-input input[type=range]::-ms-thumb,
 #put-recipe .time .time-input input[type=range]::-ms-thumb {
-  background: #ffc107;
+  background: #ffd54f;
 }
 #post-recipe .time .time-output,
 #put-recipe .time .time-output {
@@ -893,7 +972,7 @@ span {
 }
 #post-recipe .tags .recipe-tag-search .autocomplete .suggestions li.active,
 #put-recipe .tags .recipe-tag-search .autocomplete .suggestions li.active {
-  color: #ffc107;
+  color: #ffd54f;
 }
 #post-recipe .tags .recipe-tag-list,
 #put-recipe .tags .recipe-tag-list {
@@ -1009,6 +1088,10 @@ span {
 .card .create-buttons .create-recipe,
 .card .create-buttons .create-shopping-list {
   margin: 0.75rem;
+}
+
+.error-message {
+  color: #ff5722;
 }
 
 .invalid-input input:not([type]),
@@ -1198,7 +1281,7 @@ span {
   color: black;
 }
 .recipe-tags > .search .autocomplete .suggestions li.active {
-  color: #ffc107;
+  color: #ffd54f;
 }
 
 .marketing.card-image {
@@ -1536,7 +1619,7 @@ span {
 }
 
 blockquote {
-  border-left: 5px solid #ffc107;
+  border-left: 5px solid #ffd54f;
 }
 
 input:not([type]):focus:not([readonly]),
@@ -1552,12 +1635,12 @@ input[type=tel]:not(.browser-default):focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=search]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #ffc107;
-  box-shadow: 0 1px 0 0 #ffc107;
+  border-bottom: 1px solid #ffd54f;
+  box-shadow: 0 1px 0 0 #ffd54f;
 }
 
 select:focus {
-  outline: 1px solid #ffc107;
+  outline: 1px solid #ffd54f;
 }
 
 textarea.materialize-textarea {
@@ -1619,10 +1702,10 @@ select:-webkit-autofill:focus::placeholder {
 }
 
 .progress {
-  background-color: #ffeb3b;
+  background-color: #ffd600;
 }
 .progress .indeterminate {
-  background-color: #ffc107;
+  background-color: #ffd54f;
 }
 
 /*# sourceMappingURL=styles.css.map */

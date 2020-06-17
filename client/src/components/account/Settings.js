@@ -1,195 +1,64 @@
 // import dependencies
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import isEmpty from 'lodash.isempty'
 
-// import custom hooks
-import { usePasswordValue } from '../../helpers/customHooks'
+// import components
+import ChangePassword from './ChangePassword'
+import DeleteUser from './DeleteUser'
 
-const ChangePassword = props => {
-    // destructure props
-    const {
-        changePassword,
-        setChangePassword
-    } = props
-
-    // custom hook variables
-    const changePasswordInput = usePasswordValue('')
-    const changePassword2Input = usePasswordValue('')
-    const currentPasswordInput = usePasswordValue('')
-
-    const handleClick = () => setChangePassword(!changePassword)
-
-    if (changePassword) {
+const ApplicationErrors = ({ errors }) => {
+    if (!isEmpty(errors)) {
         return (
-            <div className="row password-inputs">
-                <div className="input-field col s12">
-                    <span>Current Password</span>
-                    <input
-                        {...currentPasswordInput}
-                        name="password"
-                    />
-                </div>
-                <div className="input-field col s12 m6">
-                    <span>New Password</span>
-                    <input
-                        {...changePasswordInput}
-                        name="changePassword"
-                    />
-                </div>
-                <div className="input-field col s12 m6">
-                    <span>Confirm New Password</span>
-                    <input
-                        {...changePassword2Input}
-                        name="changePassword2"
-                    />
-                </div>
+            <div className="row center-align error-message">
                 <div className="col s12">
-                    <div className="save-changes">
-                        <button
-                            className="black-text btn-small btn-flat grey lighten-2"
-                            onClick={handleClick}
-                        >
-                            <i className="material-icons left">undo</i>
-                            Go Back
-                        </button>
-                        <button
-                            className="black-text btn-small btn-flat light-green lighten-2"
-                            onClick={() => { }}
-                        >
-                            <i className="material-icons left">save</i>
-                            Save Changes
-                        </button>
-                    </div>
+                    An error occured, please try again later
                 </div>
             </div>
         )
     }
-    return (
-        <div className="button">
-            <button
-                className="black-text btn-small btn-flat grey lighten-2"
-                onClick={handleClick}
-            >
-                Change Password
-            </button>
-        </div>
-    )
+    return null
 }
 
-ChangePassword.propTypes = {
-    changePassword: PropTypes.bool,
-    setChangePassword: PropTypes.func
-}
-
-const DeleteAccount = props => {
-    // destructure props
-    const {
-        deleteProfile,
-        handleDeleteClick,
-        setDeleteProfile
-    } = props
-
-    const handleClick = () => setDeleteProfile(!deleteProfile)
-
-    if (deleteProfile) {
-        return (
-            <div className="confirm-delete">
-                <span>Are you sure?</span>
-                <button
-                    className="black-text btn-small btn-flat grey lighten-2"
-                    onClick={handleClick}
-                >
-                    <i className="material-icons left">undo</i>
-                    Go Back
-                </button>
-                <button
-                    className="black-text btn-small btn-flat red lighten-2"
-                    onClick={handleDeleteClick}
-                >
-                    <i className="material-icons left">delete_forever</i>
-                    Delete Account
-                </button>
-            </div>
-        )
-    }
-    return (
-        <div className="button">
-            <button
-                className="black-text btn-small btn-flat grey lighten-2"
-                onClick={handleClick}
-            >
-                Delete Account
-            </button>
-        </div>
-    )
-}
-
-DeleteAccount.propTypes = {
-    deleteProfile: PropTypes.bool,
-    handleDeleteClick: PropTypes.func,
-    setDeleteProfile: PropTypes.func
-}
+ApplicationErrors.propTypes = { errors: PropTypes.object }
 
 const Settings = props => {
     // destructure props
     const {
         deleteUser,
+        errors,
         history,
         user
     } = props
 
-    // destructure user
-    const {
-        address1,
-        address2,
-        city,
-        email,
-        firstName,
-        lastName,
-        postalCode,
-        state,
-        username
-    } = user
-
     // state hook variables
-    const [changePassword, setChangePassword] = useState(false)
-    const [deleteProfile, setDeleteProfile] = useState(false)
+    const [applicationErrors, setApplicationErrors] = useState({})
 
-    const handleDeleteClick = () => {
-        deleteUser(user, history)
-    }
+    // update state if errors
+    useEffect(() => setApplicationErrors(errors), [errors])
 
     return (
         <div className="card-panel settings">
-            <div className="row change-password">
-                <div className="col s12">
-                    <h5>Password</h5>
-                </div>
-                <div className="col s12">
-                    <ChangePassword
-                        changePassword={changePassword}
-                        setChangePassword={setChangePassword}
-                    />
-                </div>
-            </div>
-            <div className="row delete-account">
-                <div className="col s12">
-                    <h5>Account</h5>
-                </div>
-                <div className="col s12">
-                    <DeleteAccount
-                        deleteProfile={deleteProfile}
-                        handleDeleteClick={handleDeleteClick}
-                        setDeleteProfile={setDeleteProfile}
-                    />
-                </div>
-            </div>
+            <ChangePassword
+                applicationErrors={applicationErrors}
+                setApplicationErrors={setApplicationErrors}
+                user={user}
+            />
+            <DeleteUser
+                applicationErrors={applicationErrors}
+                deleteUser={deleteUser}
+                history={history}
+                setApplicationErrors={setApplicationErrors}
+                user={user}
+            />
+            <ApplicationErrors errors={errors} />
         </div>
     )
 }
 
 Settings.propTypes = {
     deleteUser: PropTypes.func,
+    errors: PropTypes.object,
     history: PropTypes.object,
     user: PropTypes.object
 }

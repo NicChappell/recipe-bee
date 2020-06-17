@@ -11,7 +11,7 @@ import {
 import setAuthToken from '../helpers/setAuthToken'
 
 // delete user
-export const deleteUser = (user, history) => dispatch => {
+export const deleteUser = user => dispatch => {
     axios.delete(`/api/v1/users/${user._id}`)
         .then(() => {
             // remove token from local storage
@@ -22,9 +22,6 @@ export const deleteUser = (user, history) => dispatch => {
 
             // reset current user (will also set isAuthenticated to false)
             dispatch(setCurrentUser({}))
-
-            // redirect to application root
-            history.push('/')
         })
         .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }

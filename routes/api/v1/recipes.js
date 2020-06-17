@@ -13,7 +13,7 @@ const Recipe = require('../../../models/Recipe')
 // instantiate a new Router class
 const router = express.Router()
 
-// @route:  GET api/v1/recipes/?limit=limit&skip=skip&sortMethod=sortMethod
+// @route:  GET /api/v1/recipes/?limit=limit&skip=skip&sortMethod=sortMethod
 // @desc:   Return all recipes
 router.get('/', (req, res) => {
     // destructure query params
@@ -62,7 +62,7 @@ router.get('/', (req, res) => {
         .catch(err => res.status(400).json(err))
 })
 
-// @route:  POST api/v1/recipes/
+// @route:  POST /api/v1/recipes/
 // @desc:   Create new recipe
 router.post('/', (req, res) => {
     // destructure validateRecipe()
@@ -147,7 +147,7 @@ router.post('/', (req, res) => {
         .catch(err => res.status(500).json({ mesage: 'failed to create recipe', err }))
 })
 
-// @route:  GET api/v1/recipes/:recipeId
+// @route:  GET /api/v1/recipes/:recipeId
 // @desc:   Return recipe
 router.get('/:recipeId', (req, res) => {
     // destructure request params
@@ -160,7 +160,7 @@ router.get('/:recipeId', (req, res) => {
         .catch(err => res.status(404).json({ recipe: 'failed to find recipe', err }))
 })
 
-// @route:  PUT api/v1/recipes/:recipeId
+// @route:  PUT /api/v1/recipes/:recipeId
 // @desc:   Update recipe
 router.put('/:recipeId', (req, res) => {
     // destructure validateAuthStatus()
@@ -189,7 +189,7 @@ router.put('/:recipeId', (req, res) => {
         .catch(err => res.status(400).json({ message: 'error updating recipe', err }))
 })
 
-// @route:  DELETE api/v1/recipes/:recipeId
+// @route:  DELETE /api/v1/recipes/:recipeId
 // @desc:   Delete recipe
 router.delete('/:recipeId', (req, res) => {
     // destructure request params
@@ -201,7 +201,7 @@ router.delete('/:recipeId', (req, res) => {
         .catch(err => res.status(400).json({ message: 'error deleting recipe', err }))
 })
 
-// @route:  GET api/v1/recipes/utilities/count
+// @route:  GET /api/v1/recipes/utilities/count
 // @desc:   Return document count for the recipes collection
 router.get('/utilities/count', (req, res) => {
     Recipe.countDocuments()
@@ -209,7 +209,7 @@ router.get('/utilities/count', (req, res) => {
         .catch(err => res.status(400).json({ message: 'error counting recipe documents', err }))
 })
 
-// @route:  GET api/v1/recipes/:userId/down-votes/
+// @route:  GET /api/v1/recipes/:userId/down-votes/
 // @desc:   Return a user's down-voted recipes
 router.get('/:userId/down-votes', (req, res) => {
     // destructure request params
@@ -225,7 +225,7 @@ router.get('/:userId/down-votes', (req, res) => {
         .catch(err => res.status(500).json({ recipe: 'error finding recipes', err }))
 })
 
-// @route:  GET api/v1/recipes/:userId/favorites/
+// @route:  GET /api/v1/recipes/:userId/favorites/
 // @desc:   Return a user's favorite recipes
 router.get('/:userId/favorites', (req, res) => {
     // destructure request params
@@ -241,7 +241,7 @@ router.get('/:userId/favorites', (req, res) => {
         .catch(err => res.status(500).json({ recipe: 'error finding recipes', err }))
 })
 
-// @route:  GET api/v1/recipes/:userId/submissions/
+// @route:  GET /api/v1/recipes/:userId/submissions/
 // @desc:   Return a user's submitted recipes
 router.get('/:userId/submissions', (req, res) => {
     // destructure request params
@@ -257,7 +257,7 @@ router.get('/:userId/submissions', (req, res) => {
         .catch(err => res.status(500).json({ recipe: 'error finding recipes', err }))
 })
 
-// @route:  GET api/v1/recipes/:userId/up-votes/
+// @route:  GET /api/v1/recipes/:userId/up-votes/
 // @desc:   Return a user's up-voted recipes
 router.get('/:userId/up-votes', (req, res) => {
     // destructure request params

@@ -52,12 +52,5 @@ export const signOutUser = () => dispatch => {
     dispatch(setCurrentUser({}))
 }
 
-// change user password
-export const changePassword = (userData) => dispatch => {
-    console.log(userData)
-    // Do I need to use UPDATE_USER action type?
-    // If a user updates their password, I don't need to update that in state
-}
-
 // set current user
 export const setCurrentUser = decoded => ({ type: SET_CURRENT_USER, payload: decoded })

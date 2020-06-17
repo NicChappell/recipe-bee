@@ -40,7 +40,7 @@ const RecipeDescription = props => {
             : setValid(true)
     }, [errors.description])
 
-    // lift state and resolve errors when title changes
+    // lift state and resolve errors when description changes
     useEffect(() => {
         liftState(description)
         if (errors.description) {
@@ -52,6 +52,7 @@ const RecipeDescription = props => {
         <div className="row description">
             <div className={`input-field col s12 ${!valid ? 'invalid-input' : ''}`}>
                 <textarea
+                    autoComplete="off"
                     className="materialize-textarea"
                     name="description"
                     onBlur={handleBlur}

@@ -20,12 +20,12 @@ $primary: #000000; // black
 $secondary: #9e9e9e; // grey
 $important: #2196f3; // blue
 $information: #03a9f4; // light blue
-$success: #8bc34a; // light green
+$success: #4caf50; // green
 $warning: #ff9800; // orange
 $danger: #ff5722; // deep-orange
 
-$brand-primary: #ffc107; // amber
-$brand-secondary: #ffeb3b; // yellow
+$brand-primary: #ffd54f; // amber
+$brand-secondary: #ffd600; // yellow
 $brand-grey: #9e9e9e; //grey
 $brand-light: #f5f5f5; // grey lighten-4
 $brand-dark: #212121; // grey darken-4
@@ -98,9 +98,6 @@ span {
     }
   }
   .profile {
-    .error-message {
-      color: $danger;
-    }
     .info {
       .city {
       }
@@ -227,39 +224,15 @@ span {
         display: flex;
         justify-content: flex-start;
         margin-top: 1rem;
+        padding: 0 0.75rem;
       }
-      .password-inputs {
-        .save-changes {
-          align-items: center;
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          justify-content: flex-start;
-          button {
-            margin-right: 1rem;
-            margin-top: 1rem;
-          }
-          @media screen and (max-width: $max-small) {
-            align-items: flex-start;
-            flex-direction: column;
-            justify-content: center;
-          }
-        }
-      }
-    }
-    .delete-account {
-      .button {
-        align-items: center;
-        display: flex;
-        justify-content: flex-start;
-        margin-top: 1rem;
-      }
-      .confirm-delete {
+      .confirm-change {
         align-items: center;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: flex-start;
+        padding: 0 0.75rem;
         button,
         span {
           margin-right: 1rem;
@@ -271,7 +244,100 @@ span {
           justify-content: center;
         }
       }
+      .success {
+        color: $success;
+      }
+      .success,
+      .transmitting {
+        display: inline-block;
+        font-size: 1rem;
+        height: 32.4px;
+        line-height: 32.4px;
+        margin-top: 1rem;
+        padding: 0 0.75rem;
+      }
     }
+    .delete-user {
+      .button {
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 1rem;
+        padding: 0 0.75rem;
+      }
+      .confirm-delete {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding: 0 0.75rem;
+        button,
+        span {
+          margin-right: 1rem;
+          margin-top: 1rem;
+        }
+        @media screen and (max-width: $max-small) {
+          align-items: flex-start;
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
+      .transmitting {
+        display: inline-block;
+        font-size: 1rem;
+        height: 32.4px;
+        line-height: 32.4px;
+        margin-top: 1rem;
+        padding: 0 0.75rem;
+      }
+    }
+  }
+}
+
+#contact {
+  .email {
+
+  }
+  .message {
+    textarea {
+      height: 4rem;
+      overflow: scroll;
+    }
+  }
+  .success {
+    color: $success;
+  }
+  .success,
+  .transmitting {
+    display: inline-block;
+    font-size: 1rem;
+    height: 32.4px;
+    line-height: 32.4px;
+    padding: 0 0.75rem;
+  }
+}
+
+#forgot-password {
+  button,
+  span {
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+  .email-input {
+    
+  }
+  .success {
+    color: $success;
+  }
+  .success,
+  .transmitting {
+    display: inline-block;
+    font-size: 1rem;
+    height: 32.4px;
+    line-height: 32.4px;
+    margin-top: 1rem;
+    padding: 0 0.75rem;
   }
 }
 
@@ -488,6 +554,35 @@ span {
       }
     }
   }
+  .banner {
+    .background {
+      background-color: white;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      padding: 1.625rem;
+      width: auto;
+      .content {
+        align-items: center;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 1.25rem;
+        justify-content: space-between;
+        padding: 0.75rem;
+        button {
+          margin: 0.75rem;
+        }
+        p {
+          margin: 0.75rem;
+          padding: 0;
+          width: auto;
+        }
+      }
+    }
+  }
   .recipe-sort-methods {
     display: flex;
     justify-content: flex-start;
@@ -599,9 +694,6 @@ span {
   hr {
     border-top: 1px solid $brand-light;
     margin: 2rem 0 1.5rem;
-  }
-  .error-message {
-    color: $danger;
   }
   .row {
     margin-bottom: 0em;
@@ -1042,6 +1134,10 @@ $size: 100px;
 }
 
 // INVALID STYLES
+
+.error-message {
+  color: $danger;
+}
 
 .invalid-input {
   input:not([type]),

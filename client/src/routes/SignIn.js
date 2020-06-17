@@ -42,9 +42,9 @@ const SignIn = props => {
 }
 
 SignIn.propTypes = {
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    signInUser: PropTypes.func.isRequired
+    auth: PropTypes.object,
+    errors: PropTypes.object,
+    signInUser: PropTypes.func
 }
 
 const mapStateToProps = state => ({

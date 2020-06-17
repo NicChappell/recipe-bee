@@ -44,6 +44,14 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    passwordResetExpiresAt: {
+        type: Date,
+        default: Date.now
+    },
+    passwordResetToken: {
+        type: String,
+        default: ''
+    },
     postalCode: {
         type: String,
         required: true

@@ -32,8 +32,10 @@ const Account = props => {
         updateUser
     } = props
     // console.log(auth)
+    // console.log(changePassword)
     // console.log(deleteUser)
     // console.log(errors)
+    // console.log(history)
     // console.log(recipes)
     // console.log(setUserRecipes)
     // console.log(updateRecipe)
@@ -73,8 +75,8 @@ const Account = props => {
         return (
             <div className="container" id="account">
                 <div className="row">
-                    <div className="col s12 l3 navigation">
-                        <ul>
+                    <div className="col s12 l3">
+                        <ul className="navigation">
                             <li>
                                 <button
                                     className={`btn btn-flat ${component === 'profile' ? 'active' : null}`}
@@ -144,8 +146,8 @@ const Account = props => {
                             />
                             : null
                         }
-                        {component === 'meal-plans' ? <div className="card-panel">Meal Plans</div> : null}
-                        {component === 'shopping-lists' ? <div className="card-panel">Shopping Lists</div> : null}
+                        {/* {component === 'meal-plans' ? <div className="card-panel">Meal Plans</div> : null}
+                        {component === 'shopping-lists' ? <div className="card-panel">Shopping Lists</div> : null} */}
                         {component === 'settings'
                             ? <Settings
                                 deleteUser={deleteUser}
@@ -167,10 +169,13 @@ const Account = props => {
 
 Account.propTypes = {
     auth: PropTypes.object,
+    deleteUser: PropTypes.func,
     errors: PropTypes.object,
+    history: PropTypes.object,
     recipes: PropTypes.object,
     setUserRecipes: PropTypes.func,
-    updateRecipe: PropTypes.func
+    updateRecipe: PropTypes.func,
+    updateUser: PropTypes.func,
 }
 
 const mapStateToProps = state => ({

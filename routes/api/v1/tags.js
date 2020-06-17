@@ -10,7 +10,7 @@ const Tag = require('../../../models/Tag')
 // instantiate a new Router class
 const router = express.Router()
 
-// @route:  GET api/v1/tags/
+// @route:  GET /api/v1/tags/
 // @desc:   Return all tags
 router.get('/', (req, res) => {
 	Tag.find({})
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 		.catch(err => res.status(400).json(err))
 })
 
-// @route:  POST api/v1/tags/
+// @route:  POST /api/v1/tags/
 // @desc:   Create new tag
 router.post('/', (req, res) => {
 	// destructure validateTag()
@@ -52,7 +52,7 @@ router.post('/', (req, res) => {
 		.catch(err => res.status(500).json({ mesage: "failed to create tag", err }))
 })
 
-// @route:  POST api/v1/tags/bulk/
+// @route:  POST /api/v1/tags/bulk/
 // @desc:   Bulk write new tags
 router.post('/bulk/', (req, res) => {
 	// create array of documents to insert into collection

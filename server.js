@@ -29,7 +29,7 @@ app.use(passport.initialize())
 const db = mongoURI
 
 // connect to MongoDB
-mongoose.connect(db, { useNewUrlParser: true })
+mongoose.connect(db, { useNewUrlParser: true, useFindAndModify: false })
     .then(() => console.log('connected to MongoDB'))
     .catch(err => console.log(err, 'error connecting to MongoDB'))
 

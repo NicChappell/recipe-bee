@@ -22,10 +22,14 @@ import GetRecipes from './routes/GetRecipes'
 import PostRecipe from './routes/PostRecipe'
 import PutRecipe from './routes/PutRecipe'
 // import auth routes
+import ForgotPassword from './routes/ForgotPassword'
+import ResetPassword from './routes/ResetPassword'
 import SignIn from './routes/SignIn'
 import SignUp from './routes/SignUp'
 // import account routes
 import Account from './routes/Account'
+// import contact routes
+import Contact from './routes/Contact'
 // import legalese routes
 import PrivacyPolicy from './routes/PrivacyPolicy'
 import TermsAndConditions from './routes/TermsAndConditions'
@@ -112,10 +116,13 @@ const App = props => {
                 <div className="my-3" id="router-content">
                     <Switch>
                         <Route exact path="/" component={Index} />
+                        <Route exact path="/contact" component={Contact} />
+                        <Route exact path="/forgot-password" component={ForgotPassword} />
                         <Route exact path="/recipes" component={GetRecipes} />
                         <Route exact path="/recipes/create" component={PostRecipe} />
                         <Route exact path="/recipes/:recipeSlug/:recipeId" component={GetRecipe} />
                         <Route exact path="/recipes/:recipeSlug/:recipeId/edit" component={PutRecipe} />
+                        <Route exact path="/reset-password/:token" component={ResetPassword} />
                         <Route path="/sign-in" component={SignIn} />
                         <Route path="/sign-up" component={SignUp} />
                         <Route path="/account/:userSlug" component={Account} />

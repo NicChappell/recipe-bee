@@ -17,6 +17,7 @@ import { useDidMount } from '../helpers/customHooks'
 // import components
 import Autocomplete from '../components/utility/Autocomplete'
 import IndeterminateMessage from '../components/utility/IndeterminateMessage'
+import RecipeBanner from '../components/recipe/RecipeBanner'
 import RecipeCardList from '../components/recipe/RecipeCardList'
 import DateRanges from '../components/recipe/DateRanges'
 
@@ -247,7 +248,8 @@ const GetRecipes = props => {
     }
 
     return (
-        <div className="container" id="get-recipes" /* onScroll={handleScroll} */>
+        <div className="container" id="get-recipes">
+            <RecipeBanner isAuthenticated={isAuthenticated} />
             <div className="row">
                 <div className="col s12 l6">
                     <div className="row">

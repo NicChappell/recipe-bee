@@ -42,7 +42,13 @@ const Buttons = props => {
             </div>
         )
     }
-    if (transmitting) return <span className="transmitting">Saving changes<Transmitting /></span>
+    if (transmitting) {
+        return (
+            <span className="transmitting">
+                Saving changes<Transmitting />
+            </span>
+        )
+    }
     return (
         <div className="confirm-update">
             <button
@@ -137,7 +143,10 @@ const Profile = props => {
         if (!validate.isValid) {
             setValidationErrors(validate.errors)
         } else {
+            // update state
             setTransmitting(true)
+
+            // update user
             updateUser(userId, profileData)
         }
     }
@@ -152,7 +161,6 @@ const Profile = props => {
 
     // update state when user prop changes
     useEffect(() => {
-        console.log(user)
         setDisabled(true)
         setTransmitting(false)
     }, [user])

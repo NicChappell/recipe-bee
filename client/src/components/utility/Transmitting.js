@@ -1,7 +1,7 @@
 // import dependencies
 import React, { useEffect, useState } from 'react'
 
-const Dots = () => {
+const Transmitting = () => {
     // state hook variables
     const [dots, setDots] = useState('.')
 
@@ -28,4 +28,4 @@ const Dots = () => {
     return <span className="dots">{dots}</span>
 }
 
-export default Dots
+export default Transmitting

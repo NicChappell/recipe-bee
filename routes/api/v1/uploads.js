@@ -46,7 +46,7 @@ const upload = multer({ storage })
 // instantiate a new Router class
 const router = express.Router()
 
-// @route:  GET api/v1/uploads/
+// @route:  GET /api/v1/uploads/
 // @desc:   Return all files
 router.get('/', (req, res) => {
     gfs.files.find().toArray((err, files) => {
@@ -62,12 +62,12 @@ router.get('/', (req, res) => {
     })
 })
 
-// @route:  POST api/v1/uploads/
+// @route:  POST /api/v1/uploads/
 // @desc:   Upload new file
 // @note:   'file' corresponds to matching form-data key from request
 router.post('/', upload.single('file'), (req, res) => res.json({ file: req.file }))
 
-// @route:  GET api/v1/uploads/file/:filename
+// @route:  GET /api/v1/uploads/file/:filename
 // @desc:   Return a file
 router.get('/files/:filename', (req, res) => {
     gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
@@ -83,7 +83,7 @@ router.get('/files/:filename', (req, res) => {
     })
 })
 
-// @route:  DELETE api/v1/uploads/files/:id
+// @route:  DELETE /api/v1/uploads/files/:id
 // @desc:   Delete a file
 router.delete('/files/:id', (req, res) => {
     gfs.remove({ _id: req.params.id, root: 'uploads' }, (err) => {
@@ -94,7 +94,7 @@ router.delete('/files/:id', (req, res) => {
     })
 })
 
-// @route:  GET api/v1/uploads/image/:filename
+// @route:  GET /api/v1/uploads/image/:filename
 // @desc:   Display an image file
 router.get('/image/:filename', (req, res) => {
     gfs.files.findOne({ filename: req.params.filename }, (err, file) => {

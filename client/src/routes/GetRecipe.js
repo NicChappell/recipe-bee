@@ -11,7 +11,6 @@ import {
 } from '../actions/recipeActions'
 
 // import components
-import Breadcrumb from '../components/layout/Breadcrumb'
 import HeartAction from '../components/recipe/HeartAction'
 import Preloader from '../components/utility/Preloader'
 import VoteAction from '../components/recipe/VoteAction'
@@ -94,10 +93,7 @@ const GetRecipe = props => {
         return (
             <div className="container" id="get-recipe">
                 <div className="row">
-                    <div className="col s9 left-align">
-                        <Breadcrumb location={location} />
-                    </div>
-                    <div className="col s3 right-align">
+                    <div className="col s12 right-align">
                         {user.id === recipeUser._id
                             ? <button className="btn btn-small amber lighten-2 black-text"><i className="material-icons left">edit</i> Edit Recipe</button>
                             : null
