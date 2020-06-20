@@ -28,7 +28,8 @@ import SignIn from './routes/SignIn'
 import SignUp from './routes/SignUp'
 // import account routes
 import Account from './routes/Account'
-// import contact routes
+// import company routes
+import About from './routes/About'
 import Contact from './routes/Contact'
 // import legalese routes
 import PrivacyPolicy from './routes/PrivacyPolicy'
@@ -116,6 +117,7 @@ const App = props => {
                 <div className="my-3" id="router-content">
                     <Switch>
                         <Route exact path="/" component={Index} />
+                        <Route exact path="/about" component={About} />
                         <Route exact path="/contact" component={Contact} />
                         <Route exact path="/forgot-password" component={ForgotPassword} />
                         <Route exact path="/recipes" component={GetRecipes} />

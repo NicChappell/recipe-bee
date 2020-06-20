@@ -10,7 +10,7 @@ const Contact = ({ errors }) => {
     return (
         <div className="container" id="contact">
             <div className="row center-align">
-                <div className="col s12">
+                <div className="col s12 l8 push-l2">
                     <ContactForm errors={errors} />
                 </div>
             </div>

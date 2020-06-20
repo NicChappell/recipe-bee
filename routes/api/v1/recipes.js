@@ -202,11 +202,19 @@ router.delete('/:recipeId', (req, res) => {
 })
 
 // @route:  GET /api/v1/recipes/utilities/count
-// @desc:   Return document count for the recipes collection
+// @desc:   Return recipe document count
 router.get('/utilities/count', (req, res) => {
     Recipe.countDocuments()
         .then(count => res.status(200).json({ message: 'counted recipe documnents', count }))
         .catch(err => res.status(400).json({ message: 'error counting recipe documents', err }))
+})
+
+// @route:  GET /api/v1/recipes/utilities/shared-count
+// @desc:   Return shared recipe document count
+router.get('/utilities/shared-count', (req, res) => {
+    Recipe.countDocuments({ share: true })
+        .then(count => res.status(200).json({ message: 'counted shared recipe documnents', count }))
+        .catch(err => res.status(400).json({ message: 'error counting shared recipe documents', err }))
 })
 
 // @route:  GET /api/v1/recipes/:userId/down-votes/

@@ -51,6 +51,81 @@ span {
   font-family: "Source Sans Pro", sans-serif;
 }
 
+#about .by-the-numbers,
+#about .how-it-works,
+#about .meal-planning,
+#about .recipes {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 0;
+  padding: 24px;
+}
+#about .by-the-numbers:first-child,
+#about .how-it-works:first-child,
+#about .meal-planning:first-child,
+#about .recipes:first-child {
+  padding-top: 0;
+}
+#about .by-the-numbers:last-child,
+#about .how-it-works:last-child,
+#about .meal-planning:last-child,
+#about .recipes:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+#about .by-the-numbers i,
+#about .how-it-works i,
+#about .meal-planning i,
+#about .recipes i {
+  color: #ffd600;
+}
+#about .by-the-numbers .card-panel,
+#about .how-it-works .card-panel,
+#about .meal-planning .card-panel,
+#about .recipes .card-panel {
+  -webkit-box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+}
+#about .by-the-numbers .card-panel p,
+#about .how-it-works .card-panel p,
+#about .meal-planning .card-panel p,
+#about .recipes .card-panel p {
+  font-size: 14px;
+  height: 42px;
+  line-height: 21px;
+  overflow: scroll;
+}
+#about .by-the-numbers .card-panel p.error-message,
+#about .how-it-works .card-panel p.error-message,
+#about .meal-planning .card-panel p.error-message,
+#about .recipes .card-panel p.error-message {
+  text-align: center;
+}
+#about .by-the-numbers .card-panel span,
+#about .how-it-works .card-panel span,
+#about .meal-planning .card-panel span,
+#about .recipes .card-panel span {
+  display: block;
+}
+#about .by-the-numbers .card-panel .description,
+#about .how-it-works .card-panel .description,
+#about .meal-planning .card-panel .description,
+#about .recipes .card-panel .description {
+  font-family: "Signika", "Roboto", sans-serif;
+  font-size: 14px;
+  height: 21px;
+  line-height: 21px;
+  overflow: scroll;
+}
+#about .by-the-numbers .card-panel .number,
+#about .how-it-works .card-panel .number,
+#about .meal-planning .card-panel .number,
+#about .recipes .card-panel .number {
+  color: #000000;
+  font-family: "Signika", "Roboto", sans-serif;
+  font-size: 56px;
+}
+
 #account .navigation button {
   overflow: hidden;
   text-align: left;

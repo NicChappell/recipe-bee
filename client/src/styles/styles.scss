@@ -81,6 +81,64 @@ span {
   font-family: "Source Sans Pro", sans-serif;
 }
 
+#about {
+  .by-the-numbers {
+  }
+  .how-it-works {
+  }
+  .meal-planning {
+  }
+  .recipes {
+  }
+  .by-the-numbers,
+  .how-it-works,
+  .meal-planning,
+  .recipes {
+    &:first-child {
+      padding-top: 0;
+    }
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    border-bottom: 1px solid rgba($primary, 0.1);
+    margin: 0;
+    padding: 24px;
+    i {
+      color: $brand-secondary;
+    }
+    .card-panel {
+      -webkit-box-shadow: none;
+      border: 1px solid rgba($primary, 0.1);
+      box-shadow: none;
+      p {
+        font-size: 14px;
+        height: 42px;
+        line-height: 21px;
+        overflow: scroll;
+      }
+      p.error-message {
+        text-align: center;
+      }
+      span {
+        display: block;
+      }
+      .description {
+        font-family: "Signika", "Roboto", sans-serif;
+        font-size: 14px;
+        height: 21px;
+        line-height: 21px;
+        overflow: scroll;
+      }
+      .number {
+        color: $primary;
+        font-family: "Signika", "Roboto", sans-serif;
+        font-size: 56px;
+      }
+    }
+  }
+}
+
 #account {
   .navigation {
     button {
@@ -297,7 +355,6 @@ span {
 
 #contact {
   .email {
-
   }
   .message {
     textarea {
@@ -325,7 +382,6 @@ span {
     margin-top: 1rem;
   }
   .email-input {
-    
   }
   .success {
     color: $success;

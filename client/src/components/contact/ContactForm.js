@@ -98,22 +98,23 @@ const EmailInput = props => {
         }
     }, [email])
 
-    // lift state when success changes to true
+    // update state when success changes
     useEffect(() => {
         if (success) {
-            liftState('')
+            setEmail('')
         }
     }, [success])
 
     return (
         <div className={`input-field col s12 email ${valid ? '' : 'invalid-input'}`}>
+            <span>Email</span>
             <input
                 autoComplete="off"
                 name="email"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                placeholder="Email"
+                placeholder="Your email address"
                 type="text"
                 value={email}
             />
@@ -172,15 +173,16 @@ const MessageInput = props => {
         }
     }, [message])
 
-    // lift state when success changes to true
+    // update state when success changes
     useEffect(() => {
         if (success) {
-            liftState('')
+            setMessage('')
         }
     }, [success])
 
     return (
         <div className={`input-field col s12 message ${valid ? '' : 'invalid-input'}`}>
+            <span>Message</span>
             <textarea
                 autoComplete="off"
                 className="materialize-textarea"
@@ -188,7 +190,7 @@ const MessageInput = props => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                placeholder="Message"
+                placeholder="What's on your mind?"
                 value={message}
             >
             </textarea>
@@ -204,7 +206,7 @@ MessageInput.propTypes = {
     success: PropTypes.bool
 }
 
-const ContactForm = () => {
+const ContactForm = ({ errors }) => {
     // state hook variables
     const [applicationErrors, setApplicationErrors] = useState({})
     const [email, setEmail] = useState('')
@@ -227,14 +229,13 @@ const ContactForm = () => {
 
         // validate user input
         const validate = validateMessageInput(messageData)
-        console.log(validate)
 
         // check for validation errors
         if (!validate.isValid) {
             setValidationErrors(validate.errors)
         } else {
             setTransmitting(true)
-            // sendEmail(messageData)
+            sendEmail(messageData)
         }
     }
 
@@ -246,17 +247,13 @@ const ContactForm = () => {
         } = messageData
 
         axios.post('/api/v1/contact/', { email, message })
-            .then(res => {
+            .then(() => {
                 // update state
                 setSuccess(true)
                 setTransmitting(false)
             })
             .catch(err => {
                 if (err.response.status === 400) {
-                    // update state
-                    setTransmitting(false)
-                    setValidationErrors(err.response.data)
-                } else if (err.response.status === 403) {
                     // update state
                     setTransmitting(false)
                     setValidationErrors(err.response.data)
@@ -267,6 +264,11 @@ const ContactForm = () => {
                 }
             })
     }
+
+    // update state when errors value changes
+    useEffect(() => {
+        setApplicationErrors(errors)
+    }, [errors])
 
     if (!isEmpty(applicationErrors)) {
         return (
@@ -279,7 +281,7 @@ const ContactForm = () => {
         <div className="card-panel">
             <div className="row left-align">
                 <div className="col s12">
-                    <h5>Contact</h5>
+                    <h5>Contact Us</h5>
                 </div>
                 <EmailInput
                     errors={validationErrors}

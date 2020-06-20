@@ -17,20 +17,20 @@ const Footer = () => {
                 <div className="row">
                     <div className="col s12 m6">
                         <h5 className="black-text">RecipeBee</h5>
-                        <p className="black-text">Make meal planning easy and fun</p>
+                        <p className="black-text">Save, share and discover new ideas</p>
+                    </div>
+                    <div className="col s6 m3">
+                        <h5 className="black-text">Company</h5>
+                        <ul>
+                            <li><Link className="black-text" to="/about">About</Link></li>
+                            <li><Link className="black-text" to="/contact">Contact</Link></li>
+                        </ul>
                     </div>
                     <div className="col s6 m3">
                         <h5 className="black-text">Legal</h5>
                         <ul>
                             <li><Link className="black-text" to="/privacy-policy">Privacy Policy</Link></li>
                             <li><Link className="black-text" to="/terms-and-conditions">Terms and Conditions</Link></li>
-                        </ul>
-                    </div>
-                    <div className="col s6 m3">
-                        <h5 className="black-text">About</h5>
-                        <ul>
-                            <li><Link className="black-text" to="/">Company</Link></li>
-                            <li><Link className="black-text" to="/">Contact</Link></li>
                         </ul>
                     </div>
                 </div>
