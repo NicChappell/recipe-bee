@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import isEmpty from 'lodash.isempty'
 
+// import helpers
+import { abbreviateNumber } from '../../helpers/utilities'
+
 const UsersCount = () => {
     // state hook variables
     const [applicationErrors, setApplicationErrors] = useState({})
@@ -33,7 +36,7 @@ const UsersCount = () => {
                 <span className="icon">
                     <i className="material-icons">person</i>
                 </span>
-                <span className="number">{usersCount}</span>
+                <span className="number">{abbreviateNumber(usersCount)}</span>
                 <span className="description">Active users</span>
             </div>
         </div>
@@ -69,7 +72,7 @@ const RecipesCount = () => {
                 <span className="icon">
                     <i className="material-icons">book</i>
                 </span>
-                <span className="number">{recipesCount}</span>
+                <span className="number">{abbreviateNumber(recipesCount)}</span>
                 <span className="description">Recipes created</span>
             </div>
         </div>
@@ -105,7 +108,7 @@ const SharedRecipesCount = () => {
                 <span className="icon">
                     <i className="material-icons">share</i>
                 </span>
-                <span className="number">{sharedRecipesCount}</span>
+                <span className="number">{abbreviateNumber(sharedRecipesCount)}</span>
                 <span className="description">Recipes shared</span>
             </div>
         </div>

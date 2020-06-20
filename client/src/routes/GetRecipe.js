@@ -94,7 +94,7 @@ const GetRecipe = props => {
             <div className="container" id="get-recipe">
                 <div className="row">
                     <div className="col s12 right-align">
-                        {user.id === recipeUser._id
+                        {user._id === recipeUser._id
                             ? <button className="btn btn-small amber lighten-2 black-text"><i className="material-icons left">edit</i> Edit Recipe</button>
                             : null
                         }
@@ -146,7 +146,7 @@ const GetRecipe = props => {
                                                     isAuthenticated={isAuthenticated}
                                                     recipeId={recipeId}
                                                     totalHearts={totalHearts}
-                                                    userId={user.id}
+                                                    userId={user._id}
                                                 />
                                                 <VoteAction
                                                     action={updateRecipe}
@@ -155,7 +155,7 @@ const GetRecipe = props => {
                                                     recipeId={recipeId}
                                                     netVotes={netVotes}
                                                     upVotes={upVotes}
-                                                    userId={user.id}
+                                                    userId={user._id}
                                                 />
                                             </div>
                                             <div className="tags">

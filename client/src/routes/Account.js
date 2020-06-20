@@ -66,7 +66,7 @@ const Account = props => {
     // set user recipes when viewing recipes component
     useEffect(() => {
         if (component === 'recipes') {
-            setUserRecipes(user.id)
+            setUserRecipes(user._id)
         }
     }, [component])
 

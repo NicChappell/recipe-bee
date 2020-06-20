@@ -28,7 +28,7 @@ const SignUp = props => {
     // allow access if user is not authenticated
     if (!isAuthenticated) {
         return (
-            <div className="container">
+            <div className="container" id="sign-up">
                 <div className="row">
                     <SignUpForm
                         errors={errors}

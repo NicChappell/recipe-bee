@@ -70,3 +70,19 @@ export const toTitleCase = str => {
     // convert array back into string
     return map.join(' ')
 }
+
+export const abbreviateNumber = num => {
+    // billions
+    if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B+'
+    }
+    // millions
+    if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M+'
+    }
+    // thousands
+    if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K+'
+    }
+    return num
+}
