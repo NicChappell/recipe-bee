@@ -1,5 +1,6 @@
 // import dependencies
 import React from 'react'
+import PropTypes from 'prop-types'
 
 // import components
 import RecipeCardList from '../recipe/RecipeCardList'
@@ -8,8 +9,9 @@ const Recipes = props => {
     // destructure props
     const {
         auth,
-        recipes,
-        updateRecipe
+        changeHeart,
+        changeVote,
+        recipes
     } = props
 
     // destructure auth
@@ -37,9 +39,10 @@ const Recipes = props => {
                 </div>
                 <div className="col s12">
                     <RecipeCardList
+                        changeHeart={changeHeart}
+                        changeVote={changeVote}
                         isAuthenticated={isAuthenticated}
                         recipes={submissions}
-                        updateRecipe={updateRecipe}
                         user={user}
                     />
                 </div>
@@ -50,9 +53,10 @@ const Recipes = props => {
                 </div>
                 <div className="col s12">
                     <RecipeCardList
+                        changeHeart={changeHeart}
+                        changeVote={changeVote}
                         isAuthenticated={isAuthenticated}
                         recipes={favorites}
-                        updateRecipe={updateRecipe}
                         user={user}
                     />
                 </div>
@@ -63,9 +67,10 @@ const Recipes = props => {
                 </div>
                 <div className="col s12">
                     <RecipeCardList
+                        changeHeart={changeHeart}
+                        changeVote={changeVote}
                         isAuthenticated={isAuthenticated}
                         recipes={upVoted}
-                        updateRecipe={updateRecipe}
                         user={user}
                     />
                 </div>
@@ -76,15 +81,23 @@ const Recipes = props => {
                 </div>
                 <div className="col s12">
                     <RecipeCardList
+                        changeHeart={changeHeart}
+                        changeVote={changeVote}
                         isAuthenticated={isAuthenticated}
                         recipes={downVoted}
-                        updateRecipe={updateRecipe}
                         user={user}
                     />
                 </div>
             </div>
         </div>
     )
+}
+
+Recipes.propTypes = {
+    auth: PropTypes.object,
+    changeHeart: PropTypes.func,
+    changeVote: PropTypes.func,
+    recipes: PropTypes.object
 }
 
 export default Recipes

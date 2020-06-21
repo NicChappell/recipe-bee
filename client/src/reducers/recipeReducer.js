@@ -3,6 +3,7 @@ import {
     COUNT_RECIPES,
     GET_RECIPE,
     GET_RECIPES,
+    PUT_RECIPE,
     SET_USER_RECIPES,
     UPDATE_RECIPE
 } from '../actions/types'
@@ -83,6 +84,16 @@ const recipeReducer = (state = initialState, action) => {
             return {
                 ...state,
                 searchableRecipes: newSearchableRecipes
+            }
+        }
+        case PUT_RECIPE: {
+            // destructure payload
+            const { recipe } = payload
+
+            // update state
+            return {
+                ...state,
+                recipe
             }
         }
         case SET_USER_RECIPES: {

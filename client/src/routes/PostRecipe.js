@@ -72,7 +72,9 @@ const mapStateToProps = state => ({
     tags: state.tags
 })
 
-export default connect(
-    mapStateToProps,
-    { createRecipe, getTags }
-)(PostRecipe)
+const actionCreators = {
+    createRecipe,
+    getTags
+}
+
+export default connect(mapStateToProps, actionCreators)(PostRecipe)

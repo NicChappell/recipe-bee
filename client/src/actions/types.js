@@ -8,6 +8,7 @@ export const SET_ERRORS = 'SET_ERRORS'
 export const COUNT_RECIPES = 'COUNT_RECIPES'
 export const GET_RECIPE = 'GET_RECIPE'
 export const GET_RECIPES = 'GET_RECIPES'
+export const PUT_RECIPE = 'PUT_RECIPE'
 export const SET_USER_RECIPES = 'SET_USER_RECIPES'
 export const UPDATE_RECIPE = 'UPDATE_RECIPE'
 

@@ -7,8 +7,8 @@ import {
     COUNT_RECIPES,
     GET_RECIPE,
     GET_RECIPES,
-    SET_USER_RECIPES,
-    UPDATE_RECIPE
+    PUT_RECIPE,
+    SET_USER_RECIPES
 } from './types'
 
 // create recipe
@@ -89,6 +89,22 @@ export const setUserRecipes = userId => dispatch => {
             dispatch({ type: SET_USER_RECIPES, payload: { userRecipes } })
         })
         .catch(err => dispatch({ type: SET_ERRORS, payload: err }))
+}
+
+// change hearts
+export const changeHeart = (recipeId, recipeData) => dispatch => {
+    // update recipe
+    axios.put(`/api/v1/recipes/${recipeId}`, recipeData)
+        .then(res => dispatch({ type: PUT_RECIPE, payload: res.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
+}
+
+// change likes
+export const changeVote = (recipeId, recipeData) => dispatch => {
+    // update recipe
+    axios.put(`/api/v1/recipes/${recipeId}`, recipeData)
+        .then(res => dispatch({ type: PUT_RECIPE, payload: res.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }
 
 // update recipe

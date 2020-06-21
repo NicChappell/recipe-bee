@@ -10,9 +10,10 @@ import Preloader from '../utility/Preloader'
 const RecipeCardList = props => {
     // destructure props
     const {
+        changeHeart,
+        changeVote,
         isAuthenticated,
         recipes,
-        updateRecipe,
         user
     } = props
 
@@ -49,11 +50,12 @@ const RecipeCardList = props => {
                     {arrayHalves[0].map(recipe => {
                         return (
                             <RecipeCard
-                                action={updateRecipe}
+                                changeHeart={changeHeart}
+                                changeVote={changeVote}
                                 isAuthenticated={isAuthenticated}
                                 key={recipe._id}
                                 recipe={recipe}
-                                userId={id}
+                                userId={user._id}
                             />
                         )
                     })}
@@ -62,11 +64,12 @@ const RecipeCardList = props => {
                     {arrayHalves[1].map(recipe => {
                         return (
                             <RecipeCard
-                                action={updateRecipe}
+                                changeHeart={changeHeart}
+                                changeVote={changeVote}
                                 isAuthenticated={isAuthenticated}
                                 key={recipe._id}
                                 recipe={recipe}
-                                userId={id}
+                                userId={user._id}
                             />
                         )
                     })}
@@ -75,11 +78,12 @@ const RecipeCardList = props => {
                     {recipes.map(recipe => {
                         return (
                             <RecipeCard
-                                action={updateRecipe}
+                                changeHeart={changeHeart}
+                                changeVote={changeVote}
                                 isAuthenticated={isAuthenticated}
                                 key={recipe._id}
                                 recipe={recipe}
-                                userId={id}
+                                userId={user._id}
                             />
                         )
                     })}
@@ -91,9 +95,10 @@ const RecipeCardList = props => {
 }
 
 RecipeCardList.propTypes = {
+    changeHeart: PropTypes.func,
+    changeVote: PropTypes.func,
     isAuthenticated: PropTypes.bool,
     recipes: PropTypes.array,
-    updateRecipe: PropTypes.func,
     user: PropTypes.object
 }
 

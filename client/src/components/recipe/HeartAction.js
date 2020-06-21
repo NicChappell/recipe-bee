@@ -23,9 +23,7 @@ const HeartAction = props => {
     const [loved, setLoved] = useState(hearts.includes(userId))
     const [newHearts, setNewHearts] = useState(hearts)
     const [newHeartsCount, setNewHeartsCount] = useState(totalHearts)
-    // console.log(newHeartsCount)
     const [prevHeartsCount, setPrevHeartsCount] = useState(hearts.includes(userId) ? totalHearts - 1 : totalHearts)
-    // console.log(prevHeartsCount)
 
     // custom hook variables
     const didMount = useDidMount()

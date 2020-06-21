@@ -6,9 +6,10 @@ import isEmpty from 'lodash/isEmpty'
 
 // import actions
 import {
+    changeHeart,
+    changeVote,
     countRecipes,
-    getRecipes,
-    updateRecipe
+    getRecipes
 } from '../actions/recipeActions'
 
 // import custom hooks
@@ -44,12 +45,12 @@ const GetRecipes = props => {
     // destructure props
     const {
         auth,
+        changeHeart,
+        changeVote,
         errors,
         countRecipes,
         getRecipes,
         recipes,
-        // tags,
-        updateRecipe
     } = props
     console.log(recipes)
 
@@ -76,14 +77,6 @@ const GetRecipes = props => {
         recipesCount,
         searchableRecipes
     } = recipes
-
-    // destructure searchable recipes
-    const {
-        mostLovedRecipes,
-        newRecipes,
-        topRecipes,
-        trendingRecipes
-    } = searchableRecipes
 
     const addFilter = filter => {
         setFilters([...filters, filter])
@@ -325,9 +318,10 @@ const GetRecipes = props => {
                 </div>
             </div>
             <RecipeCardList
+                changeHeart={changeHeart}
+                changeVote={changeVote}
                 isAuthenticated={isAuthenticated}
                 recipes={filteredRecipes}
-                updateRecipe={updateRecipe}
                 user={user}
             />
             <div className="row center-align">
@@ -347,12 +341,12 @@ const GetRecipes = props => {
 
 GetRecipes.propTypes = {
     auth: PropTypes.object,
+    changeHeart: PropTypes.func,
+    changeVote: PropTypes.func,
     countRecipes: PropTypes.func,
     errors: PropTypes.object,
     getRecipes: PropTypes.func,
     recipes: PropTypes.object,
-    // tags: PropTypes.array,
-    updateRecipe: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -362,7 +356,11 @@ const mapStateToProps = state => ({
     // tags: state.tags
 })
 
-export default connect(
-    mapStateToProps,
-    { countRecipes, getRecipes, updateRecipe }
-)(GetRecipes)
+const actionCreators = {
+    changeHeart,
+    changeVote,
+    countRecipes,
+    getRecipes
+}
+
+export default connect(mapStateToProps, actionCreators)(GetRecipes)

@@ -1,5 +1,5 @@
 // import dependencies
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
 
@@ -10,14 +10,12 @@ import Preloader from '../utility/Preloader'
 const RecipeCardList = props => {
     // destructure props
     const {
+        changeHeart,
+        changeVote,
         isAuthenticated,
         recipes,
-        updateRecipe,
         user
     } = props
-
-    // destructure user
-    const { id } = user
 
     if (!isEmpty(recipes)) {
         return (
@@ -27,11 +25,12 @@ const RecipeCardList = props => {
                         {recipes.map(recipe => {
                             return (
                                 <RecipeCard
-                                    action={updateRecipe}
+                                    changeHeart={changeHeart}
+                                    changeVote={changeVote}
                                     isAuthenticated={isAuthenticated}
                                     key={recipe._id}
                                     recipe={recipe}
-                                    userId={id}
+                                    userId={user._id}
                                 />
                             )
                         })}
@@ -44,9 +43,10 @@ const RecipeCardList = props => {
 }
 
 RecipeCardList.propTypes = {
+    changeHeart: PropTypes.func,
+    changeVote: PropTypes.func,
     isAuthenticated: PropTypes.bool,
     recipes: PropTypes.array,
-    updateRecipe: PropTypes.func,
     user: PropTypes.object
 }
 

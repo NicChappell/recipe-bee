@@ -10,7 +10,8 @@ import VoteAction from './VoteAction'
 const RecipeCard = props => {
     // destructure props
     const {
-        action,
+        changeHeart,
+        changeVote,
         isAuthenticated,
         recipe,
         userId
@@ -60,7 +61,7 @@ const RecipeCard = props => {
             <div className="card-action recipe-action">
                 <div className="actions">
                     <HeartAction
-                        action={action}
+                        action={changeHeart}
                         hearts={hearts}
                         isAuthenticated={isAuthenticated}
                         recipeId={recipeId}
@@ -68,7 +69,7 @@ const RecipeCard = props => {
                         userId={userId}
                     />
                     <VoteAction
-                        action={action}
+                        action={changeVote}
                         downVotes={downVotes}
                         isAuthenticated={isAuthenticated}
                         recipeId={recipeId}
@@ -87,7 +88,8 @@ const RecipeCard = props => {
 }
 
 RecipeCard.propTypes = {
-    action: PropTypes.func,
+    changeHeart: PropTypes.func,
+    changeVote: PropTypes.func,
     isAuthenticated: PropTypes.bool,
     recipe: PropTypes.object,
     userId: PropTypes.string

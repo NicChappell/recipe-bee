@@ -52,7 +52,6 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-export default connect(
-    mapStateToProps,
-    { signInUser }
-)(SignIn)
+const actionCreators = { signInUser }
+
+export default connect(mapStateToProps, actionCreators)(SignIn)

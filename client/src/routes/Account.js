@@ -6,8 +6,9 @@ import PropTypes from 'prop-types'
 
 // import actions
 import {
-    setUserRecipes,
-    updateRecipe
+    changeHeart,
+    changeVote,
+    setUserRecipes
 } from '../actions/recipeActions'
 import {
     deleteUser,
@@ -23,37 +24,25 @@ const Account = props => {
     // destructure props
     const {
         auth,
+        changeHeart,
+        changeVote,
         deleteUser,
         errors,
         history,
         recipes,
         setUserRecipes,
-        updateRecipe,
         updateUser
     } = props
-    // console.log(auth)
-    // console.log(changePassword)
-    // console.log(deleteUser)
-    // console.log(errors)
-    // console.log(history)
-    // console.log(recipes)
-    // console.log(setUserRecipes)
-    // console.log(updateRecipe)
-    // console.log(updateUser)
 
     // destructure auth
     const {
         isAuthenticated,
         user
     } = auth
-    // console.log(isAuthenticated)
-    // console.log(user)
 
     // state hook variables
     const [component, setComponent] = useState('profile')
     const [validationErrors, setValidationErrors] = useState({})
-    // console.log(component)
-    // console.log(validationErrors)
 
     const handleClick = e => {
         // destructure event
@@ -141,8 +130,9 @@ const Account = props => {
                         {component === 'recipes'
                             ? <Recipes
                                 auth={auth}
+                                changeHeart={changeHeart}
+                                changeVote={changeVote}
                                 recipes={recipes}
-                                updateRecipe={updateRecipe}
                             />
                             : null
                         }
@@ -169,12 +159,13 @@ const Account = props => {
 
 Account.propTypes = {
     auth: PropTypes.object,
+    changeHeart: PropTypes.func,
+    changeVote: PropTypes.func,
     deleteUser: PropTypes.func,
     errors: PropTypes.object,
     history: PropTypes.object,
     recipes: PropTypes.object,
     setUserRecipes: PropTypes.func,
-    updateRecipe: PropTypes.func,
     updateUser: PropTypes.func,
 }
 
@@ -185,9 +176,10 @@ const mapStateToProps = state => ({
 })
 
 const actionCreators = {
+    changeHeart,
+    changeVote,
     deleteUser,
     setUserRecipes,
-    updateRecipe,
     updateUser
 }
 

@@ -6,7 +6,10 @@ import { Link } from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty'
 
 // import actions
-import { updateRecipe } from '../actions/recipeActions'
+import {
+    changeHeart,
+    changeVote
+} from '../actions/recipeActions'
 
 // import components
 import RecipesPreview from '../components/recipe/RecipesPreview'
@@ -21,10 +24,10 @@ const Index = (props) => {
     // destructure props
     const {
         auth,
-        recipes,
-        updateRecipe
+        changeHeart,
+        changeVote,
+        recipes
     } = props
-    // console.log(recipes)
 
     // destructure auth
     const {
@@ -48,10 +51,6 @@ const Index = (props) => {
     const [newRecipesSlice, setNewRecipesSlice] = useState([])
     const [topRecipesSlice, setTopRecipesSlice] = useState([])
     const [trendingRecipesSlice, setTrendingRecipesSlice] = useState([])
-    // console.log(mostLovedRecipesSlice)
-    // console.log(newRecipesSlice)
-    // console.log(topRecipesSlice)
-    // console.log(trendingRecipesSlice)
 
     // slice recipes arrays when values change
     useEffect(() => {
@@ -79,9 +78,10 @@ const Index = (props) => {
                     </div>
                     <div className="col s12">
                         <RecipesPreview
+                            changeHeart={changeHeart}
+                            changeVote={changeVote}
                             isAuthenticated={isAuthenticated}
                             recipes={mostLovedRecipesSlice}
-                            updateRecipe={updateRecipe}
                             user={user}
                         />
                     </div>
@@ -92,9 +92,10 @@ const Index = (props) => {
                     </div>
                     <div className="col s12">
                         <RecipesPreview
+                            changeHeart={changeHeart}
+                            changeVote={changeVote}
                             isAuthenticated={isAuthenticated}
                             recipes={newRecipesSlice}
-                            updateRecipe={updateRecipe}
                             user={user}
                         />
                     </div>
@@ -105,9 +106,10 @@ const Index = (props) => {
                     </div>
                     <div className="col s12">
                         <RecipesPreview
+                            changeHeart={changeHeart}
+                            changeVote={changeVote}
                             isAuthenticated={isAuthenticated}
                             recipes={topRecipesSlice}
-                            updateRecipe={updateRecipe}
                             user={user}
                         />
                     </div>
@@ -118,9 +120,10 @@ const Index = (props) => {
                     </div>
                     <div className="col s12">
                         <RecipesPreview
+                            changeHeart={changeHeart}
+                            changeVote={changeVote}
                             isAuthenticated={isAuthenticated}
                             recipes={trendingRecipesSlice}
-                            updateRecipe={updateRecipe}
                             user={user}
                         />
                     </div>
@@ -294,8 +297,9 @@ const Index = (props) => {
 
 Index.propTypes = {
     auth: PropTypes.object,
-    recipes: PropTypes.object,
-    updateRecipe: PropTypes.func
+    changeHeart: PropTypes.func,
+    changeVote: PropTypes.func,
+    recipes: PropTypes.object
 }
 
 const mapStateToProps = state => ({
@@ -303,7 +307,9 @@ const mapStateToProps = state => ({
     recipes: state.recipes
 })
 
-export default connect(
-    mapStateToProps,
-    { updateRecipe }
-)(Index)
+const actionCreators = {
+    changeHeart,
+    changeVote
+}
+
+export default connect(mapStateToProps, actionCreators)(Index)

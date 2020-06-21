@@ -6,8 +6,9 @@ import isEmpty from 'lodash/isEmpty'
 
 // import actions
 import {
-    getRecipe,
-    updateRecipe
+    changeHeart,
+    changeVote,
+    getRecipe
 } from '../actions/recipeActions'
 
 // import components
@@ -19,12 +20,13 @@ const GetRecipe = props => {
     // destructure props
     const {
         auth,
+        changeHeart,
+        changeVote,
         errors,
         getRecipe,
         location,
         match,
-        recipes,
-        updateRecipe
+        recipes
     } = props
 
     // destructure auth
@@ -39,7 +41,6 @@ const GetRecipe = props => {
     // destructure recipe
     const {
         cookTime,
-        createdAt,
         description,
         downVotes,
         hearts,
@@ -47,20 +48,15 @@ const GetRecipe = props => {
         instructions,
         netVotes,
         notes,
-        percentDownVotes,
-        percentUpVotes,
         photo,
         prepTime,
         preparations,
         production,
         servings,
-        share,
-        slug,
         tagList,
         title,
         totalHearts,
         upVotes,
-        updatedAt,
         user: recipeUser,
         _id: recipeId
     } = recipe
@@ -141,7 +137,7 @@ const GetRecipe = props => {
                                         <div className="col s12 recipe-action">
                                             <div className="actions">
                                                 <HeartAction
-                                                    action={updateRecipe}
+                                                    action={changeHeart}
                                                     hearts={hearts}
                                                     isAuthenticated={isAuthenticated}
                                                     recipeId={recipeId}
@@ -149,7 +145,7 @@ const GetRecipe = props => {
                                                     userId={user._id}
                                                 />
                                                 <VoteAction
-                                                    action={updateRecipe}
+                                                    action={changeVote}
                                                     downVotes={downVotes}
                                                     isAuthenticated={isAuthenticated}
                                                     recipeId={recipeId}
@@ -203,10 +199,11 @@ const GetRecipe = props => {
 
 GetRecipe.propTypes = {
     auth: PropTypes.object,
+    changeHeart: PropTypes.func,
+    changeVote: PropTypes.func,
     errors: PropTypes.object,
     getRecipe: PropTypes.func,
-    recipes: PropTypes.object,
-    updateRecipe: PropTypes.func
+    recipes: PropTypes.object
 }
 
 const mapStateToProps = state => ({
@@ -215,7 +212,10 @@ const mapStateToProps = state => ({
     recipes: state.recipes
 })
 
-export default connect(
-    mapStateToProps,
-    { getRecipe, updateRecipe }
-)(GetRecipe)
+const actionCreators = {
+    changeHeart,
+    changeVote,
+    getRecipe
+}
+
+export default connect(mapStateToProps, actionCreators)(GetRecipe)
