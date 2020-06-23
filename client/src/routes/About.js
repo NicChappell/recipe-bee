@@ -1,10 +1,11 @@
 // import dependencies
 import React from 'react'
-import isEmpty from 'lodash.isempty'
 
 // import components
 import ByTheNumbers from '../components/about/ByTheNumbers'
 import HowItWorks from '../components/about/HowItWorks'
+import Location from '../components/about/Location'
+import Mission from '../components/about/Mission'
 import Recipes from '../components/about/Recipes'
 
 const About = () => {
@@ -16,6 +17,14 @@ const About = () => {
                         <Recipes />
                         <HowItWorks />
                         <ByTheNumbers />
+                        <div className="row">
+                            <div className="col s6">
+                                <Mission />
+                            </div>
+                            <div className="col s6">
+                                <Location />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

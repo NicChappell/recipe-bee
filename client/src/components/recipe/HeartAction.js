@@ -16,17 +16,16 @@ const HeartAction = props => {
         userId
     } = props
 
-    // // determine if user is already in hearts array
-    // const alreadyLoved = hearts && hearts.includes(userId)
-
     // state hook variables
     const [loved, setLoved] = useState(hearts.includes(userId))
     const [newHearts, setNewHearts] = useState(hearts)
     const [newHeartsCount, setNewHeartsCount] = useState(totalHearts)
-    const [prevHeartsCount, setPrevHeartsCount] = useState(hearts.includes(userId) ? totalHearts - 1 : totalHearts)
 
     // custom hook variables
     const didMount = useDidMount()
+
+    // constant variables
+    const prevHeartsCount = hearts.includes(userId) ? totalHearts - 1 : totalHearts
 
     // temporary variables
     let tempHearts = newHearts
@@ -70,6 +69,8 @@ const HeartAction = props => {
 
             action(recipeId, recipeData)
         }
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [newHeartsCount])
 
     return (

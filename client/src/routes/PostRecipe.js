@@ -34,6 +34,7 @@ const PostRecipe = props => {
         if (isEmpty(tags)) {
             getTags()
         }
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     // allow access if user is authenticated

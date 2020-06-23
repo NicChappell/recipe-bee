@@ -1,7 +1,6 @@
 // import dependencies
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import isEmpty from 'lodash.isempty'
 
 // import custom hooks
 import { useCheckboxValue } from '../../helpers/customHooks'
@@ -25,6 +24,7 @@ const ShareSetting = props => {
 	// update state when checked value changes
 	useEffect(() => {
 		liftState(checkbox.checked)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [checkbox.checked])
 
 	return (

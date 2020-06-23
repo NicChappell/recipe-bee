@@ -31,7 +31,10 @@ const RecipeDescription = props => {
     const handleFocus = () => setValid(true)
 
     // update state when initial value changes
-    useEffect(() => initDescription && setDescription(initDescription), [initDescription])
+    useEffect(() => {
+        initDescription && setDescription(initDescription)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [initDescription])
 
     // update state when errors value changes
     useEffect(() => {
@@ -46,6 +49,7 @@ const RecipeDescription = props => {
         if (errors.description) {
             resolveErrors('description')
         }
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [description])
 
     return (

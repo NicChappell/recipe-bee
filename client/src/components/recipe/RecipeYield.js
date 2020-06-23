@@ -1,7 +1,6 @@
 // import dependencies
 import React, { useEffect, useReducer } from 'react'
 import PropTypes from 'prop-types'
-import { v4 as uuid } from 'uuid'
 
 // import data
 import {
@@ -169,6 +168,7 @@ const RecipeYield = props => {
                 ? dispatch({ type: 'validateQuantity', value: true })
                 : dispatch({ type: 'validateQuantity', value: false })
         }
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [errors.production])
 
     // lift state and resolve errors when state changes
@@ -187,6 +187,8 @@ const RecipeYield = props => {
         if (nameValue && quantityValue) {
             resolveErrors('production')
         }
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state])
 
     return (

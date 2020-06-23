@@ -29,7 +29,7 @@ const Navbar = (props) => {
     const authLinks = isAuthenticated ? <SignedInLinks user={user} signOutUser={signOutUser} /> : <SignedOutLinks />
 
     return (
-        <nav className="grey lighten-2">
+        <nav>
             <div className="container">
                 <div className="row">
                     <div className="col s12">

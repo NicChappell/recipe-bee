@@ -16,7 +16,10 @@ const DateRanges = props => {
     const dateRanges = useSelectValue(initState)
 
     // lift state when date ranges value changes
-    useEffect(() => liftState(dateRanges.value), [dateRanges.value])
+    useEffect(() => {
+        liftState(dateRanges.value)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dateRanges.value])
 
     return (
         <div className="col s12">

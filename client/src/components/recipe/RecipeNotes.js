@@ -2,9 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-// import custom hooks
-import { useTextAreaValue } from '../../helpers/customHooks'
-
 const RecipeNotes = props => {
     // destructure props
     const {
@@ -19,7 +16,10 @@ const RecipeNotes = props => {
     useEffect(() => initNotes && setNotes(initNotes), [initNotes])
 
     // update state when value changes
-    useEffect(() => liftState(notes), [notes])
+    useEffect(() => {
+        liftState(notes)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [notes])
 
     return (
         <div className="row notes">

@@ -24,7 +24,6 @@ const GetRecipe = props => {
         changeVote,
         errors,
         getRecipe,
-        location,
         match,
         recipes
     } = props
@@ -71,19 +70,21 @@ const GetRecipe = props => {
 
         // reset recipe when component unmounts
         return () => getRecipe('reset')
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    // if (!isEmpty(errors)) {
-    //     return (
-    //         <div className="container">
-    //             <div className="row mt-5">
-    //                 <div className="center-align col s12">
-    //                     {errors.recipe}
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     )
-    // }
+    if (!isEmpty(errors)) {
+        return (
+            <div className="container">
+                <div className="row mt-5">
+                    <div className="center-align col s12">
+                        There's been an error
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     if (!isEmpty(recipe)) {
         return (

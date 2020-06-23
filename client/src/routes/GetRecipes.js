@@ -22,24 +22,24 @@ import RecipeBanner from '../components/recipe/RecipeBanner'
 import RecipeCardList from '../components/recipe/RecipeCardList'
 import DateRanges from '../components/recipe/DateRanges'
 
-const initFetchRecord = {
-    trendingRecipes: {
-        prevCount: 0,
-        currCount: 0,
-    },
-    topRecipes: {
-        prevCount: 0,
-        currCount: 0,
-    },
-    mostLovedRecipes: {
-        prevCount: 0,
-        currCount: 0,
-    },
-    newRecipes: {
-        prevCount: 0,
-        currCount: 0,
-    }
-}
+// const initFetchRecord = {
+//     trendingRecipes: {
+//         prevCount: 0,
+//         currCount: 0,
+//     },
+//     topRecipes: {
+//         prevCount: 0,
+//         currCount: 0,
+//     },
+//     mostLovedRecipes: {
+//         prevCount: 0,
+//         currCount: 0,
+//     },
+//     newRecipes: {
+//         prevCount: 0,
+//         currCount: 0,
+//     }
+// }
 
 const GetRecipes = props => {
     // destructure props
@@ -57,7 +57,7 @@ const GetRecipes = props => {
     // state hook variables
     const [dateRange, setDateRange] = useState('30')
     const [fetchLimit, setFetchLimit] = useState(false)
-    const [fetchRecord, setFetchRecord] = useState(initFetchRecord)
+    // const [fetchRecord, setFetchRecord] = useState(initFetchRecord)
     const [filteredRecipes, setFilteredRecipes] = useState([])
     const [filters, setFilters] = useState([])
     const [options, setOptions] = useState([])
@@ -147,7 +147,9 @@ const GetRecipes = props => {
 
         // update state
         setOptions(optionsCopy)
-    }, [searchableRecipes[sortMethod]])
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchableRecipes, sortMethod])
 
     // set fetch limit when searchableRecipes[sortMethod] array changes
     useEffect(() => {
@@ -163,7 +165,7 @@ const GetRecipes = props => {
             // console.log('len < recipesCount')
             setFetchLimit(false)
         }
-    }, [recipesCount, searchableRecipes[sortMethod]])
+    }, [recipesCount, searchableRecipes, sortMethod])
 
     // filter recipes when filters or searchableRecipes[sortMethod] changes
     useEffect(() => {
@@ -187,7 +189,7 @@ const GetRecipes = props => {
 
         // update state
         setFilteredRecipes(filteredRecipes)
-    }, [filters, searchableRecipes[sortMethod]])
+    }, [filters, searchableRecipes, sortMethod])
 
     // get recipes when date range option changes
     useEffect(() => {
@@ -214,6 +216,8 @@ const GetRecipes = props => {
             // days: dateRange
             getRecipes(true, 25, 0, 'mostLovedRecipes', dateRange)
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dateRange])
 
     // add scroll event listener to window when component mounts
@@ -222,10 +226,15 @@ const GetRecipes = props => {
 
         // remove scroll event listener to window when component unmounts
         return () => window.removeEventListener('scroll', handleScroll)
-    }, [recipesCount, searchableRecipes[sortMethod]])
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [recipesCount, searchableRecipes, sortMethod])
 
     // count recipes when component mounts
-    useEffect(() => countRecipes(), [])
+    useEffect(() => {
+        countRecipes()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     if (!isEmpty(errors)) {
         console.log(errors)

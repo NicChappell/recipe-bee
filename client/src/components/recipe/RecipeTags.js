@@ -47,6 +47,7 @@ const RecipeTags = props => {
             const updatedOptions = options.filter(option => !initTags.includes(option))
             setOptions(updatedOptions)
         }
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [initTags])
 
     // set options when tags value changes
@@ -60,6 +61,7 @@ const RecipeTags = props => {
         setValid(true)
         liftState(tagList)
         resolveErrors('tagList')
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [tagList])
 
     // update state when errors value changes

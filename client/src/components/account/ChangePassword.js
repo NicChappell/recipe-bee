@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-import isEmpty from 'lodash.isempty'
 
 // import components
 import NewPassword1 from './NewPassword1'
@@ -97,34 +96,37 @@ const Inputs = props => {
         validationErrors
     } = props
 
-    return (
-        <div className="col s12 password-inputs">
-            <form>
-                <input
-                    autoComplete="username"
-                    className="hide"
-                    name="username"
-                    readOnly={true}
-                    type="text"
-                    value={userEmail}
-                />
-                <NewPassword1
-                    disabled={disabled}
-                    errors={validationErrors}
-                    liftState={setNewPassword1}
-                    resolveErrors={resolveValidationErrors}
-                    value={newPassword1}
-                />
-                <NewPassword2
-                    disabled={disabled}
-                    errors={validationErrors}
-                    liftState={setNewPassword2}
-                    resolveErrors={resolveValidationErrors}
-                    value={newPassword2}
-                />
-            </form>
-        </div>
-    )
+    if (!disabled) {
+        return (
+            <div className="col s12 password-inputs">
+                <form>
+                    <input
+                        autoComplete="username"
+                        className="hide"
+                        name="username"
+                        readOnly={true}
+                        type="text"
+                        value={userEmail}
+                    />
+                    <NewPassword1
+                        disabled={disabled}
+                        errors={validationErrors}
+                        liftState={setNewPassword1}
+                        resolveErrors={resolveValidationErrors}
+                        value={newPassword1}
+                    />
+                    <NewPassword2
+                        disabled={disabled}
+                        errors={validationErrors}
+                        liftState={setNewPassword2}
+                        resolveErrors={resolveValidationErrors}
+                        value={newPassword2}
+                    />
+                </form>
+            </div>
+        )
+    }
+    return null
 }
 
 Inputs.propTypes = {
@@ -175,7 +177,7 @@ const ChangePassword = props => {
         // check for validation errors
         if (!validate.isValid) {
             setValidationErrors(validate.errors)
-        } 
+        }
         else {
             // update state
             setDisabled(true)

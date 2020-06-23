@@ -51,6 +51,7 @@ const RecipeTitle = props => {
         if (errors.title) {
             resolveErrors('title')
         }
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [title])
 
     return (

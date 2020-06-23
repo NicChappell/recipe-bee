@@ -11,7 +11,6 @@ import PropTypes from 'prop-types'
 // import actions
 import { getRecipes } from './actions/recipeActions'
 import { getTags } from './actions/tagActions'
-import { setCurrentUser } from './actions/userActions'
 import { signOutUser } from './actions/authActions'
 
 // import index screen
@@ -53,11 +52,6 @@ const App = props => {
         getTags,
         signOutUser
     } = props
-    // console.log(auth)
-
-    // destructure auth
-    const { user } = auth
-    // console.log(user)
 
     // state hook variables
     const [open, setOpen] = useState(false)
@@ -67,7 +61,10 @@ const App = props => {
     const openSideNav = () => setOpen(!open)
 
     // get tags when component mounts
-    useEffect(() => getTags(), [])
+    useEffect(() => {
+        getTags()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     // get recipes when component mounts
     useEffect(() => {
@@ -98,6 +95,8 @@ const App = props => {
         // sortMethod: 'trendingRecipes'
         // days: 30
         getRecipes(true, 25, 0, 'trendingRecipes', 30)
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

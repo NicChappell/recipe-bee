@@ -76,13 +76,14 @@ const RecipeTime = props => {
         errors[name]
             ? setValid(false)
             : setValid(true)
-    }, [errors[name]])
+    }, [errors, name])
 
     // lift state when hours or minutes value changes
     useEffect(() => {
         liftHours(hours)
         liftMinutes(minutes)
         resolveErrors(name)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [hours, minutes])
 
     return (

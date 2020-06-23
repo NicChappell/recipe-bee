@@ -40,8 +40,10 @@ const VoteAction = props => {
     const [newDownVotes, setNewDownVotes] = useState(downVotes)
     const [newUpVotes, setNewUpVotes] = useState(upVotes)
     const [newVotesCount, setNewVoteCount] = useState(netVotes)
-    const [prevVotesCount, setPrevVoteCount] = useState(prevVotes)
     const [upVoted, setUpVoted] = useState(alreadyUpVoted)
+
+    // constant variables
+    const prevVotesCount = prevVotes
 
     // temporary variables
     let tempDownVotes = newDownVotes
@@ -148,6 +150,7 @@ const VoteAction = props => {
 
             action(recipeId, recipeData)
         }
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [newVotesCount])
 
     return (

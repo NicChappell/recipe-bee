@@ -19,32 +19,16 @@ const RecipeCard = props => {
 
     // destructure recipe object
     const {
-        cookTime,
-        createdAt,
-        description,
         downVotes,
         hearts,
-        ingredients,
-        instructions,
         netVotes,
-        notes,
-        percentDownVotes,
-        percentUpVotes,
         photo,
-        prepTime,
-        preparations,
-        share,
         slug,
         tagList,
-        title,
         totalHearts,
         upVotes,
-        updatedAt
-        // user
-        // _id
+        _id: recipeId
     } = recipe
-    const recipeUser = recipe.user
-    const recipeId = recipe._id
 
     return (
         <div className="card z-depth-1 recipe-card">

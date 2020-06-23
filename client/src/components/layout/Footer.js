@@ -12,46 +12,42 @@ const Footer = () => {
     const date = new Date()
 
     return (
-        <footer className="page-footer grey lighten-2" id="footer">
+        <footer>
             <div className="container">
-                <div className="row">
+                <div className="row primary">
                     <div className="col s12 m6">
-                        <h5 className="black-text">RecipeBee</h5>
-                        <p className="black-text">Save, share and discover new ideas</p>
+                        <h5>RecipeBee</h5>
+                        <p>Save, share and discover new ideas</p>
                     </div>
                     <div className="col s6 m3">
-                        <h5 className="black-text">Company</h5>
+                        <h5>Company</h5>
                         <ul>
-                            <li><Link className="black-text" to="/about">About</Link></li>
-                            <li><Link className="black-text" to="/contact">Contact</Link></li>
+                            <li><Link to="/about">About</Link></li>
+                            <li><Link to="/contact">Contact</Link></li>
                         </ul>
                     </div>
                     <div className="col s6 m3">
-                        <h5 className="black-text">Legal</h5>
+                        <h5>Legal</h5>
                         <ul>
-                            <li><Link className="black-text" to="/privacy-policy">Privacy Policy</Link></li>
-                            <li><Link className="black-text" to="/terms-and-conditions">Terms and Conditions</Link></li>
+                            <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+                            <li><Link to="/terms-and-conditions">Terms and Conditions</Link></li>
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div className="footer-copyright">
-                <div className="container">
-                    <div className="row">
-                        <div className="col s12 m6 black-text left-align copyright">
-                            © {date.getFullYear()} RecipeBee, LLC
-                        </div>
-                        <div className="col s12 m6 right-align social">
-                            <a href="https://www.instagram.com/recipe_bee/" target="_blank">
-                                <img src={instagram} alt="instagram" />
-                            </a>
-                            <a href="https://twitter.com/recipe_bee" target="_blank">
-                                <img src={twitter} alt="twitter" />
-                            </a>
-                            <a href="https://www.facebook.com/RecipeBeeLLC" target="_blank">
-                                <img src={facebook} alt="facebook" />
-                            </a>
-                        </div>
+                <div className="row secondary">
+                    <div className="col s6 m9 copyright">
+                        © {date.getFullYear()} RecipeBee, LLC
+                    </div>
+                    <div className="col s6 m3 social">
+                        <a href="https://www.instagram.com/recipe_bee/" rel="noopener noreferrer" target="_blank">
+                            <img src={instagram} alt="instagram" />
+                        </a>
+                        <a href="https://twitter.com/recipe_bee" rel="noopener noreferrer" target="_blank">
+                            <img src={twitter} alt="twitter" />
+                        </a>
+                        <a href="https://www.facebook.com/RecipeBeeLLC" rel="noopener noreferrer" target="_blank">
+                            <img src={facebook} alt="facebook" />
+                        </a>
                     </div>
                 </div>
             </div>

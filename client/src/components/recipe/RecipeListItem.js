@@ -1,5 +1,5 @@
 // import dependencies
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 // import components
@@ -7,7 +7,6 @@ import EditButtons from './EditButtons'
 
 // import custom hooks
 import { useValidTextAreaValue } from '../../helpers/customHooks'
-import { text } from 'body-parser'
 
 const RecipeListItem = props => {
 	// state hook variables

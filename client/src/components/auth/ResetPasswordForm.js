@@ -194,6 +194,7 @@ const ResetPasswordForm = props => {
                 setUser(user)
             })
             .catch(err => setApplicationErrors(err))
+            // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (!isEmpty(applicationErrors)) {

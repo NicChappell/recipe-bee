@@ -37,7 +37,10 @@ const Address2 = props => {
     const handleFocus = () => setValid(true)
 
     // lift state when initial value changes
-    useEffect(() => liftState(initValue), [initValue])
+    useEffect(() => {
+        liftState(initValue)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [initValue])
 
     // update state when errors value changes
     useEffect(() => {

@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import isEmpty from 'lodash/isEmpty'
 
 // import actions
 import {
@@ -48,6 +47,8 @@ const PutRecipe = props => {
 
         // reset recipe when component unmounts
         return () => getRecipe('reset')
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     // allow access if user is authenticated

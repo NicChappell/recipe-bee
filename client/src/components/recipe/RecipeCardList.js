@@ -17,9 +17,6 @@ const RecipeCardList = props => {
         user
     } = props
 
-    // destructure user
-    const { id } = user
-
     // state hook variables
     const [arrayHalves, setArrayHalves] = useState([[], []])
 
@@ -91,7 +88,13 @@ const RecipeCardList = props => {
             </div>
         )
     }
-    return <Preloader />
+    return (
+        <div className="row center-align">
+            <div className="col s12">
+                < Preloader />
+            </div>
+        </div>
+    )
 }
 
 RecipeCardList.propTypes = {

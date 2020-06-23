@@ -26,7 +26,7 @@ const ValidationErrors = ({ errors }) => {
     useEffect(() => {
         setErrorsRemaining(Object.keys(errors).length)
         Object.keys(errors).length === 1 ? setPlural('') : setPlural('s')
-    }, [Object.keys(errors).length])
+    }, [errors])
 
     if (!isEmpty(errors)) {
         return (

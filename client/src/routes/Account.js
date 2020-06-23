@@ -42,7 +42,6 @@ const Account = props => {
 
     // state hook variables
     const [component, setComponent] = useState('profile')
-    const [validationErrors, setValidationErrors] = useState({})
 
     const handleClick = e => {
         // destructure event
@@ -57,6 +56,7 @@ const Account = props => {
         if (component === 'recipes') {
             setUserRecipes(user._id)
         }
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [component])
 
     // allow access if user is authenticated

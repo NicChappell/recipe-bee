@@ -140,6 +140,7 @@ const RecipePhoto = props => {
             setPhoto(initPhoto)
             setPhotoStatus('existing')
         }
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [initPhoto])
 
     // update state when errors value changes
@@ -155,6 +156,7 @@ const RecipePhoto = props => {
         if (errors.photo) {
             resolveErrors('photo')
         }
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [photo])
 
     return (

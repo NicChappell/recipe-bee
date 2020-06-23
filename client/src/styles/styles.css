@@ -1,3 +1,7 @@
+html {
+  font-size: 14px;
+}
+
 body {
   background-color: #f5f5f5;
   font-family: "Source Sans Pro", sans-serif;
@@ -12,8 +16,36 @@ h6 {
   font-family: "Signika", "Roboto", sans-serif;
 }
 
-nav {
+footer {
+  background-color: rgba(51, 51, 51, 0.08);
+  box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.14), 0 -2px 1px -2px rgba(0, 0, 0, 0.12), 0 0 5px 0 rgba(0, 0, 0, 0.2);
   font-family: "Signika", "Roboto", sans-serif;
+  padding-top: 20px;
+}
+footer .primary a {
+  color: #000000;
+}
+footer .secondary .copyright {
+  color: #000000;
+  line-height: 2rem;
+}
+footer .secondary .social img {
+  height: auto;
+  margin: 0 0.5rem;
+  max-height: 2rem;
+  max-width: 2rem;
+  width: auto;
+}
+
+nav {
+  background-color: rgba(51, 51, 51, 0.08);
+  color: #000000;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  display: block;
+  font-family: "Signika", "Roboto", sans-serif;
+  height: 64px;
+  line-height: 64px;
+  width: 100%;
 }
 nav i:hover {
   cursor: pointer;
@@ -51,9 +83,19 @@ span {
   font-family: "Source Sans Pro", sans-serif;
 }
 
+#about .location {
+  padding: 24px;
+}
+#about .location img {
+  height: auto;
+  width: 100%;
+}
+#about .location p {
+  margin: 0;
+}
 #about .by-the-numbers,
 #about .how-it-works,
-#about .meal-planning,
+#about .mission,
 #about .recipes {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin: 0;
@@ -61,26 +103,26 @@ span {
 }
 #about .by-the-numbers:first-child,
 #about .how-it-works:first-child,
-#about .meal-planning:first-child,
+#about .mission:first-child,
 #about .recipes:first-child {
   padding-top: 0;
 }
 #about .by-the-numbers:last-child,
 #about .how-it-works:last-child,
-#about .meal-planning:last-child,
+#about .mission:last-child,
 #about .recipes:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
 #about .by-the-numbers i,
 #about .how-it-works i,
-#about .meal-planning i,
+#about .mission i,
 #about .recipes i {
   color: #ffd600;
 }
 #about .by-the-numbers .card-panel,
 #about .how-it-works .card-panel,
-#about .meal-planning .card-panel,
+#about .mission .card-panel,
 #about .recipes .card-panel {
   -webkit-box-shadow: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -88,7 +130,7 @@ span {
 }
 #about .by-the-numbers .card-panel p,
 #about .how-it-works .card-panel p,
-#about .meal-planning .card-panel p,
+#about .mission .card-panel p,
 #about .recipes .card-panel p {
   font-size: 14px;
   height: 42px;
@@ -97,19 +139,20 @@ span {
 }
 #about .by-the-numbers .card-panel p.error-message,
 #about .how-it-works .card-panel p.error-message,
-#about .meal-planning .card-panel p.error-message,
+#about .mission .card-panel p.error-message,
 #about .recipes .card-panel p.error-message {
   text-align: center;
+  height: 21px;
 }
 #about .by-the-numbers .card-panel span,
 #about .how-it-works .card-panel span,
-#about .meal-planning .card-panel span,
+#about .mission .card-panel span,
 #about .recipes .card-panel span {
   display: block;
 }
 #about .by-the-numbers .card-panel .description,
 #about .how-it-works .card-panel .description,
-#about .meal-planning .card-panel .description,
+#about .mission .card-panel .description,
 #about .recipes .card-panel .description {
   font-family: "Signika", "Roboto", sans-serif;
   font-size: 14px;
@@ -119,7 +162,7 @@ span {
 }
 #about .by-the-numbers .card-panel .number,
 #about .how-it-works .card-panel .number,
-#about .meal-planning .card-panel .number,
+#about .mission .card-panel .number,
 #about .recipes .card-panel .number {
   color: #000000;
   font-family: "Signika", "Roboto", sans-serif;
@@ -541,27 +584,25 @@ span {
     width: 100%;
   }
 }
-#get-recipes .banner .background {
-  background-color: white;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  padding: 1.625rem;
-  width: auto;
-}
 #get-recipes .banner .background .content {
   align-items: center;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.125);
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   font-size: 1.25rem;
   justify-content: space-between;
   padding: 0.75rem;
 }
-#get-recipes .banner .background .content button {
+@media screen and (max-width: 600px) {
+  #get-recipes .banner .background .content {
+    flex-wrap: wrap;
+  }
+}
+#get-recipes .banner .background .content a {
   margin: 0.75rem;
+  min-width: 144px;
+  width: auto;
 }
 #get-recipes .banner .background .content p {
   margin: 0.75rem;
@@ -656,20 +697,6 @@ span {
 }
 #get-recipes .recipe-tag-list .chip i {
   padding: 0 0.5rem 0 0;
-}
-
-#footer {
-  font-family: "Signika", "Roboto", sans-serif;
-}
-#footer .copyright {
-  line-height: 2rem;
-}
-#footer .social img {
-  height: auto;
-  margin: 0 0.5rem;
-  max-height: 2rem;
-  max-width: 2rem;
-  width: auto;
 }
 
 #post-recipe hr,
@@ -997,7 +1024,7 @@ span {
 }
 #post-recipe .list,
 #put-recipe .list {
-  border: 1px dotted #9e9e9e;
+  border: 1px dotted #e0e0e0;
   margin-top: 1rem;
   padding: 1rem 0;
 }
@@ -1753,7 +1780,7 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid #9e9e9e;
+  border-bottom: 1px solid #e0e0e0;
   border-radius: 0;
   outline: none;
   height: 3rem;

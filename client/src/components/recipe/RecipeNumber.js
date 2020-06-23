@@ -83,12 +83,13 @@ const RecipeNumber = props => {
         errors[name]
             ? setValid(false)
             : setValid(true)
-    }, [errors[name]])
+    }, [errors, name])
 
     // lift state and resolve errors when value changes
     useEffect(() => {
         liftState(number)
         resolveErrors(name)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [number])
 
     return (

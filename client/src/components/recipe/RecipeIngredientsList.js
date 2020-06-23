@@ -36,7 +36,10 @@ const RecipeIngredientsList = props => {
 	}
 
 	// lift state when initial value changes
-	useEffect(() => initList && liftState(initList), [initList])
+	useEffect(() => {
+		initList && liftState(initList)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [initList])
 
 	return (
 		<div className={`row ${ingredients && ingredients.length > 0 ? 'list' : ''}`}>

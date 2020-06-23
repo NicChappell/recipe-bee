@@ -83,7 +83,7 @@ const RecipeAddListItem = props => {
 		if (errors[name]) {
 			dispatch({ type: 'validate', value: false })
 		}
-	}, [errors[name]])
+	}, [errors, name])
 
 	return (
 		<div className="row add-list-item">

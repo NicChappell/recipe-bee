@@ -96,6 +96,7 @@ const EmailInput = props => {
         if (errors.email) {
             resolveErrors('email')
         }
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [email])
 
     // update state when success changes
@@ -171,6 +172,7 @@ const MessageInput = props => {
         if (errors.message) {
             resolveErrors('message')
         }
+		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [message])
 
     // update state when success changes
