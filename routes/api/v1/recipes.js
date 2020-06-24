@@ -13,7 +13,7 @@ const Recipe = require('../../../models/Recipe')
 // instantiate a new Router class
 const router = express.Router()
 
-// @route:  GET /api/v1/recipes/?limit=limit&skip=skip&sortMethod=sortMethod
+// @route:  GET /api/v1/recipes/?limit=limit&skip=skip&sortMethod=sortMethod&days=days
 // @desc:   Return all recipes
 router.get('/', (req, res) => {
     // destructure query params
@@ -27,39 +27,41 @@ router.get('/', (req, res) => {
     // get the current date and time
     const now = moment()
 
-    let find = {}
+    let filter = {}
     let sort = {}
     switch (sortMethod) {
         case 'mostLovedRecipes':
             // filter for previous x days
-            find = { createdAt: { $gt: now.subtract(parseInt(days), 'days') } }
+            filter = { createdAt: { $gt: now.subtract(parseInt(days), 'days') } }
             sort = { totalHearts: -1, createdAt: 1 }
             break
         case 'newRecipes':
+            // filter for previous 30 days
+            filter = { createdAt: { $gt: now.subtract(30, 'days') } }
             sort = { createdAt: -1 }
             break
         case 'topRecipes':
             // filter for previous x days
-            find = { createdAt: { $gt: now.subtract(parseInt(days), 'days') } }
+            filter = { createdAt: { $gt: now.subtract(parseInt(days), 'days') } }
             sort = { netVotes: -1, createdAt: 1 }
             break
         case 'trendingRecipes':
             // filter for previous x days and more than y net (up)votes
-            find = { createdAt: { $gt: now.subtract(parseInt(days), 'days') }, netVotes: { $gt: 0 } }
+            filter = { createdAt: { $gt: now.subtract(parseInt(days), 'days') }, netVotes: { $gt: 0 } }
             sort = { percentUpVotes: -1 }
             break
         default:
-            find = {}
+            filter = {}
             sort = {}
     }
 
-    Recipe.find(find)
+    Recipe.find(filter)
         .populate(['user', 'photo'])
         .limit(limit ? parseInt(limit) : 0)
         .skip(skip ? parseInt(skip) : 0)
         .sort(sort)
-        .then(recipes => res.status(200).json(recipes))
-        .catch(err => res.status(400).json(err))
+        .then(recipes => res.status(200).json({ message: 'fetched recipe documnents', recipes }))
+        .catch(err => res.status(400).json({ message: 'error fetching recipe documents', err }))
 })
 
 // @route:  POST /api/v1/recipes/
@@ -201,10 +203,47 @@ router.delete('/:recipeId', (req, res) => {
         .catch(err => res.status(400).json({ message: 'error deleting recipe', err }))
 })
 
-// @route:  GET /api/v1/recipes/utilities/count
-// @desc:   Return recipe document count
+// @route:  GET /api/v1/recipes/utilities/count?&sortMethod=sortMethod&days=days
+// @desc:   Return all recipes
 router.get('/utilities/count', (req, res) => {
-    Recipe.countDocuments()
+    // destructure query params
+    const sortMethod = req.query.sortMethod || ''
+    const days = req.query.days || 0
+
+    // get the current date and time
+    const now = moment()
+
+    let filter = {}
+    switch (sortMethod) {
+        case 'mostLovedRecipes':
+            // filter for previous x days
+            days
+                ? filter = { createdAt: { $gt: now.subtract(parseInt(days), 'days') } }
+                : filter = {}
+            break
+        case 'newRecipes':
+            // filter for previous x days
+            days
+                ? filter = { createdAt: { $gt: now.subtract(parseInt(days), 'days') } }
+                : filter = {}
+            break
+        case 'topRecipes':
+            // filter for previous x days
+            days
+                ? filter = { createdAt: { $gt: now.subtract(parseInt(days), 'days') } }
+                : filter = {}
+            break
+        case 'trendingRecipes':
+            // filter for previous x days and more than y net (up)votes
+            days
+                ? filter = { createdAt: { $gt: now.subtract(parseInt(days), 'days') }, netVotes: { $gt: 0 } }
+                : filter = { netVotes: { $gt: 0 } }
+            break
+        default:
+            filter = {}
+    }
+
+    Recipe.countDocuments(filter)
         .then(count => res.status(200).json({ message: 'counted recipe documnents', count }))
         .catch(err => res.status(400).json({ message: 'error counting recipe documents', err }))
 })
