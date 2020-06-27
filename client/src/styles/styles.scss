@@ -124,22 +124,23 @@ span {
   }
   .how-it-works {
   }
-  .location {
-    padding: 24px;
-    img {
-      height: auto;
-      width: 100%;
-    }
-    p {
-      margin: 0;
-    }
-  }
+  // .location {
+  //   padding: 24px;
+  //   img {
+  //     height: auto;
+  //     width: 100%;
+  //   }
+  //   p {
+  //     margin: 0;
+  //   }
+  // }
   .mission {
   }
   .recipes {
   }
   .by-the-numbers,
   .how-it-works,
+  // .location,
   .mission,
   .recipes {
     &:first-child {
@@ -167,20 +168,51 @@ span {
       }
       p.error-message {
         text-align: center;
-        height: 21px;
+        height: auto;
       }
-      span {
-        display: block;
-      }
-      .description {
-        font-family: "Signika", "Roboto", sans-serif;
+      .date-ranges {
+        align-items: center;
+        color: $primary;
+        display: flex;
+        flex-wrap: wrap;
         font-size: 14px;
         height: 21px;
         line-height: 21px;
+        justify-content: flex-start;
         overflow: scroll;
+        width: auto;
+        select {
+          background-color: transparent;
+          border: none;
+          font-family: "Signika", "Roboto", sans-serif;
+          height: 21px;
+          padding: 0;
+          width: auto;
+          &:focus {
+            outline: none;
+          }
+        }
+        span {
+          font-family: "Signika", "Roboto", sans-serif;
+          height: 21px;
+          white-space: nowrap;
+        }
+      }
+      .description {
+        display: block;
+        font-family: "Signika", "Roboto", sans-serif;
+        font-size: 14px;
+        height: 21px;
+        // height: auto;
+        line-height: 21px;
+        overflow: scroll;
+      }
+      .icon {
+        display: block;
       }
       .number {
         color: $primary;
+        display: block;
         font-family: "Signika", "Roboto", sans-serif;
         font-size: 49px;
       }
@@ -197,11 +229,11 @@ span {
       width: 100%;
       &:focus,
       &:hover {
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba($primary, 0.1);
       }
     }
     .active {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba($primary, 0.1);
     }
   }
   .profile {
@@ -694,23 +726,35 @@ span {
       }
     }
   }
-  .recipe-sort-methods {
+  .sort-methods {
+    align-content: center;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: row;
     flex-wrap: wrap;
-    .active {
-      background-color: rgba(0, 0, 0, 0.1);
+    justify-content: flex-start;
+    .button-group {
+      align-content: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      .active {
+        background-color: rgba($primary, 0.1);
+      }
     }
   }
   .date-ranges {
     align-items: center;
     color: $primary;
     display: flex;
+    justify-content: flex-start;
     padding: 0 16px;
     width: auto;
     select {
       background-color: transparent;
       border: none;
+      padding-left: 0;
+      padding-right: 0;
       width: auto;
       &:focus {
         outline: none;
@@ -739,7 +783,7 @@ span {
         }
       }
       .suggestions {
-        background-color: $brand-light;
+        background-color: white;
         font-size: 0.875rem;
         height: auto;
         margin: 0 0 0 2.3rem;
@@ -779,6 +823,64 @@ span {
       i {
         padding: 0 0.5rem 0 0;
       }
+    }
+  }
+}
+
+$size: 100px;
+#no-match {
+  img,
+  div {
+    width: $size;
+    height: $size;
+  }
+  .x {
+    animation: x 13s linear infinite alternate;
+  }
+  .y {
+    animation: y 7s linear infinite alternate;
+  }
+  @keyframes x {
+    100% {
+      transform: translateX(calc(500px - #{$size}));
+    }
+  }
+  @keyframes y {
+    100% {
+      transform: translateY(calc(500px - #{$size}));
+    }
+  }
+}
+
+#shop {
+  .card-content {
+    .discount {
+      display: inline-block;
+      .right {
+        margin-left: 5px;
+      }
+    }
+    .gallery {
+      align-self: center;
+      display: flex;
+      flex-direction: row;
+      height: auto;
+      justify-content: flex-start;
+      overflow: scroll;
+      width: auto;
+      .thumbnail {
+        height: auto;
+        width: 100px;
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+    }
+    .sale {
+      color: $success;
+    }
+    .strike {
+      text-decoration: line-through;
     }
   }
 }
@@ -1152,31 +1254,7 @@ span {
   }
 }
 
-$size: 100px;
-#no-match {
-  img,
-  div {
-    width: $size;
-    height: $size;
-  }
-  .x {
-    animation: x 13s linear infinite alternate;
-  }
-  .y {
-    animation: y 7s linear infinite alternate;
-  }
-  @keyframes x {
-    100% {
-      transform: translateX(calc(500px - #{$size}));
-    }
-  }
-  @keyframes y {
-    100% {
-      transform: translateY(calc(500px - #{$size}));
-    }
-  }
-}
-
+// LAYOUT STYLES
 #router-content {
   align-items: center;
   display: flex;
@@ -1346,7 +1424,7 @@ $size: 100px;
           transition: 0.3s;
           white-space: nowrap;
           &:hover {
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: rgba($primary, 0.1);
           }
         }
       }

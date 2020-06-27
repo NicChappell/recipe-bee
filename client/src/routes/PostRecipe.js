@@ -1,16 +1,14 @@
 // import dependencies
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import isEmpty from 'lodash/isEmpty'
 
 // import actions
 import { createRecipe } from '../actions/recipeActions'
-import { getTags } from '../actions/tagActions'
 
 // import components
-import CreateRecipe from '../components/recipe/CreateRecipe'
+import CreateRecipeForm from '../components/recipe/CreateRecipeForm'
 
 const PostRecipe = props => {
     // destructure props
@@ -18,7 +16,6 @@ const PostRecipe = props => {
         auth,
         createRecipe,
         errors,
-        getTags,
         history,
         tags
     } = props
@@ -29,24 +26,16 @@ const PostRecipe = props => {
         user
     } = auth
 
-    // get tags after component mount
-    useEffect(() => {
-        if (isEmpty(tags)) {
-            getTags()
-        }
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
     // allow access if user is authenticated
     if (isAuthenticated) {
         return (
             <div className="container" id="post-recipe">
                 <div className="row">
                     <div className="col s12">
-                        <CreateRecipe
-                            createRecipe={createRecipe}
+                        <CreateRecipeForm
                             errors={errors}
                             history={history}
+                            recipeAction={createRecipe}
                             tags={tags}
                             user={user}
                         />
@@ -63,7 +52,6 @@ PostRecipe.propTypes = {
     auth: PropTypes.object,
     createRecipe: PropTypes.func,
     errors: PropTypes.object,
-    getTags: PropTypes.func,
     tags: PropTypes.array
 }
 
@@ -73,9 +61,6 @@ const mapStateToProps = state => ({
     tags: state.tags
 })
 
-const actionCreators = {
-    createRecipe,
-    getTags
-}
+const actionCreators = { createRecipe }
 
 export default connect(mapStateToProps, actionCreators)(PostRecipe)

@@ -12,7 +12,7 @@ import {
 import { deleteFile } from '../actions/uploadActions'
 
 // import components
-import RecipeForm from '../components/recipe/RecipeForm'
+import UpdateRecipeForm from '../components/recipe/UpdateRecipeForm'
 
 const PutRecipe = props => {
     // destructure props
@@ -57,7 +57,7 @@ const PutRecipe = props => {
             <div className="container" id="put-recipe">
                 <div className="row">
                     <div className="col s12">
-                        <RecipeForm
+                        <UpdateRecipeForm
                             recipeAction={updateRecipe}
                             errors={errors}
                             history={history}

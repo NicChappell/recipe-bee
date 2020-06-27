@@ -9,7 +9,7 @@ const Location = () => {
         <div className="row location">
             <div className="col s12">
                 <img src={flatirons} alt="The Flatirons" />
-                <p className="flow-text">RecipeBee is located in beautiful Boulder, Colorado, and a proud member of the Front Range community</p>
+                <p className="flow-text">RecipeBee is located in Boulder, Colorado, and a proud member of the Front Range community</p>
             </div>
         </div>
     )

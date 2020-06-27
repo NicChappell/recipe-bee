@@ -8,6 +8,7 @@ import { useSelectValue } from '../../helpers/customHooks'
 const DateRanges = props => {
     // destructure props
     const {
+        context,
         initState,
         liftState,
     } = props
@@ -22,24 +23,23 @@ const DateRanges = props => {
     }, [dateRanges.value])
 
     return (
-        <div className="col s12">
-            <div className="date-ranges">
-                Previous
-                <select
-                    {...dateRanges}
-                    name="date-range"
-                >
-                    <option value="1">day</option>
-                    <option value="7">week</option>
-                    <option value="30">month</option>
-                    <option value="365">year</option>
-                </select>
-            </div>
+        <div className="date-ranges">
+            <span>{context}</span>
+            <select
+                {...dateRanges}
+                name="date-range"
+            >
+                <option value="1">day</option>
+                <option value="7">week</option>
+                <option value="30">month</option>
+                <option value="365">year</option>
+            </select>
         </div>
     )
 }
 
 DateRanges.propTypes = {
+    context: PropTypes.string,
     initState: PropTypes.string,
     liftState: PropTypes.func
 }

@@ -126,7 +126,7 @@ const RecipeNumber = props => {
 
 RecipeNumber.propTypes = {
     errors: PropTypes.object,
-    initValue: PropTypes.string,
+    initValue: PropTypes.number,
     liftState: PropTypes.func,
     name: PropTypes.string,
     resolveErrors: PropTypes.func

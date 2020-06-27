@@ -33,6 +33,7 @@ const GetRecipe = props => {
         isAuthenticated,
         user
     } = auth
+    console.log(auth)
 
     // destructure recipes
     const { recipe } = recipes
@@ -59,6 +60,8 @@ const GetRecipe = props => {
         user: recipeUser,
         _id: recipeId
     } = recipe
+    console.log(user)
+    console.log(recipeUser)
 
     // get recipe after component mount
     useEffect(() => {

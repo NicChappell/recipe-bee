@@ -24,6 +24,7 @@ const Footer = () => {
                         <ul>
                             <li><Link to="/about">About</Link></li>
                             <li><Link to="/contact">Contact</Link></li>
+                            <li><Link to="/shop">Shop</Link></li>
                         </ul>
                     </div>
                     <div className="col s6 m3">

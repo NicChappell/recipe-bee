@@ -50,7 +50,7 @@ export const getRecipe = recipeId => dispatch => {
 // get recipes
 export const getRecipes = (reset, limit, skip, sortMethod, days) => dispatch => {
     axios.get(`/api/v1/recipes/?limit=${limit}&skip=${skip}&sortMethod=${sortMethod}&days=${days}`)
-        .then(res => dispatch({ type: GET_RECIPES, payload: { key: sortMethod, reset, value: res.data } }))
+        .then(res => dispatch({ type: GET_RECIPES, payload: { key: sortMethod, reset, value: res.data.recipes } }))
         .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }
 
@@ -88,7 +88,7 @@ export const setUserRecipes = userId => dispatch => {
 
             dispatch({ type: SET_USER_RECIPES, payload: { userRecipes } })
         })
-        .catch(err => dispatch({ type: SET_ERRORS, payload: err }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }
 
 // change hearts
@@ -149,8 +149,8 @@ export const updateRecipe = (recipeData, photoStatus, history) => dispatch => {
 }
 
 // count recipes
-export const countRecipes = () => dispatch => {
-    axios.get('/api/v1/recipes/utilities/count')
-        .then(res => dispatch({ type: COUNT_RECIPES, payload: res.data }))
+export const countRecipes = (sortMethod, days) => dispatch => {
+    axios.get(`/api/v1/recipes/utilities/count?sortMethod=${sortMethod}&days=${days}`)
+        .then(res => dispatch({ type: COUNT_RECIPES, payload: { key: sortMethod, value: res.data.count } }))
         .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
 }

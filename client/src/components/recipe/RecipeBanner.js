@@ -2,8 +2,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-// import images
-import backgroundImage from '../../images/backgrounds/healthy-food-pattern.svg'
+// // import images
+// import backgroundImage from '../../images/backgrounds/healthy-food-pattern.svg'
 
 const RecipeBanner = ({ isAuthenticated }) => {
     if (isAuthenticated) {
@@ -13,7 +13,7 @@ const RecipeBanner = ({ isAuthenticated }) => {
                     <div className="background" /* style={{ 'backgroundImage': `url(${backgroundImage})` }} */>
                         <div className="content">
                             <p>Add your favorite recipes and share them with the RecipeBee community</p>
-                            <Link to="/recipes/create" className="btn btn-flat amber lighten-2 black-text">Add Recipe</Link>
+                            <Link to="/recipes/create" className="btn btn-flat amber lighten-2 black-text">Create Recipe</Link>
                         </div>
                     </div>
                 </div>

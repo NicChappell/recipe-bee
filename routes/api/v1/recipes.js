@@ -248,14 +248,6 @@ router.get('/utilities/count', (req, res) => {
         .catch(err => res.status(400).json({ message: 'error counting recipe documents', err }))
 })
 
-// @route:  GET /api/v1/recipes/utilities/shared-count
-// @desc:   Return shared recipe document count
-router.get('/utilities/shared-count', (req, res) => {
-    Recipe.countDocuments({ share: true })
-        .then(count => res.status(200).json({ message: 'counted shared recipe documnents', count }))
-        .catch(err => res.status(400).json({ message: 'error counting shared recipe documents', err }))
-})
-
 // @route:  GET /api/v1/recipes/:userId/down-votes/
 // @desc:   Return a user's down-voted recipes
 router.get('/:userId/down-votes', (req, res) => {

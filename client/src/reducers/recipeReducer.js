@@ -11,7 +11,12 @@ import {
 // define initial state
 const initialState = {
     recipe: {},
-    recipesCount: 0,
+    recipeCounts: {
+        mostLovedRecipes: 0,
+        newRecipes: 0,
+        topRecipes: 0,
+        trendingRecipes: 0
+    },
     searchableRecipes: {
         mostLovedRecipes: [],
         newRecipes: [],
@@ -37,12 +42,24 @@ const recipeReducer = (state = initialState, action) => {
     switch (type) {
         case COUNT_RECIPES: {
             // destructure payload
-            const { count } = payload
+            const {
+                key,
+                value
+            } = payload
+
+            // destructure state
+            const { recipeCounts } = state
+
+            // update recipe counts
+            const newRecipeCounts = {
+                ...recipeCounts,
+                [key]: value
+            }
 
             // update state
             return {
                 ...state,
-                recipesCount: count
+                recipeCounts: newRecipeCounts
             }
         }
         case GET_RECIPE: {

@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import isEmpty from 'lodash.isempty'
 
+// import components
+import DateRanges from '../utility/DateRanges'
+
 // import helpers
 import { abbreviateNumber } from '../../helpers/utilities'
 
@@ -79,17 +82,23 @@ const RecipesCount = () => {
     )
 }
 
-const SharedRecipesCount = () => {
+const RecipesDateRange = () => {
     // state hook variables
     const [applicationErrors, setApplicationErrors] = useState({})
-    const [sharedRecipesCount, setSharedRecipesCount] = useState(0)
+    const [days, setDays] = useState('30')
+    const [recipesCount, setRecipesCount] = useState(0)
 
-    // get shared recipes count when component mounts
-    useEffect(() => {
-        axios.get('/api/v1/recipes/utilities/shared-count')
-            .then(res => setSharedRecipesCount(res.data.count))
+    const countRecipes = () => {
+        axios.get(`/api/v1/recipes/utilities/count?sortMethod=newRecipes&days=${days}`)
+            .then(res => setRecipesCount(res.data.count))
             .catch(err => setApplicationErrors(err))
-    }, [])
+    }
+
+    // get recipes count when days changes
+    useEffect(() => {
+        countRecipes()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [days])
 
     if (!isEmpty(applicationErrors)) {
         return (
@@ -106,10 +115,10 @@ const SharedRecipesCount = () => {
         <div className="col s12 m6 push-m3 l4">
             <div className="card-panel left-align">
                 <span className="icon">
-                    <i className="material-icons">share</i>
+                    <i className="material-icons">date_range</i>
                 </span>
-                <span className="number">{abbreviateNumber(sharedRecipesCount)}</span>
-                <span className="description">Recipes shared</span>
+                <span className="number">{abbreviateNumber(recipesCount)}</span>
+                <DateRanges context={'Recipes created previous'} initState={days} liftState={setDays} />
             </div>
         </div>
     )
@@ -122,7 +131,7 @@ const ByTheNumbers = () => {
                 <h5>RecipeBee by the Numbers</h5>
                 <UsersCount />
                 <RecipesCount />
-                <SharedRecipesCount />
+                <RecipesDateRange />
             </div>
         </div >
     )

@@ -22,7 +22,7 @@ import RecipeYield from './RecipeYield'
 // import validation
 import validateRecipe from '../../validation/recipe'
 
-const RecipeForm = props => {
+const UpdateRecipeForm = props => {
     // destructure props
     const {
         history,
@@ -65,7 +65,7 @@ const RecipeForm = props => {
         // compile recipe properties
         const recipeData = {
             id: recipe._id,
-            user: user.id,
+            user: user._id,
             title,
             slug,
             description,
@@ -345,7 +345,7 @@ const RecipeForm = props => {
     )
 }
 
-RecipeForm.propTypes = {
+UpdateRecipeForm.propTypes = {
     history: PropTypes.object,
     errors: PropTypes.object,
     recipe: PropTypes.object,
@@ -355,4 +355,4 @@ RecipeForm.propTypes = {
     user: PropTypes.object
 }
 
-export default RecipeForm
+export default UpdateRecipeForm

@@ -2,30 +2,28 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-// import custom hooks
-import { useCheckboxValue } from '../../helpers/customHooks'
-
 const ShareSetting = props => {
-    // destructure props
-    const {
-        initValue: initShare,
-        liftState
+	// destructure props
+	const {
+		initValue: initShare,
+		liftState
 	} = props
 
 	// state hook variables
 	const [checked, setChecked] = useState(false)
 
-	// custom hook variables
-	const checkbox = useCheckboxValue(false)
-
-    // update state when initial value changes
-    useEffect(() => initShare && setChecked(initShare), [initShare])
+	// update state when initial value changes
+	useEffect(() => {
+		if (initShare) {
+			setChecked(initShare)
+		}
+	}, [initShare])
 
 	// update state when checked value changes
 	useEffect(() => {
-		liftState(checkbox.checked)
+		liftState(checked)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [checkbox.checked])
+	}, [checked])
 
 	return (
 		<div className="row share">
@@ -49,7 +47,7 @@ const ShareSetting = props => {
 
 ShareSetting.propTypes = {
 	errors: PropTypes.object,
-    initValue: PropTypes.bool,
+	initValue: PropTypes.bool,
 	liftState: PropTypes.func,
 	resolveErrors: PropTypes.func
 }

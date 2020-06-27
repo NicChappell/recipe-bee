@@ -9,17 +9,13 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // import actions
-import { getRecipes } from './actions/recipeActions'
+import {
+    countRecipes,
+    getRecipes
+} from './actions/recipeActions'
 import { getTags } from './actions/tagActions'
 import { signOutUser } from './actions/authActions'
 
-// import index screen
-import Index from './routes/Index'
-// import recipe routes
-import GetRecipe from './routes/GetRecipe'
-import GetRecipes from './routes/GetRecipes'
-import PostRecipe from './routes/PostRecipe'
-import PutRecipe from './routes/PutRecipe'
 // import auth routes
 import ForgotPassword from './routes/ForgotPassword'
 import ResetPassword from './routes/ResetPassword'
@@ -30,10 +26,19 @@ import Account from './routes/Account'
 // import company routes
 import About from './routes/About'
 import Contact from './routes/Contact'
+// import index routes
+import Index from './routes/Index'
+// import recipe routes
+import GetRecipe from './routes/GetRecipe'
+import GetRecipes from './routes/GetRecipes'
+import PostRecipe from './routes/PostRecipe'
+import PutRecipe from './routes/PutRecipe'
 // import legalese routes
 import PrivacyPolicy from './routes/PrivacyPolicy'
 import TermsAndConditions from './routes/TermsAndConditions'
-// import unmatched screen
+// import shopping routes
+import Shop from './routes/Shop'
+// import unmatched routes
 import NoMatch from './routes/NoMatch'
 
 // import layout components
@@ -48,6 +53,7 @@ const App = props => {
     // destructure props
     const {
         auth,
+        countRecipes,
         getRecipes,
         getTags,
         signOutUser
@@ -99,6 +105,27 @@ const App = props => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    // get recipe counts when component mounts
+    useEffect(() => {
+        // sortMethod: 'mostLovedRecipes'
+        // days: 30
+        countRecipes('mostLovedRecipes', 30)
+
+        // sortMethod: 'newRecipes'
+        // days: 30
+        countRecipes('newRecipes', 30)
+
+        // sortMethod: 'topRecipes'
+        // days: 30
+        countRecipes('topRecipes', 30)
+
+        // sortMethod: 'trendingRecipes'
+        // days: 30
+        countRecipes('trendingRecipes', 30)
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     return (
         <Router>
             <div id="app-content">
@@ -124,6 +151,7 @@ const App = props => {
                         <Route exact path="/recipes/:recipeSlug/:recipeId" component={GetRecipe} />
                         <Route exact path="/recipes/:recipeSlug/:recipeId/edit" component={PutRecipe} />
                         <Route exact path="/reset-password/:token" component={ResetPassword} />
+                        <Route path="/shop" component={Shop} />
                         <Route path="/sign-in" component={SignIn} />
                         <Route path="/sign-up" component={SignUp} />
                         <Route path="/account/:userSlug" component={Account} />
@@ -140,6 +168,7 @@ const App = props => {
 
 App.propTypes = {
     auth: PropTypes.object,
+    countRecipes: PropTypes.func,
     getRecipes: PropTypes.func,
     getTags: PropTypes.func,
     signOutUser: PropTypes.func
@@ -150,6 +179,7 @@ const mapStateToProps = state => ({
 })
 
 const actionCreators = {
+    countRecipes,
     getRecipes,
     getTags,
     signOutUser

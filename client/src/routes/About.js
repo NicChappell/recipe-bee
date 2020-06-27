@@ -4,7 +4,7 @@ import React from 'react'
 // import components
 import ByTheNumbers from '../components/about/ByTheNumbers'
 import HowItWorks from '../components/about/HowItWorks'
-import Location from '../components/about/Location'
+// import Location from '../components/about/Location'
 import Mission from '../components/about/Mission'
 import Recipes from '../components/about/Recipes'
 
@@ -17,14 +17,8 @@ const About = () => {
                         <Recipes />
                         <HowItWorks />
                         <ByTheNumbers />
-                        <div className="row">
-                            <div className="col s6">
-                                <Mission />
-                            </div>
-                            <div className="col s6">
-                                <Location />
-                            </div>
-                        </div>
+                        <Mission />
+                        {/* <Location /> */}
                     </div>
                 </div>
             </div>
