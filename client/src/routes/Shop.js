@@ -1,123 +1,365 @@
 // import dependencies
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
+import isEmpty from 'lodash/isEmpty'
 
-// // import files
-// import longSleeveTShirt from '../images/merch/logo-solid-colors/long-sleeve-t-shirt/file-name-goes-here.png'
-// import premiumTShirt from '../images/merch/logo-solid-colors/premium-t-shirt/file-name-goes-here.png'
-// import pulloverHoodie from '../images/merch/logo-solid-colors/pullover-hoodie/file-name-goes-here.png'
-// import raglan from '../images/merch/logo-solid-colors/raglan/file-name-goes-here.png'
-// import standardTShirt from '../images/merch/logo-solid-colors/standard-t-shirt/file-name-goes-here.png'
-// import sweatshirt from '../images/merch/logo-solid-colors/sweatshirt/file-name-goes-here.png'
-// import tankTop from '../images/merch/logo-solid-colors/tank-top/file-name-goes-here.png'
-// import vNeckTShirt from '../images/merch/logo-solid-colors/v-neck-t-shirt/file-name-goes-here.png'
+// import data
+import merch from '../data/merch.json'
 
-// const products = {
-//     logoSolidColors: {
-//         longSleeveTShirt: {
+const Color = props => {
+    // destructure props
+    const {
+        color,
+        handleClick,
+        selectedColor
+    } = props
 
-//         },
-//         premiumTShirt: {
-
-//         },
-//         pulloverHoodie: {
-
-//         },
-//         raglan: {
-
-//         },
-//         standardTShirt: {
-
-//         },
-//         sweatshirt: {
-
-//         },
-//         tankTop: {
-
-//         },
-//         vNeckTShirt: {
-
-//         }
-//     },
-//     logoVintageDistressed: {
-
-//     }
-// }
-
-const Thumbnail = () => {
-    const handleClick = e => {
-        // destructure event
-        const { name } = e.target
-
-        console.log(`clicked ${name} thumbnail`)
-    }
+    // destructure color
+    const {
+        name,
+        customId,
+        fileAlias,
+        fileId,
+        fileName
+    } = color
 
     return (
         <img
-            alt=""
-            className="thumbnail"
-            name="imported-file-name-goes-here.png"
+            alt={name}
+            className={`thumbnail ${name === selectedColor.name ? 'active' : ''}`}
+            name={name}
             onClick={handleClick}
-            src="https://via.placeholder.com/400x300"
+            src={''}
         />
     )
 }
 
-const Card = () => {
+Color.propTypes = {
+    color: PropTypes.object,
+    handleClick: PropTypes.func,
+    selectedColor: PropTypes.object
+}
+
+const FitType = props => {
+    // destructure props
+    const {
+        name,
+        handleClick,
+        selectedFitType
+    } = props
+
     return (
-        <div className="card">
-            <div className="card-image">
-                <img src="https://via.placeholder.com/400x300" alt="" />
-                <span className="card-title">RecipeBee Logo [APPAREL_TYPE]</span>
-            </div>
-            <div className="card-content">
-                <p>
+        <button
+            className={`btn-flat btn ${name === selectedFitType.name ? 'active' : ''}`}
+            name={name}
+            onClick={handleClick}
+        >
+            {name}
+        </button>
+    )
+}
+
+FitType.propTypes = {
+    name: PropTypes.string,
+    handleClick: PropTypes.func,
+    selectedFitType: PropTypes.object
+}
+
+const Styles = props => {
+    // destructure props
+    const {
+        name,
+        handleClick,
+        selectedStyle
+    } = props
+
+    return (
+        <button
+            className={`btn-flat btn ${name === selectedStyle.name ? 'active' : ''}`}
+            name={name}
+            onClick={handleClick}
+        >
+            {name}
+        </button>
+    )
+}
+
+Styles.propTypes = {
+    name: PropTypes.string,
+    handleClick: PropTypes.func,
+    selectedStyle: PropTypes.object
+}
+
+const Price = props => {
+    // destructure discount
+    const {
+        discount,
+        listPrice
+    } = props
+
+    // destructure discount
+    const {
+        "discountPrice": discountPrice,
+        "discountAmount": discountAmount,
+        "discountPercent": discountPercent
+    } = discount
+
+    if (isEmpty(discount)) {
+        return (
+            <div className="price">
+                <div className="details">
                     Price:
-                    <span className="strike">$19.99</span>
-                    <span className="sale">$14.99</span>
-                    <div className="discount">
-                        <i className="right material-icons">loyalty</i>
-                        20% OFF
-                    </div>
-                </p>
-                <p>Colors:</p>
-                <div className="gallery">
-                    <Thumbnail />
-                    <Thumbnail />
-                    <Thumbnail />
-                    <Thumbnail />
-                    <Thumbnail />
+                    <span className="listPrice">
+                        ${listPrice}
+                    </span>
                 </div>
-                <p>Styles:</p>
-                <ul>
-                    <li>
-                        Solid Colors
-                    </li>
-                    <li>
-                        Vintage Distressed
-                    </li>
-                </ul>
             </div>
-            <div className="card-action">
-                <a className="btn-flat amber lighten-2 black-text" href="#">Buy on Amazon</a>
+        )
+    }
+    return (
+        <div className="price">
+            <div className="details">
+                Price:
+                <span className="list-price strike">
+                    ${listPrice}
+                </span>
+                <span className="discount-price">
+                    ${discountPrice}
+                </span>
+            </div>
+            <span className="discount">
+                <i className="right material-icons">loyalty</i>
+                {discountPercent}% OFF
+            </span>
+        </div>
+    )
+}
+
+Price.propTypes = {
+    discount: PropTypes.object,
+    listPrice: PropTypes.string
+}
+
+const ProductVariant = props => {
+    // destructure props
+    const {
+        productName,
+        productVariant
+    } = props
+
+    // destructure product variant
+    const {
+        dp,
+        name,
+        listPrice,
+        discount,
+        styles
+    } = productVariant
+
+    // state hook variables
+    const [colors, setColors] = useState([])
+    const [customId, setCustomId] = useState('')
+    const [fitTypes, setFitTypes] = useState([])
+    const [link, setLink] = useState('')
+    const [selectedColor, setSelectedColor] = useState({})
+    const [selectedFitType, setSelectedFitType] = useState({})
+    const [selectedStyle, setSelectedStyle] = useState({})
+
+    const handleColorClick = e => {
+        // destructure event
+        const { name } = e.target
+
+        // update state
+        setSelectedColor(colors.find(color => color.name === name))
+    }
+
+    const handleFitTypeClick = e => {
+        // destructure event
+        const { name } = e.target
+
+        // update state
+        setSelectedFitType(fitTypes.find(fitType => fitType.name === name))
+    }
+
+    const handleStyleClick = e => {
+        // destructure event
+        const { name } = e.target
+
+        // update state
+        setSelectedStyle(styles.find(style => style.name === name))
+    }
+
+    // update state when custom id changes
+    useEffect(() => {
+        setLink(`https://www.amazon.com/dp/${dp}?customId=${customId}`)
+    }, [customId])
+
+    // update state when selected color changes
+    useEffect(() => {
+        if (!isEmpty(selectedColor)) {
+            setCustomId(selectedColor.customId)
+        }
+    }, [selectedColor])
+
+    // update state when selected fit type changes
+    useEffect(() => {
+        if (!isEmpty(selectedFitType)) {
+            setColors(selectedFitType.colors)
+            setSelectedColor(selectedFitType.colors[0])
+        }
+    }, [selectedFitType])
+
+    // update state when selected style changes
+    useEffect(() => {
+        if (!isEmpty(selectedStyle)) {
+            setFitTypes(selectedStyle.fitTypes)
+            setSelectedFitType(selectedStyle.fitTypes[0])
+        }
+    }, [selectedStyle])
+
+    // update state when component mounts
+    useEffect(() => {
+        setSelectedStyle(styles[0])
+    }, [])
+
+    return (
+        <div className="col s12 m6 l4">
+            <div className="card">
+                <div className="card-image">
+                    <img src="" alt={selectedColor.name} />
+                    <span className="card-title">{`${productName} ${name}`}</span>
+                </div>
+                <div className="card-content">
+                    <Price
+                        discount={discount}
+                        listPrice={listPrice}
+                    />
+                    <p className="fit-type">
+                        Fit Type:
+                    </p>
+                    <div className="fit-type-options">
+                        {fitTypes.map(fitType => {
+                            return (
+                                <FitType
+                                    key={fitType.id}
+                                    name={fitType.name}
+                                    handleClick={handleFitTypeClick}
+                                    selectedFitType={selectedFitType}
+                                />
+                            )
+                        })}
+                    </div>
+                    <p className="colors">Colors:</p>
+                    <div className="colors-options">
+                        {colors.map(color => {
+                            return (
+                                <Color
+                                    color={color}
+                                    key={color.id}
+                                    handleClick={handleColorClick}
+                                    selectedColor={selectedColor}
+                                />
+                            )
+                        })}
+                    </div>
+                    <p className="styles">Styles:</p>
+                    <div className="styles-options">
+                        {styles.map(style => {
+                            return (
+                                <Styles
+                                    key={style.id}
+                                    name={style.name}
+                                    handleClick={handleStyleClick}
+                                    selectedStyle={selectedStyle}
+                                />
+                            )
+                        })}
+                    </div>
+                </div>
+                <div className="card-action">
+                    <a className="btn-flat amber lighten-2 black-text" href={link} rel="noopener noreferrer" target="_blank">Buy on Amazon</a>
+                </div>
             </div>
         </div>
     )
 }
 
+ProductVariant.propTypes = {
+    productName: PropTypes.string,
+    productVariant: PropTypes.object
+}
+
+const Category = ({ category }) => {
+    // destructure category
+    const {
+        name,
+        products
+    } = category
+
+    // state hook variables
+    const [productVariants, setProductVariants] = useState([])
+
+    // update state when products changes
+    useEffect(() => {
+        const productVariants = []
+
+        products.forEach(product => {
+            // destructure product
+            const {
+                name,
+                variants
+            } = product
+
+            variants.forEach(variant => {
+                const productVariant = {
+                    name,
+                    variant
+                }
+
+                productVariants.push(productVariant)
+            })
+        })
+
+        setProductVariants(productVariants)
+    }, [products])
+
+    return (
+        <div className="row">
+            <div className="col s12">
+                <h5>{name}</h5>
+            </div>
+            <div className="col s12">
+                {productVariants.map(productVariant => {
+                    // destructure product variant
+                    const {
+                        name,
+                        variant
+                    } = productVariant
+
+                    return (
+                        <ProductVariant
+                            key={variant.id}
+                            productName={name}
+                            productVariant={variant}
+                        />
+                    )
+                })}
+            </div>
+        </div>
+    )
+}
+
+Category.propTypes = { category: PropTypes.object }
+
 const Shop = () => {
     return (
         <div className="container" id="shop">
-            <div className="row">
-                <div className="col s12 m6 l4">
-                    <Card />
-                </div>
-                <div className="col s12 m6 l4">
-                    <Card />
-                </div>
-                <div className="col s12 m6 l4">
-                    <Card />
-                </div>
-            </div>
+            {merch.map(category => (
+                <Category
+                    key={category.id}
+                    category={category}
+                />
+            ))}
         </div>
     )
 }

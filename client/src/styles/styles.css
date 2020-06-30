@@ -765,33 +765,130 @@ span {
   }
 }
 
-#shop .card-content .discount {
-  display: inline-block;
+#shop .card-image .card-title {
+  color: #000000;
 }
-#shop .card-content .discount .right {
-  margin-left: 5px;
+#shop .card-content {
+  color: #000000;
+  font-size: 1rem;
 }
-#shop .card-content .gallery {
+#shop .card-content p {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+}
+#shop .card-content .colors {
+  margin-top: 1rem;
+}
+#shop .card-content .colors-options {
   align-self: center;
   display: flex;
   flex-direction: row;
   height: auto;
   justify-content: flex-start;
+  margin-top: 0.5rem;
   overflow: scroll;
   width: auto;
 }
-#shop .card-content .gallery .thumbnail {
+#shop .card-content .colors-options .thumbnail {
   height: auto;
   width: 100px;
 }
-#shop .card-content .gallery .thumbnail:not(:last-child) {
+#shop .card-content .colors-options .thumbnail:not(:last-child) {
   margin-right: 20px;
 }
-#shop .card-content .sale {
-  color: #4caf50;
+#shop .card-content .colors-options .active {
+  border: 1px solid #ffd54f;
 }
-#shop .card-content .strike {
+#shop .card-content .fit-type {
+  margin-top: 1rem;
+}
+#shop .card-content .fit-type-options {
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  justify-content: flex-start;
+  margin-top: 0.5rem;
+  overflow: scroll;
+  width: auto;
+}
+#shop .card-content .fit-type-options button {
+  background-color: transparent;
+  white-space: nowrap;
+}
+#shop .card-content .fit-type-options button.btn-flat {
+  color: #000000;
+}
+#shop .card-content .fit-type-options button:focus, #shop .card-content .fit-type-options button:hover {
+  background-color: transparent;
+}
+#shop .card-content .fit-type-options .active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+#shop .card-content .fit-type-options .active:focus, #shop .card-content .fit-type-options .active:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+#shop .card-content .price {
+  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+#shop .card-content .price .details {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+}
+#shop .card-content .price .details .list-price {
+  font-weight: 400;
+  margin-left: 0.5rem;
+}
+#shop .card-content .price .details .discount-price {
+  color: #4caf50;
+  font-family: "Signika", "Roboto", sans-serif;
+  font-weight: 400;
+  margin-left: 0.5rem;
+}
+#shop .card-content .price .details .strike {
   text-decoration: line-through;
+}
+#shop .card-content .price .discount {
+  display: inline-block;
+  line-height: 1.75rem;
+}
+#shop .card-content .price .discount .right {
+  line-height: 1.75rem;
+  margin-left: 5px;
+}
+#shop .card-content .styles {
+  margin-top: 1rem;
+}
+#shop .card-content .styles-options {
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  justify-content: flex-start;
+  margin-top: 0.5rem;
+  overflow: scroll;
+  width: auto;
+}
+#shop .card-content .styles-options button {
+  background-color: transparent;
+  white-space: nowrap;
+}
+#shop .card-content .styles-options button.btn-flat {
+  color: #000000;
+}
+#shop .card-content .styles-options button:focus, #shop .card-content .styles-options button:hover {
+  background-color: transparent;
+}
+#shop .card-content .styles-options .active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+#shop .card-content .styles-options .active:focus, #shop .card-content .styles-options .active:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 #post-recipe hr,

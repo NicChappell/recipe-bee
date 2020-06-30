@@ -8,12 +8,26 @@ import recipeReducer from './recipeReducer'
 import tagReducer from './tagReducer'
 import utilityReducer from './utilityReducer'
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
     auth: authReducer,
     errors: errorReducer,
     recipes: recipeReducer,
     tags: tagReducer,
     utilities: utilityReducer
 })
+
+const rootReducer = (state, action) => {
+    // destructure action
+    const {
+        payload,
+        type
+    } = action
+
+    if (payload === {} && type === 'SET_CURRENT_USER') {
+        state = undefined
+    }
+
+    return appReducer(state, action)
+}
 
 export default rootReducer

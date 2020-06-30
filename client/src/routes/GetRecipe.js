@@ -37,6 +37,7 @@ const GetRecipe = props => {
 
     // destructure recipes
     const { recipe } = recipes
+    console.log(recipes)
 
     // destructure recipe
     const {

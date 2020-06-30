@@ -1,0 +1,2064 @@
+[
+    {
+        "id": "VRppKuoWnF8jfUe7",
+        "name": "Apparel",
+        "products": [
+            {
+                "id": "1q5OxkJRJC7Jgkbh",
+                "name": "RecipeBee Logo",
+                "variants": [
+                    {
+                        "id": "fGmbME8T4KvIY6Pm",
+                        "dp": "B0863KDP27",
+                        "name": "Standard T-shirt",
+                        "listPrice": "19.99",
+                        "discount": {
+                            "discountPrice": "14.99",
+                            "discountAmount": "5.00",
+                            "discountPercent": "25"
+                        },
+                        "styles": [
+                            {
+                                "id": "Sg5zJ6nVUyBgtA2u",
+                                "name": "Solid Colors",
+                                "description": "The RecipeBee logo in solid colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name": "Men",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "NKqJCHVgxKaUs0cA",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "0thxIlJebjH1fi6i",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "y8Fx0rpSpQL86pK1",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "qKOXYynD8Ddqv2BI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "4CxpIYrvBZkm7Vdj",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "xPsGl3jjPElzUmwX",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "8PPgLzzpLPhb76Zo",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "wLoYitqZoXrAncDm",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "IJe0NNOuefJ6iGzB",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "uWuQNcWZEXP9bK7R",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "vz4leKJDKaqyo0bD",
+                                        "name": "Women",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "WmuRQTevNKAAo6S1",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "w7mDY4nGmMwUrIAY",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "5vIMcTQlWjYnOFAy",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "RYCiXrtc6c1DIIMQ",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "297qi9DsffxW1SxZ",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "q1kGLaAsOIkkLcHP",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "NU62A4pMIqTm7xE7",
+                                        "name": "Youth",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "WmuRQTevNKAAo6S1",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "w7mDY4nGmMwUrIAY",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "5vIMcTQlWjYnOFAy",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "RYCiXrtc6c1DIIMQ",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "297qi9DsffxW1SxZ",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "q1kGLaAsOIkkLcHP",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "S5caFGSYnhwUy98x",
+                                "name": "Vintage Distressed",
+                                "description": "The RecipeBee logo in faded colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name": "Men",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "NKqJCHVgxKaUs0cA",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "0thxIlJebjH1fi6i",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "y8Fx0rpSpQL86pK1",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "qKOXYynD8Ddqv2BI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "4CxpIYrvBZkm7Vdj",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "xPsGl3jjPElzUmwX",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "8PPgLzzpLPhb76Zo",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "wLoYitqZoXrAncDm",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "IJe0NNOuefJ6iGzB",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "uWuQNcWZEXP9bK7R",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "vz4leKJDKaqyo0bD",
+                                        "name": "Women",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "WmuRQTevNKAAo6S1",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "w7mDY4nGmMwUrIAY",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "5vIMcTQlWjYnOFAy",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "RYCiXrtc6c1DIIMQ",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "297qi9DsffxW1SxZ",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "q1kGLaAsOIkkLcHP",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "NU62A4pMIqTm7xE7",
+                                        "name": "Youth",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "WmuRQTevNKAAo6S1",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "w7mDY4nGmMwUrIAY",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "5vIMcTQlWjYnOFAy",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "RYCiXrtc6c1DIIMQ",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "297qi9DsffxW1SxZ",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "q1kGLaAsOIkkLcHP",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eKAx6Qsvpm14gIgk",
+                        "dp": "",
+                        "name": "Premium T-shirt",
+                        "listPrice": "21.99",
+                        "discount": {
+                            "discountPrice": "17.49",
+                            "discountAmount": "4.50",
+                            "discountPercent": "20"
+                        },
+                        "styles": [
+                            {
+                                "id": "Sg5zJ6nVUyBgtA2u",
+                                "name": "Solid Colors",
+                                "description": "The RecipeBee logo in solid colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name": "Men",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "NKqJCHVgxKaUs0cA",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "0thxIlJebjH1fi6i",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "y8Fx0rpSpQL86pK1",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "qKOXYynD8Ddqv2BI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "4CxpIYrvBZkm7Vdj",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "xPsGl3jjPElzUmwX",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "8PPgLzzpLPhb76Zo",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "wLoYitqZoXrAncDm",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "IJe0NNOuefJ6iGzB",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "uWuQNcWZEXP9bK7R",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "vz4leKJDKaqyo0bD",
+                                        "name": "Women",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "WmuRQTevNKAAo6S1",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "w7mDY4nGmMwUrIAY",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "5vIMcTQlWjYnOFAy",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "RYCiXrtc6c1DIIMQ",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "297qi9DsffxW1SxZ",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "q1kGLaAsOIkkLcHP",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "cIvZyFpfSztkA77k",
+                                        "name": "Youth",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "WmuRQTevNKAAo6S1",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "w7mDY4nGmMwUrIAY",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "5vIMcTQlWjYnOFAy",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "RYCiXrtc6c1DIIMQ",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "297qi9DsffxW1SxZ",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "q1kGLaAsOIkkLcHP",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "1ZGYe2QwEOTXXdC4",
+                                "name": "Vintage Distressed",
+                                "description": "The RecipeBee logo in faded colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name": "Men",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "NKqJCHVgxKaUs0cA",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "0thxIlJebjH1fi6i",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "y8Fx0rpSpQL86pK1",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "qKOXYynD8Ddqv2BI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "4CxpIYrvBZkm7Vdj",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "xPsGl3jjPElzUmwX",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "8PPgLzzpLPhb76Zo",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "wLoYitqZoXrAncDm",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "IJe0NNOuefJ6iGzB",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "uWuQNcWZEXP9bK7R",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "vz4leKJDKaqyo0bD",
+                                        "name": "Women",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "WmuRQTevNKAAo6S1",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "w7mDY4nGmMwUrIAY",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "5vIMcTQlWjYnOFAy",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "RYCiXrtc6c1DIIMQ",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "297qi9DsffxW1SxZ",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "q1kGLaAsOIkkLcHP",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "cIvZyFpfSztkA77k",
+                                        "name": "Youth",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "WmuRQTevNKAAo6S1",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "w7mDY4nGmMwUrIAY",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "5vIMcTQlWjYnOFAy",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "RYCiXrtc6c1DIIMQ",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "297qi9DsffxW1SxZ",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "q1kGLaAsOIkkLcHP",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "9bSbTxb3pABaAoGO",
+                        "dp": "",
+                        "name": "V-neck T-shirt",
+                        "listPrice": "19.99",
+                        "discount": {
+                            "discountPrice": "15.99",
+                            "discountAmount": "4.00",
+                            "discountPercent": "20"
+                        },
+                        "styles": [
+                            {
+                                "id": "Sg5zJ6nVUyBgtA2u",
+                                "name": "Solid Colors",
+                                "description": "The RecipeBee logo in solid colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "vz4leKJDKaqyo0bD",
+                                        "name": "Women",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "WmuRQTevNKAAo6S1",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "w7mDY4nGmMwUrIAY",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "5vIMcTQlWjYnOFAy",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "RYCiXrtc6c1DIIMQ",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "297qi9DsffxW1SxZ",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "q1kGLaAsOIkkLcHP",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "1ZGYe2QwEOTXXdC4",
+                                "name": "Vintage Distressed",
+                                "description": "The RecipeBee logo in faded colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "vz4leKJDKaqyo0bD",
+                                        "name": "Women",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "WmuRQTevNKAAo6S1",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "w7mDY4nGmMwUrIAY",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "5vIMcTQlWjYnOFAy",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "RYCiXrtc6c1DIIMQ",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "297qi9DsffxW1SxZ",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "q1kGLaAsOIkkLcHP",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "e87J8oRkqTdmR2Al",
+                        "dp": "",
+                        "name": "Tank Top",
+                        "listPrice": "19.99",
+                        "discount": {
+                            "discountPrice": "15.99",
+                            "discountAmount": "4.00",
+                            "discountPercent": "20"
+                        },
+                        "styles": [
+                            {
+                                "id": "Sg5zJ6nVUyBgtA2u",
+                                "name": "Solid Colors",
+                                "description": "The RecipeBee logo in solid colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name": "Men",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "NKqJCHVgxKaUs0cA",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "0thxIlJebjH1fi6i",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "y8Fx0rpSpQL86pK1",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "qKOXYynD8Ddqv2BI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "4CxpIYrvBZkm7Vdj",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "xPsGl3jjPElzUmwX",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "8PPgLzzpLPhb76Zo",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "wLoYitqZoXrAncDm",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "IJe0NNOuefJ6iGzB",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "uWuQNcWZEXP9bK7R",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "vz4leKJDKaqyo0bD",
+                                        "name": "Women",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "WmuRQTevNKAAo6S1",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "w7mDY4nGmMwUrIAY",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "5vIMcTQlWjYnOFAy",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "RYCiXrtc6c1DIIMQ",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "297qi9DsffxW1SxZ",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "q1kGLaAsOIkkLcHP",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "1ZGYe2QwEOTXXdC4",
+                                "name": "Vintage Distressed",
+                                "description": "The RecipeBee logo in faded colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name": "Men",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "NKqJCHVgxKaUs0cA",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "0thxIlJebjH1fi6i",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "y8Fx0rpSpQL86pK1",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "qKOXYynD8Ddqv2BI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "4CxpIYrvBZkm7Vdj",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "xPsGl3jjPElzUmwX",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "8PPgLzzpLPhb76Zo",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "wLoYitqZoXrAncDm",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "IJe0NNOuefJ6iGzB",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "uWuQNcWZEXP9bK7R",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "vz4leKJDKaqyo0bD",
+                                        "name": "Women",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "WmuRQTevNKAAo6S1",
+                                                "name": "Olive",
+                                                "customId": "",
+                                                "fileId": "w7mDY4nGmMwUrIAY",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "5vIMcTQlWjYnOFAy",
+                                                "name": "Purple",
+                                                "customId": "",
+                                                "fileId": "RYCiXrtc6c1DIIMQ",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "297qi9DsffxW1SxZ",
+                                                "name": "Royal Blue",
+                                                "customId": "",
+                                                "fileId": "q1kGLaAsOIkkLcHP",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "mrSNaouZ8hYd4nnZ",
+                        "dp": "",
+                        "name": "Long Sleeve T-shirt",
+                        "listPrice": "22.99",
+                        "discount": {
+                            "discountPrice": "19.49",
+                            "discountAmount": "3.50",
+                            "discountPercent": "15"
+                        },
+                        "styles": [
+                            {
+                                "id": "Sg5zJ6nVUyBgtA2u",
+                                "name": "Solid Colors",
+                                "description": "The RecipeBee logo in solid colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name": "Adult unisex",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "1ZGYe2QwEOTXXdC4",
+                                "name": "Vintage Distressed",
+                                "description": "The RecipeBee logo in faded colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name":"Adult unisex",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "fWWJ3xegU8CQWe7s",
+                        "dp": "",
+                        "name": "Raglan",
+                        "listPrice": "23.99",
+                        "discount": {
+                            "discountPrice": "20.49",
+                            "discountAmount": "3.50",
+                            "discountPercent": "15"
+                        },
+                        "styles": [
+                            {
+                                "id": "Sg5zJ6nVUyBgtA2u",
+                                "name": "Solid Colors",
+                                "description": "The RecipeBee logo in solid colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name": "Men",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "NKqJCHVgxKaUs0cA",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "0thxIlJebjH1fi6i",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "y8Fx0rpSpQL86pK1",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "qKOXYynD8Ddqv2BI",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "vz4leKJDKaqyo0bD",
+                                        "name": "Women",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "1ZGYe2QwEOTXXdC4",
+                                "name": "Vintage Distressed",
+                                "description": "The RecipeBee logo in faded colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name": "Men",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "NKqJCHVgxKaUs0cA",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "0thxIlJebjH1fi6i",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "y8Fx0rpSpQL86pK1",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "qKOXYynD8Ddqv2BI",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "vz4leKJDKaqyo0bD",
+                                        "name": "Women",
+                                        "colors": [
+                                            {
+                                                "id": "HeMZv6fWEge4mqcA",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "Rn4PGcCSrgSZAJRM",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "EIgXUJtdndccIlUH",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "2qS7hnftUZki4dsb",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "KYASKVZZOWFsUA1J",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "pUSGBZtu5HpFFATA",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "7dkXozUw839PydUn",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "wDN1VTCQ2jJ7UFFt",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "AtDuEFGo1MTJZHgT",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "RBKjO75hKGerwmH1",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "pajg9QW3M19frCKw",
+                                                "name": "Heather Blue",
+                                                "customId": "",
+                                                "fileId": "mQOC2J4ypX63amEK",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "M2hnhLbiOiMyaYBD",
+                                                "name": "Navy",
+                                                "customId": "",
+                                                "fileId": "rudmUMEl84ygs0Vx",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "FB5onqk2Ij1w0oKE",
+                        "dp": "",
+                        "name": "Sweatshirt",
+                        "listPrice": "31.99",
+                        "discount": {
+                            "discountPrice": "27.49",
+                            "discountAmount": "4.50",
+                            "discountPercent": "15"
+                        },
+                        "styles": [
+                            {
+                                "id": "Sg5zJ6nVUyBgtA2u",
+                                "name": "Solid Colors",
+                                "description": "The RecipeBee logo in solid colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name": "Adult unisex",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "1ZGYe2QwEOTXXdC4",
+                                "name": "Vintage Distressed",
+                                "description": "The RecipeBee logo in faded colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name":"Adult unisex",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "WBgOItYz6AM0S45s",
+                        "dp": "",
+                        "name": "Pullover Hoodie",
+                        "listPrice": "31.99",
+                        "discount": {
+                            "discountPrice": "27.49",
+                            "discountAmount": "4.50",
+                            "discountPercent": "15"
+                        },
+                        "styles": [
+                            {
+                                "id": "Sg5zJ6nVUyBgtA2u",
+                                "name": "Solid Colors",
+                                "description": "The RecipeBee logo in solid colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name": "Adult unisex",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "1ZGYe2QwEOTXXdC4",
+                                "name": "Vintage Distressed",
+                                "description": "The RecipeBee logo in faded colors",
+                                "fitTypes": [
+                                    {
+                                        "id": "cYuucaZKqlmyr0mB",
+                                        "name":"Adult unisex",
+                                        "colors": [
+                                            {
+                                                "id": "x0eW6TqbHEesXhJd",
+                                                "name": "Asphalt",
+                                                "customId": "",
+                                                "fileId": "GZa7RpFKZueaa7SO",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "rJ0T9bQ9o5FV0j2n",
+                                                "name": "Black",
+                                                "customId": "",
+                                                "fileId": "t2jo3e6FouXMyoOe",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "u2umhSovJkQmqII1",
+                                                "name": "Brown",
+                                                "customId": "",
+                                                "fileId": "OtmQ7fAFXQgKbqfI",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "oTK7VuyN3DLebhGJ",
+                                                "name": "Cranberry",
+                                                "customId": "",
+                                                "fileId": "DsDIhJ6V570f6vK7",
+                                                "fileName": ""
+                                            },
+                                            {
+                                                "id": "q9qAzrxVJMwxH1Go",
+                                                "name": "Dark Heather",
+                                                "customId": "",
+                                                "fileId": "Ott2eaWWBhBoz2KK",
+                                                "fileName": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
