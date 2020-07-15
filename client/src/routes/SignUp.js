@@ -4,9 +4,6 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-// import actions
-import { signUpUser } from '../actions/authActions'
-
 // import components
 import SignUpForm from '../components/auth/SignUpForm'
 
@@ -14,9 +11,7 @@ const SignUp = props => {
     // destructure props
     const {
         auth,
-        errors,
-        history,
-        signUpUser
+        history
     } = props
 
     // destructure auth
@@ -30,11 +25,9 @@ const SignUp = props => {
         return (
             <div className="container" id="sign-up">
                 <div className="row">
-                    <SignUpForm
-                        errors={errors}
-                        history={history}
-                        signUpUser={signUpUser}
-                    />
+                    <div className="col s12 m10 push-m1 l8 push-l2 xl6 push-xl3">
+                        <SignUpForm history={history} />
+                    </div>
                 </div>
             </div>
         )
@@ -45,15 +38,11 @@ const SignUp = props => {
 
 SignUp.propTypes = {
     auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    signUpUser: PropTypes.func.isRequired
+    history: PropTypes.object
 }
 
-const mapStateToProps = state => ({
-    auth: state.auth,
-    errors: state.errors
-})
+const mapStateToProps = state => ({ auth: state.auth })
 
-const actionCreators = { signUpUser }
+const actionCreators = {}
 
 export default connect(mapStateToProps, actionCreators)(SignUp)

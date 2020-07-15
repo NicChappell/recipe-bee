@@ -3,28 +3,28 @@ import Validator from 'validator'
 import isEmpty from 'lodash/isEmpty'
 
 // validate reset password user input
-export const validateResetPasswordInput = passwordData => {
+export const validateResetPasswordInput = data => {
     // create an errors object
     let errors = {}
 
-    // destructure password data
+    // destructure data
     const {
         newPassword1,
         newPassword2
-    } = passwordData
+    } = data
 
     // validate new password input
     if (!newPassword1) {
-        errors.newPassword1 = 'New password is required'
+        errors.newPassword1 = 'new password is required'
     }
     if (!Validator.isLength(newPassword1, { min: 6, max: 30 })) {
-        errors.newPassword1 = 'New password must be at least 6 characters'
+        errors.newPassword1 = 'new password must be at least 6 characters'
     }
     if (!newPassword2) {
-        errors.newPassword2 = 'Confirm new password is required'
+        errors.newPassword2 = 'confirm new password is required'
     }
     if (!Validator.equals(newPassword1, newPassword2)) {
-        errors.newPassword2 = 'Passwords must match'
+        errors.newPassword2 = 'passwords must match'
     }
 
     // return errors object and isValid boolean

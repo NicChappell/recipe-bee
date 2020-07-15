@@ -86,26 +86,6 @@ const Account = props => {
                                     <span>Recipes</span>
                                 </button>
                             </li>
-                            {/* <li>
-                                <button
-                                    className={`btn btn-flat ${component === 'meal-plans' ? 'active' : null}`}
-                                    name="meal-plans"
-                                    onClick={handleClick}
-                                >
-                                    <i className="material-icons left">content_paste</i>
-                                    <span>Meal Plans</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    className={`btn btn-flat ${component === 'shopping-lists' ? 'active' : null}`}
-                                    name="shopping-lists"
-                                    onClick={handleClick}
-                                >
-                                    <i className="material-icons left">shopping_cart</i>
-                                    <span>Shopping Lists</span>
-                                </button>
-                            </li> */}
                             <li>
                                 <button
                                     className={`btn btn-flat ${component === 'settings' ? 'active' : null}`}
@@ -136,8 +116,6 @@ const Account = props => {
                             />
                             : null
                         }
-                        {/* {component === 'meal-plans' ? <div className="card-panel">Meal Plans</div> : null}
-                        {component === 'shopping-lists' ? <div className="card-panel">Shopping Lists</div> : null} */}
                         {component === 'settings'
                             ? <Settings
                                 deleteUser={deleteUser}

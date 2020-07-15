@@ -1,40 +1,34 @@
 // import dependencies
-const Validator = require('validator')
-const isEmpty = require('lodash.isempty')
+var Validator = require('validator');
+var isEmpty = require('lodash.isempty');
 
 // validate user input
-const validateSignInInput = data => {
-    // instantiate an errors object
-    let errors = {}
+function validateSignIn(data) {
+    // create an errors object
+    var errors = {};
 
     // destructure data
-    const {
-        email,
-        password
-    } = data
-
-    // convert empty fields into empty strings for Validator methods
-    const validateEmail = !isEmpty(email) ? email : ''
+    var emailAddress = data.emailAddress;
+    var password = data.password;
 
     // validate email input
-    if (!email) {
-        errors.email = 'Email is required'
-    }
-    if (!Validator.isEmail(validateEmail)) {
-        errors.email = 'Invalid email address'
+    if (!emailAddress) {
+        errors.emailAddress = 'email is required';
+    } else if (!Validator.isEmail(emailAddress)) {
+        errors.emailAddress = 'email is invalid';
     }
 
     // validate password input
     if (!password) {
-        errors.password = 'Password is required'
+        errors.password = 'password is required';
     }
 
     // return errors object and isValid boolean
     return {
         errors,
         isValid: isEmpty(errors)
-    }
+    };
 }
 
 // export function
-module.exports = validateSignInInput
+module.exports = validateSignIn;

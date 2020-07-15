@@ -17,10 +17,7 @@ const Color = props => {
     // destructure color
     const {
         name,
-        customId,
-        fileAlias,
-        fileId,
-        fileName
+        photos
     } = color
 
     return (
@@ -29,7 +26,7 @@ const Color = props => {
             className={`thumbnail ${name === selectedColor.name ? 'active' : ''}`}
             name={name}
             onClick={handleClick}
-            src={''}
+            src={photos[0]}
         />
     )
 }
@@ -90,8 +87,52 @@ Styles.propTypes = {
     selectedStyle: PropTypes.object
 }
 
+const Photos = ({ photos }) => {
+    // state hook variables
+    const [currIndex, setCurrIndex] = useState(0)
+
+    const handleBackClick = () => {
+        if (currIndex - 1 >= 0) {
+            setCurrIndex(currIndex - 1)
+        } else {
+            setCurrIndex(photos.length - 1)
+        }
+    }
+
+    const handleForwardClick = () => {
+        if (currIndex + 1 === photos.length) {
+            setCurrIndex(0)
+        } else {
+            setCurrIndex(currIndex + 1)
+        }
+    }
+
+    if (photos.length === 1) {
+        return (
+            <div className="card-image">
+                <img src={photos[0]} alt="" />
+            </div>
+        )
+    }
+    return (
+        <div className="card-image">
+            <div className="gallery">
+                <button className="btn-flat btn-large transparent back" onClick={handleBackClick}>
+                    <i className="material-icons">chevron_left</i>
+                </button>
+                <img src={photos[currIndex]} alt="" />
+                <button className="btn-flat btn-large transparent forward" onClick={handleForwardClick}>
+                    <i className="material-icons">chevron_right</i>
+                </button>
+            </div>
+        </div>
+    )
+}
+
+Photos.propTypes = { photos: PropTypes.array }
+
 const Price = props => {
-    // destructure discount
+    // destructure props
     const {
         discount,
         listPrice
@@ -99,9 +140,8 @@ const Price = props => {
 
     // destructure discount
     const {
-        "discountPrice": discountPrice,
-        "discountAmount": discountAmount,
-        "discountPercent": discountPercent
+        discountPrice,
+        discountPercent
     } = discount
 
     if (isEmpty(discount)) {
@@ -109,7 +149,7 @@ const Price = props => {
             <div className="price">
                 <div className="details">
                     Price:
-                    <span className="listPrice">
+                    <span className="list-price">
                         ${listPrice}
                     </span>
                 </div>
@@ -149,7 +189,6 @@ const ProductVariant = props => {
 
     // destructure product variant
     const {
-        dp,
         name,
         listPrice,
         discount,
@@ -159,6 +198,8 @@ const ProductVariant = props => {
     // state hook variables
     const [colors, setColors] = useState([])
     const [customId, setCustomId] = useState('')
+    const [dp, setDp] = useState('')
+    const [photos, setPhotos] = useState([])
     const [fitTypes, setFitTypes] = useState([])
     const [link, setLink] = useState('')
     const [selectedColor, setSelectedColor] = useState({})
@@ -189,15 +230,16 @@ const ProductVariant = props => {
         setSelectedStyle(styles.find(style => style.name === name))
     }
 
-    // update state when custom id changes
+    // update state when custom id or dp changes
     useEffect(() => {
         setLink(`https://www.amazon.com/dp/${dp}?customId=${customId}`)
-    }, [customId])
+    }, [customId, dp])
 
     // update state when selected color changes
     useEffect(() => {
         if (!isEmpty(selectedColor)) {
             setCustomId(selectedColor.customId)
+            setPhotos(selectedColor.photos)
         }
     }, [selectedColor])
 
@@ -212,6 +254,7 @@ const ProductVariant = props => {
     // update state when selected style changes
     useEffect(() => {
         if (!isEmpty(selectedStyle)) {
+            setDp(selectedStyle.dp)
             setFitTypes(selectedStyle.fitTypes)
             setSelectedFitType(selectedStyle.fitTypes[0])
         }
@@ -220,16 +263,15 @@ const ProductVariant = props => {
     // update state when component mounts
     useEffect(() => {
         setSelectedStyle(styles[0])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <div className="col s12 m6 l4">
             <div className="card">
-                <div className="card-image">
-                    <img src="" alt={selectedColor.name} />
-                    <span className="card-title">{`${productName} ${name}`}</span>
-                </div>
+                <Photos photos={photos} />
                 <div className="card-content">
+                    <h5>{productName} {name}</h5>
                     <Price
                         discount={discount}
                         listPrice={listPrice}
@@ -291,10 +333,7 @@ ProductVariant.propTypes = {
 
 const Category = ({ category }) => {
     // destructure category
-    const {
-        name,
-        products
-    } = category
+    const { products } = category
 
     // state hook variables
     const [productVariants, setProductVariants] = useState([])
@@ -325,9 +364,6 @@ const Category = ({ category }) => {
 
     return (
         <div className="row">
-            <div className="col s12">
-                <h5>{name}</h5>
-            </div>
             <div className="col s12">
                 {productVariants.map(productVariant => {
                     // destructure product variant

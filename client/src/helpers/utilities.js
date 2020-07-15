@@ -1,3 +1,19 @@
+export const abbreviateNumber = num => {
+    // billions
+    if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B+'
+    }
+    // millions
+    if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M+'
+    }
+    // thousands
+    if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K+'
+    }
+    return num
+}
+
 export const capitalize = str => {
     // get first character of the string
     // convert first character to uppercase
@@ -52,6 +68,28 @@ export const fileSize = (file, megabyteLimit) => {
 
 export const formatTime = int => ('00' + int).slice(-2)
 
+export const shuffleArray = arr => {
+    let currIndex = arr.length
+    let randIndex = undefined
+    let tempValue = undefined
+
+    // while elements remain to be shuffled
+    while (0 !== currIndex) {
+        // pick a remaining element
+        randIndex = Math.floor(Math.random() * currIndex)
+
+        // decrement current index
+        currIndex -= 1
+
+        // swap with the current element
+        tempValue = arr[currIndex]
+        arr[currIndex] = arr[randIndex]
+        arr[randIndex] = tempValue
+    }
+
+    return arr
+}
+
 export const slugify = (str = '') => {
     // split string on empty space ' ' separator
     // join array using hyphen '-' separator
@@ -69,20 +107,4 @@ export const toTitleCase = str => {
 
     // convert array back into string
     return map.join(' ')
-}
-
-export const abbreviateNumber = num => {
-    // billions
-    if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B+'
-    }
-    // millions
-    if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M+'
-    }
-    // thousands
-    if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K+'
-    }
-    return num
 }

@@ -7,6 +7,11 @@ body {
   font-family: "Source Sans Pro", sans-serif;
 }
 
+a,
+button {
+  font-family: "Signika", "Roboto", sans-serif;
+}
+
 h1,
 h2,
 h3,
@@ -27,13 +32,21 @@ footer .primary a {
 }
 footer .secondary .copyright {
   color: #000000;
-  line-height: 2rem;
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
+footer .secondary .copyright small {
+  display: block;
+}
+footer .secondary .copyright span {
+  display: inline-block;
+  line-height: 14px;
 }
 footer .secondary .social img {
   height: auto;
-  margin: 0 0.5rem;
-  max-height: 2rem;
-  max-width: 2rem;
+  margin: 0 7px;
+  max-height: 28px;
+  max-width: 28px;
   width: auto;
 }
 
@@ -46,6 +59,9 @@ nav {
   height: 64px;
   line-height: 64px;
   width: 100%;
+}
+nav a {
+  text-transform: uppercase;
 }
 nav i:hover {
   cursor: pointer;
@@ -85,43 +101,37 @@ span {
 
 #about .by-the-numbers,
 #about .how-it-works,
-#about .mission,
-#about .recipes {
+#about .mission {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin: 0;
   padding: 24px;
 }
 #about .by-the-numbers:first-child,
 #about .how-it-works:first-child,
-#about .mission:first-child,
-#about .recipes:first-child {
+#about .mission:first-child {
   padding-top: 0;
 }
 #about .by-the-numbers:last-child,
 #about .how-it-works:last-child,
-#about .mission:last-child,
-#about .recipes:last-child {
+#about .mission:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
 #about .by-the-numbers i,
 #about .how-it-works i,
-#about .mission i,
-#about .recipes i {
+#about .mission i {
   color: #ffd600;
 }
 #about .by-the-numbers .card-panel,
 #about .how-it-works .card-panel,
-#about .mission .card-panel,
-#about .recipes .card-panel {
+#about .mission .card-panel {
   -webkit-box-shadow: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: none;
 }
 #about .by-the-numbers .card-panel p,
 #about .how-it-works .card-panel p,
-#about .mission .card-panel p,
-#about .recipes .card-panel p {
+#about .mission .card-panel p {
   font-size: 14px;
   height: 42px;
   line-height: 21px;
@@ -129,15 +139,13 @@ span {
 }
 #about .by-the-numbers .card-panel p.error-message,
 #about .how-it-works .card-panel p.error-message,
-#about .mission .card-panel p.error-message,
-#about .recipes .card-panel p.error-message {
+#about .mission .card-panel p.error-message {
   text-align: center;
   height: auto;
 }
 #about .by-the-numbers .card-panel .date-ranges,
 #about .how-it-works .card-panel .date-ranges,
-#about .mission .card-panel .date-ranges,
-#about .recipes .card-panel .date-ranges {
+#about .mission .card-panel .date-ranges {
   align-items: center;
   color: #000000;
   display: flex;
@@ -151,8 +159,7 @@ span {
 }
 #about .by-the-numbers .card-panel .date-ranges select,
 #about .how-it-works .card-panel .date-ranges select,
-#about .mission .card-panel .date-ranges select,
-#about .recipes .card-panel .date-ranges select {
+#about .mission .card-panel .date-ranges select {
   background-color: transparent;
   border: none;
   font-family: "Signika", "Roboto", sans-serif;
@@ -162,22 +169,19 @@ span {
 }
 #about .by-the-numbers .card-panel .date-ranges select:focus,
 #about .how-it-works .card-panel .date-ranges select:focus,
-#about .mission .card-panel .date-ranges select:focus,
-#about .recipes .card-panel .date-ranges select:focus {
+#about .mission .card-panel .date-ranges select:focus {
   outline: none;
 }
 #about .by-the-numbers .card-panel .date-ranges span,
 #about .how-it-works .card-panel .date-ranges span,
-#about .mission .card-panel .date-ranges span,
-#about .recipes .card-panel .date-ranges span {
+#about .mission .card-panel .date-ranges span {
   font-family: "Signika", "Roboto", sans-serif;
   height: 21px;
   white-space: nowrap;
 }
 #about .by-the-numbers .card-panel .description,
 #about .how-it-works .card-panel .description,
-#about .mission .card-panel .description,
-#about .recipes .card-panel .description {
+#about .mission .card-panel .description {
   display: block;
   font-family: "Signika", "Roboto", sans-serif;
   font-size: 14px;
@@ -187,14 +191,12 @@ span {
 }
 #about .by-the-numbers .card-panel .icon,
 #about .how-it-works .card-panel .icon,
-#about .mission .card-panel .icon,
-#about .recipes .card-panel .icon {
+#about .mission .card-panel .icon {
   display: block;
 }
 #about .by-the-numbers .card-panel .number,
 #about .how-it-works .card-panel .number,
-#about .mission .card-panel .number,
-#about .recipes .card-panel .number {
+#about .mission .card-panel .number {
   color: #000000;
   display: block;
   font-family: "Signika", "Roboto", sans-serif;
@@ -231,13 +233,6 @@ span {
     justify-content: center;
   }
 }
-#account .profile .update-profile .transmitting {
-  display: inline-block;
-  font-size: 1rem;
-  height: 32.4px;
-  line-height: 32.4px;
-  margin-top: 1rem;
-}
 #account .profile .update-profile .update {
   align-content: center;
   display: flex;
@@ -253,9 +248,10 @@ span {
   max-height: 450px;
   overflow: scroll;
 }
-#account .recipes .card.recipe-card .card-image .card-title {
-  color: #f5f5f5;
-  text-shadow: 1px 1px #000000;
+#account .recipes .card.recipe-card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }
 #account .recipes .card.recipe-card .card-content .card-title {
   color: #000000;
@@ -337,18 +333,6 @@ span {
     justify-content: center;
   }
 }
-#account .settings .change-password .success {
-  color: #4caf50;
-}
-#account .settings .change-password .success,
-#account .settings .change-password .transmitting {
-  display: inline-block;
-  font-size: 1rem;
-  height: 32.4px;
-  line-height: 32.4px;
-  margin-top: 1rem;
-  padding: 0 0.75rem;
-}
 #account .settings .delete-user .button {
   align-items: center;
   display: flex;
@@ -376,29 +360,10 @@ span {
     justify-content: center;
   }
 }
-#account .settings .delete-user .transmitting {
-  display: inline-block;
-  font-size: 1rem;
-  height: 32.4px;
-  line-height: 32.4px;
-  margin-top: 1rem;
-  padding: 0 0.75rem;
-}
 
 #contact .message textarea {
   height: 4rem;
   overflow: scroll;
-}
-#contact .success {
-  color: #4caf50;
-}
-#contact .success,
-#contact .transmitting {
-  display: inline-block;
-  font-size: 1rem;
-  height: 32.4px;
-  line-height: 32.4px;
-  padding: 0 0.75rem;
 }
 
 #forgot-password button,
@@ -406,19 +371,6 @@ span {
   margin-right: 1rem;
   margin-top: 1rem;
 }
-#forgot-password .success {
-  color: #4caf50;
-}
-#forgot-password .success,
-#forgot-password .transmitting {
-  display: inline-block;
-  font-size: 1rem;
-  height: 32.4px;
-  line-height: 32.4px;
-  margin-top: 1rem;
-  padding: 0 0.75rem;
-}
-
 #index .recipes-preview .overflow-x-container {
   background-color: yellowgreen;
   overflow: scroll;
@@ -493,6 +445,27 @@ span {
     justify-content: center;
     width: 100%;
   }
+}
+#index .testimonials p {
+  margin-left: 26px;
+}
+#index .value-prop {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+}
+#index .value-prop i {
+  color: #ffd54f;
+  font-size: 72px;
+  height: 72px;
+  line-height: 72px;
+  width: 72px;
+}
+#index .value-prop .description h5 {
+  margin: 16px 0 4px;
+}
+#index .value-prop .description p {
+  margin: 4px 0 16px;
 }
 
 #app-content {
@@ -765,12 +738,37 @@ span {
   }
 }
 
-#shop .card-image .card-title {
-  color: #000000;
+#shop .card-image {
+  padding-top: 24px;
+}
+#shop .card-image .gallery {
+  position: relative;
+}
+#shop .card-image .gallery button {
+  position: absolute;
+  z-index: 1;
+}
+#shop .card-image .gallery img {
+  z-index: 0;
+}
+#shop .card-image .gallery .back {
+  top: 50%;
+  left: 0;
+}
+#shop .card-image .gallery .forward {
+  top: 50%;
+  right: 0;
 }
 #shop .card-content {
   color: #000000;
   font-size: 1rem;
+}
+#shop .card-content h5 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  height: 5rem;
+  line-height: 2rem;
+  overflow: scroll;
 }
 #shop .card-content p {
   font-size: 1.25rem;
@@ -891,6 +889,14 @@ span {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+#sign-in .new-user {
+  background-color: #aed581;
+  font-size: 1.125rem;
+  text-align: center;
+}
+#sign-in .new-user span {
+  display: inline-block;
+}
 #post-recipe hr,
 #put-recipe hr {
   border-top: 1px solid #f5f5f5;
@@ -1332,16 +1338,6 @@ span {
   width: 0;
 }
 
-.breadcrumbs {
-  line-height: 1.15;
-}
-.breadcrumbs .breadcrumb {
-  color: #000000;
-}
-.breadcrumbs .breadcrumb:before {
-  color: #000000;
-}
-
 .card {
   color: #000000;
 }
@@ -1434,6 +1430,24 @@ span {
 
 .invalid-photo {
   border: 1px solid #ff5722;
+}
+
+.success {
+  color: #aed581;
+}
+
+.transmitting {
+  color: #000000;
+}
+
+.success,
+.transmitting {
+  display: inline-block;
+  font-size: 1rem;
+  height: 32.4px;
+  line-height: 32.4px;
+  margin-top: 1rem;
+  padding: 0 0.75rem;
 }
 
 .no-recipes {

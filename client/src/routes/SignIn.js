@@ -10,11 +10,28 @@ import { signInUser } from '../actions/authActions'
 // import components
 import SignInForm from '../components/auth/SignInForm'
 
+const Banner = ({ location }) => {
+    // destructure location
+    const { state } = location
+
+    // display banner if new user
+    if (state && state.newUser) {
+        return (
+            <div className="card-panel new-user">
+                <span>Welcome to RecipeBee!</span> <span>Please sign in to continue.</span>
+            </div>
+        )
+    }
+    return null
+}
+
+Banner.propTypes = { location: PropTypes.object }
+
 const SignIn = props => {
     // destructure props
     const {
         auth,
-        errors,
+        location,
         signInUser
     } = props
 
@@ -29,10 +46,10 @@ const SignIn = props => {
         return (
             <div className="container" id="sign-in">
                 <div className="row">
-                    <SignInForm
-                        errors={errors}
-                        signInUser={signInUser}
-                    />
+                    <div className="col s12 m10 push-m1 l8 push-l2 xl6 push-xl3">
+                        <Banner location={location} />
+                        <SignInForm signInUser={signInUser} />
+                    </div>
                 </div>
             </div>
         )
@@ -43,14 +60,11 @@ const SignIn = props => {
 
 SignIn.propTypes = {
     auth: PropTypes.object,
-    errors: PropTypes.object,
+    location: PropTypes.object,
     signInUser: PropTypes.func
 }
 
-const mapStateToProps = state => ({
-    auth: state.auth,
-    errors: state.errors
-})
+const mapStateToProps = state => ({ auth: state.auth })
 
 const actionCreators = { signInUser }
 

@@ -37,17 +37,18 @@ const Footer = () => {
                 </div>
                 <div className="row secondary">
                     <div className="col s6 m9 copyright">
-                        © {date.getFullYear()} RecipeBee, LLC
+                        <span className="hide-on-small-only">© {date.getFullYear()}</span> <span>RecipeBee, LLC</span>
+                        <small>Alpha Test</small>
                     </div>
                     <div className="col s6 m3 social">
                         <a href="https://www.instagram.com/recipe_bee/" rel="noopener noreferrer" target="_blank">
                             <img src={instagram} alt="instagram" />
                         </a>
-                        <a href="https://twitter.com/recipe_bee" rel="noopener noreferrer" target="_blank">
-                            <img src={twitter} alt="twitter" />
-                        </a>
                         <a href="https://www.facebook.com/RecipeBeeLLC" rel="noopener noreferrer" target="_blank">
                             <img src={facebook} alt="facebook" />
+                        </a>
+                        <a href="https://twitter.com/recipe_bee" rel="noopener noreferrer" target="_blank">
+                            <img src={twitter} alt="twitter" />
                         </a>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 // import dependencies
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
@@ -24,6 +25,7 @@ const GetRecipe = props => {
         changeVote,
         errors,
         getRecipe,
+        history,
         match,
         recipes
     } = props
@@ -33,11 +35,12 @@ const GetRecipe = props => {
         isAuthenticated,
         user
     } = auth
-    console.log(auth)
+
+    // destructure history
+    const {location } = history
 
     // destructure recipes
     const { recipe } = recipes
-    console.log(recipes)
 
     // destructure recipe
     const {
@@ -54,6 +57,7 @@ const GetRecipe = props => {
         preparations,
         production,
         servings,
+        slug,
         tagList,
         title,
         totalHearts,
@@ -61,8 +65,6 @@ const GetRecipe = props => {
         user: recipeUser,
         _id: recipeId
     } = recipe
-    console.log(user)
-    console.log(recipeUser)
 
     // get recipe after component mount
     useEffect(() => {
@@ -75,7 +77,7 @@ const GetRecipe = props => {
         // reset recipe when component unmounts
         return () => getRecipe('reset')
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (!isEmpty(errors)) {
@@ -96,7 +98,10 @@ const GetRecipe = props => {
                 <div className="row">
                     <div className="col s12 right-align">
                         {user._id === recipeUser._id
-                            ? <button className="btn btn-small amber lighten-2 black-text"><i className="material-icons left">edit</i> Edit Recipe</button>
+                            ? <Link to={`/recipes/${slug}/${recipeId}/edit`} className="btn-flat btn-small amber lighten-2 black-text">
+                                <i className="material-icons left">edit</i>
+                                Edit Recipe
+                              </Link>
                             : null
                         }
                     </div>
@@ -208,6 +213,8 @@ GetRecipe.propTypes = {
     changeVote: PropTypes.func,
     errors: PropTypes.object,
     getRecipe: PropTypes.func,
+    history: PropTypes.object,
+    match: PropTypes.object,
     recipes: PropTypes.object
 }
 

@@ -10,8 +10,8 @@ const { secretOrKey } = require('../../../config/keys')
 
 // import validation
 const validateEmailAddress = require('../../../validation/email')
-const validateSignInInput = require('../../../validation/signIn')
-const validateSignUpInput = require('../../../validation/signUp')
+const validateSignIn = require('../../../validation/signIn')
+const validateSignUp = require('../../../validation/signUp')
 const validateResetPasswordInput = require('../../../validation/password')
 
 // import helpers
@@ -216,31 +216,28 @@ router.post('/password/reset-password', (req, res) => {
 // @route:  POST /api/v1/users/sign-in
 // @desc:   Sign in user and return JWT token
 router.post('/sign-in', (req, res) => {
-    // destructure validateSignInInput()
-    const {
-        errors,
-        isValid
-    } = validateSignInInput(req.body)
+    // validate user input
+    const validate = validateSignIn(req.body)
 
-    // check validation
-    if (!isValid) {
+    // check for validation errors
+    if (!validate.isValid) {
         return res
             .status(400)
-            .json(errors)
+            .json(validate.errors)
     }
 
     // destructure request body
     const {
-        email,
+        emailAddress,
         password
     } = req.body
 
-    User.findOne({ email }).then(user => {
+    User.findOne({ email: emailAddress }).then(user => {
         // confirm user exists
         if (!user) {
             return res
                 .status(404)
-                .json({ email: 'Email not found' })
+                .json({ emailAddress: 'email not found' })
         }
 
         // check password
@@ -273,27 +270,24 @@ router.post('/sign-in', (req, res) => {
                 else {
                     return res
                         .status(400)
-                        .json({ password: 'Password incorrect' })
+                        .json({ password: 'password incorrect' })
                 }
             })
-            .catch(err => res.status(500).json({ recipe: 'there was a problem signing in, please try again later', err }))
+            .catch(err => res.status(500).json({ message: 'there was a problem signing in, please try again later', err }))
     })
 })
 
 // @route:  POST /api/v1/users/sign-up
 // @desc:   Sign up new user
 router.post('/sign-up', (req, res) => {
-    // destructure validateSignUpInput()
-    const {
-        errors,
-        isValid
-    } = validateSignUpInput(req.body)
+    // validate user input
+    const validate = validateSignUp(req.body)
 
-    // check validation
-    if (!isValid) {
+    // check for validation errors
+    if (!validate.isValid) {
         return res
             .status(400)
-            .json(errors)
+            .json(validate.errors)
     }
 
     // destructure request body
@@ -304,7 +298,7 @@ router.post('/sign-up', (req, res) => {
         email,
         firstName,
         lastName,
-        password,
+        password1: password,
         postalCode,
         state,
         username
@@ -351,7 +345,7 @@ router.post('/sign-up', (req, res) => {
                     newUser.password = hash
                     newUser.save()
                         .then(user => res.status(200).json(user))
-                        .catch(err => console.log(err))
+                        .catch(err => res.status(500).json({ message: 'there was a problem signing up, please try again later', err }))
                 })
             })
         })

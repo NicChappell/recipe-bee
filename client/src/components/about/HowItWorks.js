@@ -5,7 +5,7 @@ const HowItWorks = () => {
     return (
         <div className="row how-it-works">
             <div className="col s12">
-                <h5>How Does RecipeBee Work?</h5>
+                <h3>How Does RecipeBee Work?</h3>
             </div>
             <div className="col s12 m6 l4">
                 <div className="card-panel left-align">

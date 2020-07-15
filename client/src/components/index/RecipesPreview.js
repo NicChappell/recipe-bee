@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
 
 // import components
-import RecipeCard from './RecipeCard'
+import RecipeCard from '../recipe/RecipeCard'
 import Preloader from '../utility/Preloader'
 
 const RecipeCardList = props => {

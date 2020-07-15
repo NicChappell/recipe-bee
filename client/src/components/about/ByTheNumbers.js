@@ -128,7 +128,7 @@ const ByTheNumbers = () => {
     return (
         <div className="row by-the-numbers">
             <div className="col s12">
-                <h5>RecipeBee by the Numbers</h5>
+                <h3>RecipeBee by the Numbers</h3>
                 <UsersCount />
                 <RecipesCount />
                 <RecipesDateRange />
