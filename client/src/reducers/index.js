@@ -6,14 +6,12 @@ import authReducer from './authReducer'
 import errorReducer from './errorReducer'
 import recipeReducer from './recipeReducer'
 import tagReducer from './tagReducer'
-import utilityReducer from './utilityReducer'
 
 const appReducer = combineReducers({
     auth: authReducer,
     errors: errorReducer,
     recipes: recipeReducer,
-    tags: tagReducer,
-    utilities: utilityReducer
+    tags: tagReducer
 })
 
 const rootReducer = (state, action) => {

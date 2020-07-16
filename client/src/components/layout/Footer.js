@@ -16,7 +16,7 @@ const Footer = () => {
             <div className="container">
                 <div className="row primary">
                     <div className="col s12 m6">
-                        <h5>RecipeBee</h5>
+                        <h5 className="brand">RecipeBee</h5>
                         <p>Save, share and discover new ideas</p>
                     </div>
                     <div className="col s6 m3">

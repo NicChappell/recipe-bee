@@ -42,7 +42,7 @@ const RecipeCardList = props => {
 
     if (!isEmpty(arrayHalves[0]) || !isEmpty(arrayHalves[1])) {
         return (
-            <div className="row recipes">
+            <div className="row recipe-card-list">
                 <div className="col m6 hide-on-small-only">
                     {arrayHalves[0].map(recipe => {
                         return (

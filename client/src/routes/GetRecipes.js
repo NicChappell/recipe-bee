@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
+import { Link } from 'react-router-dom'
 
 // import actions
 import {
@@ -15,7 +16,6 @@ import {
 // import components
 import Autocomplete from '../components/utility/Autocomplete'
 import IndeterminateMessage from '../components/utility/IndeterminateMessage'
-import RecipeBanner from '../components/recipe/RecipeBanner'
 import RecipeCardList from '../components/recipe/RecipeCardList'
 import DateRanges from '../components/utility/DateRanges'
 
@@ -29,6 +29,33 @@ import {
     filterRecipes,
     generateOptions
 } from '../helpers/recipes'
+
+const Banner = ({ isAuthenticated }) => {
+    if (isAuthenticated) {
+        return (
+            <div className="row banner">
+                <div className="col s12 content">
+                    <p>Add your favorite recipes and share them with the RecipeBee community</p>
+                    <Link to="/recipes/create" className="btn btn-flat amber lighten-2 black-text">Create Recipe</Link>
+                </div>
+            </div>
+        )
+    }
+    return (
+        <div className="row banner">
+            <div className="col s12">
+                <div className="background">
+                    <div className="content">
+                        <p>RecipeBee makes it easy to save your favorite recipes and discover new ideas</p>
+                        <Link to="/sign-up" className="btn btn-flat amber lighten-2 black-text">Create Account</Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+Banner.propTypes = { isAuthenticated: PropTypes.object }
 
 const Button = props => {
     // destructure props
@@ -265,7 +292,7 @@ const GetRecipes = props => {
 
     return (
         <div className="container" id="get-recipes">
-            <RecipeBanner isAuthenticated={isAuthenticated} />
+            <Banner isAuthenticated={isAuthenticated} />
             <div className="row">
                 <div className="col s12 l6">
                     <div className="row">

@@ -1,16 +1,20 @@
 // import dependencies
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const ValueProps = ({ isAuthenticated }) => {
+const ValueProps = ({ auth }) => {
+    // destructure auth
+    const { isAuthenticated } = auth
+
     return (
         <div className="row value-props">
-            <div className="col s12 center-align">
-                <h3>Recipes done right</h3>
-                <p className="flow-text">RecipeBee makes it easy to save, share and discover new ideas</p>
+            <div className="col s12 header">
+                <h3><span>Recipes</span> <span>done right</span></h3>
+                <p className="flow-text"><span>RecipeBee makes it easy to save,</span> <span>share and discover new ideas</span></p>
                 {
                     !isAuthenticated
-                        ? <Link to="/sign-up" className="btn-large amber lighten-2 black-text">Create Account</Link>
+                        ? <Link to="/sign-up" className="btn-flat amber lighten-2 black-text">Create Account</Link>
                         : null
                 }
             </div>
@@ -44,5 +48,7 @@ const ValueProps = ({ isAuthenticated }) => {
         </div>
     )
 }
+
+ValueProps.propTypes = { auth: PropTypes.object }
 
 export default ValueProps

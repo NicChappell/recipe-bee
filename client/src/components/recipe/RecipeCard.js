@@ -31,14 +31,13 @@ const RecipeCard = props => {
     } = recipe
 
     return (
-        <div className="card z-depth-1 recipe-card">
+        <div className="card recipe-card">
             <Link to={`/recipes/${slug}/${recipeId}`}>
                 <div className="card-image">
                     <img alt="" src={`/api/v1/uploads/image/${photo.filename}`} />
-                    {/* <span className="card-title">{recipe.title}</span> */}
                 </div>
                 <div className="card-content">
-                    <span className="card-title">{recipe.title}</span>
+                    <h5>{recipe.title}</h5>
                     <p>{recipe.description}</p>
                 </div>
             </Link>

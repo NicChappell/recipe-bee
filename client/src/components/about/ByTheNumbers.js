@@ -118,7 +118,11 @@ const RecipesDateRange = () => {
                     <i className="material-icons">date_range</i>
                 </span>
                 <span className="number">{abbreviateNumber(recipesCount)}</span>
-                <DateRanges context={'Recipes created previous'} initState={days} liftState={setDays} />
+                <DateRanges
+                    context={'Recipes created previous'}
+                    initState={days}
+                    liftState={setDays}
+                />
             </div>
         </div>
     )

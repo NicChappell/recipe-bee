@@ -33,6 +33,7 @@ $brand-light: #f5f5f5; // grey lighten-4
 $brand-dark: #212121; // grey darken-4
 
 html {
+  color: $primary;
   font-size: 14px;
 }
 
@@ -41,7 +42,10 @@ body {
   font-family: "Source Sans Pro", sans-serif;
 }
 
-a,
+a {
+  font-family: "Signika", "Roboto", sans-serif;
+}
+
 button {
   font-family: "Signika", "Roboto", sans-serif;
 }
@@ -57,7 +61,8 @@ h6 {
 
 footer {
   background-color: rgba(51, 51, 51, 0.08);
-  box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.14), 0 -2px 1px -2px rgba(0, 0, 0, 0.12), 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba($primary, 0.1);
+  // box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.14), 0 -2px 1px -2px rgba(0, 0, 0, 0.12), 0 0 5px 0 rgba(0, 0, 0, 0.2);
   font-family: "Signika", "Roboto", sans-serif;
   padding-top: 20px;
   .primary {
@@ -67,11 +72,9 @@ footer {
   }
   .secondary {
     .copyright {
-      color: $primary;
-      padding-bottom: 7px;
-      padding-top: 7px;
       small {
         display: block;
+        line-height: 14px;
       }
       span {
         display: inline-block;
@@ -92,9 +95,10 @@ footer {
 
 nav {
   background-color: rgba(51, 51, 51, 0.08);
-  color: $primary;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-  display: block;
+  border-bottom: 1px solid rgba($primary, 0.1);
+  // box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: none;
+  -webkit-box-shadow: none;
   font-family: "Signika", "Roboto", sans-serif;
   height: 64px;
   line-height: 64px;
@@ -106,9 +110,6 @@ nav {
     &:hover {
       cursor: pointer;
     }
-  }
-  .active {
-    font-weight: bold;
   }
   .logo {
     align-items: center;
@@ -176,7 +177,6 @@ span {
       }
       .date-ranges {
         align-items: center;
-        color: $primary;
         display: flex;
         flex-wrap: wrap;
         font-size: 14px;
@@ -215,7 +215,6 @@ span {
         display: block;
       }
       .number {
-        color: $primary;
         display: block;
         font-family: "Signika", "Roboto", sans-serif;
         font-size: 49px;
@@ -285,40 +284,37 @@ span {
       }
     }
   }
-  .recipes {
-    border: 1px solid $brand-light;
+  .recipe-card-list {
+    border: 1px solid rgba($primary, 0.1);
     height: auto;
     max-height: 450px;
     overflow: scroll;
-    .card.recipe-card {
+    .recipe-card {
       border: 1px solid rgba($primary, 0.1);
       box-shadow: none;
       -webkit-box-shadow: none;
-      .card-content {
-        .card-title {
-          color: $primary;
-          font-weight: 400;
-        }
-      }
-      .card-action.recipe-action {
+      margin: 1rem 0.25rem 1rem;
+      .recipe-action {
+        align-items: center;
         display: flex;
-        flex-direction: row;
         justify-content: space-between;
         overflow: hidden;
         .actions,
         .tags {
-          align-items: center;
           display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
+          overflow: hidden;
           width: auto;
         }
         .actions {
-          justify-content: flex-start;
+          align-items: flex-start;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-right: 4px;
+          padding-right: 4px;
           .heart-action,
           .vote-action {
             margin: 0;
-            overflow: hidden;
             padding: 0;
             white-space: nowrap;
             button {
@@ -332,19 +328,12 @@ span {
           }
         }
         .tags {
-          justify-content: flex-end;
-          padding: 4px 16px;
+          align-items: center;
+          justify-content: flex-start;
+          padding: 4px;
           .chip {
             margin: 4px;
             white-space: nowrap;
-          }
-        }
-        @media screen and (min-width: $min-medium) and (max-width: $max-medium) {
-          flex-direction: column;
-          .actions,
-          .tags {
-            justify-content: center;
-            width: 100%;
           }
         }
       }
@@ -408,6 +397,12 @@ span {
   }
 }
 
+#app-content {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 #contact {
   .email {
   }
@@ -430,80 +425,84 @@ span {
 }
 
 #index {
-  .recipes-preview {
-    .overflow-x-container {
-      background-color: yellowgreen;
-      overflow: scroll;
-      padding: 0.75rem;
-      .overflow-x-content {
-        align-items: flex-start;
+  .recipes {
+    .header {
+      text-align: center;
+      a {
+        margin: 0 1rem 1.68rem;
+      }
+      div {
+        align-items: center;
         display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        .card.recipe-card {
-          display: inline-block;
-          margin: 0.75rem;
-          min-width: 500px;
-          width: 100%;
-          .card-image {
-            .card-title {
-              color: $brand-light;
-              text-shadow: 1px 1px $primary;
-            }
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 1em 0;
+        select {
+          background-color: transparent;
+          border: none;
+          height: auto;
+          margin-right: 0.125em;
+          padding: 0;
+          width: auto;
+          &:focus {
+            outline: none;
           }
-          .card-content {
-            .card-title {
-              color: $primary;
-              font-weight: 400;
-            }
-          }
-          .card-action.recipe-action {
+        }
+      }
+      span {
+        white-space: nowrap;
+      }
+    }
+    .recipe-card-list {
+      border: 1px solid rgba($primary, 0.1);
+      height: auto;
+      max-height: 600px;
+      overflow: scroll;
+      .recipe-card {
+        border: 1px solid rgba($primary, 0.1);
+        // box-shadow: none;
+        // -webkit-box-shadow: none;
+        margin: 1rem 0.25rem 1rem;
+        .recipe-action {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          overflow: hidden;
+          .actions,
+          .tags {
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
             overflow: hidden;
-            .actions,
-            .tags {
-              align-items: center;
-              display: flex;
-              flex-direction: row;
-              flex-wrap: wrap;
-              width: auto;
-            }
-            .actions {
-              justify-content: flex-start;
-              .heart-action,
-              .vote-action {
-                margin: 0;
-                overflow: hidden;
-                padding: 0;
-                white-space: nowrap;
-                button {
-                  &:focus {
-                    background-color: transparent;
-                  }
+            width: auto;
+          }
+          .actions {
+            align-items: flex-start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-right: 4px;
+            padding-right: 4px;
+            .heart-action,
+            .vote-action {
+              margin: 0;
+              padding: 0;
+              white-space: nowrap;
+              button {
+                &:focus {
+                  background-color: transparent;
                 }
               }
-              .heart-action {
-                margin-right: 25px;
-              }
             }
-            .tags {
-              justify-content: flex-end;
-              padding: 4px 16px;
-              .chip {
-                margin: 4px;
-                white-space: nowrap;
-              }
+            .heart-action {
+              margin-right: 25px;
             }
-            @media screen and (min-width: $min-medium) and (max-width: $max-medium) {
-              flex-direction: column;
-              .actions,
-              .tags {
-                justify-content: center;
-                width: 100%;
-              }
+          }
+          .tags {
+            align-items: center;
+            justify-content: flex-start;
+            padding: 4px;
+            .chip {
+              margin: 4px;
+              white-space: nowrap;
             }
           }
         }
@@ -511,36 +510,58 @@ span {
     }
   }
   .testimonials {
-    p {
-      margin-left: 26px;
-    }
-  }
-  .value-prop {
-    align-items: center;
-    display: flex;
-    justify-content: flex-start;
-    i {
-      color: $brand-primary;
-      font-size: 72px;
-      height: 72px;
-      line-height: 72px;
-      width: 72px;
-    }
-    .description {
-      h5 {
-        margin: 16px 0 4px;
+    .header {
+      text-align: center;
+      a {
+        margin: 0 1rem 1.68rem;
       }
       p {
-        margin: 4px 0 16px;
+        margin: 1em 0;
+      }
+      span {
+        white-space: nowrap;
+      }
+    }
+    .quote {
+      p {
+        margin-left: 26px;
       }
     }
   }
-}
-
-#app-content {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+  .value-props {
+    .header {
+      text-align: center !important;
+      a {
+        margin-bottom: 1.68rem;
+      }
+      p {
+        margin: 1em 0;
+      }
+      span {
+        white-space: nowrap;
+      }
+    }
+    .value-prop {
+      align-items: center;
+      display: flex;
+      justify-content: flex-start;
+      i {
+        color: $brand-primary;
+        font-size: 72px;
+        height: 72px;
+        line-height: 72px;
+        width: 72px;
+      }
+      .description {
+        h5 {
+          margin: 16px 0 4px;
+        }
+        p {
+          margin: 4px 0 16px;
+        }
+      }
+    }
+  }
 }
 
 #get-recipe {
@@ -551,24 +572,26 @@ span {
     }
   }
   .recipe-action {
+    align-items: center;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     overflow: hidden;
     .actions,
     .tags {
-      align-items: center;
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      width: 50%;
+      overflow: hidden;
+      width: auto;
     }
     .actions {
-      justify-content: flex-start;
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-right: 4px;
+      padding-right: 4px;
       .heart-action,
       .vote-action {
         margin: 0;
-        overflow: hidden;
         padding: 0;
         white-space: nowrap;
         button {
@@ -582,122 +605,87 @@ span {
       }
     }
     .tags {
-      height: auto;
-      justify-content: flex-end;
-      max-height: 80px;
-      min-height: 40px;
-      overflow: auto;
-      padding: 0 16px;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 4px;
       .chip {
         margin: 4px;
         white-space: nowrap;
-      }
-    }
-    @media screen and (min-width: $min-medium) and (max-width: $max-medium) {
-      flex-direction: column;
-      .actions,
-      .tags {
-        justify-content: center;
-        width: 100%;
       }
     }
   }
 }
 
 #get-recipes {
-  .card.recipe-card {
-    .card-image {
-      .card-title {
-        color: $brand-light;
-        text-shadow: 1px 1px $primary;
-      }
-    }
-    .card-content {
-      .card-title {
-        color: $primary;
-        font-weight: 400;
-      }
-    }
-    .card-action.recipe-action {
+  .banner {
+    .content {
+      align-items: center;
+      background-color: white;
+      border: 1px solid rgba(0, 0, 0, 0.125);
       display: flex;
-      flex-direction: row;
+      flex-wrap: nowrap;
+      font-size: 1.25rem;
       justify-content: space-between;
-      overflow: hidden;
-      .actions,
-      .tags {
-        align-items: center;
-        display: flex;
-        flex-direction: row;
+      padding: 0.75rem;
+      @media screen and (max-width: $max-small) {
         flex-wrap: wrap;
+      }
+      a {
+        margin: 0.75rem;
+        white-space: nowrap;
         width: auto;
       }
-      .actions {
-        justify-content: flex-start;
-        .heart-action,
-        .vote-action {
-          margin: 0;
-          overflow: hidden;
-          padding: 0;
-          white-space: nowrap;
-          button {
-            &:focus {
-              background-color: transparent;
-            }
-          }
-        }
-        .heart-action {
-          margin-right: 25px;
-        }
-      }
-      .tags {
-        justify-content: flex-end;
-        padding: 4px 16px;
-        .chip {
-          margin: 4px;
-          white-space: nowrap;
-        }
-      }
-      @media screen and (min-width: $min-medium) and (max-width: $max-medium) {
-        flex-direction: column;
-        .actions,
-        .tags {
-          justify-content: center;
-          width: 100%;
-        }
+      p {
+        margin: 0.75rem;
+        padding: 0;
+        width: auto;
       }
     }
   }
-  .banner {
-    .background {
-      // background-color: white;
-      // background-position: center;
-      // background-repeat: no-repeat;
-      // background-size: cover;
-      // border: 1px solid rgba(0, 0, 0, 0.125);
-      // padding: 1.625rem;
-      // width: auto;
-      .content {
+  .recipe-card-list {
+    .recipe-card {
+      margin: 1rem 0.25rem 1rem;
+      .recipe-action {
         align-items: center;
-        background-color: white;
-        border: 1px solid rgba(0, 0, 0, 0.125);
         display: flex;
-        flex-wrap: nowrap;
-        font-size: 1.25rem;
         justify-content: space-between;
-        padding: 0.75rem;
-        @media screen and (max-width: $max-small) {
-          flex-wrap: wrap;
-        }
-        a {
-          margin: 0.75rem;
-          min-width: 144px;
+        overflow: hidden;
+        .actions,
+        .tags {
+          display: flex;
+          overflow: hidden;
           width: auto;
         }
-        p {
-          margin: 0.75rem;
-          padding: 0;
-          width: auto;
-          // width: 60%;
+        .actions {
+          align-items: flex-start;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-right: 4px;
+          padding-right: 4px;
+          .heart-action,
+          .vote-action {
+            margin: 0;
+            padding: 0;
+            white-space: nowrap;
+            button {
+              &:focus {
+                background-color: transparent;
+              }
+            }
+          }
+          .heart-action {
+            margin-right: 25px;
+          }
+        }
+        .tags {
+          align-items: center;
+          justify-content: flex-start;
+          padding: 4px;
+          .chip {
+            margin: 4px;
+            white-space: nowrap;
+          }
         }
       }
     }
@@ -721,7 +709,6 @@ span {
   }
   .date-ranges {
     align-items: center;
-    color: $primary;
     display: flex;
     justify-content: flex-start;
     padding: 0 16px;
@@ -803,28 +790,38 @@ span {
   }
 }
 
-$size: 100px;
 #no-match {
-  img,
-  div {
-    width: $size;
-    height: $size;
-  }
-  .x {
-    animation: x 13s linear infinite alternate;
-  }
-  .y {
-    animation: y 7s linear infinite alternate;
-  }
-  @keyframes x {
-    100% {
-      transform: translateX(calc(500px - #{$size}));
+  .error {
+    align-items: center;
+    display: flex;
+    font-family: "Signika", "Roboto", sans-serif;
+    font-size: 10rem;
+    justify-content: center;
+    line-height: 10rem;
+    img {
+      height: 7rem;
+      width: auto;
+    }
+    span {
+      font-family: "Signika", "Roboto", sans-serif;
+    }
+    @media screen and (min-width: $min-medium) {
+      font-size: 15rem;
+      line-height: 15rem;
+      img {
+        height: 10.5rem;
+      }
+    }
+    @media screen and (min-width: $min-large) {
+      font-size: 20rem;
+      line-height: 20rem;
+      img {
+        height: 14rem;
+      }
     }
   }
-  @keyframes y {
-    100% {
-      transform: translateY(calc(500px - #{$size}));
-    }
+  .message {
+    text-align: center;
   }
 }
 
@@ -852,7 +849,6 @@ $size: 100px;
     }
   }
   .card-content {
-    color: $primary;
     font-size: 1rem;
     h5 {
       font-size: 1.75rem;
@@ -1183,7 +1179,7 @@ $size: 100px;
       align-items: center;
       display: flex;
       font-size: 1rem;
-      font-weight: bold;
+      font-weight: 600;
       height: 4rem;
       justify-content: center;
     }
@@ -1239,7 +1235,7 @@ $size: 100px;
       align-items: center;
       display: flex;
       font-size: 1rem;
-      font-weight: bold;
+      font-weight: 600;
       height: 4rem;
       justify-content: center;
     }
@@ -1417,36 +1413,6 @@ $size: 100px;
   }
 }
 
-// .breadcrumbs {
-//   line-height: 1.15;
-//   .breadcrumb {
-//     color: $primary;
-//     &:before {
-//       color: $primary;
-//     }
-//   }
-// }
-
-.card {
-  color: $primary;
-  a {
-    color: $primary;
-  }
-  // REVIEW THIS STYLE
-  // WHERE IS IT BEING USED?
-  .create-buttons {
-    display: flex;
-    flex-direction: row;
-    @media screen and (min-width: $min-medium) and (max-width: $max-medium) {
-      flex-direction: column;
-    }
-    .create-recipe,
-    .create-shopping-list {
-      margin: 0.75rem;
-    }
-  }
-}
-
 // VALIDATION STYLES
 
 .error-message {
@@ -1557,16 +1523,15 @@ $size: 100px;
       align-items: center;
       display: flex;
       font-size: 1.375rem;
-      font-weight: bold;
       height: 56px;
-      line-height: 3rem;
+      line-height: 56px;
       justify-content: center;
       white-space: nowrap;
       img {
         height: auto;
-        margin-right: 1rem;
-        max-width: 3rem;
-        max-height: 3rem;
+        margin-right: 14px;
+        max-width: 56px;
+        max-height: 56px;
         width: auto;
       }
     }
@@ -1597,6 +1562,11 @@ $size: 100px;
 
 .side-nav.open {
   width: 18rem;
+}
+
+.active,
+.brand {
+  font-weight: 600;
 }
 
 // THIS NEEDS TO GET ADDED TO POST RECIPE CSS
@@ -1644,23 +1614,6 @@ $size: 100px;
         color: $brand-primary;
       }
     }
-  }
-}
-
-// **************** //
-// Marketing Styles //
-// **************** //
-.marketing.card-image {
-  height: auto;
-  min-height: 10rem;
-  min-width: 10rem;
-  padding: 1rem;
-  width: auto;
-  img {
-    height: auto;
-    max-height: 8rem;
-    max-width: 8rem;
-    width: auto;
   }
 }
 
@@ -2019,6 +1972,16 @@ select:-webkit-autofill:focus {
   transition: box-shadow 0.3s, border 0.3s, -webkit-box-shadow 0.3s;
   &::placeholder {
     font-size: 16px;
+  }
+}
+
+.card,
+.card-panel {
+  border: 1px solid rgba($primary, 0.1);
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  a {
+    color: $primary;
   }
 }
 
