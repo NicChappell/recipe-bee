@@ -6,13 +6,14 @@ import PropTypes from 'prop-types'
 import Address1 from './Address1'
 import Address2 from './Address2'
 import City from './City'
-import EmailAddress from './EmailAddress'
+import Email from './Email'
 import FirstName from './FirstName'
 import Transmitting from '../utility/Transmitting'
 import LastName from './LastName'
 import PostalCode from './PostalCode'
 import ProfileErrors from './ProfileErrors'
 import State from './State'
+import Username from './Username'
 
 // import validation
 import validateProfile from '../../validation/profile'
@@ -89,6 +90,7 @@ const Profile = props => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [emailAddress, setEmailAddress] = useState('')
+    const [username, setUsername] = useState('')
     const [address1, setAddress1] = useState('')
     const [address2, setAddress2] = useState('')
     const [city, setCity] = useState('')
@@ -109,6 +111,7 @@ const Profile = props => {
         setFirstName(user.firstName)
         setLastName(user.lastName)
         setEmailAddress(user.email)
+        setUsername(user.username)
         setAddress1(user.address1)
         setAddress2(user.address2)
         setCity(user.city)
@@ -187,13 +190,19 @@ const Profile = props => {
                     resolveErrors={resolveValidationErrors}
                     value={lastName}
                 />
-                <EmailAddress
-                    // disabled={disabled}
+                <Email
                     errors={validationErrors}
                     initValue={user.email}
                     liftState={setEmailAddress}
                     resolveErrors={resolveValidationErrors}
                     value={emailAddress}
+                />
+                <Username
+                    errors={validationErrors}
+                    initValue={user.username}
+                    liftState={setUsername}
+                    resolveErrors={resolveValidationErrors}
+                    value={username}
                 />
                 <Address1
                     disabled={disabled}

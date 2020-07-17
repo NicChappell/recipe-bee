@@ -55,6 +55,7 @@ const NewPassword2 = props => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
+                placeholder="Confirm password"
                 type="password"
                 value={value}
             />

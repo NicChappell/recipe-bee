@@ -53,7 +53,7 @@ const State = props => {
     useEffect(() => setValid(true), [disabled])
 
     return (
-        <div className={`input-field col s12 m3 state ${!valid ? 'invalid-input' : ''}`}>
+        <div className={`input-field col s4 m2 state ${!valid ? 'invalid-input' : ''}`}>
             <span>State</span>
             <input
                 autoComplete="off"

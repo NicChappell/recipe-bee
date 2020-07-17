@@ -62,7 +62,7 @@ export const validateSignUp = data => {
 
     // validate postal code input
     if (!postalCode) {
-        errors.postalCode = 'zip code is required'
+        errors.postalCode = 'postal code is required'
     }
 
     // validate state input

@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-const EmailAddress = props => {
+const Email = props => {
     // destructure props
     const {
-        // disabled,
         errors,
         initValue,
         liftState,
@@ -59,7 +58,7 @@ const EmailAddress = props => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                placeholder="Email Address"
+                placeholder="Email address"
                 type="email"
                 value={value}
             />
@@ -68,8 +67,7 @@ const EmailAddress = props => {
     )
 }
 
-EmailAddress.propTypes = {
-    // disabled: PropTypes.bool,
+Email.propTypes = {
     errors: PropTypes.object,
     initValue: PropTypes.string,
     liftState: PropTypes.func,
@@ -77,4 +75,4 @@ EmailAddress.propTypes = {
     value: PropTypes.string
 }
 
-export default EmailAddress
+export default Email

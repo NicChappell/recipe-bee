@@ -7,7 +7,7 @@ import MobileSignedInLinks from '../auth/MobileSignedInLinks'
 import MobileSignedOutLinks from '../auth/MobileSignedOutLinks'
 
 // import images
-import icon from '../../images/icons/icon.png'
+import logo from '../../images/logos/logo.png'
 
 const SideNav = (props) => {
     // destructure props
@@ -38,7 +38,7 @@ const SideNav = (props) => {
         <div className={`side-nav ${open ? 'open' : 'closed'}`}>
             <div className="control">
                 <div className="brand">
-                    <img src={icon} alt="Recipe Bee" />
+                    <img src={logo} alt="RecipeBee" />
                     RecipeBee
                 </div>
                 <i className="black-text material-icons" onClick={closeSideNav}>close</i>

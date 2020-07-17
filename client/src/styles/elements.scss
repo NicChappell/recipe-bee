@@ -1,0 +1,37 @@
+// import dependencies
+@import 'colors';
+
+html {
+    color: $primary;
+    font-size: 14px;
+}
+
+body {
+    background-color: $brand-light;
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+a {
+    font-family: "Signika", "Roboto", sans-serif;
+}
+
+button {
+    font-family: "Signika", "Roboto", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Signika", "Roboto", sans-serif;
+}
+
+p {
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+span {
+    font-family: "Source Sans Pro", sans-serif;
+}

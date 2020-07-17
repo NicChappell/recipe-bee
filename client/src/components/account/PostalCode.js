@@ -53,7 +53,7 @@ const PostalCode = props => {
     useEffect(() => setValid(true), [disabled])
 
     return (
-        <div className={`input-field col s12 m4 postal-code ${!valid ? 'invalid-input' : ''}`}>
+        <div className={`input-field col s8 m4 postal-code ${!valid ? 'invalid-input' : ''}`}>
             <span>Postal Code</span>
             <input
                 autoComplete="off"
@@ -62,7 +62,7 @@ const PostalCode = props => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                placeholder="Postal Code"
+                placeholder="Postal code"
                 type="text"
                 value={value}
             />

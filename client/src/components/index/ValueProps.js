@@ -23,7 +23,7 @@ const ValueProps = ({ auth }) => {
                     <i className="material-icons left">favorite</i>
                     <div className="description">
                         <h5>Save</h5>
-                        <p className="flow-text">Add recipes of your own and save your favorites</p>
+                        <p className="flow-text">Add recipes you love and save your favorites</p>
                     </div>
                 </div>
             </div>

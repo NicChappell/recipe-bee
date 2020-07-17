@@ -108,7 +108,7 @@ const EmailInput = props => {
 
     return (
         <div className={`input-field col s12 email ${valid ? '' : 'invalid-input'}`}>
-            <span>Email</span>
+            <span>Email Address</span>
             <input
                 autoComplete="off"
                 name="email"

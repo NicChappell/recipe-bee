@@ -53,7 +53,7 @@ const City = props => {
     useEffect(() => setValid(true), [disabled])
 
     return (
-        <div className={`input-field col s12 m5 city ${!valid ? 'invalid-input' : ''}`}>
+        <div className={`input-field col s12 m6 city ${!valid ? 'invalid-input' : ''}`}>
             <span>City</span>
             <input
                 autoComplete="off"

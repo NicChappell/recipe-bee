@@ -25,7 +25,6 @@ const GetRecipe = props => {
         changeVote,
         errors,
         getRecipe,
-        history,
         match,
         recipes
     } = props
@@ -35,9 +34,6 @@ const GetRecipe = props => {
         isAuthenticated,
         user
     } = auth
-
-    // destructure history
-    const {location } = history
 
     // destructure recipes
     const { recipe } = recipes
@@ -213,7 +209,6 @@ GetRecipe.propTypes = {
     changeVote: PropTypes.func,
     errors: PropTypes.object,
     getRecipe: PropTypes.func,
-    history: PropTypes.object,
     match: PropTypes.object,
     recipes: PropTypes.object
 }

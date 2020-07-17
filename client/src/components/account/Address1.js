@@ -54,7 +54,7 @@ const Address1 = props => {
 
     return (
         <div className={`input-field col s12 street-address ${!valid ? 'invalid-input' : ''}`}>
-            <span>Mailing Address</span>
+            <span>Street Address</span>
             <input
                 autoComplete="off"
                 disabled={disabled}

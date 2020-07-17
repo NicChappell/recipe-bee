@@ -18,32 +18,32 @@ const validateProfile = data => {
 
     // validate address1 input
     if (!address1) {
-        errors.address1 = 'Street address is required'
+        errors.address1 = 'street address is required'
     }
 
     // validate city input
     if (!city) {
-        errors.city = 'City is required'
+        errors.city = 'city is required'
     }
 
     // validate firstName input
     if (!firstName) {
-        errors.firstName = 'First name is required'
+        errors.firstName = 'first name is required'
     }
 
     // validate lastName input
     if (!lastName) {
-        errors.lastName = 'Last name is required'
+        errors.lastName = 'last name is required'
     }
 
     // validate postalCode input
     if (!postalCode) {
-        errors.postalCode = 'Postal code is required'
+        errors.postalCode = 'postal code is required'
     }
 
     // validate state input
     if (!state) {
-        errors.state = 'State is required'
+        errors.state = 'state is required'
     }
 
     // return errors object and isValid boolean

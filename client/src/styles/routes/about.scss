@@ -1,0 +1,88 @@
+// import dependencies
+@import '../breakpoints';
+@import '../colors';
+
+#about {
+    .by-the-numbers {
+    }
+    .how-it-works {
+    }
+    .mission {
+    }
+    .by-the-numbers,
+    .how-it-works,
+    .mission {
+        &:first-child {
+            padding-top: 0;
+        }
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        border-bottom: 1px solid rgba($primary, 0.1);
+        margin: 0;
+        padding: 24px;
+        i {
+            color: $brand-secondary;
+        }
+        .card-panel {
+            -webkit-box-shadow: none;
+            border: 1px solid rgba($primary, 0.1);
+            box-shadow: none;
+            p {
+                font-size: 14px;
+                height: 42px;
+                line-height: 21px;
+                overflow: scroll;
+            }
+            p.error-message {
+                text-align: center;
+                height: auto;
+            }
+            .date-ranges {
+                align-items: center;
+                display: flex;
+                flex-wrap: wrap;
+                font-size: 14px;
+                height: 21px;
+                line-height: 21px;
+                justify-content: flex-start;
+                overflow: scroll;
+                width: auto;
+                select {
+                    background-color: transparent;
+                    border: none;
+                    font-family: "Signika", "Roboto", sans-serif;
+                    height: 21px;
+                    padding: 0;
+                    width: auto;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+                span {
+                    font-family: "Signika", "Roboto", sans-serif;
+                    height: 21px;
+                    white-space: nowrap;
+                }
+            }
+            .description {
+                display: block;
+                font-family: "Signika", "Roboto", sans-serif;
+                font-size: 14px;
+                height: 21px;
+                // height: auto;
+                line-height: 21px;
+                overflow: scroll;
+            }
+            .icon {
+                display: block;
+            }
+            .number {
+                display: block;
+                font-family: "Signika", "Roboto", sans-serif;
+                font-size: 49px;
+            }
+        }
+    }
+}

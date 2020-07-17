@@ -61,7 +61,6 @@ const Address2 = props => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                placeholder=""
                 type="text"
                 value={value}
             />

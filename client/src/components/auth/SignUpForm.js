@@ -56,6 +56,7 @@ const Address1 = props => {
 
     return (
         <div className={`input-field col s12 address ${!valid ? 'invalid-input' : ''}`}>
+            <span>Street Address</span>
             <input
                 autoComplete="address-line1"
                 name="address1"
@@ -168,6 +169,7 @@ const City = props => {
 
     return (
         <div className={`input-field col s12 m6 city ${!valid ? 'invalid-input' : ''}`}>
+            <span>City</span>
             <input
                 autoComplete="address-level2"
                 name="city"
@@ -234,13 +236,14 @@ const Email = props => {
 
     return (
         <div className={`input-field col s12 email ${!valid ? 'invalid-input' : ''}`}>
+            <span>Email Address</span>
             <input
                 autoComplete="email"
                 name="email"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                placeholder="Email"
+                placeholder="Email Address"
                 type="text"
                 value={email}
             />
@@ -299,7 +302,8 @@ const FirstName = props => {
     }, [firstName])
 
     return (
-        <div className={`input-field col s6 firstName ${!valid ? 'invalid-input' : ''}`}>
+        <div className={`input-field col s6 first-name ${!valid ? 'invalid-input' : ''}`}>
+            <span>First Name</span>
             <input
                 autoComplete="given-name"
                 name="firstName"
@@ -365,7 +369,8 @@ const LastName = props => {
     }, [lastName])
 
     return (
-        <div className={`input-field col s6 lastName ${!valid ? 'invalid-input' : ''}`}>
+        <div className={`input-field col s6 last-name ${!valid ? 'invalid-input' : ''}`}>
+            <span>Last Name</span>
             <input
                 autoComplete="family-name"
                 name="lastName"
@@ -432,6 +437,7 @@ const Password1 = props => {
 
     return (
         <div className={`input-field col s12 m6 password ${!valid ? 'invalid-input' : ''}`}>
+            <span>Password</span>
             <input
                 autoComplete="new-password"
                 name="password1"
@@ -498,6 +504,7 @@ const Password2 = props => {
 
     return (
         <div className={`input-field col s12 m6 password ${!valid ? 'invalid-input' : ''}`}>
+            <span>Confirm Password</span>
             <input
                 autoComplete="new-password"
                 name="password2"
@@ -563,14 +570,15 @@ const PostalCode = props => {
     }, [postalCode])
 
     return (
-        <div className={`input-field col s8 m4 postalCode ${!valid ? 'invalid-input' : ''}`}>
+        <div className={`input-field col s8 m4 postal-code ${!valid ? 'invalid-input' : ''}`}>
+            <span>Postal Code</span>
             <input
                 autoComplete="postal-code"
                 name="postalCode"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                placeholder="ZIP Code"
+                placeholder="Postal code"
                 type="text"
                 value={postalCode}
             />
@@ -630,6 +638,7 @@ const State = props => {
 
     return (
         <div className={`input-field col s4 m2 state ${!valid ? 'invalid-input' : ''}`}>
+            <span>State</span>
             <input
                 autoComplete="address-level1"
                 name="state"
@@ -696,6 +705,7 @@ const Username = props => {
 
     return (
         <div className={`input-field col s12 username ${!valid ? 'invalid-input' : ''}`}>
+            <span>Username</span>
             <input
                 autoComplete="username"
                 name="username"

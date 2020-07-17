@@ -6,7 +6,7 @@ const Testimonials = () => {
         <div className="row testimonials">
             <div className="col s12 header">
                 <h3><span>What users</span> <span>are saying</span></h3>
-                <p className="flow-text"><span>We love hearing from the RecipeBee community</span></p>
+                <p className="flow-text"><span>We love hearing from</span> <span>the RecipeBee community!</span></p>
             </div>
             <div className="col s12 m8 push-m1">
                 <div className="card-panel quote">

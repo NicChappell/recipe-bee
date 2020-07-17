@@ -62,7 +62,7 @@ const FirstName = props => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                placeholder="First Name"
+                placeholder="First name"
                 type="text"
                 value={value}
             />

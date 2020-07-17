@@ -9,7 +9,6 @@ import { createRecipe } from '../actions/recipeActions'
 
 // import components
 import CreateRecipeForm from '../components/recipe/CreateRecipeForm'
-import Preloader from '../components/utility/Preloader'
 
 const PostRecipe = props => {
     // destructure props

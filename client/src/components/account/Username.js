@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-const NewPassword1 = props => {
+const Username = props => {
     // destructure props
     const {
-        disabled,
         errors,
+        initValue,
         liftState,
         resolveErrors,
         value
@@ -22,8 +22,8 @@ const NewPassword1 = props => {
         const { value } = e.target
 
         // resolve errors
-        if (errors.newPassword1) {
-            resolveErrors('newPassword1')
+        if (errors.username) {
+            resolveErrors('username')
         }
 
         // lift and update state
@@ -35,41 +35,44 @@ const NewPassword1 = props => {
 
     const handleFocus = () => setValid(true)
 
-    // update state when disabled value changes
-    useEffect(() => setValid(true), [disabled])
+    // lift state when initial value changes
+    useEffect(() => {
+        liftState(initValue)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [initValue])
 
     // update state when errors value changes
     useEffect(() => {
-        errors.newPassword1
+        errors.username
             ? setValid(false)
             : setValid(true)
-    }, [errors.newPassword1])
+    }, [errors.username])
 
     return (
-        <div className={`input-field col s12 m6 new-password ${!valid ? 'invalid-input' : ''}`}>
-            <span>New Password</span>
+        <div className={`input-field col s12 username ${!valid ? 'invalid-input' : ''}`}>
+            <span>Username</span>
             <input
-                autoComplete="new-password"
-                disabled={disabled}
-                name="newPassword1"
+                autoComplete="off"
+                disabled={true}
+                name="username"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                placeholder="Password"
-                type="password"
+                placeholder="Username"
+                type="text"
                 value={value}
             />
-            {valid ? null : <span className="error-message">{errors.newPassword1}</span>}
+            {valid ? null : <span className="error-message">{errors.username}</span>}
         </div>
     )
 }
 
-NewPassword1.propTypes = {
-    disabled: PropTypes.bool,
+Username.propTypes = {
     errors: PropTypes.object,
+    initValue: PropTypes.string,
     liftState: PropTypes.func,
     resolveErrors: PropTypes.func,
     value: PropTypes.string
 }
 
-export default NewPassword1
+export default Username

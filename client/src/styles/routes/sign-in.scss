@@ -1,0 +1,23 @@
+// import dependencies
+@import "../breakpoints";
+@import "../colors";
+
+#sign-in {
+    a {
+        color: $secondary;
+    }
+    .button {
+    }
+    .email-address {
+    }
+    .new-user {
+        background-color: $success;
+        font-size: 1.125rem;
+        text-align: center;
+        span {
+            display: inline-block;
+        }
+    }
+    .password {
+    }
+}

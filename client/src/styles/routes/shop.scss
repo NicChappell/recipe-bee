@@ -1,0 +1,160 @@
+// import dependencies
+@import "../breakpoints";
+@import "../colors";
+
+#shop {
+    .card-image {
+        padding-top: 24px;
+        .gallery {
+            position: relative;
+            button {
+                position: absolute;
+                z-index: 1;
+            }
+            img {
+                // position: absolute;
+                z-index: 0;
+            }
+            .back {
+                top: 50%;
+                left: 0;
+            }
+            .forward {
+                top: 50%;
+                right: 0;
+            }
+        }
+    }
+    .card-content {
+        font-size: 1rem;
+        h5 {
+            font-size: 1.75rem;
+            font-weight: 400;
+            height: 5rem;
+            line-height: 2rem;
+            overflow: scroll;
+        }
+        p {
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.75rem;
+        }
+        .colors {
+            margin-top: 1rem;
+        }
+        .colors-options {
+            align-self: center;
+            display: flex;
+            flex-direction: row;
+            height: auto;
+            justify-content: flex-start;
+            margin-top: 0.5rem;
+            overflow: scroll;
+            width: auto;
+            .thumbnail {
+                height: auto;
+                width: 100px;
+                &:not(:last-child) {
+                    margin-right: 20px;
+                }
+            }
+            .active {
+                border: 1px solid $brand-primary;
+            }
+        }
+        .fit-type {
+            margin-top: 1rem;
+        }
+        .fit-type-options {
+            align-self: center;
+            display: flex;
+            flex-direction: row;
+            height: auto;
+            justify-content: flex-start;
+            margin-top: 0.5rem;
+            overflow: scroll;
+            width: auto;
+            button {
+                background-color: transparent;
+                white-space: nowrap;
+                &.btn-flat {
+                    color: $primary;
+                }
+                &:focus,
+                &:hover {
+                    background-color: transparent;
+                }
+            }
+            .active {
+                background-color: rgba($primary, 0.1);
+                &:focus,
+                &:hover {
+                    background-color: rgba($primary, 0.1);
+                }
+            }
+        }
+        .price {
+            align-content: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .details {
+                font-size: 1.25rem;
+                font-weight: 600;
+                line-height: 1.75rem;
+                .list-price {
+                    font-weight: 400;
+                    margin-left: 0.5rem;
+                }
+                .discount-price {
+                    color: $discount;
+                    font-family: "Signika", "Roboto", sans-serif;
+                    font-weight: 400;
+                    margin-left: 0.5rem;
+                }
+                .strike {
+                    text-decoration: line-through;
+                }
+            }
+            .discount {
+                display: inline-block;
+                line-height: 1.75rem;
+                .right {
+                    line-height: 1.75rem;
+                    margin-left: 5px;
+                }
+            }
+        }
+        .styles {
+            margin-top: 1rem;
+        }
+        .styles-options {
+            align-self: center;
+            display: flex;
+            flex-direction: row;
+            height: auto;
+            justify-content: flex-start;
+            margin-top: 0.5rem;
+            overflow: scroll;
+            width: auto;
+            button {
+                background-color: transparent;
+                white-space: nowrap;
+                &.btn-flat {
+                    color: $primary;
+                }
+                &:focus,
+                &:hover {
+                    background-color: transparent;
+                }
+            }
+            .active {
+                background-color: rgba($primary, 0.1);
+                &:focus,
+                &:hover {
+                    background-color: rgba($primary, 0.1);
+                }
+            }
+        }
+    }
+}

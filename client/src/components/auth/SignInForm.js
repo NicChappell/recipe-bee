@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import isEmpty from 'lodash.isempty'
+import { Link } from 'react-router-dom'
 
 // import components
 import Transmitting from '../utility/Transmitting'
@@ -29,11 +30,12 @@ const Button = props => {
     return (
         <div className="col s12 button">
             <button
-                className="black-text btn-small btn-flat amber lighten-2"
+                className="btn-flat btn-small amber lighten-2"
                 onClick={handleClick}
             >
                 Sign in
             </button>
+            <Link className="btn-flat btn-small transparent" to="/forgot-password">Forgot Password</Link>
         </div>
     )
 }
@@ -88,13 +90,14 @@ const EmailAddress = props => {
 
     return (
         <div className={`input-field col s12 email-address ${!valid ? 'invalid-input' : ''}`}>
+            <span>Email Address</span>
             <input
                 autoComplete="email"
                 name="emailAddress"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                placeholder="Email"
+                placeholder="Email address"
                 type="text"
                 value={emailAddress}
             />
@@ -154,6 +157,7 @@ const Password = props => {
 
     return (
         <div className={`input-field col s12 password ${!valid ? 'invalid-input' : ''}`}>
+            <span>Password</span>
             <input
                 autoComplete="current-password"
                 name="password"

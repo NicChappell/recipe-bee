@@ -1,0 +1,14 @@
+// import dependencies
+@import 'colors';
+
+input,
+select,
+textarea {
+    font-family: "Source Sans Pro", sans-serif;
+    &:disabled {
+        color: $secondary;
+    }
+    &::placeholder {
+        color: $secondary;
+    }
+}

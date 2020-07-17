@@ -55,7 +55,7 @@ const Banner = ({ isAuthenticated }) => {
     )
 }
 
-Banner.propTypes = { isAuthenticated: PropTypes.object }
+Banner.propTypes = { isAuthenticated: PropTypes.bool }
 
 const Button = props => {
     // destructure props

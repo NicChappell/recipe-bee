@@ -26,7 +26,7 @@ const SortMethods = ({ liftState }) => {
         >
             <option value="trending">top trending</option>
             <option value="loved">most loved</option>
-            <option value="top">top rated</option>
+            <option value="top">highest rated</option>
         </select>
     )
 }
@@ -63,24 +63,19 @@ const Recipes = props => {
     useEffect(() => {
         switch (sortMethod) {
             case 'trending':
-                setSpotlight(trendingRecipes.slice(0, 4))
+                setSpotlight(trendingRecipes.slice(0, 10))
                 break
             case 'loved':
-                setSpotlight(mostLovedRecipes.slice(0, 4))
+                setSpotlight(mostLovedRecipes.slice(0, 10))
                 break
             case 'top':
-                setSpotlight(topRecipes.slice(0, 4))
+                setSpotlight(topRecipes.slice(0, 10))
                 break
             default:
                 setSpotlight([])
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortMethod])
-
-
-
-
-
 
     return (
         <div className="row recipes">
