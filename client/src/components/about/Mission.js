@@ -5,7 +5,9 @@ const Mission = () => {
     return (
         <div className="row mission">
             <div className="col s12">
-                <p className="flow-text">Our mission is to reduce barriers to a healthy diet</p>
+                <p className="flow-text">
+                    <span>Our mission is to reduce</span> <span>barriers to a healthy diet</span>
+                </p>
             </div>
         </div>
     )

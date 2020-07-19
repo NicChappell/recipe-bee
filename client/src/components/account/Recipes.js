@@ -32,7 +32,7 @@ const Recipes = props => {
     } = userRecipes
 
     return (
-        <div className="card-panel">
+        <div className="card-panel recipes">
             <div className="row">
                 <div className="col s12">
                     <h5>Your Recipes</h5>

@@ -16,14 +16,12 @@ const validateResetPasswordInput = passwordData => {
     // validate new password input
     if (!newPassword1) {
         errors.newPassword1 = 'New password is required'
-    }
-    if (!Validator.isLength(newPassword1, { min: 6, max: 30 })) {
+    } else if (!Validator.isLength(newPassword1, { min: 6, max: 30 })) {
         errors.newPassword1 = 'New password must be at least 6 characters'
     }
     if (!newPassword2) {
         errors.newPassword2 = 'Confirm new password is required'
-    }
-    if (!Validator.equals(newPassword1, newPassword2)) {
+    } else if (!Validator.equals(newPassword1, newPassword2)) {
         errors.newPassword2 = 'Passwords must match'
     }
 

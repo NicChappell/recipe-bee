@@ -59,7 +59,7 @@ const Recipes = props => {
     const [sortMethod, setSortMethod] = useState('')
     const [spotlight, setSpotlight] = useState([])
 
-    // update state when sort method changes
+    // update state when recipes or sort method changes
     useEffect(() => {
         switch (sortMethod) {
             case 'trending':
@@ -75,7 +75,7 @@ const Recipes = props => {
                 setSpotlight([])
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sortMethod])
+    }, [recipes, sortMethod])
 
     return (
         <div className="row recipes">

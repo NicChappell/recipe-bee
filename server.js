@@ -6,6 +6,8 @@ const passport = require("passport")
 
 // import config keys
 const { mongoURI } = require('./config/keys')
+// configure dotenv
+require('dotenv').config()
 
 // import routers
 const contact = require("./routes/api/v1/contact")

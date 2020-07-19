@@ -25,7 +25,7 @@ const UsersCount = () => {
     if (!isEmpty(applicationErrors)) {
         return (
             <div className="col s12 m6 l4">
-                <div className="card-panel left-align">
+                <div className="card-panel center-align">
                     <p className="error-message">
                         An error occurred, please try again later
                     </p>
@@ -61,7 +61,7 @@ const RecipesCount = () => {
     if (!isEmpty(applicationErrors)) {
         return (
             <div className="col s12 m6 l4">
-                <div className="card-panel left-align">
+                <div className="card-panel center-align">
                     <p className="error-message">
                         An error occurred, please try again later
                     </p>
@@ -103,7 +103,7 @@ const RecipesDateRange = () => {
     if (!isEmpty(applicationErrors)) {
         return (
             <div className="col s12 m6 l4">
-                <div className="card-panel left-align">
+                <div className="card-panel center-align">
                     <p className="error-message">
                         An error occurred, please try again later
                     </p>

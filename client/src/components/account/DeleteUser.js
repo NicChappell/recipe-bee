@@ -44,7 +44,7 @@ const Buttons = props => {
         )
     }
     return (
-        <div className="button">
+        <div className="delete">
             <button
                 className="black-text btn-small btn-flat grey lighten-2"
                 onClick={handleDeleteClick}

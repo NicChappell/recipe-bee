@@ -247,7 +247,7 @@ const SignInForm = ({ signInUser }) => {
     }
 
     return (
-        <div className="card-panel">
+        <div className="card-panel sign-in-form">
             <div className="row left-align">
                 <div className="col s12">
                     <h5>Sign In</h5>

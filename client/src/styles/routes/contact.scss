@@ -1,10 +1,18 @@
 #contact {
-    .email {
-    }
-    .message {
-        textarea {
-            height: 4rem;
-            overflow: scroll;
+    .contact-form {
+        .button {
+        }
+        .email {
+        }
+        .message {
+            textarea {
+                height: 4rem;
+                overflow: scroll;
+            }
+        }
+        .success {
+        }
+        .transmitting {
         }
     }
 }

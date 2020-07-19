@@ -1,59 +1,13 @@
 // import dependencies
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import axios from 'axios'
 import isEmpty from 'lodash.isempty'
 
 // import components
-import Transmitting from '../utility/Transmitting'
+import Button from './Button'
 
 // import validation
 import { validateEmailAddress } from '../../validation/email'
-
-const Button = props => {
-    // destructure props
-    const {
-        handleClick,
-        success,
-        transmitting
-    } = props
-
-    if (transmitting) {
-        return (
-            <div className="col s12">
-                <span className="transmitting">
-                    Sending password reset email<Transmitting />
-                </span>
-            </div>
-        )
-    }
-    if (success) {
-        return (
-            <div className="col s12">
-                <span className="success">
-                    Password reset email sent
-                </span>
-            </div>
-        )
-    }
-    return (
-        <div className="col s12">
-            <button
-                className="black-text btn-small btn-flat grey lighten-2"
-                onClick={handleClick}
-            >
-                <i className="material-icons left">email</i>
-                Send Password Reset Email
-            </button>
-        </div>
-    )
-}
-
-Button.propTypes = {
-    handleClick: PropTypes.func,
-    success: PropTypes.bool,
-    transmitting: PropTypes.bool
-}
 
 const ForgotPasswordForm = () => {
     // state hook variables
@@ -62,7 +16,6 @@ const ForgotPasswordForm = () => {
     const [success, setSuccess] = useState(false)
     const [transmitting, setTransmitting] = useState(false)
     const [validationErrors, setValidationErrors] = useState({})
-    console.log(validationErrors)
 
     const handleBlur = e => {
         // destructure event
@@ -123,24 +76,27 @@ const ForgotPasswordForm = () => {
         )
     }
     return (
-        <div className="card-panel">
+        <div className="card-panel forgot-password-form">
             <div className="row left-align">
                 <div className="col s12">
                     <h5>Forgot Password</h5>
                 </div>
-                <div className={`input-field col s12 email-input ${isEmpty(validationErrors) ? '' : 'invalid-input'}`}>
-                    <span>Email Address</span>
-                    <input
-                        autoComplete="username"
-                        name="forgotPassword"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        onFocus={handleFocus}
-                        type="text"
-                        value={value}
-                    />
-                    {isEmpty(validationErrors) ? null : <span className="error-message">{validationErrors.email}</span>}
-                </div>
+                <form>
+                    <div className={`input-field col s12 email-input ${isEmpty(validationErrors) ? '' : 'invalid-input'}`}>
+                        <span>Email Address</span>
+                        <input
+                            autoComplete="email"
+                            name="emailAddress"
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            onFocus={handleFocus}
+                            placeholder="Email address"
+                            type="text"
+                            value={value}
+                        />
+                        {isEmpty(validationErrors) ? null : <span className="error-message">{validationErrors.email}</span>}
+                    </div>
+                </form>
                 <Button
                     handleClick={handleClick}
                     success={success}

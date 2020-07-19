@@ -23,7 +23,6 @@ const GetRecipe = props => {
         auth,
         changeHeart,
         changeVote,
-        errors,
         getRecipe,
         match,
         recipes
@@ -76,18 +75,6 @@ const GetRecipe = props => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    if (!isEmpty(errors)) {
-        return (
-            <div className="container">
-                <div className="row mt-5">
-                    <div className="center-align col s12">
-                        There's been an error
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
     if (!isEmpty(recipe)) {
         return (
             <div className="container" id="get-recipe">
@@ -95,7 +82,6 @@ const GetRecipe = props => {
                     <div className="col s12 right-align">
                         {user._id === recipeUser._id
                             ? <Link to={`/recipes/${slug}/${recipeId}/edit`} className="btn-flat btn-small amber lighten-2 black-text">
-                                <i className="material-icons left">edit</i>
                                 Edit Recipe
                               </Link>
                             : null
@@ -199,7 +185,6 @@ const GetRecipe = props => {
             </div>
         )
     }
-
     return <Preloader />
 }
 
@@ -207,7 +192,6 @@ GetRecipe.propTypes = {
     auth: PropTypes.object,
     changeHeart: PropTypes.func,
     changeVote: PropTypes.func,
-    errors: PropTypes.object,
     getRecipe: PropTypes.func,
     match: PropTypes.object,
     recipes: PropTypes.object
@@ -215,7 +199,6 @@ GetRecipe.propTypes = {
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    errors: state.errors,
     recipes: state.recipes
 })
 

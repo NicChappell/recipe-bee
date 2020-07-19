@@ -1,0 +1,69 @@
+// import dependencies
+@import "./colors";
+
+.recipe-card {
+    border: 1px solid rgba($primary, 0.1);
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    margin: 1rem 0.25rem 1rem;
+    .recipe-action,
+    .recipe-details {
+        padding: 1.25rem;
+    }
+    .recipe-action {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+        .actions,
+        .tags {
+            display: flex;
+            margin: 0;
+            max-width: 50%;
+            padding: 4px;
+            width: auto;
+        }
+        .actions {
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            .heart-action,
+            .vote-action {
+                margin: 0;
+                padding: 0;
+                white-space: nowrap;
+                button {
+                    &:focus {
+                        background-color: transparent;
+                    }
+                }
+            }
+            .heart-action {
+                margin-right: 25px;
+            }
+        }
+        .tags {
+            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+            height: auto;
+            justify-content: flex-end;
+            max-height: 76px;
+            overflow: scroll;
+            .chip {
+                margin: 2px;
+                white-space: nowrap;
+            }
+        }
+    }
+    .recipe-details {
+        
+    }
+    .recipe-image {
+        border-bottom: 1px solid rgba($primary, 0.2);
+        img {
+            height: auto;
+            width: 100%;
+        }
+    }
+}

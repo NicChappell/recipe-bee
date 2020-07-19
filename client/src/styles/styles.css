@@ -130,6 +130,69 @@ select:-webkit-autofill:focus::placeholder {
   font-size: 16px;
 }
 
+.recipe-card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  margin: 1rem 0.25rem 1rem;
+}
+.recipe-card .recipe-action,
+.recipe-card .recipe-details {
+  padding: 1.25rem;
+}
+.recipe-card .recipe-action {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.recipe-card .recipe-action .actions,
+.recipe-card .recipe-action .tags {
+  display: flex;
+  margin: 0;
+  max-width: 50%;
+  padding: 4px;
+  width: auto;
+}
+.recipe-card .recipe-action .actions {
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.recipe-card .recipe-action .actions .heart-action,
+.recipe-card .recipe-action .actions .vote-action {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+.recipe-card .recipe-action .actions .heart-action button:focus,
+.recipe-card .recipe-action .actions .vote-action button:focus {
+  background-color: transparent;
+}
+.recipe-card .recipe-action .actions .heart-action {
+  margin-right: 25px;
+}
+.recipe-card .recipe-action .tags {
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: auto;
+  justify-content: flex-end;
+  max-height: 76px;
+  overflow: scroll;
+}
+.recipe-card .recipe-action .tags .chip {
+  margin: 2px;
+  white-space: nowrap;
+}
+.recipe-card .recipe-image {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.recipe-card .recipe-image img {
+  height: auto;
+  width: 100%;
+}
+
 .xs-text {
   font-size: 50% !important;
 }
@@ -610,6 +673,10 @@ nav .logo img {
   width: 18rem;
 }
 
+.brand {
+  font-weight: 600;
+}
+
 .error-message {
   color: #ff5722;
 }
@@ -724,46 +791,49 @@ nav .logo img {
 #about .mission i {
   color: #ffd600;
 }
-#about .by-the-numbers .card-panel,
-#about .how-it-works .card-panel,
-#about .mission .card-panel {
-  -webkit-box-shadow: none;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: none;
-}
 #about .by-the-numbers .card-panel p,
 #about .how-it-works .card-panel p,
 #about .mission .card-panel p {
   font-size: 14px;
-  height: 42px;
+  height: auto;
   line-height: 21px;
+  margin: 14px 0;
   overflow: scroll;
 }
-#about .by-the-numbers .card-panel p.error-message,
-#about .how-it-works .card-panel p.error-message,
-#about .mission .card-panel p.error-message {
-  text-align: center;
-  height: auto;
+@media screen and (min-width: 601px) {
+  #about .by-the-numbers .card-panel p,
+#about .how-it-works .card-panel p,
+#about .mission .card-panel p {
+    height: 42px;
+  }
 }
 #about .by-the-numbers .card-panel .date-ranges,
 #about .how-it-works .card-panel .date-ranges,
 #about .mission .card-panel .date-ranges {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-wrap: wrap;
   font-size: 14px;
-  height: 21px;
+  height: auto;
   line-height: 21px;
+  margin-bottom: 14px;
   justify-content: flex-start;
   overflow: scroll;
   width: auto;
+}
+@media screen and (min-width: 601px) {
+  #about .by-the-numbers .card-panel .date-ranges,
+#about .how-it-works .card-panel .date-ranges,
+#about .mission .card-panel .date-ranges {
+    height: 42px;
+  }
 }
 #about .by-the-numbers .card-panel .date-ranges select,
 #about .how-it-works .card-panel .date-ranges select,
 #about .mission .card-panel .date-ranges select {
   background-color: transparent;
   border: none;
-  font-family: "Signika", "Roboto", sans-serif;
+  display: inline-block;
   height: 21px;
   padding: 0;
   width: auto;
@@ -773,22 +843,22 @@ nav .logo img {
 #about .mission .card-panel .date-ranges select:focus {
   outline: none;
 }
-#about .by-the-numbers .card-panel .date-ranges span,
-#about .how-it-works .card-panel .date-ranges span,
-#about .mission .card-panel .date-ranges span {
-  font-family: "Signika", "Roboto", sans-serif;
-  height: 21px;
-  white-space: nowrap;
-}
 #about .by-the-numbers .card-panel .description,
 #about .how-it-works .card-panel .description,
 #about .mission .card-panel .description {
   display: block;
-  font-family: "Signika", "Roboto", sans-serif;
   font-size: 14px;
-  height: 21px;
+  height: auto;
   line-height: 21px;
+  margin-bottom: 14px;
   overflow: scroll;
+}
+@media screen and (min-width: 601px) {
+  #about .by-the-numbers .card-panel .description,
+#about .how-it-works .card-panel .description,
+#about .mission .card-panel .description {
+    height: 42px;
+  }
 }
 #about .by-the-numbers .card-panel .icon,
 #about .how-it-works .card-panel .icon,
@@ -815,16 +885,20 @@ nav .logo img {
 #account .navigation .active {
   background-color: rgba(0, 0, 0, 0.1);
 }
-#account .profile .update-profile .confirm-update {
+#account .profile .update-profile .confirm-update,
+#account .profile .update-profile .transmitting,
+#account .profile .update-profile .update {
   align-items: center;
   display: flex;
+  justify-content: flex-start;
+  margin-top: 1rem;
+}
+#account .profile .update-profile .confirm-update {
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
 }
 #account .profile .update-profile .confirm-update button {
   margin-right: 1rem;
-  margin-top: 1rem;
 }
 @media screen and (max-width: 600px) {
   #account .profile .update-profile .confirm-update {
@@ -833,140 +907,65 @@ nav .logo img {
     justify-content: center;
   }
 }
-#account .profile .update-profile .update {
-  align-content: center;
-  display: flex;
-  justify-content: flex-start;
-}
-#account .profile .update-profile .update button {
-  margin-right: 1rem;
-  margin-top: 1rem;
-}
-#account .recipe-card-list {
+#account .recipes .recipe-card-list {
   border: 1px solid rgba(0, 0, 0, 0.1);
   height: auto;
+  margin: 0;
   max-height: 450px;
   overflow: scroll;
 }
-#account .recipe-card-list .recipe-card {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  margin: 1rem 0.25rem 1rem;
-}
-#account .recipe-card-list .recipe-card .recipe-action {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  overflow: hidden;
-}
-#account .recipe-card-list .recipe-card .recipe-action .actions,
-#account .recipe-card-list .recipe-card .recipe-action .tags {
-  display: flex;
-  overflow: hidden;
-  width: auto;
-}
-#account .recipe-card-list .recipe-card .recipe-action .actions {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 4px;
-  padding-right: 4px;
-}
-#account .recipe-card-list .recipe-card .recipe-action .actions .heart-action,
-#account .recipe-card-list .recipe-card .recipe-action .actions .vote-action {
-  margin: 0;
-  padding: 0;
-  white-space: nowrap;
-}
-#account .recipe-card-list .recipe-card .recipe-action .actions .heart-action button:focus,
-#account .recipe-card-list .recipe-card .recipe-action .actions .vote-action button:focus {
-  background-color: transparent;
-}
-#account .recipe-card-list .recipe-card .recipe-action .actions .heart-action {
-  margin-right: 25px;
-}
-#account .recipe-card-list .recipe-card .recipe-action .tags {
-  align-items: center;
-  justify-content: flex-start;
-  padding: 4px;
-}
-#account .recipe-card-list .recipe-card .recipe-action .tags .chip {
-  margin: 4px;
-  white-space: nowrap;
-}
-#account .recipe-card-list .recipe-card .recipe-image {
-  border-bottom: 1px solid rgba(160, 160, 160, 0.2);
-}
-#account .recipe-card-list .recipe-card .recipe-image img {
-  height: auto;
-  width: 100%;
-}
-#account .settings .change-password .button {
+#account .settings .change-password .change,
+#account .settings .change-password .confirm-change,
+#account .settings .change-password .success,
+#account .settings .change-password .transmitting {
   align-items: center;
   display: flex;
   justify-content: flex-start;
   margin-top: 1rem;
-  padding: 0 0.75rem;
 }
 #account .settings .change-password .confirm-change {
-  align-items: center;
-  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  padding: 0 0.75rem;
 }
-#account .settings .change-password .confirm-change button,
-#account .settings .change-password .confirm-change span {
+#account .settings .change-password .confirm-change button {
   margin-right: 1rem;
-  margin-top: 1rem;
 }
 @media screen and (max-width: 600px) {
   #account .settings .change-password .confirm-change {
     align-items: flex-start;
     flex-direction: column;
+    flex-wrap: nowrap;
     justify-content: center;
   }
 }
-#account .settings .delete-user .button {
+#account .settings .delete-user .confirm-delete,
+#account .settings .delete-user .delete,
+#account .settings .delete-user .transmitting {
   align-items: center;
   display: flex;
   justify-content: flex-start;
   margin-top: 1rem;
-  padding: 0 0.75rem;
 }
 #account .settings .delete-user .confirm-delete {
-  align-items: center;
-  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  padding: 0 0.75rem;
 }
 #account .settings .delete-user .confirm-delete button,
 #account .settings .delete-user .confirm-delete span {
   margin-right: 1rem;
-  margin-top: 1rem;
 }
 @media screen and (max-width: 600px) {
   #account .settings .delete-user .confirm-delete {
     align-items: flex-start;
     flex-direction: column;
+    flex-wrap: nowrap;
     justify-content: center;
   }
 }
 
-#contact .message textarea {
+#contact .contact-form .message textarea {
   height: 4rem;
   overflow: scroll;
-}
-
-#forgot-password button,
-#forgot-password span {
-  margin-right: 1rem;
-  margin-top: 1rem;
 }
 #get-recipe .recipe-action {
   align-items: center;
@@ -2036,46 +2035,28 @@ nav .logo img {
   display: flex;
   height: calc(3rem + 1px);
 }
-#shop .card-image {
-  padding-top: 24px;
+#reset-password .reset-password-form .success span {
+  display: block;
 }
-#shop .card-image .gallery {
-  position: relative;
-}
-#shop .card-image .gallery button {
-  position: absolute;
-  z-index: 1;
-}
-#shop .card-image .gallery img {
-  z-index: 0;
-}
-#shop .card-image .gallery .back {
-  top: 50%;
-  left: 0;
-}
-#shop .card-image .gallery .forward {
-  top: 50%;
-  right: 0;
-}
-#shop .card-content {
+#shop .category .product-variant .shop-content {
   font-size: 1rem;
 }
-#shop .card-content h5 {
+#shop .category .product-variant .shop-content h5 {
   font-size: 1.75rem;
   font-weight: 400;
   height: 5rem;
   line-height: 2rem;
   overflow: scroll;
 }
-#shop .card-content p {
+#shop .category .product-variant .shop-content p {
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.75rem;
 }
-#shop .card-content .colors {
+#shop .category .product-variant .shop-content .colors {
   margin-top: 1rem;
 }
-#shop .card-content .colors-options {
+#shop .category .product-variant .shop-content .colors-options {
   align-self: center;
   display: flex;
   flex-direction: row;
@@ -2085,20 +2066,20 @@ nav .logo img {
   overflow: scroll;
   width: auto;
 }
-#shop .card-content .colors-options .thumbnail {
+#shop .category .product-variant .shop-content .colors-options .thumbnail {
   height: auto;
   width: 100px;
 }
-#shop .card-content .colors-options .thumbnail:not(:last-child) {
+#shop .category .product-variant .shop-content .colors-options .thumbnail:not(:last-child) {
   margin-right: 20px;
 }
-#shop .card-content .colors-options .active {
+#shop .category .product-variant .shop-content .colors-options .active {
   border: 1px solid #ffd54f;
 }
-#shop .card-content .fit-type {
+#shop .category .product-variant .shop-content .fit-type {
   margin-top: 1rem;
 }
-#shop .card-content .fit-type-options {
+#shop .category .product-variant .shop-content .fit-type-options {
   align-self: center;
   display: flex;
   flex-direction: row;
@@ -2108,58 +2089,58 @@ nav .logo img {
   overflow: scroll;
   width: auto;
 }
-#shop .card-content .fit-type-options button {
+#shop .category .product-variant .shop-content .fit-type-options button {
   background-color: transparent;
   white-space: nowrap;
 }
-#shop .card-content .fit-type-options button.btn-flat {
+#shop .category .product-variant .shop-content .fit-type-options button.btn-flat {
   color: #000000;
 }
-#shop .card-content .fit-type-options button:focus, #shop .card-content .fit-type-options button:hover {
+#shop .category .product-variant .shop-content .fit-type-options button:focus, #shop .category .product-variant .shop-content .fit-type-options button:hover {
   background-color: transparent;
 }
-#shop .card-content .fit-type-options .active {
+#shop .category .product-variant .shop-content .fit-type-options .active {
   background-color: rgba(0, 0, 0, 0.1);
 }
-#shop .card-content .fit-type-options .active:focus, #shop .card-content .fit-type-options .active:hover {
+#shop .category .product-variant .shop-content .fit-type-options .active:focus, #shop .category .product-variant .shop-content .fit-type-options .active:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
-#shop .card-content .price {
+#shop .category .product-variant .shop-content .price {
   align-content: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-#shop .card-content .price .details {
+#shop .category .product-variant .shop-content .price .details {
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.75rem;
 }
-#shop .card-content .price .details .list-price {
+#shop .category .product-variant .shop-content .price .details .list-price {
   font-weight: 400;
   margin-left: 0.5rem;
 }
-#shop .card-content .price .details .discount-price {
+#shop .category .product-variant .shop-content .price .details .discount-price {
   color: #4caf50;
   font-family: "Signika", "Roboto", sans-serif;
   font-weight: 400;
   margin-left: 0.5rem;
 }
-#shop .card-content .price .details .strike {
+#shop .category .product-variant .shop-content .price .details .strike {
   text-decoration: line-through;
 }
-#shop .card-content .price .discount {
+#shop .category .product-variant .shop-content .price .discount {
   display: inline-block;
   line-height: 1.75rem;
 }
-#shop .card-content .price .discount .right {
+#shop .category .product-variant .shop-content .price .discount .right {
   line-height: 1.75rem;
   margin-left: 5px;
 }
-#shop .card-content .styles {
+#shop .category .product-variant .shop-content .styles {
   margin-top: 1rem;
 }
-#shop .card-content .styles-options {
+#shop .category .product-variant .shop-content .styles-options {
   align-self: center;
   display: flex;
   flex-direction: row;
@@ -2169,81 +2150,53 @@ nav .logo img {
   overflow: scroll;
   width: auto;
 }
-#shop .card-content .styles-options button {
+#shop .category .product-variant .shop-content .styles-options button {
   background-color: transparent;
   white-space: nowrap;
 }
-#shop .card-content .styles-options button.btn-flat {
+#shop .category .product-variant .shop-content .styles-options button.btn-flat {
   color: #000000;
 }
-#shop .card-content .styles-options button:focus, #shop .card-content .styles-options button:hover {
+#shop .category .product-variant .shop-content .styles-options button:focus, #shop .category .product-variant .shop-content .styles-options button:hover {
   background-color: transparent;
 }
-#shop .card-content .styles-options .active {
+#shop .category .product-variant .shop-content .styles-options .active {
   background-color: rgba(0, 0, 0, 0.1);
 }
-#shop .card-content .styles-options .active:focus, #shop .card-content .styles-options .active:hover {
+#shop .category .product-variant .shop-content .styles-options .active:focus, #shop .category .product-variant .shop-content .styles-options .active:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+#shop .category .product-variant .shop-image {
+  padding-top: 24px;
+}
+#shop .category .product-variant .shop-image .gallery {
+  position: relative;
+}
+#shop .category .product-variant .shop-image .gallery button {
+  position: absolute;
+  z-index: 1;
+}
+#shop .category .product-variant .shop-image .gallery img {
+  z-index: 0;
+}
+#shop .category .product-variant .shop-image .gallery .back {
+  top: 50%;
+  left: 0;
+}
+#shop .category .product-variant .shop-image .gallery .forward {
+  top: 50%;
+  right: 0;
 }
 
-#sign-in a {
-  color: #9e9e9e;
-}
-#sign-in .new-user {
+#sign-in .banner {
   background-color: #aed581;
   font-size: 1.125rem;
-  text-align: center;
 }
-#sign-in .new-user span {
+#sign-in .banner span {
   display: inline-block;
 }
-.brand {
-  font-weight: 600;
-}
-
-@media screen and (max-width: 992px) {
-  .recipe-share-setting,
-.recipe-tags > .search,
-.recipe-tags > .tags {
-    margin: 1rem;
-  }
-}
-
-.recipe-tags > .search .autocomplete {
-  padding: 0 1rem;
-}
-.recipe-tags > .search .autocomplete .input-field {
-  margin: 0;
-}
-.recipe-tags > .search .autocomplete .input-field input[type=text] {
-  font-size: 0.875rem;
-  height: 2rem;
-  line-height: 2rem;
-  margin: 0;
-}
-.recipe-tags > .search .autocomplete .input-field .prefix {
-  font-size: 1.3rem;
-}
-.recipe-tags > .search .autocomplete .input-field .prefix ~ input {
-  margin-left: 2.3rem;
-}
-.recipe-tags > .search .autocomplete .suggestions {
-  background-color: #f5f5f5;
-  font-size: 0.875rem;
-  margin: 0 0 0 2.3rem;
-  overflow: hidden;
-  padding: 0.875rem 0;
-  width: calc(100% - 3rem);
-}
-.recipe-tags > .search .autocomplete .suggestions li {
-  color: black;
-  padding: 0.125rem 1rem;
-}
-.recipe-tags > .search .autocomplete .suggestions li a {
-  color: black;
-}
-.recipe-tags > .search .autocomplete .suggestions li.active {
-  color: #ffd54f;
+#sign-in .sign-in-form a {
+  color: #9e9e9e;
 }
 
 /*# sourceMappingURL=styles.css.map */

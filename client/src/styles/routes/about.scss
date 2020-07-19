@@ -1,6 +1,6 @@
 // import dependencies
-@import '../breakpoints';
-@import '../colors';
+@import "../breakpoints";
+@import "../colors";
 
 #about {
     .by-the-numbers {
@@ -12,6 +12,9 @@
     .by-the-numbers,
     .how-it-works,
     .mission {
+        border-bottom: 1px solid rgba($primary, 0.1);
+        margin: 0;
+        padding: 24px;
         &:first-child {
             padding-top: 0;
         }
@@ -19,40 +22,38 @@
             border-bottom: none;
             padding-bottom: 0;
         }
-        border-bottom: 1px solid rgba($primary, 0.1);
-        margin: 0;
-        padding: 24px;
         i {
             color: $brand-secondary;
         }
         .card-panel {
-            -webkit-box-shadow: none;
-            border: 1px solid rgba($primary, 0.1);
-            box-shadow: none;
             p {
                 font-size: 14px;
-                height: 42px;
-                line-height: 21px;
-                overflow: scroll;
-            }
-            p.error-message {
-                text-align: center;
                 height: auto;
+                line-height: 21px;
+                margin: 14px 0;
+                overflow: scroll;
+                @media screen and (min-width: $min-medium) {
+                    height: 42px;
+                }
             }
             .date-ranges {
-                align-items: center;
+                align-items: flex-start;
                 display: flex;
                 flex-wrap: wrap;
                 font-size: 14px;
-                height: 21px;
+                height: auto;
                 line-height: 21px;
+                margin-bottom: 14px;
                 justify-content: flex-start;
                 overflow: scroll;
-                width: auto;
+                width: auto; 
+                @media screen and (min-width: $min-medium) {
+                    height: 42px;
+                }
                 select {
                     background-color: transparent;
                     border: none;
-                    font-family: "Signika", "Roboto", sans-serif;
+                    display: inline-block;
                     height: 21px;
                     padding: 0;
                     width: auto;
@@ -60,20 +61,17 @@
                         outline: none;
                     }
                 }
-                span {
-                    font-family: "Signika", "Roboto", sans-serif;
-                    height: 21px;
-                    white-space: nowrap;
-                }
             }
             .description {
                 display: block;
-                font-family: "Signika", "Roboto", sans-serif;
                 font-size: 14px;
-                height: 21px;
-                // height: auto;
+                height: auto;
                 line-height: 21px;
+                margin-bottom: 14px;
                 overflow: scroll;
+                @media screen and (min-width: $min-medium) {
+                    height: 42px;
+                }
             }
             .icon {
                 display: block;

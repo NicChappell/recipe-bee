@@ -3,21 +3,24 @@
 @import "../colors";
 
 #sign-in {
-    a {
-        color: $secondary;
-    }
-    .button {
-    }
-    .email-address {
-    }
-    .new-user {
+    .banner {
         background-color: $success;
         font-size: 1.125rem;
-        text-align: center;
         span {
             display: inline-block;
         }
     }
-    .password {
+    .sign-in-form {
+        a {
+            color: $secondary;
+        }
+        .button {
+        }
+        .email-address {
+        }
+        .password {
+        }
+        .transmitting {
+        }
     }
 }

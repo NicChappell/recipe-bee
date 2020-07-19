@@ -123,18 +123,24 @@ router.post('/password/forgot-password', (req, res) => {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: `nic.chappell@gmail.com`,
-                    pass: `@{}c];f&#Rx2u&e+rM)*dFN}`
+                    user: process.env.NODEMAILER_USER,
+                    pass: process.env.NODEMAILER_PASS
                 }
             })
 
             // define mail options
+            let url = ''
+            if (process.env.NODE_ENV === 'production') {
+                url = `${req.protocol}://${req.host}/reset-password/${token}`
+            } else {
+                url = `http://localhost:3000/reset-password/${token}`
+            }
+
             const mailOptions = {
                 from: 'no-reply@recipebee.com',
                 to: user.email,
                 subject: 'Reset Your RecipeBee Account Password',
-                // text: `${req.protocol}://${req.get('host')}/reset-password/${token}`
-                text: `${req.protocol}://localhost:3000/reset-password/${token}`
+                text: url
             }
 
             // send mail

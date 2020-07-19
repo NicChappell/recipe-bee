@@ -109,13 +109,13 @@ const Photos = ({ photos }) => {
 
     if (photos.length === 1) {
         return (
-            <div className="card-image">
+            <div className="card-image shop-image">
                 <img src={photos[0]} alt="" />
             </div>
         )
     }
     return (
-        <div className="card-image">
+        <div className="card-image shop-image">
             <div className="gallery">
                 <button className="btn-flat btn-large transparent back" onClick={handleBackClick}>
                     <i className="material-icons">chevron_left</i>
@@ -268,9 +268,9 @@ const ProductVariant = props => {
 
     return (
         <div className="col s12 m6 l4">
-            <div className="card">
+            <div className="card product-variant">
                 <Photos photos={photos} />
-                <div className="card-content">
+                <div className="card-content shop-content">
                     <h5>{productName} {name}</h5>
                     <Price
                         discount={discount}
@@ -318,7 +318,7 @@ const ProductVariant = props => {
                         })}
                     </div>
                 </div>
-                <div className="card-action">
+                <div className="card-action shop-action">
                     <a className="btn-flat amber lighten-2 black-text" href={link} rel="noopener noreferrer" target="_blank">Buy on Amazon</a>
                 </div>
             </div>
@@ -363,24 +363,22 @@ const Category = ({ category }) => {
     }, [products])
 
     return (
-        <div className="row">
-            <div className="col s12">
-                {productVariants.map(productVariant => {
-                    // destructure product variant
-                    const {
-                        name,
-                        variant
-                    } = productVariant
+        <div className="row category">
+            {productVariants.map(productVariant => {
+                // destructure product variant
+                const {
+                    name,
+                    variant
+                } = productVariant
 
-                    return (
-                        <ProductVariant
-                            key={variant.id}
-                            productName={name}
-                            productVariant={variant}
-                        />
-                    )
-                })}
-            </div>
+                return (
+                    <ProductVariant
+                        key={variant.id}
+                        productName={name}
+                        productVariant={variant}
+                    />
+                )
+            })}
         </div>
     )
 }

@@ -24,52 +24,46 @@ const Buttons = props => {
 
     if (!disabled) {
         return (
-            <div className="col s12">
-                <div className="confirm-change">
-                    <button
-                        className="black-text btn-small btn-flat grey lighten-2"
-                        onClick={handleGoBackClick}
-                    >
-                        <i className="material-icons left">undo</i>
-                        Go Back
-                    </button>
-                    <button
-                        className="black-text btn-small btn-flat light-green lighten-2"
-                        onClick={handleConfirmChangeClick}
-                    >
-                        <i className="material-icons left">save</i>
-                        Change Password
-                    </button>
-                </div>
+            <div className="col s12 confirm-change">
+                <button
+                    className="black-text btn-small btn-flat grey lighten-2"
+                    onClick={handleGoBackClick}
+                >
+                    <i className="material-icons left">undo</i>
+                    Go Back
+                </button>
+                <button
+                    className="black-text btn-small btn-flat light-green lighten-2"
+                    onClick={handleConfirmChangeClick}
+                >
+                    <i className="material-icons left">save</i>
+                    Change Password
+                </button>
             </div>
         )
     }
     if (transmitting) {
         return (
-            <div className="col s12">
-                <span className="transmitting">
-                    Saving changes<Transmitting />
-                </span>
+            <div className="col s12 transmitting">
+                Saving changes<Transmitting />
             </div>
         )
     }
     if (success) {
         return (
-            <div className="col s12">
-                <span className="success">Password successfully reset</span>
+            <div className="col s12 success">
+                Password successfully reset
             </div>
         )
     }
     return (
-        <div className="col s12">
-            <div className="button">
-                <button
-                    className="black-text btn-small btn-flat grey lighten-2"
-                    onClick={handleChangeClick}
-                >
-                    Change Password
+        <div className="col s12 change">
+            <button
+                className="black-text btn-small btn-flat grey lighten-2"
+                onClick={handleChangeClick}
+            >
+                Change Password
             </button>
-            </div>
         </div>
     )
 }

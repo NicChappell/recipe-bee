@@ -1,118 +1,17 @@
 // import dependencies
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import isEmpty from 'lodash.isempty'
 
 // import components
+import Button from './Button'
 import NewPassword1 from './NewPassword1'
 import NewPassword2 from './NewPassword2'
 import Preloader from '../utility/Preloader'
-import Transmitting from '../utility/Transmitting'
 
 // import validation
 import { validateResetPasswordInput } from '../../validation/password'
-
-const Button = props => {
-    // destructure props
-    const {
-        handleClick,
-        success,
-        transmitting
-    } = props
-
-    if (transmitting) {
-        return (
-            <div className="col s12">
-                <span className="transmitting">
-                    Saving new password<Transmitting />
-                </span>
-            </div>
-        )
-    }
-    if (success) {
-        return (
-            <div className="col s12">
-                <span className="success">
-                    Password successfully reset
-                </span>
-                <Link className="black-text btn-flat grey lighten-2" to="/sign-in">Sign In</Link>
-            </div>
-        )
-    }
-    return (
-        <div className="col s12">
-            <button
-                className="black-text btn-small btn-flat grey lighten-2"
-                onClick={handleClick}
-            >
-                <i className="material-icons left">refresh</i>
-                Reset Password
-            </button>
-        </div>
-    )
-}
-
-Button.propTypes = {
-    handleClick: PropTypes.func,
-    success: PropTypes.bool,
-    transmitting: PropTypes.bool
-}
-
-const Inputs = props => {
-    // destructure props
-    const {
-        disabled,
-        newPassword1,
-        newPassword2,
-        resolveValidationErrors,
-        setNewPassword1,
-        setNewPassword2,
-        userEmail,
-        validationErrors
-    } = props
-
-    return (
-        <div className="col s12 password-inputs">
-            <form>
-                <input
-                    autoComplete="username"
-                    className="hide"
-                    name="username"
-                    readOnly={true}
-                    type="text"
-                    value={userEmail}
-                />
-                <NewPassword1
-                    disabled={disabled}
-                    errors={validationErrors}
-                    liftState={setNewPassword1}
-                    resolveErrors={resolveValidationErrors}
-                    value={newPassword1}
-                />
-                <NewPassword2
-                    disabled={disabled}
-                    errors={validationErrors}
-                    liftState={setNewPassword2}
-                    resolveErrors={resolveValidationErrors}
-                    value={newPassword2}
-                />
-            </form>
-        </div>
-    )
-}
-
-Inputs.propTypes = {
-    disabled: PropTypes.bool,
-    newPassword1: PropTypes.string,
-    newPassword2: PropTypes.string,
-    resolveValidationErrors: PropTypes.func,
-    setNewPassword1: PropTypes.func,
-    setNewPassword2: PropTypes.func,
-    userEmail: PropTypes.string,
-    validationErrors: PropTypes.object
-}
 
 const ResetPasswordForm = props => {
     // destructure props
@@ -194,7 +93,7 @@ const ResetPasswordForm = props => {
                 setUser(user)
             })
             .catch(err => setApplicationErrors(err))
-            // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (!isEmpty(applicationErrors)) {
@@ -213,21 +112,36 @@ const ResetPasswordForm = props => {
     }
     if (!isEmpty(user)) {
         return (
-            <div className="card-panel">
+            <div className="card-panel reset-password-form">
                 <div className="row left-align">
                     <div className="col s12">
                         <h5>Reset Password</h5>
                     </div>
-                    <Inputs
-                        disabled={success}
-                        newPassword1={newPassword1}
-                        newPassword2={newPassword2}
-                        resolveValidationErrors={resolveValidationErrors}
-                        setNewPassword1={setNewPassword1}
-                        setNewPassword2={setNewPassword2}
-                        userEmail={user.email}
-                        validationErrors={validationErrors}
-                    />
+                    <form>
+                        <div className="input-field col s12 hide">
+                            <input
+                                autoComplete="email"
+                                name="emailAddress"
+                                readOnly={true}
+                                type="text"
+                                value={user.email}
+                            />
+                        </div>
+                        <NewPassword1
+                            disabled={success}
+                            errors={validationErrors}
+                            liftState={setNewPassword1}
+                            resolveErrors={resolveValidationErrors}
+                            value={newPassword1}
+                        />
+                        <NewPassword2
+                            disabled={success}
+                            errors={validationErrors}
+                            liftState={setNewPassword2}
+                            resolveErrors={resolveValidationErrors}
+                            value={newPassword2}
+                        />
+                    </form>
                     <Button
                         handleClick={handleClick}
                         success={success}

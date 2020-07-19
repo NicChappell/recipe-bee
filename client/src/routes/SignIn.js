@@ -8,24 +8,8 @@ import PropTypes from 'prop-types'
 import { signInUser } from '../actions/authActions'
 
 // import components
-import SignInForm from '../components/auth/SignInForm'
-
-const Banner = ({ location }) => {
-    // destructure location
-    const { state } = location
-
-    // display banner if new user
-    if (state && state.newUser) {
-        return (
-            <div className="card-panel new-user">
-                <span>Welcome to RecipeBee!</span> <span>Please sign in to continue.</span>
-            </div>
-        )
-    }
-    return null
-}
-
-Banner.propTypes = { location: PropTypes.object }
+import Banner from '../components/sign-in/Banner'
+import SignInForm from '../components/sign-in/SignInForm'
 
 const SignIn = props => {
     // destructure props
@@ -45,7 +29,7 @@ const SignIn = props => {
     if (!isAuthenticated) {
         return (
             <div className="container" id="sign-in">
-                <div className="row">
+                <div className="row center-align">
                     <div className="col s12 m10 push-m1 l8 push-l2 xl6 push-xl3">
                         <Banner location={location} />
                         <SignInForm signInUser={signInUser} />

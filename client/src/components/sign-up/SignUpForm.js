@@ -100,10 +100,8 @@ const Button = props => {
 
     if (transmitting) {
         return (
-            <div className="col s12">
-                <span className="transmitting">
-                    Please wait<Transmitting />
-                </span>
+            <div className="col s12 transmitting">
+                Please wait<Transmitting />
             </div>
         )
     }
@@ -821,62 +819,64 @@ const SignUpForm = ({ history }) => {
     }
 
     return (
-        <div className="card-panel">
+        <div className="card-panel sign-up-form">
             <div className="row left-align">
                 <div className="col s12">
                     <h5>Sign Up</h5>
                 </div>
-                <Email
-                    errors={validationErrors}
-                    liftState={setEmail}
-                    resolveErrors={resolveValidationErrors}
-                />
-                <Username
-                    errors={validationErrors}
-                    liftState={setUsername}
-                    resolveErrors={resolveValidationErrors}
-                />
-                <Password1
-                    errors={validationErrors}
-                    liftState={setPassword1}
-                    resolveErrors={resolveValidationErrors}
-                />
-                <Password2
-                    errors={validationErrors}
-                    liftState={setPassword2}
-                    resolveErrors={resolveValidationErrors}
-                />
-                <FirstName
-                    errors={validationErrors}
-                    liftState={setFirstName}
-                    resolveErrors={resolveValidationErrors}
-                />
-                <LastName
-                    errors={validationErrors}
-                    liftState={setLastName}
-                    resolveErrors={resolveValidationErrors}
-                />
-                <Address1
-                    errors={validationErrors}
-                    liftState={setAddress1}
-                    resolveErrors={resolveValidationErrors}
-                />
-                <Address2 liftState={setAddress2} />
-                <City
-                    errors={validationErrors}
-                    liftState={setCity}
-                    resolveErrors={resolveValidationErrors}
-                />
-                <State
-                    errors={validationErrors}
-                    liftState={setState}
-                    resolveErrors={resolveValidationErrors}
-                />
-                <PostalCode
-                    errors={validationErrors}
-                    liftState={setPostalCode}
-                    resolveErrors={resolveValidationErrors}
-                />
+                <form>
+                    <Email
+                        errors={validationErrors}
+                        liftState={setEmail}
+                        resolveErrors={resolveValidationErrors}
+                    />
+                    <Username
+                        errors={validationErrors}
+                        liftState={setUsername}
+                        resolveErrors={resolveValidationErrors}
+                    />
+                    <Password1
+                        errors={validationErrors}
+                        liftState={setPassword1}
+                        resolveErrors={resolveValidationErrors}
+                    />
+                    <Password2
+                        errors={validationErrors}
+                        liftState={setPassword2}
+                        resolveErrors={resolveValidationErrors}
+                    />
+                    <FirstName
+                        errors={validationErrors}
+                        liftState={setFirstName}
+                        resolveErrors={resolveValidationErrors}
+                    />
+                    <LastName
+                        errors={validationErrors}
+                        liftState={setLastName}
+                        resolveErrors={resolveValidationErrors}
+                    />
+                    <Address1
+                        errors={validationErrors}
+                        liftState={setAddress1}
+                        resolveErrors={resolveValidationErrors}
+                    />
+                    <Address2 liftState={setAddress2} />
+                    <City
+                        errors={validationErrors}
+                        liftState={setCity}
+                        resolveErrors={resolveValidationErrors}
+                    />
+                    <State
+                        errors={validationErrors}
+                        liftState={setState}
+                        resolveErrors={resolveValidationErrors}
+                    />
+                    <PostalCode
+                        errors={validationErrors}
+                        liftState={setPostalCode}
+                        resolveErrors={resolveValidationErrors}
+                    />
+                </form>
                 <Button
                     handleClick={handleClick}
                     transmitting={transmitting}

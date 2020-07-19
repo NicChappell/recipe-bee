@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // import components
-import ResetPasswordForm from '../components/auth/ResetPasswordForm'
+import ResetPasswordForm from '../components/reset-password/ResetPasswordForm'
 
 const ResetPassword = props => {
     // destructure props

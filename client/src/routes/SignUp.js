@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // import components
-import SignUpForm from '../components/auth/SignUpForm'
+import SignUpForm from '../components/sign-up/SignUpForm'
 
 const SignUp = props => {
     // destructure props

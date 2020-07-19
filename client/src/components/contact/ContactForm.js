@@ -20,26 +20,22 @@ const Button = props => {
 
     if (transmitting) {
         return (
-            <div className="col s12">
-                <span className="transmitting">
-                    Sending message<Transmitting />
-                </span>
+            <div className="col s12 transmitting">
+                Sending message<Transmitting />
             </div>
         )
     }
     if (success) {
         return (
-            <div className="col s12">
-                <span className="success">
-                    Your message has been sent
-                </span>
+            <div className="col s12 success">
+                Your message has been sent
             </div>
         )
     }
     return (
-        <div className="col s12">
+        <div className="col s12 button">
             <button
-                className="black-text btn-small btn-flat grey lighten-2"
+                className="btn-flat btn-small black-text grey lighten-2"
                 onClick={handleClick}
             >
                 <i className="material-icons left">send</i>
@@ -55,7 +51,7 @@ Button.propTypes = {
     transmitting: PropTypes.bool
 }
 
-const EmailInput = props => {
+const Email = props => {
     // destructure props
     const {
         errors,
@@ -96,7 +92,7 @@ const EmailInput = props => {
         if (errors.email) {
             resolveErrors('email')
         }
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [email])
 
     // update state when success changes
@@ -110,8 +106,8 @@ const EmailInput = props => {
         <div className={`input-field col s12 email ${valid ? '' : 'invalid-input'}`}>
             <span>Email Address</span>
             <input
-                autoComplete="off"
-                name="email"
+                autoComplete="email"
+                name="emailAddress"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 onFocus={handleFocus}
@@ -124,14 +120,14 @@ const EmailInput = props => {
     )
 }
 
-EmailInput.propTypes = {
+Email.propTypes = {
     errors: PropTypes.object,
     liftState: PropTypes.func,
     resolveErrors: PropTypes.func,
     success: PropTypes.bool
 }
 
-const MessageInput = props => {
+const Message = props => {
     // destructure props
     const {
         errors,
@@ -172,7 +168,7 @@ const MessageInput = props => {
         if (errors.message) {
             resolveErrors('message')
         }
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [message])
 
     // update state when success changes
@@ -201,7 +197,7 @@ const MessageInput = props => {
     )
 }
 
-MessageInput.propTypes = {
+Message.propTypes = {
     errors: PropTypes.object,
     liftState: PropTypes.func,
     resolveErrors: PropTypes.func,
@@ -279,24 +275,27 @@ const ContactForm = ({ errors }) => {
             </p>
         )
     }
+
     return (
-        <div className="card-panel">
+        <div className="card-panel contact-form">
             <div className="row left-align">
                 <div className="col s12">
                     <h5>Contact Us</h5>
                 </div>
-                <EmailInput
-                    errors={validationErrors}
-                    liftState={setEmail}
-                    resolveErrors={resolveValidationErrors}
-                    success={success}
-                />
-                <MessageInput
-                    errors={validationErrors}
-                    liftState={setMessage}
-                    resolveErrors={resolveValidationErrors}
-                    success={success}
-                />
+                <form>
+                    <Email
+                        errors={validationErrors}
+                        liftState={setEmail}
+                        resolveErrors={resolveValidationErrors}
+                        success={success}
+                    />
+                    <Message
+                        errors={validationErrors}
+                        liftState={setMessage}
+                        resolveErrors={resolveValidationErrors}
+                        success={success}
+                    />
+                </form>
                 <Button
                     handleClick={handleClick}
                     success={success}

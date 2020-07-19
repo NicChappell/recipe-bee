@@ -19,21 +19,23 @@ const DateRanges = props => {
     // lift state when date ranges value changes
     useEffect(() => {
         liftState(dateRanges.value)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dateRanges.value])
 
     return (
         <div className="date-ranges">
-            <span>{context}</span>
-            <select
-                {...dateRanges}
-                name="date-range"
-            >
-                <option value="1">day</option>
-                <option value="7">week</option>
-                <option value="30">month</option>
-                <option value="365">year</option>
-            </select>
+            <span>
+                {context}
+                <select
+                    {...dateRanges}
+                    name="date-range"
+                >
+                    <option value="1">day</option>
+                    <option value="7">week</option>
+                    <option value="30">month</option>
+                    <option value="365">year</option>
+                </select>
+            </span>
         </div>
     )
 }

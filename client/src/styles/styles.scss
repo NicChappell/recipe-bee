@@ -4,6 +4,7 @@
 @import 'elements';
 @import 'forms';
 @import 'overrides';
+@import 'recipes';
 @import 'utilities';
 
 // layout styles
@@ -29,63 +30,3 @@
 @import './routes/shop';
 @import './routes/sign-in';
 @import './routes/sign-up';
-
-// font-family: 'Source Sans Pro', sans-serif;
-// font-family: 'Signika', sans-serif;
-// font-family: 'Source Serif Pro', serif;
-// font-family: 'Source Code Pro', monospace;
-
-.brand {
-  font-weight: 600;
-}
-
-// THIS NEEDS TO GET ADDED TO POST RECIPE CSS?!
-// THIS NEEDS TO BE EVALUATED!?
-.recipe-share-setting,
-.recipe-tags > .search,
-.recipe-tags > .tags {
-  @media screen and (max-width: $max-medium) {
-    margin: 1rem;
-  }
-}
-
-// THIS NEEDS TO GET ADDED TO POST RECIPE CSS?!
-// THIS NEEDS TO BE EVALUATED!?
-.recipe-tags > .search {
-  .autocomplete {
-    padding: 0 1rem;
-    .input-field {
-      margin: 0;
-      input[type="text"] {
-        font-size: 0.875rem;
-        height: 2rem;
-        line-height: 2rem;
-        margin: 0;
-      }
-      .prefix {
-        font-size: 1.3rem;
-        ~ input {
-          margin-left: 2.3rem;
-        }
-      }
-    }
-    .suggestions {
-      background-color: $brand-light;
-      font-size: 0.875rem;
-      margin: 0 0 0 2.3rem;
-      overflow: hidden;
-      padding: 0.875rem 0;
-      width: calc(100% - 3rem);
-      li {
-        color: rgba(0, 0, 0, 1);
-        padding: 0.125rem 1rem;
-        a {
-          color: rgba(0, 0, 0, 1);
-        }
-      }
-      li.active {
-        color: $brand-primary;
-      }
-    }
-  }
-}
