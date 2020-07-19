@@ -1,7 +1,5 @@
 # RecipeBee
 
-Create, share and search recipes.
+RecipeBee makes it easy to save, share and discover new ideas
 
-Create and share meal plans.
-
-Create and share shopping lists.
+[recipebee.com](https://recipebee.com)
