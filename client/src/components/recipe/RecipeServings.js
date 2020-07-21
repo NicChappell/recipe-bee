@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-const RecipeNumber = props => {
+const RecipeServings = props => {
     // destructure props
     const {
         errors,
@@ -89,11 +89,11 @@ const RecipeNumber = props => {
     useEffect(() => {
         liftState(number)
         resolveErrors(name)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [number])
 
     return (
-        <div className="row number">
+        <div className="row servings">
             <div className={`col s12 number-input ${!valid ? 'invalid-input' : null}`}>
                 <div className="button-controls">
                     <button
@@ -124,7 +124,7 @@ const RecipeNumber = props => {
     )
 }
 
-RecipeNumber.propTypes = {
+RecipeServings.propTypes = {
     errors: PropTypes.object,
     initValue: PropTypes.number,
     liftState: PropTypes.func,
@@ -132,4 +132,4 @@ RecipeNumber.propTypes = {
     resolveErrors: PropTypes.func
 }
 
-export default RecipeNumber
+export default RecipeServings

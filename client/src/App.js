@@ -42,9 +42,9 @@ import Shop from './routes/Shop'
 import NoMatch from './routes/NoMatch'
 
 // import layout components
-import Footer from './components/layout/Footer'
-import Navbar from './components/layout/Navbar'
-import SideNav from './components/layout/SideNav'
+import Footer from './components/app/Footer'
+import Navbar from './components/app/Navbar'
+import SideNav from './components/app/SideNav'
 
 // import styles
 import './styles/styles.css'

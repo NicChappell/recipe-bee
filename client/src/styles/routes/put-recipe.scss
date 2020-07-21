@@ -3,7 +3,6 @@
 @import "../colors";
 
 #put-recipe {
-    // miscellaneous components
     hr {
         border-top: 1px solid $brand-light;
         margin: 2rem 0 1.5rem;
@@ -11,17 +10,13 @@
     .row {
         margin-bottom: 0em;
     }
-    // recipe title
     .title {
-        // styles go here
     }
-    // recipe description
     .description {
         textarea {
             overflow: scroll;
         }
     }
-    // recipe photo
     .photo {
         .photo-container {
             background-color: $brand-light;
@@ -64,8 +59,6 @@
             }
         }
     }
-    // recipe prep time
-    // recipe cook time
     .time {
         margin-bottom: 0;
         p {
@@ -116,9 +109,7 @@
             margin-left: 1rem;
         }
     }
-    // recipe servings
-    .number {
-        // background-color: yellowgreen;
+    .servings {
         overflow: hidden;
         .number-input {
             align-items: center;
@@ -126,7 +117,6 @@
             justify-content: flex-start;
         }
         .button-controls {
-            // background-color: aqua;
             display: flex;
             flex-direction: column;
             button {
@@ -137,7 +127,6 @@
             }
         }
         input[type="number"] {
-            // background-color: cornflowerblue;
             font-size: 1rem;
             font-weight: 600;
             margin: 0;
@@ -151,9 +140,7 @@
             }
         }
     }
-    // recipe yield
     .yield {
-        display: flex;
         .index {
             align-items: center;
             display: flex;
@@ -204,9 +191,6 @@
             }
         }
     }
-    // recipe preparations
-    // recipe ingredients
-    // recipe instructions
     .add-list-item,
     .list-item {
         display: flex;
@@ -280,84 +264,76 @@
         margin-top: 1rem;
         padding: 1rem 0;
     }
-    // recipe notes
     .notes {
         textarea {
             height: 8rem;
             overflow: scroll;
         }
     }
-    // recipe tags
     .tags {
-        .recipe-tag-search {
-            span {
-                display: block;
-                margin-top: 0.5rem;
-            }
+        .tag-search {
             .autocomplete {
                 .input-field {
-                    margin-bottom: 0;
+                    margin: 0;
                     input[type="text"] {
+                        font-size: 0.875rem;
                         height: 2rem;
                         line-height: 2rem;
                         margin: 0;
                     }
                     .prefix {
-                        display: none;
+                        font-size: 1.3rem;
+                        ~ input {
+                            margin-left: 2.3rem;
+                        }
                     }
                 }
                 .suggestions {
-                    background-color: $brand-light;
+                    background-color: white;
                     font-size: 0.875rem;
                     height: auto;
-                    margin: 0;
+                    margin: 0 0 0 2.3rem;
                     max-height: 9rem;
                     overflow: scroll;
                     padding: 0.875rem 0;
                     width: calc(100% - 3rem);
                     li {
-                        color: rgba(0, 0, 0, 1);
+                        color: $primary;
                         padding: 0.125rem 1rem;
                         a {
-                            color: rgba(0, 0, 0, 1);
+                            color: $primary;
                         }
                     }
                     li.active {
-                        color: $brand-primary;
+                        font-weight: 600;
                     }
                 }
             }
         }
-        .recipe-tag-list {
-            align-items: center;
+        .tag-list {
             display: flex;
             flex-wrap: wrap;
             height: auto;
-            justify-content: flex-start;
+            margin-top: 1rem;
             max-height: 11rem;
             overflow: scroll;
-            padding: 0.25rem;
-            @media screen and (max-width: $max-small) {
-                margin-top: 1rem;
-            }
             @media screen and (min-width: $min-medium) {
-                min-height: calc(3rem + 1px);
+                margin-top: 0;
             }
             .chip {
                 display: flex;
                 flex-wrap: nowrap;
-                margin: 0.25rem;
                 overflow: hidden;
                 span {
                     white-space: nowrap;
                 }
                 i {
-                    padding: 0 0.5rem 0 0;
+                    margin-right: 0.5rem;
+                    padding: 0;
                 }
             }
         }
     }
-    // recipe share setting
     .share {
         .switch {
             align-items: center;
@@ -365,7 +341,6 @@
             height: calc(3rem + 1px);
         }
     }
-    // recipe save button
     .save-button {
     }
 }

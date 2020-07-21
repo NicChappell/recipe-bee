@@ -73,7 +73,7 @@ const RecipeTags = props => {
 
     return (
         <div className="row tags">
-            <div className="col s12 m4 recipe-tag-search">
+            <div className="col s12 m4 tag-search">
                 <Autocomplete
                     handleBlur={handleBlur}
                     liftState={addTag}
@@ -81,7 +81,7 @@ const RecipeTags = props => {
                 />
                 {valid ? null : <span className="error-message">{errors.tagList}</span>}
             </div>
-            <div className="col s12 m8 recipe-tag-list">
+            <div className="col s12 m8 tag-list">
                 {tagList.map(tag => {
                     return (
                         <div className="chip amber lighten-2" key={tag}>

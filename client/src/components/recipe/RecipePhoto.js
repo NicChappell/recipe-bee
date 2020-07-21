@@ -148,13 +148,13 @@ const UpdateButtons = props => {
                     <div className="confirm-delete">
                         <span>Are you sure?</span>
                         <div className="buttons">
-                            <button className="black-text btn-small btn-flat deep-orange lighten-2" onClick={deleteImage}>
-                                <i className="material-icons left">delete_forever</i>
-                                Delete
-                            </button>
                             <button className="black-text btn-small btn-flat grey lighten-2" onClick={() => setConfirmDelete(false)}>
                                 <i className="material-icons left">undo</i>
                                 Undo
+                            </button>
+                            <button className="black-text btn-small btn-flat deep-orange lighten-2" onClick={deleteImage}>
+                                <i className="material-icons left">delete_forever</i>
+                                Delete
                             </button>
                         </div>
                     </div>

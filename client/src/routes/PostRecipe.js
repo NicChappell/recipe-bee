@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import { createRecipe } from '../actions/recipeActions'
 
 // import components
-import CreateRecipeForm from '../components/recipe/CreateRecipeForm'
+import PostRecipeForm from '../components/post-recipe/PostRecipeForm'
 
 const PostRecipe = props => {
     // destructure props
@@ -30,9 +30,9 @@ const PostRecipe = props => {
     if (isAuthenticated) {
         return (
             <div className="container" id="post-recipe">
-                <div className="row">
+                <div className="row center-align">
                     <div className="col s12">
-                        <CreateRecipeForm
+                        <PostRecipeForm
                             errors={errors}
                             history={history}
                             recipeAction={createRecipe}

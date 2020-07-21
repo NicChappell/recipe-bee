@@ -12,7 +12,7 @@ import {
 import { deleteFile } from '../actions/uploadActions'
 
 // import components
-import UpdateRecipeForm from '../components/recipe/UpdateRecipeForm'
+import PutRecipeForm from '../components/recipe/PutRecipeForm'
 
 const PutRecipe = props => {
     // destructure props
@@ -55,9 +55,9 @@ const PutRecipe = props => {
     if (isAuthenticated) {
         return (
             <div className="container" id="put-recipe">
-                <div className="row">
+                <div className="row center-align">
                     <div className="col s12">
-                        <UpdateRecipeForm
+                        <PutRecipeForm
                             recipeAction={updateRecipe}
                             errors={errors}
                             history={history}

@@ -28,157 +28,131 @@
             }
         }
     }
-    .recipe-card-list {
-        .recipe-card {
-            margin: 1rem 0.25rem 1rem;
-            .recipe-action {
+    .count {
+        margin-bottom: 0;
+        padding: 0 16px;
+        .found {
+            height: 14px;
+            font-size: 0.75rem;
+            line-height: 1rem;
+        }
+        .indeterminate-message {
+            height: 14px;
+            font-size: 0.75rem;
+            line-height: 1rem;
+        }
+    }
+    .sort-and-filter {
+        h6 {
+            margin: 1rem 0;
+        }
+        small {
+            margin: 0;
+        }
+        .sort-methods {
+            margin-bottom: 0;
+            .button-group {
                 align-items: center;
                 display: flex;
-                justify-content: space-between;
-                overflow: hidden;
-                .actions,
-                .tags {
+                justify-content: flex-start;
+                overflow: scroll;
+                button {
+                    align-items: center;
                     display: flex;
-                    overflow: hidden;
-                    width: auto;
+                    justify-content: flex-start;
                 }
-                .actions {
-                    align-items: flex-start;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    margin-right: 4px;
-                    padding-right: 4px;
-                    .heart-action,
-                    .vote-action {
+                i {
+                    margin-right: 15px;
+                }
+                .active {
+                    background-color: rgba($primary, 0.1);
+                }
+            }
+            .date-ranges {
+                align-items: center;
+                display: flex;
+                justify-content: flex-start;
+                padding: 0 16px;
+                width: auto;
+                select {
+                    background-color: transparent;
+                    border: none;
+                    display: inline-block;
+                    padding-left: 0;
+                    padding-right: 0;
+                    width: auto;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+        .filter-options {
+            margin-bottom: 0;
+            .tag-search {
+                .autocomplete {
+                    .input-field {
                         margin: 0;
-                        padding: 0;
-                        white-space: nowrap;
-                        button {
-                            &:focus {
-                                background-color: transparent;
+                        input[type="text"] {
+                            font-size: 0.875rem;
+                            height: 2rem;
+                            line-height: 2rem;
+                            margin: 0;
+                        }
+                        .prefix {
+                            font-size: 1.3rem;
+                            ~ input {
+                                margin-left: 2.3rem;
                             }
                         }
                     }
-                    .heart-action {
-                        margin-right: 25px;
+                    .suggestions {
+                        background-color: white;
+                        font-size: 0.875rem;
+                        height: auto;
+                        margin: 0 0 0 2.3rem;
+                        max-height: 9rem;
+                        overflow: scroll;
+                        padding: 0.875rem 0;
+                        width: calc(100% - 3rem);
+                        li {
+                            color: $primary;
+                            padding: 0.125rem 1rem;
+                            a {
+                                color: $primary;
+                            }
+                        }
+                        li.active {
+                            font-weight: 600;
+                        }
                     }
                 }
-                .tags {
-                    align-items: center;
-                    justify-content: flex-start;
-                    padding: 4px;
-                    .chip {
-                        margin: 4px;
+            }
+            .tag-list {
+                display: flex;
+                flex-wrap: wrap;
+                height: auto;
+                margin-top: 1rem;
+                max-height: 11rem;
+                overflow: scroll;
+                @media screen and (min-width: $min-medium) {
+                    margin-top: 0;
+                }
+                .chip {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    overflow: hidden;
+                    span {
                         white-space: nowrap;
                     }
-                }
-            }
-            .recipe-image {
-                border-bottom: 1px solid rgba(160, 160, 160, 0.2);
-                img {
-                    height: auto;
-                    width: 100%;
-                }
-            }
-        }
-    }
-    .sort-methods {
-        align-content: center;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        .button-group {
-            align-content: center;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            .active {
-                background-color: rgba($primary, 0.1);
-            }
-        }
-    }
-    .date-ranges {
-        align-items: center;
-        display: flex;
-        justify-content: flex-start;
-        padding: 0 16px;
-        width: auto;
-        select {
-            background-color: transparent;
-            border: none;
-            padding-left: 0;
-            padding-right: 0;
-            width: auto;
-            &:focus {
-                outline: none;
-            }
-        }
-    }
-    .recipe-tag-search {
-        @media screen and (max-width: $max-medium) {
-            margin-top: 1rem;
-        }
-        .autocomplete {
-            padding-left: 1rem;
-            .input-field {
-                margin: 0;
-                input[type="text"] {
-                    font-size: 0.875rem;
-                    height: 2rem;
-                    line-height: 2rem;
-                    margin: 0;
-                }
-                .prefix {
-                    font-size: 1.3rem;
-                    ~ input {
-                        margin-left: 2.3rem;
+                    i {
+                        margin-right: 0.5rem;
+                        padding: 0;
                     }
                 }
             }
-            .suggestions {
-                background-color: white;
-                font-size: 0.875rem;
-                height: auto;
-                margin: 0 0 0 2.3rem;
-                max-height: 9rem;
-                overflow: scroll;
-                padding: 0.875rem 0;
-                width: calc(100% - 3rem);
-                li {
-                    color: rgba(0, 0, 0, 1);
-                    padding: 0.125rem 1rem;
-                    a {
-                        color: rgba(0, 0, 0, 1);
-                    }
-                }
-                li.active {
-                    color: $brand-primary;
-                }
-            }
         }
     }
-    .recipe-tag-list {
-        display: flex;
-        flex-wrap: wrap;
-        height: auto;
-        max-height: 11rem;
-        overflow: scroll;
-        @media screen and (max-width: $max-medium) {
-            margin-top: 1rem;
-        }
-        .chip {
-            display: flex;
-            flex-wrap: nowrap;
-            overflow: hidden;
-            span {
-                white-space: nowrap;
-            }
-            i {
-                padding: 0 0.5rem 0 0;
-            }
-        }
+    .view-more {
     }
 }

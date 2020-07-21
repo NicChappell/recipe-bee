@@ -1,35 +1,33 @@
 // import dependencies
 import React, { useEffect, useState } from 'react'
-import isEmpty from 'lodash.isempty'
+import PropTypes from 'prop-types'
 
 // import components
-import IndeterminateMessage from '../utility/IndeterminateMessage'
-import IndeterminateProgress from '../utility/IndeterminateProgress'
-import RecipeAddIngredientItem from './RecipeAddIngredientItem'
-import RecipeAddListItem from './RecipeAddListItem'
-import RecipeDescription from './RecipeDescription'
-import RecipeErrors from './RecipeErrors'
-import RecipeIngredientsList from './RecipeIngredientsList'
-import RecipeList from './RecipeList'
-import RecipeNotes from './RecipeNotes'
-import RecipeNumber from './RecipeNumber'
-import RecipePhoto from './RecipePhoto'
-import RecipeShare from './RecipeShare'
-import RecipeTags from './RecipeTags'
-import RecipeTime from './RecipeTime'
-import RecipeTitle from './RecipeTitle'
-import RecipeYield from './RecipeYield'
-import SaveButton from './SaveButton'
+import RecipeAddIngredientItem from '../recipe/RecipeAddIngredientItem'
+import RecipeAddListItem from '../recipe/RecipeAddListItem'
+import RecipeDescription from '../recipe/RecipeDescription'
+import RecipeErrors from '../recipe/RecipeErrors'
+import RecipeIngredientsList from '../recipe/RecipeIngredientsList'
+import RecipeList from '../recipe/RecipeList'
+import RecipeNotes from '../recipe/RecipeNotes'
+import RecipeServings from '../recipe/RecipeServings'
+import RecipePhoto from '../recipe/RecipePhoto'
+import RecipeShare from '../recipe/RecipeShare'
+import RecipeSubmit from '../recipe/RecipeSubmit'
+import RecipeTags from '../recipe/RecipeTags'
+import RecipeTime from '../recipe/RecipeTime'
+import RecipeTitle from '../recipe/RecipeTitle'
+import RecipeYield from '../recipe/RecipeYield'
 
 // import validation
 import validateRecipe from '../../validation/recipe'
 
-const CreateRecipe = props => {
+const CreateRecipeForm = props => {
     // destructure props
     const {
-        createRecipe,
         history,
-        errors: propsErrors,
+        errors,
+        recipeAction,
         tags,
         user
     } = props
@@ -51,18 +49,19 @@ const CreateRecipe = props => {
     const [notes, setNotes] = useState('')
     const [tagList, setTagList] = useState([])
     const [share, setShare] = useState(false)
-    const [errors, setErrors] = useState({})
+    const [applicationErrors, setApplicationErrors] = useState({})
+    const [validationErrors, setValidationErrors] = useState({})
     const [transmitting, setTransmitting] = useState(false)
 
-    const resolveErrors = (...keys) => {
-        keys.forEach(key => delete errors[key])
-        setErrors(errors)
+    const resolveValidationErrors = (...keys) => {
+        keys.forEach(key => delete validationErrors[key])
+        setValidationErrors(validationErrors)
     }
 
-    const saveRecipe = () => {
-        // create new recipe object
-        const newRecipe = {
-            user: user.id,
+    const submitRecipe = () => {
+        // compile recipe properties
+        const recipeData = {
+            user: user._id,
             title,
             slug,
             description,
@@ -82,22 +81,25 @@ const CreateRecipe = props => {
         }
 
         // validate user input
-        const validate = validateRecipe(newRecipe)
+        const validate = validateRecipe(recipeData)
 
         // check for validation errors
         if (!validate.isValid) {
-            setErrors(validate.errors)
+            setValidationErrors(validate.errors)
         } else {
             setTransmitting(true)
-            createRecipe(newRecipe, history)
+            recipeAction(recipeData, history)
         }
     }
 
-    // set errors when props errors changes
-    useEffect(() => setErrors(propsErrors), [propsErrors])
+    // update state when errors prop changes
+    useEffect(() => {
+        setApplicationErrors(errors)
+        setTransmitting(false)
+    }, [errors])
 
     return (
-        <div className="card-panel white">
+        <div className="card-panel left-align">
             <div className="row">
                 <div className="col s12 l6">
                     <div className="row">
@@ -106,10 +108,11 @@ const CreateRecipe = props => {
                         </div>
                     </div>
                     <RecipeTitle
-                        errors={errors}
+                        errors={validationErrors}
+                        initValue={undefined}
                         liftSlug={setSlug}
                         liftState={setTitle}
-                        resolveErrors={resolveErrors}
+                        resolveErrors={resolveValidationErrors}
                     />
                     <div className="row">
                         <div className="col s12">
@@ -117,16 +120,17 @@ const CreateRecipe = props => {
                         </div>
                     </div>
                     <RecipeDescription
-                        errors={errors}
+                        errors={validationErrors}
+                        initValue={undefined}
                         liftState={setDescription}
-                        resolveErrors={resolveErrors}
+                        resolveErrors={resolveValidationErrors}
                     />
                 </div>
                 <div className="col s12 l6">
                     <RecipePhoto
-                        errors={errors}
+                        errors={validationErrors}
                         liftState={setPhoto}
-                        resolveErrors={resolveErrors}
+                        resolveErrors={resolveValidationErrors}
                     />
                 </div>
             </div>
@@ -139,11 +143,12 @@ const CreateRecipe = props => {
                         </div>
                     </div>
                     <RecipeTime
-                        errors={errors}
+                        errors={validationErrors}
+                        initValue={undefined}
                         liftHours={setPrepTimeHours}
                         liftMinutes={setPrepTimeMinutes}
                         name={'prepTime'}
-                        resolveErrors={resolveErrors}
+                        resolveErrors={resolveValidationErrors}
                     />
                 </div>
                 <div className="col s12 m6 xl4 push-xl2">
@@ -153,11 +158,12 @@ const CreateRecipe = props => {
                         </div>
                     </div>
                     <RecipeTime
-                        errors={errors}
+                        errors={validationErrors}
+                        initValue={undefined}
                         liftHours={setCookTimeHours}
                         liftMinutes={setCookTimeMinutes}
                         name={'cookTime'}
-                        resolveErrors={resolveErrors}
+                        resolveErrors={resolveValidationErrors}
                     />
                 </div>
             </div>
@@ -169,11 +175,12 @@ const CreateRecipe = props => {
                             <h5>Servings</h5>
                         </div>
                     </div>
-                    <RecipeNumber
-                        errors={errors}
+                    <RecipeServings
+                        errors={validationErrors}
+                        initValue={undefined}
                         liftState={setServings}
                         name={'servings'}
-                        resolveErrors={resolveErrors}
+                        resolveErrors={resolveValidationErrors}
                     />
                 </div>
                 <div className="col s7 m8 l9 xl10">
@@ -183,9 +190,10 @@ const CreateRecipe = props => {
                         </div>
                     </div>
                     <RecipeYield
-                        errors={errors}
+                        errors={validationErrors}
+                        initValue={undefined}
                         liftState={setProduction}
-                        resolveErrors={resolveErrors}
+                        resolveErrors={resolveValidationErrors}
                     />
                 </div>
             </div>
@@ -198,6 +206,7 @@ const CreateRecipe = props => {
                         </div>
                     </div>
                     <RecipeList
+                        initValue={undefined}
                         liftState={setPreparations}
                         list={preparations}
                         placeholder={'Preparation'}
@@ -207,13 +216,13 @@ const CreateRecipe = props => {
             <div className="row">
                 <div className="col s12">
                     <RecipeAddListItem
-                        errors={errors}
+                        errors={validationErrors}
                         index={preparations.length}
                         liftState={setPreparations}
                         listItems={preparations}
                         name={'preparations'}
                         placeholder={'Preparation (e.g. Wash and dry all produce)'}
-                        resolveErrors={resolveErrors}
+                        resolveErrors={resolveValidationErrors}
                     />
                 </div>
             </div>
@@ -226,6 +235,7 @@ const CreateRecipe = props => {
                         </div>
                     </div>
                     <RecipeIngredientsList
+                        initValue={undefined}
                         liftState={setIngredients}
                         ingredients={ingredients}
                     />
@@ -234,11 +244,11 @@ const CreateRecipe = props => {
             <div className="row">
                 <div className="col s12">
                     <RecipeAddIngredientItem
-                        errors={errors}
+                        errors={validationErrors}
                         index={ingredients.length}
                         ingredients={ingredients}
                         liftState={setIngredients}
-                        resolveErrors={resolveErrors}
+                        resolveErrors={resolveValidationErrors}
                     />
                 </div>
             </div>
@@ -251,6 +261,7 @@ const CreateRecipe = props => {
                         </div>
                     </div>
                     <RecipeList
+                        initValue={undefined}
                         liftState={setInstructions}
                         list={instructions}
                         placeholder={'Instruction'}
@@ -260,13 +271,13 @@ const CreateRecipe = props => {
             <div className="row">
                 <div className="col s12">
                     <RecipeAddListItem
-                        errors={errors}
+                        errors={validationErrors}
                         index={instructions.length}
                         liftState={setInstructions}
                         listItems={instructions}
                         name={'instructions'}
                         placeholder={'Instruction (e.g. Combine ingredients and mix thoroughly)'}
-                        resolveErrors={resolveErrors}
+                        resolveErrors={resolveValidationErrors}
                     />
                 </div>
             </div>
@@ -278,7 +289,10 @@ const CreateRecipe = props => {
                             <h5>Notes</h5>
                         </div>
                     </div>
-                    <RecipeNotes liftState={setNotes} />
+                    <RecipeNotes
+                        initValue={undefined}
+                        liftState={setNotes}
+                    />
                 </div>
             </div>
             <hr />
@@ -290,9 +304,10 @@ const CreateRecipe = props => {
                         </div>
                     </div>
                     <RecipeTags
-                        errors={errors}
+                        errors={validationErrors}
+                        initValue={undefined}
                         liftState={setTagList}
-                        resolveErrors={resolveErrors}
+                        resolveErrors={resolveValidationErrors}
                         tags={tags}
                     />
                 </div>
@@ -303,22 +318,31 @@ const CreateRecipe = props => {
                         </div>
                     </div>
                     <RecipeShare
-                        errors={errors}
+                        errors={validationErrors}
+                        initValue={undefined}
                         liftState={setShare}
-                        resolveErrors={resolveErrors}
+                        resolveErrors={resolveValidationErrors}
                     />
                 </div>
             </div>
-            <div className="row center-align">
-                <div className="col s6 push-s3">
-                    {transmitting ? <IndeterminateMessage message='Saving recipe' /> : null}
-                    {transmitting ? <IndeterminateProgress /> : null}
-                    {transmitting ? null : <SaveButton onClick={saveRecipe} />}
-                </div>
-            </div>
-            {isEmpty(errors) ? null : <RecipeErrors errors={errors} />}
+            <RecipeSubmit
+                handleClick={submitRecipe}
+                transmitting={transmitting}
+            />
+            <RecipeErrors
+                applicationErrors={applicationErrors}
+                validationErrors={validationErrors}
+            />
         </div>
     )
 }
 
-export default CreateRecipe
+CreateRecipeForm.propTypes = {
+    errors: PropTypes.object,
+    history: PropTypes.object,
+    recipeAction: PropTypes.func,
+    tags: PropTypes.array,
+    user: PropTypes.object
+}
+
+export default CreateRecipeForm

@@ -11,16 +11,15 @@
         .actions,
         .tags {
             display: flex;
-            overflow: hidden;
+            margin: 0;
+            max-width: 50%;
+            padding: 4px;
             width: auto;
         }
         .actions {
-            align-items: flex-start;
-            display: flex;
+            align-items: center;
             flex-direction: column;
             justify-content: center;
-            margin-right: 4px;
-            padding-right: 4px;
             .heart-action,
             .vote-action {
                 margin: 0;
@@ -38,16 +37,19 @@
         }
         .tags {
             align-items: center;
-            justify-content: flex-start;
-            padding: 4px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            height: auto;
+            justify-content: flex-end;
+            max-height: 76px;
+            overflow: scroll;
             .chip {
-                margin: 4px;
+                margin: 2px;
                 white-space: nowrap;
             }
         }
     }
     .recipe-image {
-        border-bottom: 1px solid rgba(160, 160, 160, 0.2);
         img {
             height: auto;
             width: 100%;

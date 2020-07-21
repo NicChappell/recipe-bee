@@ -3,8 +3,8 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 // import components
-import MobileSignedInLinks from '../auth/MobileSignedInLinks'
-import MobileSignedOutLinks from '../auth/MobileSignedOutLinks'
+import MobileSignedInLinks from '../app/MobileSignedInLinks'
+import MobileSignedOutLinks from '../app/MobileSignedOutLinks'
 
 // import images
 import logo from '../../images/logos/logo.png'

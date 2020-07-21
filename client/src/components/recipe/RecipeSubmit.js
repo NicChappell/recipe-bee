@@ -4,14 +4,12 @@ import PropTypes from 'prop-types'
 
 // import components
 import IndeterminateMessage from '../utility/IndeterminateMessage'
-import IndeterminateProgress from '../utility/IndeterminateProgress'
 
 const IndeterminateComponents = ({ transmitting }) => {
     if (transmitting) {
         return (
             <div className="row center-align">
                 <IndeterminateMessage message='Saving recipe' />
-                <IndeterminateProgress />
             </div>
         )
     }

@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import isEmpty from 'lodash/isEmpty'
-import { Link } from 'react-router-dom'
 
 // import actions
 import {
@@ -14,9 +12,11 @@ import {
 } from '../actions/recipeActions'
 
 // import components
+import Banner from '../components/get-recipes/Banner'
+import Button from '../components/get-recipes/Button'
+import RecipeCardList from '../components/recipe/RecipeCardList'
 import Autocomplete from '../components/utility/Autocomplete'
 import IndeterminateMessage from '../components/utility/IndeterminateMessage'
-import RecipeCardList from '../components/recipe/RecipeCardList'
 import DateRanges from '../components/utility/DateRanges'
 
 // import custom hooks
@@ -30,69 +30,12 @@ import {
     generateOptions
 } from '../helpers/recipes'
 
-const Banner = ({ isAuthenticated }) => {
-    if (isAuthenticated) {
-        return (
-            <div className="row banner">
-                <div className="col s12 content">
-                    <p>Add your favorite recipes and share them with the RecipeBee community</p>
-                    <Link to="/recipes/create" className="btn btn-flat amber lighten-2 black-text">Create Recipe</Link>
-                </div>
-            </div>
-        )
-    }
-    return (
-        <div className="row banner">
-            <div className="col s12">
-                <div className="background">
-                    <div className="content">
-                        <p>RecipeBee makes it easy to save your favorite recipes and discover new ideas</p>
-                        <Link to="/sign-up" className="btn btn-flat amber lighten-2 black-text">Create Account</Link>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-Banner.propTypes = { isAuthenticated: PropTypes.bool }
-
-const Button = props => {
-    // destructure props
-    const {
-        fetchLimit,
-        handleClick
-    } = props
-
-    if (!fetchLimit) {
-        return (
-            <div className="row center-align">
-                <div className="col s12">
-                    <button
-                        className="black-text btn-small btn-flat amber lighten-2"
-                        onClick={handleClick}
-                    >
-                        View More Recipes
-                    </button>
-                </div>
-            </div>
-        )
-    }
-    return null
-}
-
-Button.propTypes = {
-    fetchLimit: PropTypes.bool,
-    handleClick: PropTypes.func
-}
-
 const GetRecipes = props => {
     // destructure props
     const {
         auth,
         changeHeart,
         changeVote,
-        errors,
         countRecipes,
         getRecipes,
         recipes,
@@ -278,82 +221,74 @@ const GetRecipes = props => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [didMount])
 
-    if (!isEmpty(errors)) {
-        return (
-            <div className="container">
-                <div className="row mt-5">
-                    <div className="center-align col s12">
-                        <p>There's been an error, please try again later</p>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
     return (
         <div className="container" id="get-recipes">
             <Banner isAuthenticated={isAuthenticated} />
-            <div className="row">
+            <div className="row sort-and-filter">
                 <div className="col s12 l6">
-                    <div className="row">
+                    <div className="row sort-methods">
                         <div className="col s12">
-                            Sort recipes
+                            <h6>Sort recipes</h6>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s12 sort-methods">
-                            <div className="button-group">
-                                <button
-                                    className={`btn-flat ${sortMethod === 'trendingRecipes' ? 'active' : null}`}
-                                    name='trendingRecipes'
-                                    onClick={handleSortMethodClick}
-                                >
-                                    <i className="material-icons left">trending_up</i>trending
-                                </button>
-                                <button
-                                    className={`btn-flat ${sortMethod === 'topRecipes' ? 'active' : null}`}
-                                    name='topRecipes'
-                                    onClick={handleSortMethodClick}
-                                >
-                                    <i className="material-icons left">thumb_up</i>top
-                                </button>
-                            </div>
-                            <div className="button-group">
-                                <button
-                                    className={`btn-flat ${sortMethod === 'mostLovedRecipes' ? 'active' : null}`}
-                                    name='mostLovedRecipes'
-                                    onClick={handleSortMethodClick}
-                                >
-                                    <i className="material-icons left">favorite</i>loved
-                                </button>
-                                <button
-                                    className={`btn-flat ${sortMethod === 'newRecipes' ? 'active' : null}`}
-                                    name='newRecipes'
-                                    onClick={handleSortMethodClick}
-                                >
-                                    <i className="material-icons left">new_releases</i>new
-                                </button>
-                            </div>
+                        <div className="col s12 button-group">
+                            <button
+                                className={`btn-flat ${sortMethod === 'trendingRecipes' ? 'active' : null}`}
+                                name='trendingRecipes'
+                                onClick={handleSortMethodClick}
+                            >
+                                <i className="material-icons">trending_up</i>
+                                Trending
+                            </button>
+                            <button
+                                className={`btn-flat ${sortMethod === 'topRecipes' ? 'active' : null}`}
+                                name='topRecipes'
+                                onClick={handleSortMethodClick}
+                            >
+                                <i className="material-icons">thumb_up</i>
+                                Top
+                            </button>
+                            <button
+                                className={`btn-flat ${sortMethod === 'mostLovedRecipes' ? 'active' : null}`}
+                                name='mostLovedRecipes'
+                                onClick={handleSortMethodClick}
+                            >
+                                <i className="material-icons">favorite</i>
+                                Loved
+                            </button>
+                            <button
+                                className={`btn-flat ${sortMethod === 'newRecipes' ? 'active' : null}`}
+                                name='newRecipes'
+                                onClick={handleSortMethodClick}
+                            >
+                                <i className="material-icons left">new_releases</i>
+                                New
+                            </button>
                         </div>
                         <div className="col s12">
-                            {sortMethod !== 'newRecipes' ? <DateRanges context={'Previous'} initState={dateRange} liftState={setDateRange} /> : null}
+                            {
+                                sortMethod !== 'newRecipes'
+                                    ? <DateRanges
+                                        context={'Previous'}
+                                        initState={dateRange}
+                                        liftState={setDateRange}
+                                    />
+                                    : null
+                            }
                         </div>
                     </div>
                 </div>
                 <div className="col s12 l6">
-                    <div className="row">
+                    <div className="row filter-options">
                         <div className="col s12">
-                            Filter recipes
+                            <h6>Filter recipes</h6>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s12 l6 recipe-tag-search">
+                        <div className="col s12 m6 tag-search">
                             <Autocomplete
                                 options={options}
                                 liftState={addFilter}
                             />
                         </div>
-                        <div className="col s12 l6 recipe-tag-list">
+                        <div className="col s12 m6 tag-list">
                             {filters.map(filter => {
                                 return (
                                     <div className="chip amber lighten-2" key={filter}>
@@ -366,11 +301,13 @@ const GetRecipes = props => {
                     </div>
                 </div>
             </div>
-            <div className="row">
+            <div className="row count">
                 <div className="col s12">
-                    <span className="sm-text">
-                        {filteredRecipes.length ? `${filteredRecipes.length} recipes found` : <IndeterminateMessage message="Searching for recipes" />}
-                    </span>
+                    {
+                        filteredRecipes.length
+                            ? <div className="found">{filteredRecipes.length} recipes found</div>
+                            : <IndeterminateMessage message="Searching for recipes" />
+                    }
                 </div>
             </div>
             <RecipeCardList
@@ -393,16 +330,13 @@ GetRecipes.propTypes = {
     changeHeart: PropTypes.func,
     changeVote: PropTypes.func,
     countRecipes: PropTypes.func,
-    errors: PropTypes.object,
     getRecipes: PropTypes.func,
     recipes: PropTypes.object,
 }
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    errors: state.errors,
-    recipes: state.recipes,
-    // tags: state.tags
+    recipes: state.recipes
 })
 
 const actionCreators = {

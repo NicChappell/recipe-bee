@@ -10,7 +10,7 @@ import RecipeErrors from './RecipeErrors'
 import RecipeIngredientsList from './RecipeIngredientsList'
 import RecipeList from './RecipeList'
 import RecipeNotes from './RecipeNotes'
-import RecipeNumber from './RecipeNumber'
+import RecipeServings from './RecipeServings'
 import RecipePhoto from './RecipePhoto'
 import RecipeShare from './RecipeShare'
 import RecipeSubmit from './RecipeSubmit'
@@ -22,7 +22,7 @@ import RecipeYield from './RecipeYield'
 // import validation
 import validateRecipe from '../../validation/recipe'
 
-const UpdateRecipeForm = props => {
+const PutRecipeForm = props => {
     // destructure props
     const {
         history,
@@ -103,7 +103,7 @@ const UpdateRecipeForm = props => {
     }, [errors])
 
     return (
-        <div className="card-panel white">
+        <div className="card-panel left-align">
             <div className="row">
                 <div className="col s12 l6">
                     <div className="row">
@@ -183,7 +183,7 @@ const UpdateRecipeForm = props => {
                             <h5>Servings</h5>
                         </div>
                     </div>
-                    <RecipeNumber
+                    <RecipeServings
                         errors={validationErrors}
                         initValue={recipe.servings}
                         liftState={setServings}
@@ -345,7 +345,7 @@ const UpdateRecipeForm = props => {
     )
 }
 
-UpdateRecipeForm.propTypes = {
+PutRecipeForm.propTypes = {
     history: PropTypes.object,
     errors: PropTypes.object,
     recipe: PropTypes.object,
@@ -355,4 +355,4 @@ UpdateRecipeForm.propTypes = {
     user: PropTypes.object
 }
 
-export default UpdateRecipeForm
+export default PutRecipeForm

@@ -7,7 +7,7 @@ const TermsAndConditions = () => {
         <div className="card-panel">
             <h3>Terms and Conditions</h3>
 
-            <p>By using this application we assume you accept these terms and conditions. Do not continue to use RecipeBee if you do not agree to all of the terms and conditions stated on this page.</p>
+            <p>By using the RecipeBee application we assume you accept these terms and conditions. Do not continue to use this application if you do not agree to all of the terms and conditions stated on this page.</p>
 
             <p>The following terminology applies to these terms and conditions and all agreements: "Client", "You" and "Your" refers to you, the person using this application and compliant to the Company’s terms and conditions. "Company", "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.</p>
 

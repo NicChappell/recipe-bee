@@ -8,8 +8,8 @@ import logo from '../images/logos/logo.svg'
 const NoMatch = ({ history }) => {
     return (
         <div className="container" id="no-match">
-            <div className="row">
-                <div className="col s12 center-align">
+            <div className="row center-align">
+                <div className="col s12">
                     <div className="error">
                         <span>4</span>
                         <img src={logo} alt="0" />
