@@ -34,32 +34,18 @@ router.post('/', (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: `nic.chappell@gmail.com`,
-            pass: `@{}c];f&#Rx2u&e+rM)*dFN}`
+            user: process.env.NODEMAILER_USER,
+            pass: process.env.NODEMAILER_PASS
         }
     })
 
     // define mail options
     const mailOptions = {
         from: email,
-        to: 'nic.chappell@gmail.com',
-        subject: 'RecipeBee Contact Us Message',
+        to: 'nic@recipebee.com',
+        subject: 'Contact Us Message',
         text: message,
-        html: `<p>${message}</p>`,
-        amp: `<!doctype html>
-        <html ⚡4email>
-          <head>
-            <meta charset="utf-8">
-            <style amp4email-boilerplate>body{visibility:hidden}</style>
-            <script async src="https://cdn.ampproject.org/v0.js"></script>
-            <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
-          </head>
-          <body>
-            <p>Image: <amp-img src="https://cldup.com/P0b1bUmEet.png" width="16" height="16"/></p>
-            <p>GIF (requires "amp-anim" script in header):<br/>
-              <amp-anim src="https://cldup.com/D72zpdwI-i.gif" width="500" height="350"/></p>
-          </body>
-        </html>`
+        html: `<p>${message}</p>`
     }
 
     // send mail

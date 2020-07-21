@@ -41,7 +41,7 @@ const ValueProps = ({ auth }) => {
                     <i className="material-icons left">search</i>
                     <div className="description">
                         <h5>Discover</h5>
-                        <p className="flow-text">An endless stream of new recipes to discover</p>
+                        <p className="flow-text">Explore our recipes and discover something new to try</p>
                     </div>
                 </div>
             </div>
