@@ -3,7 +3,10 @@ import isEmpty from 'lodash/isEmpty'
 
 export const calculateFetchLimit = (array, count) => {
     // calculate number of records fetched
-    const fetched = array.length
+    let fetched = 0
+    if (array) {
+        fetched = array.length
+    }
 
     // calculate fetch limit
     const fetchLimit = count < 500 ? count : 500
