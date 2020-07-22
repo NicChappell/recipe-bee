@@ -74,7 +74,7 @@ const GetRecipes = props => {
 
     const appendRecipes = () => {
         let offset = 0
-        if (searchableRecipes) {
+        if (searchableRecipes[sortMethod]) {
             offset = searchableRecipes[sortMethod].length
         }
 
