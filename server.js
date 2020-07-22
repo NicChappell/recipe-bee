@@ -56,8 +56,8 @@ mongoose.connect(db, { useNewUrlParser: true, useFindAndModify: false })
     .then(() => console.log('connected to MongoDB'))
     .catch(err => console.log(err, 'error connecting to MongoDB'))
 
-// use process.env.port if deployed to Heroku or localhost:5000 in dev
-const PORT = process.env.port || 5000
+// use process.env.PORT if deployed to Heroku or localhost:5000 in dev
+const PORT = process.env.PORT || 5000
 
 // activate the server
 app.listen(PORT, () => console.log(`server running on port http://localhost:${PORT}`))
