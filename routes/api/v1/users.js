@@ -5,9 +5,6 @@ const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 
-// import jwt key
-const { secretOrKey } = require('../../../config/keys')
-
 // import validation
 const validateEmailAddress = require('../../../validation/email')
 const validateSignIn = require('../../../validation/signIn')
@@ -263,7 +260,7 @@ router.post('/sign-in', (req, res) => {
                     // sign token
                     jwt.sign(
                         payload,
-                        secretOrKey,
+                        process.env.JWT_SECRET,
                         { expiresIn: oneYear },
                         (err, token) => {
                             return res
