@@ -73,12 +73,17 @@ const GetRecipes = props => {
     }
 
     const appendRecipes = () => {
+        let offset = 0
+        if (searchableRecipes) {
+            offset = searchableRecipes[sortMethod].length
+        }
+
         // reset: false
         // limit: 25
-        // skip: searchableRecipes[sortMethod].length
+        // skip: offset
         // sortMethod: sortMethod
         // days: dateRange
-        getRecipes(false, 25, searchableRecipes[sortMethod].length, sortMethod, dateRange)
+        getRecipes(false, 25, offset, sortMethod, dateRange)
     }
 
     const handleSortMethodClick = e => setSortMethod(e.currentTarget.name)
