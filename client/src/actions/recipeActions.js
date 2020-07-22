@@ -33,7 +33,7 @@ export const createRecipe = (recipeData, history) => dispatch => {
         .then(res => {
             history.push(`/recipes/${res.data.recipe.slug}/${res.data.recipe._id}`)
         })
-        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err }))
 }
 
 // get recipe
@@ -43,7 +43,7 @@ export const getRecipe = recipeId => dispatch => {
     } else {
         axios.get(`/api/v1/recipes/${recipeId}`)
             .then(res => dispatch({ type: GET_RECIPE, payload: res.data }))
-            .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
+            .catch(err => dispatch({ type: SET_ERRORS, payload: err }))
     }
 }
 
@@ -51,7 +51,7 @@ export const getRecipe = recipeId => dispatch => {
 export const getRecipes = (reset, limit, skip, sortMethod, days) => dispatch => {
     axios.get(`/api/v1/recipes/?limit=${limit}&skip=${skip}&sortMethod=${sortMethod}&days=${days}`)
         .then(res => dispatch({ type: GET_RECIPES, payload: { key: sortMethod, reset, value: res.data.recipes } }))
-        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err }))
 }
 
 // set user recipes
@@ -88,7 +88,7 @@ export const setUserRecipes = userId => dispatch => {
 
             dispatch({ type: SET_USER_RECIPES, payload: { userRecipes } })
         })
-        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err }))
 }
 
 // change hearts
@@ -96,7 +96,7 @@ export const changeHeart = (recipeId, recipeData) => dispatch => {
     // update recipe
     axios.put(`/api/v1/recipes/${recipeId}`, recipeData)
         .then(res => dispatch({ type: PUT_RECIPE, payload: res.data }))
-        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err }))
 }
 
 // change likes
@@ -104,7 +104,7 @@ export const changeVote = (recipeId, recipeData) => dispatch => {
     // update recipe
     axios.put(`/api/v1/recipes/${recipeId}`, recipeData)
         .then(res => dispatch({ type: PUT_RECIPE, payload: res.data }))
-        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err }))
 }
 
 // update recipe
@@ -136,7 +136,7 @@ export const updateRecipe = (recipeData, photoStatus, history) => dispatch => {
                 return axios.put(`/api/v1/recipes/${recipeId}`, recipeData)
             })
             .then(res => history.push(`/recipes/${res.data.recipe.slug}/${res.data.recipe._id}`))
-            .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
+            .catch(err => dispatch({ type: SET_ERRORS, payload: err }))
     } else {
         // remove photo property from recipe
         delete recipeData.photo
@@ -144,7 +144,7 @@ export const updateRecipe = (recipeData, photoStatus, history) => dispatch => {
         // update recipe
         axios.put(`/api/v1/recipes/${recipeId}`, recipeData)
             .then(res => history.push(`/recipes/${res.data.recipe.slug}/${res.data.recipe._id}`))
-            .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
+            .catch(err => dispatch({ type: SET_ERRORS, payload: err }))
     }
 }
 
@@ -152,5 +152,5 @@ export const updateRecipe = (recipeData, photoStatus, history) => dispatch => {
 export const countRecipes = (sortMethod, days) => dispatch => {
     axios.get(`/api/v1/recipes/utilities/count?sortMethod=${sortMethod}&days=${days}`)
         .then(res => dispatch({ type: COUNT_RECIPES, payload: { key: sortMethod, value: res.data.count } }))
-        .catch(err => dispatch({ type: SET_ERRORS, payload: err.response.data }))
+        .catch(err => dispatch({ type: SET_ERRORS, payload: err }))
 }
