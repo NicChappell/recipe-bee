@@ -2016,7 +2016,9 @@ nav .logo img {
 }
 #shop .category .product-variant .shop-content .colors-options .thumbnail {
   height: auto;
-  width: 100px;
+  max-height: 100px;
+  max-width: 100px;
+  width: 100%;
 }
 #shop .category .product-variant .shop-content .colors-options .thumbnail:not(:last-child) {
   margin-right: 20px;

@@ -763,11 +763,9 @@ const SignUpForm = ({ history }) => {
             state,
             username
         }
-        console.log(payload)
 
         // validate user input
         const validate = validateSignUp(payload)
-        console.log(validate)
 
         // check for validation errors
         if (!validate.isValid) {
@@ -787,7 +785,6 @@ const SignUpForm = ({ history }) => {
             })
             .catch(err => {
                 if (err.response.status === 400) {
-                    console.log(err.response.data)
                     // update state
                     setTransmitting(false)
                     setValidationErrors(err.response.data)
