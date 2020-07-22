@@ -1,7 +1,8 @@
 // import dependencies
 const express = require('express')
-const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const cors = require('cors')
+const mongoose = require('mongoose')
 const passport = require('passport')
 const path = require('path')
 
@@ -24,7 +25,8 @@ const app = express()
 // body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
+// cors middleware
+app.use(cors())
 // passport middleware
 app.use(passport.initialize())
 
