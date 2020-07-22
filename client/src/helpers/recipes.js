@@ -37,7 +37,7 @@ export const filterRecipes = (recipes, filters) => {
 export const generateOptions = (recipes) => {
     const options = []
 
-    recipes.forEach(recipe => {
+    recipes && recipes.forEach(recipe => {
         // destructure recipe
         const { tagList } = recipe
 
