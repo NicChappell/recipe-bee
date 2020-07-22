@@ -244,7 +244,7 @@ const ContactForm = ({ errors }) => {
             message
         } = messageData
 
-        axios.post('/api/v1/contact/', { email, message })
+        axios.post('/api/v1/contact', { email, message })
             .then(() => {
                 // update state
                 setSuccess(true)
