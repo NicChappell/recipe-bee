@@ -61,18 +61,32 @@ const Recipes = props => {
 
     // update state when recipes or sort method changes
     useEffect(() => {
+        let recipes = []
+
         switch (sortMethod) {
             case 'trending':
-                setSpotlight(trendingRecipes.slice(0, 10))
+                if (trendingRecipes) {
+                    recipes = trendingRecipes.slice(0, 10)
+                }
+
+                setSpotlight(recipes)
                 break
             case 'loved':
-                setSpotlight(mostLovedRecipes.slice(0, 10))
+                if (mostLovedRecipes) {
+                    recipes = mostLovedRecipes.slice(0, 10)
+                }
+
+                setSpotlight(recipes)
                 break
             case 'top':
-                setSpotlight(topRecipes.slice(0, 10))
+                if (topRecipes) {
+                    recipes = topRecipes.slice(0, 10)
+                }
+
+                setSpotlight(recipes)
                 break
             default:
-                setSpotlight([])
+                setSpotlight(recipes)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [recipes, sortMethod])
