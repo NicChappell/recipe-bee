@@ -7,11 +7,8 @@ const Grid = require('gridfs-stream')
 const crypto = require('crypto')
 const path = require('path')
 
-// import config keys
-const { mongoURI } = require('../../../config/keys')
-
 // create connection
-const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true })
+const conn = mongoose.createConnection(process.env.MONGO_URI, { useNewUrlParser: true })
 
 // init gfs
 let gfs
@@ -24,7 +21,7 @@ conn.once('open', () => {
 
 // create storage engine
 const storage = new GridFsStorage({
-    url: mongoURI,
+    url: process.env.MONGO_URI,
     file: (req, file) => {
         return new Promise((resolve, reject) => {
             crypto.randomBytes(16, (err, buf) => {

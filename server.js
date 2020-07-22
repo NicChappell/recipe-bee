@@ -44,7 +44,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // database config
-const db = process.env.DB_URI
+const db = process.env.MONGO_URI
 
 // connect to MongoDB
 mongoose.connect(db, { useNewUrlParser: true, useFindAndModify: false })
