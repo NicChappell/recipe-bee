@@ -304,7 +304,7 @@ const GetRecipes = props => {
             <div className="row count">
                 <div className="col s12">
                     {
-                        filteredRecipes.length
+                        filteredRecipes && filteredRecipes.length
                             ? <div className="found">{filteredRecipes.length} recipes found</div>
                             : <IndeterminateMessage message="Searching for recipes" />
                     }
