@@ -44,8 +44,8 @@ router.post('/', (req, res) => {
         from: email,
         to: 'nic@recipebee.com',
         subject: 'Contact Us Message',
-        text: message,
-        html: `<p>${message}</p>`
+        text: `${email} | ${message}`,
+        html: `<p>${email}</p> <p>${message}</p>`
     }
 
     // send mail
