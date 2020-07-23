@@ -1,12 +1,13 @@
 {
-    "root": "client/build",
+    "canonical_host": "www.example.com",
     "clean_urls": false,
-    "routes": {
-        "/**": "index.html"
-    },
     "headers": {
         "/**": {
             "Access-Control-Allow-Origin": "*"
         }
+    },
+    "root": "client/build",
+    "routes": {
+        "/**": "index.html"
     }
 }
