@@ -255,8 +255,6 @@ const ContactForm = ({ errors }) => {
                     // update state
                     setTransmitting(false)
                     setValidationErrors(err.response.data)
-                } else if (err.response.status === 405) {
-                    console.log(err.response)
                 } else {
                     // update state
                     setApplicationErrors(err)
