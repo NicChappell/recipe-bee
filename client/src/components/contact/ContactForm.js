@@ -282,7 +282,7 @@ const ContactForm = ({ errors }) => {
         <div className="card-panel contact-form">
             <div className="row left-align">
                 <div className="col s12">
-                    <h5>Contact Us</h5>
+                    <h5>Contact Us1</h5>
                 </div>
                 <form>
                     <Email
