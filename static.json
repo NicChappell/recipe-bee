@@ -1,5 +1,4 @@
 {
-    "canonical_host": "www.example.com",
     "clean_urls": false,
     "root": "client/build",
     "routes": {
