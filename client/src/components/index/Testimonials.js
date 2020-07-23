@@ -27,7 +27,7 @@ const Testimonials = () => {
             <div className="col s12 m8 push-m1">
                 <div className="card-panel quote">
                     <blockquote className="flow-text">
-                        I love how easy it is to find great recipes!
+                        I love how simple it is to find new recipes with RecipeBee!
                     </blockquote>
                     <p>– Miranda Lowry, Henderson, NV</p>
                 </div>
