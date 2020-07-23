@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
 
     // define mail options
     const mailOptions = {
-        from: email,
+        from: 'no-reply@recipebee.com',
         to: 'nic@recipebee.com',
         subject: 'Contact Us Message',
         text: `${email} | ${message}`,
