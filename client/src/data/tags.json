@@ -1,0 +1,458 @@
+[
+    {
+        "category": "ingredient",
+        "tag": "chicken recipes"
+    },
+    {
+        "category": "ingredient",
+        "tag": "grains"
+    },
+    {
+        "category": "meal type",
+        "tag": "desserts"
+    },
+    {
+        "category": "diet and health",
+        "tag": "low cholesterol"
+    },
+    {
+        "category": "diet and health",
+        "tag": "low fat"
+    },
+    {
+        "category": "seasonal",
+        "tag": "easter"
+    },
+    {
+        "category": "seasonal",
+        "tag": "events and gatherings"
+    },
+    {
+        "category": "ingredient",
+        "tag": "mushrooms"
+    },
+    {
+        "category": "ingredient",
+        "tag": "poultry"
+    },
+    {
+        "category": "diet and health",
+        "tag": "high fiber"
+    },
+    {
+        "category": "seasonal",
+        "tag": "father's day"
+    },
+    {
+        "category": "meal type",
+        "tag": "lunch"
+    },
+    {
+        "category": "ingredient",
+        "tag": "chocolate"
+    },
+    {
+        "category": "seasonal",
+        "tag": "hanukkah"
+    },
+    {
+        "category": "ingredient",
+        "tag": "beef"
+    },
+    {
+        "category": "ingredient",
+        "tag": "tofu and tempeh"
+    },
+    {
+        "category": "seasonal",
+        "tag": "labor day"
+    },
+    {
+        "category": "seasonal",
+        "tag": "diwali"
+    },
+    {
+        "category": "ingredient",
+        "tag": "game meats"
+    },
+    {
+        "category": "ingredient",
+        "tag": "potatoes"
+    },
+    {
+        "category": "ingredient",
+        "tag": "vegetable"
+    },
+    {
+        "category": "seasonal",
+        "tag": "cinco de mayo"
+    },
+    {
+        "category": "ingredient",
+        "tag": "beans and legumes"
+    },
+    {
+        "category": "seasonal",
+        "tag": "christmas cookies"
+    },
+    {
+        "category": "seasonal",
+        "tag": "rosh hashanah"
+    },
+    {
+        "category": "seasonal",
+        "tag": "oktoberfest"
+    },
+    {
+        "category": "ingredient",
+        "tag": "shrimp"
+    },
+    {
+        "category": "seasonal",
+        "tag": "football"
+    },
+    {
+        "category": "seasonal",
+        "tag": "back to school"
+    },
+    {
+        "category": "ingredient",
+        "tag": "turkey"
+    },
+    {
+        "category": "diet and health",
+        "tag": "dairy free"
+    },
+    {
+        "category": "diet and health",
+        "tag": "low calorie"
+    },
+    {
+        "category": "seasonal",
+        "tag": "tailgating"
+    },
+    {
+        "category": "seasonal",
+        "tag": "new year's"
+    },
+    {
+        "category": "seasonal",
+        "tag": "4th of july"
+    },
+    {
+        "category": "seasonal",
+        "tag": "veteran's day"
+    },
+    {
+        "category": "seasonal",
+        "tag": "thanksgiving"
+    },
+    {
+        "category": "seasonal",
+        "tag": "lunar new year"
+    },
+    {
+        "category": "ingredient",
+        "tag": "salmon"
+    },
+    {
+        "category": "diet and health",
+        "tag": "heart-healthy"
+    },
+    {
+        "category": "seasonal",
+        "tag": "baby shower"
+    },
+    {
+        "category": "seasonal",
+        "tag": "lent"
+    },
+    {
+        "category": "seasonal",
+        "tag": "memorial day"
+    },
+    {
+        "category": "seasonal",
+        "tag": "recipes for the super bowl®"
+    },
+    {
+        "category": "ingredient",
+        "tag": "rice"
+    },
+    {
+        "category": "meal type",
+        "tag": "breakfast and brunch"
+    },
+    {
+        "category": "ingredient",
+        "tag": "seafood"
+    },
+    {
+        "category": "diet and health",
+        "tag": "low carb"
+    },
+    {
+        "category": "diet and health",
+        "tag": "gluten free"
+    },
+    {
+        "category": "seasonal",
+        "tag": "kwanzaa"
+    },
+    {
+        "category": "ingredient",
+        "tag": "fruit"
+    },
+    {
+        "category": "diet and health",
+        "tag": "diabetic"
+    },
+    {
+        "category": "seasonal",
+        "tag": "birthday"
+    },
+    {
+        "category": "seasonal",
+        "tag": "christmas"
+    },
+    {
+        "category": "seasonal",
+        "tag": "passover"
+    },
+    {
+        "category": "meal type",
+        "tag": "dinners"
+    },
+    {
+        "category": "seasonal",
+        "tag": "april fools' day"
+    },
+    {
+        "category": "diet and health",
+        "tag": "healthy"
+    },
+    {
+        "category": "diet and health",
+        "tag": "weight-loss"
+    },
+    {
+        "category": "seasonal",
+        "tag": "mother's day"
+    },
+    {
+        "category": "seasonal",
+        "tag": "halloween"
+    },
+    {
+        "category": "ingredient",
+        "tag": "pork recipes"
+    },
+    {
+        "category": "seasonal",
+        "tag": "ramadan"
+    },
+    {
+        "category": "cooking style",
+        "tag": "paleo"
+    },
+    {
+        "category": "cooking style",
+        "tag": "cooking for kids"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "southern"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "french"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "mediterranean diet"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "korean"
+    },
+    {
+        "category": "dish type",
+        "tag": "bread"
+    },
+    {
+        "category": "dish type",
+        "tag": "candy and fudge"
+    },
+    {
+        "category": "cooking style",
+        "tag": "slow cooker"
+    },
+    {
+        "category": "cooking style",
+        "tag": "vegetarian"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "indian"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "latin american"
+    },
+    {
+        "category": "cooking style",
+        "tag": "bbq & grilling"
+    },
+    {
+        "category": "cooking style",
+        "tag": "clean-eating"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "australian and new zealander"
+    },
+    {
+        "category": "seasonal",
+        "tag": "st. patrick's day"
+    },
+    {
+        "category": "dish type",
+        "tag": "casserole"
+    },
+    {
+        "category": "dish type",
+        "tag": "pasta"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "european"
+    },
+    {
+        "category": "dish type",
+        "tag": "pasta salad"
+    },
+    {
+        "category": "dish type",
+        "tag": "appetizers & snacks"
+    },
+    {
+        "category": "dish type",
+        "tag": "cookie"
+    },
+    {
+        "category": "cooking style",
+        "tag": "budget cooking"
+    },
+    {
+        "category": "cooking style",
+        "tag": "cooking for two"
+    },
+    {
+        "category": "cooking style",
+        "tag": "gourmet"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "middle eastern"
+    },
+    {
+        "category": "dish type",
+        "tag": "pie"
+    },
+    {
+        "category": "dish type",
+        "tag": "pizza"
+    },
+    {
+        "category": "dish type",
+        "tag": "smoothie"
+    },
+    {
+        "category": "seasonal",
+        "tag": "valentine's day"
+    },
+    {
+        "category": "cooking style",
+        "tag": "quick & easy"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "african"
+    },
+    {
+        "category": "dish type",
+        "tag": "sauces and condiments"
+    },
+    {
+        "category": "dish type",
+        "tag": "soups, stew, and chili"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "u.s."
+    },
+    {
+        "category": "dish type",
+        "tag": "main dishes"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "japanese"
+    },
+    {
+        "category": "seasonal",
+        "tag": "mardi gras"
+    },
+    {
+        "category": "dish type",
+        "tag": "sandwiches"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "mexican"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "thai"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "canadian"
+    },
+    {
+        "category": "cooking style",
+        "tag": "vegan"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "asian"
+    },
+    {
+        "category": "dish type",
+        "tag": "cake"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "italian"
+    },
+    {
+        "category": "seasonal",
+        "tag": "purim"
+    },
+    {
+        "category": "dish type",
+        "tag": "cocktail"
+    },
+    {
+        "category": "dish type",
+        "tag": "mac and cheese"
+    },
+    {
+        "category": "cooking style",
+        "tag": "pressure cooker"
+    },
+    {
+        "category": "world cuisine",
+        "tag": "chinese"
+    }
+]
