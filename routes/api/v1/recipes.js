@@ -143,6 +143,8 @@ router.post('/', (req, res) => {
         netVotes: 1
     })
 
+    console.log(newRecipe)
+
     // save recipe to database
     newRecipe.save()
         .then(recipe => res.status(200).json({ mesage: 'created recipe', recipe }))
