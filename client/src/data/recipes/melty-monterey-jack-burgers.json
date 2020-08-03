@@ -77,12 +77,11 @@
         }
     ],
     "kitchenware": [
-        "________________________", // ObjectId
-        "________________________", // ObjectId
-        "________________________", // ObjectId
-        "________________________", // ObjectId
-        "________________________", // ObjectId
-        "________________________", // ObjectId
+        "ObjectId",
+        "ObjectId",
+        "ObjectId",
+        "ObjectId",
+        "ObjectId"
     ],
     "notes": "recipe_notes",
     "photo": "5f1c5b247b79e9e43050d5c3", // ObjectId
