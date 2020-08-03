@@ -1,0 +1,34 @@
+[
+    {
+        "fullName": "kitchenware_full_name",
+        "shortName": "kitchenware_short_name",
+        "description": "kitchenware_description",
+        "standardLink": "kitchenware_referral_standard_link",
+        "shortLink": "kitchenware_referral_short_link",
+        "photo": "________________________"
+    },
+    {
+        "fullName": "Nordic Ware Natural Aluminum Commercial Baker's Big Sheet",
+        "shortName": "Baking sheet",
+        "description": "Make mega batches of cookies and bars with this extra large sheet pan. Fits all standard size ovens. 35 percent larger surface than the half sheet! Our commercial-duty Naturals Bakeware is made of even-heating, rust-proof aluminum and features a galvanized steel reinforcement around the rims for added strength. Bakers agree that aluminum bakes best. Hand-wash cleaning only. Made in the USA. Limited Lifetime Warranty. Nylon, wood, or silicone utensils are recommended. Metal utensils and scouring pads may scratch natural aluminum pans, but will not affect baking performance",
+        "fullLink": "https://www.amazon.com/gp/product/B0064OM53G/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B0064OM53G&linkCode=as2&tag=kxnld8tqio6te-20&linkId=fd94c41aebb12a87964b3d82df970314",
+        "shortLink": "https://amzn.to/3k6NJrZ",
+        "photo": "https://images-na.ssl-images-amazon.com/images/I/81IFksPCq2L._AC_SL1500_.jpg"
+    },
+    {
+        "fullName": "Cuisinart 722-30G Chef's Classic 12-Inch Skillet with Glass Cover",
+        "shortName": "Large pan",
+        "description": "Cuisinart's Chef's Classic stainless cookware is high quality, yet affordable. Unlike many lines of cookware, this can go in the dishwasher for clean up, yet the aluminum core within the base provides even and efficient heating. Any cook would be happy to have this nicely crafted pan on hand for sauteing and frying. The stainless steel interior is non-reactive with food and it's also tough enough to withstand the use of metal utensils. True browning is very difficult with non-stick interiors, so many chefs insist on using a traditional pan such as this. The large 12\" size is ideal for cooking pancakes, chicken breasts, pork chops and more.",
+        "standardLink": "https://www.amazon.com/gp/product/B0078P9D8U/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B0078P9D8U&linkCode=as2&tag=kxnld8tqio6te-20&linkId=63e27bd8581893ab871941410695495a",
+        "shortLink": "https://amzn.to/2DsvBba",
+        "photo": "https://images-na.ssl-images-amazon.com/images/I/61ry1BO7otL._AC_SL1500_.jpg"
+    },
+    {
+        "fullName": "Doryh 18/10 Stainless Steel Mixing Bowls, Nesting Bowls for Meal Prep, Serving, Baking, Set of 4",
+        "shortName": "Small bowls",
+        "description": "Stainless steel construction for durability. Ideal for whisking, beating, mixing, food prep, marinating and serving. Nest inside each other for convenient storage.",
+        "standardLink": "https://www.amazon.com/gp/product/B07G71N72N/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B07G71N72N&linkCode=as2&tag=kxnld8tqio6te-20&linkId=7185653665a54670451c51ab0d6c6446",
+        "shortLink": "https://amzn.to/33gclsd",
+        "photo": "https://images-na.ssl-images-amazon.com/images/I/61F3T7MHmPL._AC_SL1001_.jpg"
+    }
+]

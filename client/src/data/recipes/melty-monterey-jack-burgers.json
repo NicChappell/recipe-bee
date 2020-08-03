@@ -1,0 +1,111 @@
+{
+    "cookTimeHours": 0,
+    "cookTimeMinutes": 35,
+    "description": "Melty Monterey Jack Burgers with Red Onion Jam, Garlic Mayo & Crispy Potato Wedges",
+    "ingredients": [
+        {
+            "id": "1",
+            "name": "ingredient_name",
+            "quantity": "ingredient_quantity",
+            "unit": "ingredient_unit"
+        },
+        {
+            "id": "2",
+            "name": "ingredient_name",
+            "quantity": "ingredient_quantity",
+            "unit": "ingredient_unit"
+        },
+        {
+            "id": "3",
+            "name": "ingredient_name",
+            "quantity": "ingredient_quantity",
+            "unit": "ingredient_unit"
+        },
+        {
+            "id": "4",
+            "name": "ingredient_name",
+            "quantity": "ingredient_quantity",
+            "unit": "ingredient_unit"
+        },
+        {
+            "id": "5",
+            "name": "ingredient_name",
+            "quantity": "ingredient_quantity",
+            "unit": "ingredient_unit"
+        },
+        {
+            "id": "6",
+            "name": "ingredient_name",
+            "quantity": "ingredient_quantity",
+            "unit": "ingredient_unit"
+        },
+        {
+            "id": "7",
+            "name": "ingredient_name",
+            "quantity": "ingredient_quantity",
+            "unit": "ingredient_unit"
+        },
+        {
+            "id": "8",
+            "name": "ingredient_name",
+            "quantity": "ingredient_quantity",
+            "unit": "ingredient_unit"
+        },
+        {
+            "id": "9",
+            "name": "ingredient_name",
+            "quantity": "ingredient_quantity",
+            "unit": "ingredient_unit"
+        },
+        {
+            "id": "10",
+            "name": "ingredient_name",
+            "quantity": "ingredient_quantity",
+            "unit": "ingredient_unit"
+        },
+        {
+            "id": "11",
+            "name": "ingredient_name",
+            "quantity": "ingredient_quantity",
+            "unit": "ingredient_unit"
+        }
+    ],
+    "instructions": [
+        {
+            "id": "0",
+            "value": "ingredient"
+        }
+    ],
+    "kitchenware": [
+        "________________________", // ObjectId
+        "________________________", // ObjectId
+        "________________________", // ObjectId
+        "________________________", // ObjectId
+        "________________________", // ObjectId
+        "________________________", // ObjectId
+    ],
+    "notes": "recipe_notes",
+    "photo": "5f1c5b247b79e9e43050d5c3", // ObjectId
+    "prepTimeHours": 0,
+    "prepTimeMinutes": 10,
+    "preparations": [
+        {
+            "id": "0",
+            "value": "preparation"
+        }
+    ],
+    "production": {
+        "name": "",
+        "quantity": "",
+        "unit": ""
+    },
+    "servings": 2,
+    "share": true,
+    "slug": "recipe-title",
+    "tagList": [
+        "cooking for two",
+        "dinners"
+    ],
+    "title": "recipe_title",
+    "user": "5f0df8d4d81e9f1dbc17e6a9" // ObjectId
+}
